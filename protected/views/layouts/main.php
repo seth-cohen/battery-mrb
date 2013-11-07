@@ -36,6 +36,7 @@
 					'label'=>'Manufacturing', 
 					'url'=>array('/manufacturing/index'),
 					'active'=>(Yii::app()->controller->id=='cell' || Yii::app()->controller->id=='anode' || Yii::app()->controller->id=='cathode' || Yii::app()->controller->id=='manufacturing'),
+					'visible'=>!Yii::app()->user->isGuest,
 					'linkOptions'=>array('id'=>'menuMFG'),
 					'itemOptions'=>array('id'=>'itemMFG'),
 					'items'=>array(
@@ -48,6 +49,7 @@
 					'label'=>'TestLab', 
 					'url'=>array('/testlab/index'),
 					'active'=>(Yii::app()->controller->id=='channel' || Yii::app()->controller->id=='chamber' || Yii::app()->controller->id=='cycler' || Yii::app()->controller->id=='testlab'),
+					'visible'=>!Yii::app()->user->isGuest,
 					'linkOptions'=>array('id'=>'menuTestLab'),
 					'itemOptions'=>array('id'=>'itemTestLab'),
 					'items'=>array(
@@ -59,6 +61,7 @@
 				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
 				array('label'=>'Contact', 'url'=>array('/site/contact')),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+				array('label'=>'Register', 'url'=>array('/site/register'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
 		)); ?>

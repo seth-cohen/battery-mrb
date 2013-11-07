@@ -62,7 +62,7 @@ $this->breadcrumbs=array(
 		<div class="row">
 			<?php echo $form->labelEx($model,'depart_id'); ?>
 			<?php echo CHtml::activeDropDownList($model, 'depart_id', 
-							CHtml::listData(Department::model()->findAll(), 'id','name'), array('prompt'=>'Select Department...')); ?>
+							CHtml::listData(Department::model()->findAll(), 'id','name'), array('prompt'=>' -Select Department- ')); ?>
 			<?php echo $form->error($model,'depart_id');?>
 		</div>
 	</td>	

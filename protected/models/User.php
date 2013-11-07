@@ -146,4 +146,9 @@ class User extends CActiveRecord
 		
 		return CPasswordHelper::hashPassword($password);
 	}
+	
+	public function getFullName()
+	{
+		return $this->first_name.' '.$this->last_name;
+	}
 }
