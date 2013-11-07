@@ -32,7 +32,8 @@ class UserIdentity extends CUserIdentity
 		}
 		else
 		{
-			$this->_id=$user->id;
+			$this->_id = $user->id;
+			$this->setState('depart_id', $user->depart_id); 
 			$this->username = $user->username;
 			$this->errorCode = self::ERROR_NONE;
 		}
@@ -43,6 +44,11 @@ class UserIdentity extends CUserIdentity
 	public function getId()
 	{
 		return $this->_id;
+	}
+	
+	public function getDepart_id()
+	{
+		return $this->_depart_id;
 	}
 	
 	public function getUsername()
