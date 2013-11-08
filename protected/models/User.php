@@ -20,6 +20,8 @@
  * @property FormationDetail[] $formationDetails
  * @property Kit[] $kits
  * @property Department $depart
+ * 
+ * @property Role[] $roles
  */
 class User extends CActiveRecord
 {
@@ -40,7 +42,8 @@ class User extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('username, password, first_name, last_name', 'required'),
-			array('username, password, first_name, last_name', 'length', 'max'=>50),
+			array('password', 'length', 'max'=>64),
+			array('username, first_name, last_name', 'length', 'max'=>50),
 			array('username','unique', 'message'=>'Username is already taken'),
 			
 			array('email','unique', 'message'=>'Email address is already taken'),
@@ -67,6 +70,7 @@ class User extends CActiveRecord
 			'formationDetails' => array(self::HAS_MANY, 'FormationDetail', 'operator_id'),
 			'kits' => array(self::HAS_MANY, 'Kit', 'kitter_id'),
 			'depart' => array(self::BELONGS_TO, 'Department', 'depart_id'),
+			'roles' => array(self::MANY_MANY, 'Role', 'user_role(user_id, role_id)'),
 		);
 	}
 

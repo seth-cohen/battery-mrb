@@ -30,3 +30,5 @@ $this->menu=array(
 		'depart_id',
 	),
 )); ?>
+
+<?php echo $this->renderPartial('_mfg', array('model'=>$model)); ?>
