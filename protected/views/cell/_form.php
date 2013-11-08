@@ -1,6 +1,8 @@
 <?php
 /* @var $this CellController */
 /* @var $model Cell */
+/* @var $kit Kit */
+/* @var $celltype Celltype */
 /* @var $form CActiveForm */
 ?>
 
@@ -20,15 +22,9 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'serial_num'); ?>
-		<?php echo $form->textField($model,'serial_num',array('size'=>10,'maxlength'=>10)); ?>
-		<?php echo $form->error($model,'serial_num'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'kit_id'); ?>
-		<?php echo $form->textField($model,'kit_id',array('size'=>10,'maxlength'=>10)); ?>
-		<?php echo $form->error($model,'kit_id'); ?>
+		<?php echo $form->labelEx($kit,'serial_num'); ?>
+		<?php echo $form->dropDownList($kit, 'celltype_id', $celltype->forList()); ?> <?php echo $form->textField($kit,'serial_num',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->error($kit,'serial_num'); ?>
 	</div>
 
 	<div class="row">
@@ -44,20 +40,27 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'celltype_id'); ?>
-		<?php echo $form->textField($model,'celltype_id',array('size'=>10,'maxlength'=>10)); ?>
-		<?php echo $form->error($model,'celltype_id'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'stacker_id'); ?>
-		<?php echo $form->textField($model,'stacker_id',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->dropDownList($model, 'stacker_id', User::model()->forList()); ?> 
 		<?php echo $form->error($model,'stacker_id'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'stack_date'); ?>
-		<?php echo $form->textField($model,'stack_date'); ?>
+		<?php
+		    $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+		        'model'=>$model,
+		        'attribute'=>'stack_date',
+		    	'value'=>$model->stack_date,
+		        // additional javascript options for the date picker plugin
+		        'options'=>array(
+		            'showAnim'=>'slideDown',
+		            'changeMonth'=>true,
+		            'changeYear'=>true,
+		            'dateFormat' => 'yy-mm-dd'
+		        ),
+		    ));
+		?>
 		<?php echo $form->error($model,'stack_date'); ?>
 	</div>
 
@@ -75,25 +78,51 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'filler_id'); ?>
-		<?php echo $form->textField($model,'filler_id',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->dropDownList($model, 'filler_id', User::model()->forList()); ?>
 		<?php echo $form->error($model,'filler_id'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'fill_date'); ?>
-		<?php echo $form->textField($model,'fill_date'); ?>
+		<?php
+		    $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+		        'model'=>$model,
+		        'attribute'=>'fill_date',
+		    	'value'=>$model->fill_date,
+		        // additional javascript options for the date picker plugin
+		        'options'=>array(
+		            'showAnim'=>'slideDown',
+		            'changeMonth'=>true,
+		            'changeYear'=>true,
+		            'dateFormat' => 'yy-mm-dd'
+		        ),
+		    ));
+		?>
 		<?php echo $form->error($model,'fill_date'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'inspector_id'); ?>
-		<?php echo $form->textField($model,'inspector_id',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->dropDownList($model, 'inspector_id', User::model()->forList()); ?>
 		<?php echo $form->error($model,'inspector_id'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'inspection_date'); ?>
-		<?php echo $form->textField($model,'inspection_date'); ?>
+		<?php
+		    $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+		        'model'=>$model,
+		        'attribute'=>'inspection_date',
+		    	'value'=>$model->inspection_date,
+		        // additional javascript options for the date picker plugin
+		        'options'=>array(
+		            'showAnim'=>'slideDown',
+		            'changeMonth'=>true,
+		            'changeYear'=>true,
+		            'dateFormat' => 'yy-mm-dd'
+		        ),
+		    ));
+		?>
 		<?php echo $form->error($model,'inspection_date'); ?>
 	</div>
 

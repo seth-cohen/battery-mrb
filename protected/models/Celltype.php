@@ -94,4 +94,22 @@ class Celltype extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+	
+/*
+	 * REturns one dimensional array to use to populate dropdown list for filtering
+	 * @return 1-D array of id=>name
+	 */
+	public function forList()
+	{
+		$arr = array();
+		$celltypes = Celltype::model()->findAll();
+	
+		$arr[''] = '-Assign Type-';
+		foreach ($celltypes as $celltype)
+		{
+			$arr[$celltype->id] = $celltype->name;
+		}
+		 			
+		return $arr;
+	}
 }

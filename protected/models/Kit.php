@@ -5,15 +5,17 @@
  *
  * The followings are the available columns in table 'tbl_kit':
  * @property string $id
- * @property string $lot_num
+ * @property string $serial_num
  * @property string $ref_num
  * @property string $anode_id
  * @property string $cathode_id
  * @property string $kitter_id
  * @property string $kitting_date
+ * @property string $celltype_id
  *
  * The followings are the available model relations:
  * @property Cell[] $cells
+ * @property Celltype $celltype
  * @property Anode $anode
  * @property Cathode $cathode
  * @property User $kitter
@@ -36,12 +38,12 @@ class Kit extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('lot_num, ref_num, kitting_date', 'required'),
-			array('lot_num, ref_num', 'length', 'max'=>50),
-			array('anode_id, cathode_id, kitter_id', 'length', 'max'=>10),
+			array('serial_num, ref_num, kitting_date', 'required'),
+			array('serial_num, ref_num', 'length', 'max'=>50),
+			array('anode_id, cathode_id, kitter_id, celltype_id', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, lot_num, ref_num, anode_id, cathode_id, kitter_id, kitting_date', 'safe', 'on'=>'search'),
+			array('id, serial_num, ref_num, anode_id, cathode_id, kitter_id, kitting_date, celltype_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -54,6 +56,7 @@ class Kit extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'cells' => array(self::HAS_MANY, 'Cell', 'kit_id'),
+			'celltype' => array(self::BELONGS_TO, 'Celltype', 'celltype_id'),
 			'anode' => array(self::BELONGS_TO, 'Anode', 'anode_id'),
 			'cathode' => array(self::BELONGS_TO, 'Cathode', 'cathode_id'),
 			'kitter' => array(self::BELONGS_TO, 'User', 'kitter_id'),
@@ -119,7 +122,7 @@ class Kit extends CActiveRecord
 		$arr[''] = 'All';
 		foreach ($kits as $kit)
 		{
-			$arr[$kit->id] = $kit->lot_num;
+			$arr[$kit->id] = $kit->serial_num;
 		}
 		 			
 		return $arr;

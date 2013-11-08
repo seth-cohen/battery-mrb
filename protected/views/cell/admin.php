@@ -47,18 +47,18 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'filter'=>$model,
 	'columns'=>array(
 		array(
-			'name'=>'serial_num',
-			'value'=>'$data->celltype->name."-".$data->serial_num',
-		),
-		array(
-			'name'=>'kit_search',
-			'value'=>'"Lot# ".$data->kit->lot_num',
+			'name'=>'serial_search',
+			'value'=>'$data->kit->celltype->name."-".$data->kit->serial_num',
 		),
 		'ref_num',
 		'eap_num',
 		array(
 			'name'=>'celltype_search',
-			'value'=>'$data->celltype->name',
+			'value'=>'$data->kit->celltype->name',
+		),
+		array(
+			'name'=>'stacker_search',
+			'value'=>'$data->stacker->getFullName()',
 		),
 		/*
 		'stacker_id',

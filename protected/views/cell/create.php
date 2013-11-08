@@ -1,6 +1,8 @@
 <?php
 /* @var $this CellController */
 /* @var $model Cell */
+/* @var $kit Kit */
+/* @var $celltype Celltype */
 
 $this->breadcrumbs=array(
 	'Manufacturing'=>array('/manufacturing'),
@@ -16,4 +18,4 @@ $this->menu=array(
 
 <h1>Create Cell</h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->renderPartial('_form', array('model'=>$model,'kit'=>$kit, 'celltype'=>$celltype)); ?>

@@ -32,3 +32,4 @@ $this->menu=array(
 )); ?>
 
 <?php echo $this->renderPartial('_mfg', array('model'=>$model)); ?>
+

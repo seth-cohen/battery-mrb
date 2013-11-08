@@ -155,4 +155,22 @@ class User extends CActiveRecord
 	{
 		return $this->first_name.' '.$this->last_name;
 	}
+	
+/*
+	 * REturns one dimensional array to use to populate dropdown list for filtering
+	 * @return 1-D array of id=>name
+	 */
+	public function forList()
+	{
+		$arr = array();
+		$users = User::model()->findAll();
+	
+		$arr[''] = '-Assign User-';
+		foreach ($users as $user)
+		{
+			$arr[$user->id] = $user->first_name.' '.$user->last_name;
+		}
+		 			
+		return $arr;
+	}
 }

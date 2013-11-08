@@ -5,16 +5,12 @@
 
 <div class="view">
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->celltype->name.'-'.$data->serial_num), array('view', 'id'=>$data->id)); ?>
-	<br />
-
 	<b><?php echo CHtml::encode($data->getAttributeLabel('serial_num')); ?>:</b>
-	<?php echo CHtml::encode($data->serial_num); ?>
+	<?php echo CHtml::link(CHtml::encode($data->kit->celltype->name.'-'.$data->kit->serial_num), array('view', 'id'=>$data->id)); ?>
 	<br />
 
 	<b>Kitted:</b>
-	<?php echo date('G:i \o\n n/j/y', strtotime($data->kit->kitting_date)); ?> | Lot # <?php echo CHtml::encode($data->kit->lot_num); ?> [<?php echo CHtml::encode($data->kit->kitter->getFullName()); ?>]
+	<?php echo date('G:i \o\n n/j/y', strtotime($data->kit->kitting_date)); ?> [<?php echo CHtml::encode($data->kit->kitter->getFullName()); ?>]
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('ref_num')); ?>:</b>
@@ -26,7 +22,7 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('celltype_id')); ?>:</b>
-	<?php echo CHtml::encode($data->celltype->name); ?>
+	<?php echo CHtml::encode($data->kit->celltype->name); ?>
 	<br />
 
 	<b>Stacked:</b>

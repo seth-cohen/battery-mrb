@@ -11,14 +11,10 @@
 	'method'=>'get',
 )); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'id'); ?>
-		<?php echo $form->textField($model,'id',array('size'=>10,'maxlength'=>10)); ?>
-	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'serial_num'); ?>
-		<?php echo $form->textField($model,'serial_num',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->label($model,'serial_search'); ?>
+		<?php echo $form->textField($model,'serial_search',array('size'=>10,'maxlength'=>10)); ?>
 	</div>
 
 	<div class="row">
@@ -37,8 +33,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'celltype_id'); ?>
-		<?php echo $form->textField($model,'celltype_id',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->label($model,'celltype_search'); ?>
+		<?php echo $form->textField($model,'celltype_search',array('size'=>10,'maxlength'=>10)); ?>
 	</div>
 
 	<div class="row">

@@ -63,6 +63,8 @@ class CellController extends Controller
 	public function actionCreate()
 	{
 		$model=new Cell;
+		$kit = new Kit;
+		$celltype = new Celltype;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -76,6 +78,8 @@ class CellController extends Controller
 
 		$this->render('create',array(
 			'model'=>$model,
+			'kit'=>$kit,
+			'celltype'=>$celltype,
 		));
 	}
 
@@ -100,6 +104,8 @@ class CellController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
+			'kit'=>$model->kit,
+			'celltype'=>$model->kit->celltype,
 		));
 	}
 

@@ -5,7 +5,7 @@
 $this->breadcrumbs=array(
 	'Manufacturing'=>array('/manufacturing'),
 	'Cells'=>array('index'),
-	$model->celltype->name.'-'.$model->serial_num,
+	$model->kit->celltype->name.'-'.$model->kit->serial_num,
 );
 
 $this->menu=array(
@@ -13,7 +13,7 @@ $this->menu=array(
 	array('label'=>'Create Cell', 'url'=>array('create')),
 	array('label'=>'Update Cell', 'url'=>array('update', 'id'=>$model->id)),
 	array('label'=>'Delete Cell', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Cell', 'url'=>array('admin')),
+	array('label'=>'Manage Cell', 'url'=>array('admin'), 'visible'=>Yii::app()->user->name=='admin'),
 );
 ?>
 
@@ -22,12 +22,13 @@ $this->menu=array(
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id',
-		'serial_num',
+		array(
+			'name'=>'serial_search',
+			'value'=>$model->kit->celltype->name.'-'.$model->kit->serial_num,
+		),
 		'kit_id',
 		'ref_num',
 		'eap_num',
-		'celltype_id',
 		'stacker_id',
 		'stack_date',
 		'dry_wt',
