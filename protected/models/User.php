@@ -174,6 +174,12 @@ class User extends CActiveRecord
 		return $this->first_name.' '.$this->last_name;
 	}
 	
+	public function getFullNameProper($id)
+	{
+		$user = User::model()->findByPk($id); 
+		return $user->last_name.', '.$user->first_name;
+	}
+	
 /*
 	 * REturns one dimensional array to use to populate dropdown list for filtering
 	 * @return 1-D array of id=>name

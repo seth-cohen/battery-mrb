@@ -7,8 +7,10 @@
  * @property string $id
  * @property string $lot_num
  * @property string $eap_num
+ * @property string $coater_id
  *
  * The followings are the available model relations:
+ * @property User $coater
  * @property Kit[] $kits
  */
 class Anode extends CActiveRecord
@@ -31,9 +33,10 @@ class Anode extends CActiveRecord
 		return array(
 			array('lot_num', 'required'),
 			array('lot_num, eap_num', 'length', 'max'=>50),
+			array('coater_id', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, lot_num, eap_num', 'safe', 'on'=>'search'),
+			array('id, lot_num, eap_num, coater_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -45,6 +48,7 @@ class Anode extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'coater' => array(self::BELONGS_TO, 'User', 'coater_id'),
 			'kits' => array(self::HAS_MANY, 'Kit', 'anode_id'),
 		);
 	}
@@ -58,6 +62,7 @@ class Anode extends CActiveRecord
 			'id' => 'ID',
 			'lot_num' => 'Lot Num',
 			'eap_num' => 'Eap Num',
+			'coater_id' => 'Coater',
 		);
 	}
 
@@ -82,6 +87,7 @@ class Anode extends CActiveRecord
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('lot_num',$this->lot_num,true);
 		$criteria->compare('eap_num',$this->eap_num,true);
+		$criteria->compare('coater_id',$this->coater_id,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

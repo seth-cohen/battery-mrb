@@ -30,7 +30,15 @@ $this->menu=array(
 		'in_commission',
 		'govt_tag_num',
 		'cycler_id',
-		'min_temp',
-		'max_temp',
+		array(
+			'label'=>'Min Temp',
+			'type'=>'raw',
+			'value'=>$model->min_temp.' &degC',
+		),
+		array(
+			'label'=>'Max Temp',
+			'type'=>'raw',
+			'value'=>$model->max_temp.' &degC',
+		),
 	),
 )); ?>

@@ -1,26 +1,20 @@
 <?php
 
 /**
- * This is the model class for table "tbl_cathode".
+ * This is the model class for table "tbl_ref_num".
  *
- * The followings are the available columns in table 'tbl_cathode':
+ * The followings are the available columns in table 'tbl_ref_num':
  * @property string $id
- * @property string $lot_num
- * @property string $eap_num
- * @property string $coater_id
- *
- * The followings are the available model relations:
- * @property User $coater
- * @property Kit[] $kits
+ * @property string $number
  */
-class Cathode extends CActiveRecord
+class RefNum extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'tbl_cathode';
+		return 'tbl_ref_num';
 	}
 
 	/**
@@ -31,12 +25,10 @@ class Cathode extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('lot_num', 'required'),
-			array('lot_num, eap_num', 'length', 'max'=>50),
-			array('coater_id', 'length', 'max'=>10),
+			array('number', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, lot_num, eap_num, coater_id', 'safe', 'on'=>'search'),
+			array('id, number', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -48,8 +40,6 @@ class Cathode extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'coater' => array(self::BELONGS_TO, 'User', 'coater_id'),
-			'kits' => array(self::HAS_MANY, 'Kit', 'cathode_id'),
 		);
 	}
 
@@ -60,9 +50,7 @@ class Cathode extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'lot_num' => 'Lot Num',
-			'eap_num' => 'Eap Num',
-			'coater_id' => 'Coater',
+			'number' => 'Number',
 		);
 	}
 
@@ -85,9 +73,7 @@ class Cathode extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id,true);
-		$criteria->compare('lot_num',$this->lot_num,true);
-		$criteria->compare('eap_num',$this->eap_num,true);
-		$criteria->compare('coater_id',$this->coater_id,true);
+		$criteria->compare('number',$this->number,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -98,7 +84,7 @@ class Cathode extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Cathode the static model class
+	 * @return RefNum the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

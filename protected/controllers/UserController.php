@@ -29,15 +29,19 @@ class UserController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
-				'users'=>array('*'),
+				'roles'=>array('engineering tech')
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update'),
 				'users'=>array('@'),
 			),
+			array('allow',	
+				'actions'=>array('ajaxusersearch'),
+				'roles'=>array('manufacturing supervisor'),
+			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete','ajaxassignrole'),
-				'users'=>array('admin'),
+				'roles'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -189,7 +193,7 @@ class UserController extends Controller
 		}
 	}
 	
-/**
+	/**
 	 * ajax saving of the users roles.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
@@ -222,6 +226,34 @@ class UserController extends Controller
 				}	
 			}
 		}
+	}
+	
+	/**
+	 * ajax user search
+	 * @param string $term the term to search for
+	 */
+	public function actionAjaxUserSearch($term)
+	{	
+		$results = array();
+		
+		$criteria = new CDbCriteria;
+		$criteria->compare('first_name',$term, true, 'OR');
+		$criteria->compare('last_name',$term, true, 'OR');
+		$criteria->order = 'last_name';
+		$criteria->select = 'first_name, last_name, id';
+		
+		$users = User::model()->findAll($criteria);
+		
+		foreach ($users as $user){
+			$results[] = array(
+					'value'=>$user->last_name.', '.$user->first_name,
+					'id'=>$user->id,
+			);
+		}
+		
+		echo json_encode($results);
+		
+		Yii::app()->end();
 	}
 	
 }
