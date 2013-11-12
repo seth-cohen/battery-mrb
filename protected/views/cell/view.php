@@ -1,11 +1,13 @@
 <?php
 /* @var $this CellController */
 /* @var $model Cell */
+/* @var $kit Kit */
+/* @var $celltype Celltype */
 
 $this->breadcrumbs=array(
 	'Manufacturing'=>array('/manufacturing'),
 	'Cells'=>array('index'),
-	$model->kit->celltype->name.'-'.$model->kit->serial_num,
+	$celltype->name.'-'.$kit->serial_num,
 );
 
 $this->menu=array(
@@ -17,25 +19,33 @@ $this->menu=array(
 );
 ?>
 
-<h1>View Cell #<?php echo $model->id; ?></h1>
+<h1>Details for Cell #<?php echo $celltype->name.'-'.$kit->serial_num; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
 		array(
 			'name'=>'serial_search',
-			'value'=>$model->kit->celltype->name.'-'.$model->kit->serial_num,
+			'value'=>$celltype->name.'-'.$kit->serial_num,
 		),
-		'kit_id',
 		'ref_num',
 		'eap_num',
-		'stacker_id',
+		array(
+			'name'=>'Stacker',
+			'value'=>$model->stacker->getFullName(),
+		),
 		'stack_date',
 		'dry_wt',
 		'wet_wt',
-		'filler_id',
+		array(
+			'name'=>'Stacker',
+			'value'=>$model->filler->getFullName(),
+		),
 		'fill_date',
-		'inspector_id',
+		array(
+			'name'=>'Stacker',
+			'value'=>$model->inspector->getFullName(),
+		),
 		'inspection_date',
 	),
 )); ?>

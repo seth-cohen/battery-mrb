@@ -25,6 +25,7 @@
  */
 class User extends CActiveRecord
 {
+	public $roleIds = array();
 	/**
 	 * @return string the associated database table name
 	 */
@@ -70,7 +71,7 @@ class User extends CActiveRecord
 			'formationDetails' => array(self::HAS_MANY, 'FormationDetail', 'operator_id'),
 			'kits' => array(self::HAS_MANY, 'Kit', 'kitter_id'),
 			'depart' => array(self::BELONGS_TO, 'Department', 'depart_id'),
-			'roles' => array(self::MANY_MANY, 'Role', 'user_role(user_id, role_id)'),
+			'roles' => array(self::MANY_MANY, 'Role', 'tbl_user_role(user_id, role_id)'),
 		);
 	}
 
@@ -132,6 +133,23 @@ class User extends CActiveRecord
 		return parent::model($className);
 	}
 	
+	/**
+	 * 
+	 */
+	public function afterFind()
+	{
+		if (!empty($this->roles))
+		{
+			foreach($this->roles as $index=>$role)
+			{
+				$this->roleIds[] = $role->id;
+			}
+		}
+		
+		return parent::afterFind();
+		
+	}
+	// added to ensure password is hashed on new records
 	public function beforeSave(){
 		if ($this->isNewRecord)
 		{

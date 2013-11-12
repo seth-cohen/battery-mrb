@@ -55,6 +55,8 @@
 		<?php echo $form->error($model,'depart_id'); ?>
 	</div>
 
+	<?php echo $this->renderPartial('_roleassign',array('model'=>$model)); ?>
+    
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>

@@ -36,7 +36,7 @@ class UserController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete','ajaxassignrole'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -51,8 +51,18 @@ class UserController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$model = $this->loadModel($id);
+		$roles = array();
+		
+		foreach($model->roles as $key=>$role){
+			$roles[] = array('id'=>$key+1, 'role'=>$role->name);
+		}
+		
+		$roleDataProvider = new CArrayDataProvider($roles);
+	
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$model,
+			'roleDataProvider'=>$roleDataProvider,
 		));
 	}
 
@@ -70,8 +80,16 @@ class UserController extends Controller
 		if(isset($_POST['User']))
 		{
 			$model->attributes=$_POST['User'];
-			if($model->save())
+			if($model->save()){
+				foreach($_POST['User']['roles'] as $role)
+				{
+					$commandInsert->insert('tbl_user_role', array(
+						'user_id'=>$model->id,
+						'role_id'=>$role,
+					));
+				}
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('create',array(
@@ -170,4 +188,40 @@ class UserController extends Controller
 			Yii::app()->end();
 		}
 	}
+	
+/**
+	 * ajax saving of the users roles.
+	 * If update is successful, the browser will be redirected to the 'view' page.
+	 * @param integer $id the ID of the model to be updated
+	 */
+	public function actionAjaxAssignRole()
+	{	
+		if(isset($_POST['id']))
+		{
+			$id = $_POST['id'];
+			$roles = array();
+						
+			/* clear the join table of roles */
+			$commandDelete = Yii::app()->db->createCommand();
+			$commandDelete->delete('tbl_user_role', 
+				'user_id = :id',
+				array(':id'=>$id)
+			);
+				
+			if(isset($_POST['roles']))
+			{
+				$roles = $_POST['roles'];
+				/* save the roles in the join table */
+				$commandInsert = Yii::app()->db->createCommand();
+				foreach($roles as $role)
+				{
+					$commandInsert->insert('tbl_user_role', array(
+						'user_id'=>$id,
+						'role_id'=>$role,
+					));
+				}	
+			}
+		}
+	}
+	
 }

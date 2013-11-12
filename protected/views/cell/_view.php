@@ -26,7 +26,7 @@
 	<br />
 
 	<b>Stacked:</b>
-	<?php echo date('G:i \o\n n/j/y', strtotime($data->stack_date)); ?> [<?php echo CHtml::encode($data->stacker->getFullName()); ?>]
+	<?php echo date('n/j/y', strtotime($data->stack_date)); ?> [<?php echo CHtml::encode($data->stacker->getFullName()); ?>]
 	<br />
 
 	<?php /*

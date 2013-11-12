@@ -278,3 +278,14 @@ div.search-form
 {
 	background: #80CFFF;
 }
+
+#role-checkbox
+{
+	overflow:auto;
+	clear:both;
+}
+#role-checkbox div
+{
+	width: 200px;
+	float: left;
+}

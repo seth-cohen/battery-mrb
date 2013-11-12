@@ -51,8 +51,12 @@ class CellController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$model = $this->loadModel($id);
+		
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$model,
+			'kit'=>$model->kit,
+			'celltype'=>$model->kit->celltype,
 		));
 	}
 

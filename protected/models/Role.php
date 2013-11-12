@@ -43,6 +43,11 @@ class Role extends CActiveRecord
 		return array(
 		);
 	}
+	
+	public function defaultScope()
+	{
+	    return array("order" => "name");
+	}
 
 	/**
 	 * @return array customized attribute labels (name=>label)
