@@ -8648,3 +8648,1978 @@ Stack trace:
 REQUEST_URI=/ytpdb/index.php?r=manufacturing/createanodelot
 in C:\wamp\www\ytpdb\protected\controllers\ManufacturingController.php (52)
 in C:\wamp\www\ytpdb\index.php (13)
+2013/11/12 23:15:30 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(WebUser), 'You are not aut...')
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('view')
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('user/view')
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/ytpdb/index.php?r=user/view&id=1
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=site/login
+---
+2013/11/12 23:15:41 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(WebUser), 'You are not aut...')
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('')
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('user')
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/ytpdb/index.php?r=user
+---
+2013/11/12 23:27:21 [error] [exception.CException] exception 'CException' with message 'Property "Cell.ref_num" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('ref_num')
+#1 C:\wamp\www\ytpdb\protected\views\cell\_view.php(17): CActiveRecord->__get('ref_num')
+#2 C:\wamp\www\yii\framework\web\CBaseController.php(130): require('C:\wamp\www\ytp...')
+#3 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, false)
+#4 C:\wamp\www\yii\framework\zii\widgets\CListView.php(291): CBaseController->renderFile('C:\wamp\www\ytp...', Array)
+#5 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(167): CListView->renderItems()
+#6 [internal function]: CBaseListView->renderSection(Array)
+#7 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{summary}?{sort...')
+#8 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(135): CBaseListView->renderContent()
+#9 C:\wamp\www\yii\framework\web\CBaseController.php(173): CBaseListView->run()
+#10 C:\wamp\www\ytpdb\protected\views\cell\index.php(21): CBaseController->widget('zii.widgets.CLi...', Array)
+#11 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#12 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#13 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#14 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('index', Array, true)
+#15 C:\wamp\www\ytpdb\protected\controllers\CellController.php(138): CController->render('index', Array)
+#16 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionIndex()
+#17 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#18 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#19 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#20 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#21 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#22 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#23 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#24 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#25 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('')
+#26 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell')
+#27 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#28 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#29 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell
+---
+2013/11/12 23:29:56 [error] [exception.CException] exception 'CException' with message 'Property "Cell.ref_num" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('ref_num')
+#1 C:\wamp\www\ytpdb\protected\views\cell\_view.php(17): CActiveRecord->__get('ref_num')
+#2 C:\wamp\www\yii\framework\web\CBaseController.php(130): require('C:\wamp\www\ytp...')
+#3 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, false)
+#4 C:\wamp\www\yii\framework\zii\widgets\CListView.php(291): CBaseController->renderFile('C:\wamp\www\ytp...', Array)
+#5 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(167): CListView->renderItems()
+#6 [internal function]: CBaseListView->renderSection(Array)
+#7 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{summary}?{sort...')
+#8 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(135): CBaseListView->renderContent()
+#9 C:\wamp\www\yii\framework\web\CBaseController.php(173): CBaseListView->run()
+#10 C:\wamp\www\ytpdb\protected\views\cell\index.php(21): CBaseController->widget('zii.widgets.CLi...', Array)
+#11 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#12 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#13 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#14 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('index', Array, true)
+#15 C:\wamp\www\ytpdb\protected\controllers\CellController.php(138): CController->render('index', Array)
+#16 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionIndex()
+#17 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#18 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#19 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#20 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#21 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#22 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#23 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#24 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#25 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('')
+#26 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell')
+#27 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#28 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#29 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell
+---
+2013/11/12 23:30:54 [error] [exception.CException] exception 'CException' with message 'Property "RefNum.name" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('name')
+#1 C:\wamp\www\ytpdb\protected\views\cell\_view.php(17): CActiveRecord->__get('name')
+#2 C:\wamp\www\yii\framework\web\CBaseController.php(130): require('C:\wamp\www\ytp...')
+#3 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, false)
+#4 C:\wamp\www\yii\framework\zii\widgets\CListView.php(291): CBaseController->renderFile('C:\wamp\www\ytp...', Array)
+#5 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(167): CListView->renderItems()
+#6 [internal function]: CBaseListView->renderSection(Array)
+#7 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{summary}?{sort...')
+#8 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(135): CBaseListView->renderContent()
+#9 C:\wamp\www\yii\framework\web\CBaseController.php(173): CBaseListView->run()
+#10 C:\wamp\www\ytpdb\protected\views\cell\index.php(21): CBaseController->widget('zii.widgets.CLi...', Array)
+#11 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#12 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#13 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#14 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('index', Array, true)
+#15 C:\wamp\www\ytpdb\protected\controllers\CellController.php(138): CController->render('index', Array)
+#16 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionIndex()
+#17 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#18 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#19 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#20 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#21 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#22 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#23 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#24 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#25 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('')
+#26 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell')
+#27 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#28 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#29 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell
+---
+2013/11/12 23:32:42 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(WebUser), 'You are not aut...')
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/admin')
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/admin
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell
+---
+2013/11/12 23:33:32 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(WebUser), 'You are not aut...')
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/admin')
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/admin
+---
+2013/11/12 23:33:36 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(WebUser), 'You are not aut...')
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/admin')
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/admin
+---
+2013/11/12 23:34:15 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(WebUser), 'You are not aut...')
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/admin')
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/admin
+---
+2013/11/12 23:34:38 [error] [exception.CException] exception 'CException' with message 'Property "Cell.ref_num" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('ref_num')
+#1 C:\wamp\www\yii\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('ref_num')
+#2 C:\wamp\www\yii\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(Cell), 'ref_num')
+#3 C:\wamp\www\yii\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(Cell), 'ref_num', Array)
+#4 C:\wamp\www\yii\framework\web\widgets\CActiveForm.php(725): CHtml::activeTextField(Object(Cell), 'ref_num', Array)
+#5 C:\wamp\www\ytpdb\protected\views\cell\_search.php(27): CActiveForm->textField(Object(Cell), 'ref_num', Array)
+#6 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#7 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#8 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#9 C:\wamp\www\ytpdb\protected\views\cell\admin.php(41): CController->renderPartial('_search', Array)
+#10 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#11 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#12 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#13 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#14 C:\wamp\www\ytpdb\protected\controllers\CellController.php(154): CController->render('admin', Array)
+#15 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAdmin()
+#16 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#17 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#18 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#19 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#20 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#21 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#22 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#23 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#24 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#25 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/admin')
+#26 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#27 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#28 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/admin
+---
+2013/11/12 23:36:02 [error] [exception.CException] exception 'CException' with message 'Property "Cell.ref_num" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('ref_num')
+#1 C:\wamp\www\ytpdb\protected\models\Cell.php(139): CActiveRecord->__get('ref_num')
+#2 C:\wamp\www\ytpdb\protected\views\cell\admin.php(46): Cell->search()
+#3 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#4 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#5 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#6 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#7 C:\wamp\www\ytpdb\protected\controllers\CellController.php(154): CController->render('admin', Array)
+#8 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAdmin()
+#9 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#11 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#13 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#14 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#15 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#16 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#18 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/admin')
+#19 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/admin
+---
+2013/11/12 23:37:01 [error] [exception.CException] exception 'CException' with message 'Property "Cell.ref_num" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('ref_num')
+#1 C:\wamp\www\ytpdb\protected\models\Cell.php(139): CActiveRecord->__get('ref_num')
+#2 C:\wamp\www\ytpdb\protected\views\cell\admin.php(46): Cell->search()
+#3 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#4 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#5 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#6 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#7 C:\wamp\www\ytpdb\protected\controllers\CellController.php(154): CController->render('admin', Array)
+#8 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAdmin()
+#9 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#11 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#13 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#14 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#15 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#16 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#18 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/admin')
+#19 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/admin
+---
+2013/11/12 23:37:48 [error] [exception.CException] exception 'CException' with message 'Property "Cell.ref_num" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('ref_num')
+#1 C:\wamp\www\yii\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('ref_num')
+#2 C:\wamp\www\yii\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(Cell), 'ref_num')
+#3 C:\wamp\www\yii\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(Cell), 'ref_num', Array)
+#4 C:\wamp\www\yii\framework\zii\widgets\grid\CDataColumn.php(103): CHtml::activeTextField(Object(Cell), 'ref_num', Array)
+#5 C:\wamp\www\yii\framework\zii\widgets\grid\CGridColumn.php(116): CDataColumn->renderFilterCellContent()
+#6 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(532): CGridColumn->renderFilterCell()
+#7 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(510): CGridView->renderFilter()
+#8 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(480): CGridView->renderTableHeader()
+#9 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#10 [internal function]: CBaseListView->renderSection(Array)
+#11 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{summary}?{item...')
+#12 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(135): CBaseListView->renderContent()
+#13 C:\wamp\www\yii\framework\web\CBaseController.php(173): CBaseListView->run()
+#14 C:\wamp\www\ytpdb\protected\views\cell\admin.php(77): CBaseController->widget('zii.widgets.gri...', Array)
+#15 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#16 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#17 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#18 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#19 C:\wamp\www\ytpdb\protected\controllers\CellController.php(154): CController->render('admin', Array)
+#20 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAdmin()
+#21 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#22 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#23 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#24 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#25 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#26 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#27 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#28 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#29 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#30 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/admin')
+#31 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#32 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#33 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/admin
+---
+2013/11/12 23:39:28 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ref.name' in 'where clause'. The SQL statement executed was: SELECT COUNT(DISTINCT `t`.`id`) FROM `tbl_cell` `t`  LEFT OUTER JOIN `tbl_kit` `kit` ON (`t`.`kit_id`=`kit`.`id`)  LEFT OUTER JOIN `tbl_celltype` `celltype` ON (`kit`.`celltype_id`=`celltype`.`id`)  LEFT OUTER JOIN `tbl_user` `user` ON (`t`.`stacker_id`=`user`.`id`)  LEFT OUTER JOIN `tbl_ref_num` `ref` ON (`t`.`ref_num_id`=`ref`.`id`)  WHERE (ref.name LIKE :ycp0).
+in C:\wamp\www\ytpdb\protected\views\cell\admin.php (80)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (154)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/12 23:39:28 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ref.name' in 'where clause'. The SQL statement executed was: SELECT COUNT(DISTINCT `t`.`id`) FROM `tbl_cell` `t`  LEFT OUTER JOIN `tbl_kit` `kit` ON (`t`.`kit_id`=`kit`.`id`)  LEFT OUTER JOIN `tbl_celltype` `celltype` ON (`kit`.`celltype_id`=`celltype`.`id`)  LEFT OUTER JOIN `tbl_user` `user` ON (`t`.`stacker_id`=`user`.`id`)  LEFT OUTER JOIN `tbl_ref_num` `ref` ON (`t`.`ref_num_id`=`ref`.`id`)  WHERE (ref.name LIKE :ycp0)' in C:\wamp\www\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(759): CDbCommand->queryScalar()
+#2 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(151): CJoinElement->count(Object(CDbCriteria))
+#3 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1605): CActiveFinder->count(Object(CDbCriteria))
+#4 C:\wamp\www\yii\framework\web\CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#5 C:\wamp\www\yii\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#6 C:\wamp\www\yii\framework\web\CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#7 C:\wamp\www\yii\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#8 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(111): CDataProvider->getData()
+#9 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(339): CBaseListView->init()
+#10 C:\wamp\www\yii\framework\web\CBaseController.php(147): CGridView->init()
+#11 C:\wamp\www\yii\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#12 C:\wamp\www\ytpdb\protected\views\cell\admin.php(80): CBaseController->widget('zii.widgets.gri...', Array)
+#13 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#14 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#15 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#16 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#17 C:\wamp\www\ytpdb\protected\controllers\CellController.php(154): CController->render('admin', Array)
+#18 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAdmin()
+#19 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#20 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#21 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#22 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#23 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#24 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#25 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#26 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#27 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#28 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/admin')
+#29 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#30 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#31 {main}
+REQUEST_URI=/ytpdb/index.php?Cell%5Bserial_search%5D=&Cell%5Brefnum_search%5D=12&Cell%5Beap_num%5D=&Cell%5Bcelltype_search%5D=&Cell%5Bstacker_search%5D=&Cell_page=1&ajax=cell-grid&r=cell%2Fadmin
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/12 23:39:39 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ref.name' in 'where clause'. The SQL statement executed was: SELECT COUNT(DISTINCT `t`.`id`) FROM `tbl_cell` `t`  LEFT OUTER JOIN `tbl_kit` `kit` ON (`t`.`kit_id`=`kit`.`id`)  LEFT OUTER JOIN `tbl_celltype` `celltype` ON (`kit`.`celltype_id`=`celltype`.`id`)  LEFT OUTER JOIN `tbl_user` `user` ON (`t`.`stacker_id`=`user`.`id`)  LEFT OUTER JOIN `tbl_ref_num` `ref` ON (`t`.`ref_num_id`=`ref`.`id`)  WHERE (ref.name LIKE :ycp0).
+in C:\wamp\www\ytpdb\protected\views\cell\admin.php (80)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (154)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/12 23:39:39 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ref.name' in 'where clause'. The SQL statement executed was: SELECT COUNT(DISTINCT `t`.`id`) FROM `tbl_cell` `t`  LEFT OUTER JOIN `tbl_kit` `kit` ON (`t`.`kit_id`=`kit`.`id`)  LEFT OUTER JOIN `tbl_celltype` `celltype` ON (`kit`.`celltype_id`=`celltype`.`id`)  LEFT OUTER JOIN `tbl_user` `user` ON (`t`.`stacker_id`=`user`.`id`)  LEFT OUTER JOIN `tbl_ref_num` `ref` ON (`t`.`ref_num_id`=`ref`.`id`)  WHERE (ref.name LIKE :ycp0)' in C:\wamp\www\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(759): CDbCommand->queryScalar()
+#2 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(151): CJoinElement->count(Object(CDbCriteria))
+#3 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1605): CActiveFinder->count(Object(CDbCriteria))
+#4 C:\wamp\www\yii\framework\web\CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#5 C:\wamp\www\yii\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#6 C:\wamp\www\yii\framework\web\CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#7 C:\wamp\www\yii\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#8 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(111): CDataProvider->getData()
+#9 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(339): CBaseListView->init()
+#10 C:\wamp\www\yii\framework\web\CBaseController.php(147): CGridView->init()
+#11 C:\wamp\www\yii\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#12 C:\wamp\www\ytpdb\protected\views\cell\admin.php(80): CBaseController->widget('zii.widgets.gri...', Array)
+#13 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#14 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#15 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#16 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#17 C:\wamp\www\ytpdb\protected\controllers\CellController.php(154): CController->render('admin', Array)
+#18 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAdmin()
+#19 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#20 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#21 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#22 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#23 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#24 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#25 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#26 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#27 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#28 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/admin')
+#29 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#30 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#31 {main}
+REQUEST_URI=/ytpdb/index.php?Cell%5Bserial_search%5D=&Cell%5Brefnum_search%5D=12&Cell%5Beap_num%5D=&Cell%5Bcelltype_search%5D=&Cell%5Bstacker_search%5D=&Cell_page=1&ajax=cell-grid&r=cell%2Fadmin
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/12 23:41:54 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'refNum.number' in 'order clause'. The SQL statement executed was: SELECT `t`.`id` AS `t0_c0`, `t`.`kit_id` AS `t0_c1`, `t`.`ref_num_id` AS `t0_c2`, `t`.`eap_num` AS `t0_c3`, `t`.`stacker_id` AS `t0_c4`, `t`.`stack_date` AS `t0_c5`, `t`.`dry_wt` AS `t0_c6`, `t`.`wet_wt` AS `t0_c7`, `t`.`filler_id` AS `t0_c8`, `t`.`fill_date` AS `t0_c9`, `t`.`inspector_id` AS `t0_c10`, `t`.`inspection_date` AS `t0_c11`, `kit`.`id` AS `t1_c0`, `kit`.`serial_num` AS `t1_c1`, `kit`.`ref_num_id` AS `t1_c2`, `kit`.`anode_id` AS `t1_c3`, `kit`.`cathode_id` AS `t1_c4`, `kit`.`kitter_id` AS `t1_c5`, `kit`.`kitting_date` AS `t1_c6`, `kit`.`celltype_id` AS `t1_c7`, `celltype`.`id` AS `t2_c0`, `celltype`.`name` AS `t2_c1`, `user`.`id` AS `t3_c0`, `user`.`username` AS `t3_c1`, `user`.`password` AS `t3_c2`, `user`.`first_name` AS `t3_c3`, `user`.`last_name` AS `t3_c4`, `user`.`email` AS `t3_c5`, `user`.`depart_id` AS `t3_c6`, `ref`.`id` AS `t4_c0`, `ref`.`number` AS `t4_c1` FROM `tbl_cell` `t`  LEFT OUTER JOIN `tbl_kit` `kit` ON (`t`.`kit_id`=`kit`.`id`)  LEFT OUTER JOIN `tbl_celltype` `celltype` ON (`kit`.`celltype_id`=`celltype`.`id`)  LEFT OUTER JOIN `tbl_user` `user` ON (`t`.`stacker_id`=`user`.`id`)  LEFT OUTER JOIN `tbl_ref_num` `ref` ON (`t`.`ref_num_id`=`ref`.`id`)  ORDER BY refNum.number LIMIT 16.
+in C:\wamp\www\ytpdb\protected\views\cell\admin.php (80)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (154)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/12 23:41:54 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'refNum.number' in 'order clause'. The SQL statement executed was: SELECT `t`.`id` AS `t0_c0`, `t`.`kit_id` AS `t0_c1`, `t`.`ref_num_id` AS `t0_c2`, `t`.`eap_num` AS `t0_c3`, `t`.`stacker_id` AS `t0_c4`, `t`.`stack_date` AS `t0_c5`, `t`.`dry_wt` AS `t0_c6`, `t`.`wet_wt` AS `t0_c7`, `t`.`filler_id` AS `t0_c8`, `t`.`fill_date` AS `t0_c9`, `t`.`inspector_id` AS `t0_c10`, `t`.`inspection_date` AS `t0_c11`, `kit`.`id` AS `t1_c0`, `kit`.`serial_num` AS `t1_c1`, `kit`.`ref_num_id` AS `t1_c2`, `kit`.`anode_id` AS `t1_c3`, `kit`.`cathode_id` AS `t1_c4`, `kit`.`kitter_id` AS `t1_c5`, `kit`.`kitting_date` AS `t1_c6`, `kit`.`celltype_id` AS `t1_c7`, `celltype`.`id` AS `t2_c0`, `celltype`.`name` AS `t2_c1`, `user`.`id` AS `t3_c0`, `user`.`username` AS `t3_c1`, `user`.`password` AS `t3_c2`, `user`.`first_name` AS `t3_c3`, `user`.`last_name` AS `t3_c4`, `user`.`email` AS `t3_c5`, `user`.`depart_id` AS `t3_c6`, `ref`.`id` AS `t4_c0`, `ref`.`number` AS `t4_c1` FROM `tbl_cell` `t`  LEFT OUTER JOIN `tbl_kit` `kit` ON (`t`.`kit_id`=`kit`.`id`)  LEFT OUTER JOIN `tbl_celltype` `celltype` ON (`kit`.`celltype_id`=`celltype`.`id`)  LEFT OUTER JOIN `tbl_user` `user` ON (`t`.`stacker_id`=`user`.`id`)  LEFT OUTER JOIN `tbl_ref_num` `ref` ON (`t`.`ref_num_id`=`ref`.`id`)  ORDER BY refNum.number LIMIT 16' in C:\wamp\www\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(803): CDbCommand->queryAll()
+#2 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(437): CJoinElement->runQuery(Object(CJoinQuery))
+#3 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1356): CActiveFinder->query(Object(CDbCriteria), true)
+#5 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#6 C:\wamp\www\yii\framework\web\CActiveDataProvider.php(199): CActiveRecord->findAll(Object(CDbCriteria))
+#7 C:\wamp\www\yii\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#8 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(111): CDataProvider->getData()
+#9 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(339): CBaseListView->init()
+#10 C:\wamp\www\yii\framework\web\CBaseController.php(147): CGridView->init()
+#11 C:\wamp\www\yii\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#12 C:\wamp\www\ytpdb\protected\views\cell\admin.php(80): CBaseController->widget('zii.widgets.gri...', Array)
+#13 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#14 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#15 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#16 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#17 C:\wamp\www\ytpdb\protected\controllers\CellController.php(154): CController->render('admin', Array)
+#18 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAdmin()
+#19 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#20 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#21 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#22 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#23 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#24 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#25 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#26 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#27 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#28 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/admin')
+#29 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#30 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#31 {main}
+REQUEST_URI=/ytpdb/index.php?Cell_sort=refnum_search&ajax=cell-grid&r=cell%2Fadmin
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/12 23:42:24 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ref.name' in 'where clause'. The SQL statement executed was: SELECT COUNT(DISTINCT `t`.`id`) FROM `tbl_cell` `t`  LEFT OUTER JOIN `tbl_kit` `kit` ON (`t`.`kit_id`=`kit`.`id`)  LEFT OUTER JOIN `tbl_celltype` `celltype` ON (`kit`.`celltype_id`=`celltype`.`id`)  LEFT OUTER JOIN `tbl_user` `user` ON (`t`.`stacker_id`=`user`.`id`)  LEFT OUTER JOIN `tbl_ref_num` `ref` ON (`t`.`ref_num_id`=`ref`.`id`)  WHERE (ref.name LIKE :ycp0).
+in C:\wamp\www\ytpdb\protected\views\cell\admin.php (80)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (154)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/12 23:42:24 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ref.name' in 'where clause'. The SQL statement executed was: SELECT COUNT(DISTINCT `t`.`id`) FROM `tbl_cell` `t`  LEFT OUTER JOIN `tbl_kit` `kit` ON (`t`.`kit_id`=`kit`.`id`)  LEFT OUTER JOIN `tbl_celltype` `celltype` ON (`kit`.`celltype_id`=`celltype`.`id`)  LEFT OUTER JOIN `tbl_user` `user` ON (`t`.`stacker_id`=`user`.`id`)  LEFT OUTER JOIN `tbl_ref_num` `ref` ON (`t`.`ref_num_id`=`ref`.`id`)  WHERE (ref.name LIKE :ycp0)' in C:\wamp\www\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(759): CDbCommand->queryScalar()
+#2 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(151): CJoinElement->count(Object(CDbCriteria))
+#3 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1605): CActiveFinder->count(Object(CDbCriteria))
+#4 C:\wamp\www\yii\framework\web\CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#5 C:\wamp\www\yii\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#6 C:\wamp\www\yii\framework\web\CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#7 C:\wamp\www\yii\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#8 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(111): CDataProvider->getData()
+#9 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(339): CBaseListView->init()
+#10 C:\wamp\www\yii\framework\web\CBaseController.php(147): CGridView->init()
+#11 C:\wamp\www\yii\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#12 C:\wamp\www\ytpdb\protected\views\cell\admin.php(80): CBaseController->widget('zii.widgets.gri...', Array)
+#13 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#14 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#15 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#16 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#17 C:\wamp\www\ytpdb\protected\controllers\CellController.php(154): CController->render('admin', Array)
+#18 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAdmin()
+#19 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#20 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#21 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#22 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#23 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#24 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#25 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#26 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#27 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#28 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/admin')
+#29 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#30 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#31 {main}
+REQUEST_URI=/ytpdb/index.php?Cell%5Bserial_search%5D=&Cell%5Brefnum_search%5D=1&Cell%5Beap_num%5D=&Cell%5Bcelltype_search%5D=&Cell%5Bstacker_search%5D=&Cell_page=1&ajax=cell-grid&r=cell%2Fadmin
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/12 23:43:17 [error] [exception.CException] exception 'CException' with message 'Property "Cell.ref_num" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('ref_num')
+#1 C:\wamp\www\yii\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('ref_num')
+#2 C:\wamp\www\yii\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(Cell), 'ref_num')
+#3 C:\wamp\www\yii\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(Cell), 'ref_num', Array)
+#4 C:\wamp\www\yii\framework\web\widgets\CActiveForm.php(725): CHtml::activeTextField(Object(Cell), 'ref_num', Array)
+#5 C:\wamp\www\ytpdb\protected\views\cell\_form.php(32): CActiveForm->textField(Object(Cell), 'ref_num', Array)
+#6 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#7 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#8 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#9 C:\wamp\www\ytpdb\protected\views\cell\create.php(21): CController->renderPartial('_form', Array)
+#10 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#11 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#12 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#13 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('create', Array, true)
+#14 C:\wamp\www\ytpdb\protected\controllers\CellController.php(88): CController->render('create', Array)
+#15 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionCreate()
+#16 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#17 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#18 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#19 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#20 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#21 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#22 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#23 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#24 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#25 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/create')
+#26 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#27 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#28 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/create
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/index
+---
+2013/11/13 00:10:02 [error] [php] Missing argument 1 for CBaseController::widget(), called in C:\wamp\www\ytpdb\protected\views\cell\admin.php on line 84 and defined (C:\wamp\www\yii\framework\web\CBaseController.php:160)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CBaseController.php(95): CellController->renderInternal()
+#1 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#2 C:\wamp\www\yii\framework\web\CController.php(782): CellController->renderPartial()
+#3 C:\wamp\www\ytpdb\protected\controllers\CellController.php(154): CellController->render()
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAdmin()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/index.php?r=cell/admin
+in C:\wamp\www\ytpdb\protected\views\cell\admin.php (84)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (154)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/13 00:10:11 [error] [php] Missing argument 1 for CBaseController::widget(), called in C:\wamp\www\ytpdb\protected\views\cell\admin.php on line 84 and defined (C:\wamp\www\yii\framework\web\CBaseController.php:160)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CBaseController.php(95): CellController->renderInternal()
+#1 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#2 C:\wamp\www\yii\framework\web\CController.php(782): CellController->renderPartial()
+#3 C:\wamp\www\ytpdb\protected\controllers\CellController.php(154): CellController->render()
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAdmin()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/index.php?r=cell/admin
+in C:\wamp\www\ytpdb\protected\views\cell\admin.php (84)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (154)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/13 00:42:39 [error] [php] Undefined variable: cellMFGDetails (C:\wamp\www\ytpdb\protected\views\cell\admin.php:87)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#1 C:\wamp\www\yii\framework\web\CController.php(782): CellController->renderPartial()
+#2 C:\wamp\www\ytpdb\protected\controllers\CellController.php(154): CellController->render()
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAdmin()
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/index.php?r=cell/admin
+in C:\wamp\www\ytpdb\protected\views\cell\admin.php (87)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (154)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/13 00:53:28 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\wamp\www\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&id%5B%5D=13
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 00:54:55 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\wamp\www\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&id%5B%5D=13
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 00:55:30 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\wamp\www\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&id%5B%5D=14
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 00:56:47 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\wamp\www\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&id%5B%5D=14
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 00:58:26 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\wamp\www\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&id%5B%5D=14
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 00:58:59 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\wamp\www\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&id%5B%5D=13
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 01:00:05 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\wamp\www\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&id%5B%5D=14
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 01:01:31 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\wamp\www\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&id%5B%5D=15
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 01:01:52 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\wamp\www\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&id%5B%5D=15
+---
+2013/11/13 01:01:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "lkjh".' in C:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('lkjh')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('lkjh')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/lkjh')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/lkjh
+---
+2013/11/13 01:02:03 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\wamp\www\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&id%5B%5D=15
+---
+2013/11/13 01:05:27 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\wamp\www\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 01:13:33 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\wamp\www\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&callback=jQuery18308860136547591537_1384305211389&id%5B%5D=15&newparam=tits&_=1384305213243
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 01:13:49 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\wamp\www\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&id%5B%5D=15&newparam=tits
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 01:14:12 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\wamp\www\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&id%5B%5D=15&newparam=tits
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 01:15:49 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\wamp\www\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&id%5B%5D=15&newparam=tits
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 01:16:12 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\wamp\www\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&id%5B%5D=16&newparam=tits
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 01:16:45 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\wamp\www\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&id%5B%5D=14&newparam=tits
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 01:17:17 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\wamp\www\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id%5B%5D=14
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 01:17:38 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\wamp\www\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id%5B%5D=13
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 01:18:21 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\wamp\www\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&cell_id%5B%5D=13
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 01:18:22 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\wamp\www\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&cell_id%5B%5D=14
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 01:18:26 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\wamp\www\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&cell_id%5B%5D=13
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 01:18:34 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\wamp\www\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&cell_id%5B%5D=14
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 01:18:37 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\wamp\www\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&cell_id%5B%5D=15
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 01:18:39 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\wamp\www\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&cell_id%5B%5D=16
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 01:19:36 [error] [php] Undefined variable: id (C:\wamp\www\ytpdb\protected\controllers\CellController.php:205)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#3 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#4 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#5 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#7 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#10 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&id=15&newparam=tit
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (205)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/13 01:20:33 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\wamp\www\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&cellid%5B%5D=13
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 01:20:35 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\wamp\www\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&cellid%5B%5D=14
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 01:20:58 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\wamp\www\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&cell%5B%5D=14
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 01:33:32 [error] [php] Object of class CDetailView could not be converted to string (C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php:16)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#1 C:\wamp\www\ytpdb\protected\controllers\CellController.php(200): CellController->renderPartial()
+#2 unknown(0): CellController->actionAjaxMFGUpdate()
+#3 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=15
+in C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php (16)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (200)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/13 01:33:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in C:\wamp\www\ytpdb\protected\controllers\CellController.php:168
+Stack trace:
+#0 C:\wamp\www\ytpdb\protected\controllers\CellController.php(192): CellController->loadModel('')
+#1 [internal function]: CellController->actionAjaxMFGUpdate('', 'tits')
+#2 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(CellController), Array)
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CellController), Object(ReflectionMethod), Array)
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 01:33:38 [error] [php] Object of class CDetailView could not be converted to string (C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php:16)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#1 C:\wamp\www\ytpdb\protected\controllers\CellController.php(200): CellController->renderPartial()
+#2 unknown(0): CellController->actionAjaxMFGUpdate()
+#3 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=14
+in C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php (16)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (200)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/13 01:41:34 [error] [php] Undefined index: stacker (C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php:11)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#1 C:\wamp\www\ytpdb\protected\controllers\CellController.php(200): CellController->renderPartial()
+#2 unknown(0): CellController->actionAjaxMFGUpdate()
+#3 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=7
+in C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php (11)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (200)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/13 01:41:43 [error] [php] Undefined index: stacker (C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php:11)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#1 C:\wamp\www\ytpdb\protected\controllers\CellController.php(200): CellController->renderPartial()
+#2 unknown(0): CellController->actionAjaxMFGUpdate()
+#3 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=14
+in C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php (11)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (200)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/13 01:41:57 [error] [php] Undefined index: stacker (C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php:11)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#1 C:\wamp\www\ytpdb\protected\controllers\CellController.php(200): CellController->renderPartial()
+#2 unknown(0): CellController->actionAjaxMFGUpdate()
+#3 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=13
+in C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php (11)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (200)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/13 01:51:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in C:\wamp\www\ytpdb\protected\controllers\CellController.php:168
+Stack trace:
+#0 C:\wamp\www\ytpdb\protected\controllers\CellController.php(192): CellController->loadModel('')
+#1 [internal function]: CellController->actionAjaxMFGUpdate('', 'tits')
+#2 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(CellController), Array)
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CellController), Object(ReflectionMethod), Array)
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 01:55:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in C:\wamp\www\ytpdb\protected\controllers\CellController.php:168
+Stack trace:
+#0 C:\wamp\www\ytpdb\protected\controllers\CellController.php(192): CellController->loadModel('')
+#1 [internal function]: CellController->actionAjaxMFGUpdate('', 'tits')
+#2 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(CellController), Array)
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CellController), Object(ReflectionMethod), Array)
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 02:03:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in C:\wamp\www\ytpdb\protected\controllers\CellController.php:168
+Stack trace:
+#0 C:\wamp\www\ytpdb\protected\controllers\CellController.php(192): CellController->loadModel('')
+#1 [internal function]: CellController->actionAjaxMFGUpdate('', 'tits')
+#2 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(CellController), Array)
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CellController), Object(ReflectionMethod), Array)
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 02:17:51 [error] [php] Cannot use a scalar value as an array (C:\wamp\www\yii\framework\zii\widgets\CDetailView.php:210)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#1 C:\wamp\www\yii\framework\web\CBaseController.php(95): CellController->renderInternal()
+#2 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#3 C:\wamp\www\ytpdb\protected\controllers\CellController.php(200): CellController->renderPartial()
+#4 unknown(0): CellController->actionAjaxMFGUpdate()
+#5 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#6 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#7 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#8 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#9 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#10 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#11 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#12 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#13 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#14 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#15 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#16 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#17 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#18 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=13
+in C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php (12)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (200)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/13 02:17:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in C:\wamp\www\ytpdb\protected\controllers\CellController.php:168
+Stack trace:
+#0 C:\wamp\www\ytpdb\protected\controllers\CellController.php(192): CellController->loadModel('')
+#1 [internal function]: CellController->actionAjaxMFGUpdate('', 'tits')
+#2 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(CellController), Array)
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CellController), Object(ReflectionMethod), Array)
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 02:17:54 [error] [php] Cannot use a scalar value as an array (C:\wamp\www\yii\framework\zii\widgets\CDetailView.php:210)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#1 C:\wamp\www\yii\framework\web\CBaseController.php(95): CellController->renderInternal()
+#2 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#3 C:\wamp\www\ytpdb\protected\controllers\CellController.php(200): CellController->renderPartial()
+#4 unknown(0): CellController->actionAjaxMFGUpdate()
+#5 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#6 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#7 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#8 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#9 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#10 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#11 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#12 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#13 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#14 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#15 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#16 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#17 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#18 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=14
+in C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php (12)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (200)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/13 02:17:59 [error] [php] Cannot use a scalar value as an array (C:\wamp\www\yii\framework\zii\widgets\CDetailView.php:210)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#1 C:\wamp\www\yii\framework\web\CBaseController.php(95): CellController->renderInternal()
+#2 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#3 C:\wamp\www\ytpdb\protected\controllers\CellController.php(200): CellController->renderPartial()
+#4 unknown(0): CellController->actionAjaxMFGUpdate()
+#5 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#6 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#7 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#8 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#9 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#10 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#11 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#12 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#13 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#14 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#15 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#16 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#17 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#18 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=12
+in C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php (12)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (200)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/13 02:18:23 [error] [php] Cannot use a scalar value as an array (C:\wamp\www\yii\framework\zii\widgets\CDetailView.php:210)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#1 C:\wamp\www\yii\framework\web\CBaseController.php(95): CellController->renderInternal()
+#2 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#3 C:\wamp\www\ytpdb\protected\controllers\CellController.php(200): CellController->renderPartial()
+#4 unknown(0): CellController->actionAjaxMFGUpdate()
+#5 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#6 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#7 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#8 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#9 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#10 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#11 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#12 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#13 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#14 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#15 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#16 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#17 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#18 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=4
+in C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php (12)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (200)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/13 02:18:33 [error] [php] Cannot use a scalar value as an array (C:\wamp\www\yii\framework\zii\widgets\CDetailView.php:210)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#1 C:\wamp\www\yii\framework\web\CBaseController.php(95): CellController->renderInternal()
+#2 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#3 C:\wamp\www\ytpdb\protected\controllers\CellController.php(200): CellController->renderPartial()
+#4 unknown(0): CellController->actionAjaxMFGUpdate()
+#5 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#6 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#7 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#8 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#9 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#10 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#11 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#12 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#13 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#14 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#15 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#16 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#17 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#18 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=16
+in C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php (12)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (200)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/13 02:21:55 [error] [php] Undefined variable: model (C:\wamp\www\ytpdb\protected\controllers\CellController.php:194)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#3 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#4 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#5 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#7 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#10 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=13
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (194)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/13 02:22:14 [error] [php] htmlspecialchars() expects parameter 1 to be string, object given (C:\wamp\www\yii\framework\web\helpers\CHtml.php:103)
+Stack trace:
+#0 C:\wamp\www\yii\framework\utils\CFormatter.php(128): CFormatter->formatText()
+#1 C:\wamp\www\yii\framework\zii\widgets\CDetailView.php(218): CFormatter->format()
+#2 C:\wamp\www\yii\framework\web\CBaseController.php(173): CDetailView->run()
+#3 C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php(15): CellController->widget()
+#4 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#5 C:\wamp\www\yii\framework\web\CBaseController.php(95): CellController->renderInternal()
+#6 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#7 C:\wamp\www\ytpdb\protected\controllers\CellController.php(195): CellController->renderPartial()
+#8 unknown(0): CellController->actionAjaxMFGUpdate()
+#9 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#10 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#11 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#12 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#13 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#14 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#15 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#16 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#17 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#18 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#19 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#20 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#21 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#22 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=15
+in C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php (15)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (195)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/13 02:23:55 [error] [php] htmlspecialchars() expects parameter 1 to be string, object given (C:\wamp\www\yii\framework\web\helpers\CHtml.php:103)
+Stack trace:
+#0 C:\wamp\www\yii\framework\utils\CFormatter.php(128): CFormatter->formatText()
+#1 C:\wamp\www\yii\framework\zii\widgets\CDetailView.php(218): CFormatter->format()
+#2 C:\wamp\www\yii\framework\web\CBaseController.php(173): CDetailView->run()
+#3 C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php(14): CellController->widget()
+#4 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#5 C:\wamp\www\yii\framework\web\CBaseController.php(95): CellController->renderInternal()
+#6 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#7 C:\wamp\www\ytpdb\protected\controllers\CellController.php(195): CellController->renderPartial()
+#8 unknown(0): CellController->actionAjaxMFGUpdate()
+#9 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#10 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#11 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#12 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#13 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#14 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#15 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#16 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#17 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#18 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#19 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#20 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#21 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#22 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=13
+in C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php (14)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (195)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/13 02:30:00 [error] [php] Undefined variable: celltype (C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php:13)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#1 C:\wamp\www\ytpdb\protected\controllers\CellController.php(195): CellController->renderPartial()
+#2 unknown(0): CellController->actionAjaxMFGUpdate()
+#3 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=14
+in C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php (13)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (195)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/13 02:30:04 [error] [php] Undefined variable: celltype (C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php:13)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#1 C:\wamp\www\ytpdb\protected\controllers\CellController.php(195): CellController->renderPartial()
+#2 unknown(0): CellController->actionAjaxMFGUpdate()
+#3 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=8
+in C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php (13)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (195)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/13 02:37:23 [error] [php] Undefined variable: celltype (C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php:15)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#1 C:\wamp\www\ytpdb\protected\controllers\CellController.php(195): CellController->renderPartial()
+#2 unknown(0): CellController->actionAjaxMFGUpdate()
+#3 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=12
+in C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php (15)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (195)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/13 02:38:07 [error] [exception.CException] exception 'CException' with message 'Property "Cell.celltype" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('celltype')
+#1 C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php(13): CActiveRecord->__get('celltype')
+#2 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#3 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#4 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#5 C:\wamp\www\ytpdb\protected\controllers\CellController.php(195): CController->renderPartial('_ajaxcelldetail', Array)
+#6 [internal function]: CellController->actionAjaxMFGUpdate('7', 'tits')
+#7 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(CellController), Array)
+#8 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CellController), Object(ReflectionMethod), Array)
+#9 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#11 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#13 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#14 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#15 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#16 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#18 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#19 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=7
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 03:01:08 [error] [php] Undefined variable: model (C:\wamp\www\ytpdb\protected\controllers\CellController.php:192)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#3 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#4 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#5 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#7 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#10 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=10
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (192)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/13 03:08:47 [error] [php] Object of class CClientScript could not be converted to string (C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php:6)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#1 C:\wamp\www\ytpdb\protected\controllers\CellController.php(195): CellController->renderPartial()
+#2 unknown(0): CellController->actionAjaxMFGUpdate()
+#3 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=17
+in C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php (6)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (195)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/13 03:08:50 [error] [php] Object of class CClientScript could not be converted to string (C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php:6)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#1 C:\wamp\www\ytpdb\protected\controllers\CellController.php(195): CellController->renderPartial()
+#2 unknown(0): CellController->actionAjaxMFGUpdate()
+#3 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=14
+in C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php (6)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (195)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/13 03:08:52 [error] [php] Object of class CClientScript could not be converted to string (C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php:6)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#1 C:\wamp\www\ytpdb\protected\controllers\CellController.php(195): CellController->renderPartial()
+#2 unknown(0): CellController->actionAjaxMFGUpdate()
+#3 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=15
+in C:\wamp\www\ytpdb\protected\views\cell\_ajaxcelldetail.php (6)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (195)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/13 03:17:09 [error] [exception.CException] exception 'CException' with message 'Property "CGridView.class" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:173
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CWidgetFactory.php(161): CComponent->__set('class', 'shadow')
+#1 C:\wamp\www\yii\framework\web\CBaseController.php(146): CWidgetFactory->createWidget(Object(CellController), 'zii.widgets.gri...', Array)
+#2 C:\wamp\www\yii\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#3 C:\wamp\www\ytpdb\protected\views\cell\admin.php(83): CBaseController->widget('zii.widgets.gri...', Array)
+#4 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#5 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#6 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#7 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('admin', Array, true)
+#8 C:\wamp\www\ytpdb\protected\controllers\CellController.php(154): CController->render('admin', Array)
+#9 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAdmin()
+#10 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#12 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#13 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#14 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#15 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#16 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#17 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#18 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#19 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/admin')
+#20 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#21 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#22 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 03:18:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in C:\wamp\www\ytpdb\protected\controllers\CellController.php:168
+Stack trace:
+#0 C:\wamp\www\ytpdb\protected\controllers\CellController.php(191): CellController->loadModel('')
+#1 [internal function]: CellController->actionAjaxMFGUpdate('', 'tits')
+#2 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(CellController), Array)
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CellController), Object(ReflectionMethod), Array)
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 03:32:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in C:\wamp\www\ytpdb\protected\controllers\CellController.php:168
+Stack trace:
+#0 C:\wamp\www\ytpdb\protected\controllers\CellController.php(191): CellController->loadModel('')
+#1 [internal function]: CellController->actionAjaxMFGUpdate('', 'tits')
+#2 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(CellController), Array)
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CellController), Object(ReflectionMethod), Array)
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 03:34:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in C:\wamp\www\ytpdb\protected\controllers\CellController.php:168
+Stack trace:
+#0 C:\wamp\www\ytpdb\protected\controllers\CellController.php(191): CellController->loadModel('')
+#1 [internal function]: CellController->actionAjaxMFGUpdate('', 'tits')
+#2 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(CellController), Array)
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CellController), Object(ReflectionMethod), Array)
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 03:41:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in C:\wamp\www\ytpdb\protected\controllers\CellController.php:168
+Stack trace:
+#0 C:\wamp\www\ytpdb\protected\controllers\CellController.php(191): CellController->loadModel('')
+#1 [internal function]: CellController->actionAjaxMFGUpdate('', 'tits')
+#2 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(CellController), Array)
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CellController), Object(ReflectionMethod), Array)
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 03:41:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in C:\wamp\www\ytpdb\protected\controllers\CellController.php:168
+Stack trace:
+#0 C:\wamp\www\ytpdb\protected\controllers\CellController.php(191): CellController->loadModel('')
+#1 [internal function]: CellController->actionAjaxMFGUpdate('', 'tits')
+#2 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(CellController), Array)
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CellController), Object(ReflectionMethod), Array)
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 03:41:59 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in C:\wamp\www\ytpdb\protected\controllers\CellController.php:168
+Stack trace:
+#0 C:\wamp\www\ytpdb\protected\controllers\CellController.php(191): CellController->loadModel('')
+#1 [internal function]: CellController->actionAjaxMFGUpdate('', 'tits')
+#2 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(CellController), Array)
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CellController), Object(ReflectionMethod), Array)
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 03:42:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in C:\wamp\www\ytpdb\protected\controllers\CellController.php:168
+Stack trace:
+#0 C:\wamp\www\ytpdb\protected\controllers\CellController.php(191): CellController->loadModel('')
+#1 [internal function]: CellController->actionAjaxMFGUpdate('', 'tits')
+#2 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(CellController), Array)
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CellController), Object(ReflectionMethod), Array)
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 03:42:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in C:\wamp\www\ytpdb\protected\controllers\CellController.php:168
+Stack trace:
+#0 C:\wamp\www\ytpdb\protected\controllers\CellController.php(191): CellController->loadModel('')
+#1 [internal function]: CellController->actionAjaxMFGUpdate('', 'tits')
+#2 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(CellController), Array)
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CellController), Object(ReflectionMethod), Array)
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&newparam=tits&id=
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 03:42:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in C:\wamp\www\ytpdb\protected\controllers\CellController.php:168
+Stack trace:
+#0 C:\wamp\www\ytpdb\protected\controllers\CellController.php(191): CellController->loadModel('')
+#1 [internal function]: CellController->actionAjaxMFGUpdate('', NULL)
+#2 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(CellController), Array)
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CellController), Object(ReflectionMethod), Array)
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&id=
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---
+2013/11/13 03:44:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in C:\wamp\www\ytpdb\protected\controllers\CellController.php:168
+Stack trace:
+#0 C:\wamp\www\ytpdb\protected\controllers\CellController.php(191): CellController->loadModel('')
+#1 [internal function]: CellController->actionAjaxMFGUpdate('')
+#2 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(CellController), Array)
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CellController), Object(ReflectionMethod), Array)
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmfgupdate')
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxmfgupd...')
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/ytpdb/index.php?r=cell/ajaxmfgupdate&id=
+HTTP_REFERER=http://localhost/ytpdb/index.php?r=cell/admin
+---

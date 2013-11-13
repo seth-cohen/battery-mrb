@@ -1,6 +1,7 @@
 <?php
 /* @var $this CellController */
 /* @var $model Cell */
+/* @var $mfgDataProvider CArrayDataProvider */
 
 $this->breadcrumbs=array(
 	'Manufacturing'=>array('/manufacturing'),
@@ -41,6 +42,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 )); ?>
 </div><!-- search-form -->
 
+<div class="shadow" style="padding:0 5px; margin-bottom:12px; border: 1px solid #888888">
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'cell-grid',
 	'dataProvider'=>$model->search(),
@@ -50,7 +52,10 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 			'name'=>'serial_search',
 			'value'=>'$data->kit->celltype->name."-".$data->kit->serial_num',
 		),
-		'ref_num',
+		array(
+			'name'=>'refnum_search',
+			'value'=>'$data->refNum->number',
+		),
 		'eap_num',
 		array(
 			'name'=>'celltype_search',
@@ -74,4 +79,32 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 			'class'=>'CButtonColumn',
 		),
 	),
+	//'htmlOptions'=>array('class'=>'shadow grid-view'),
+	'selectionChanged'=>'cellSelected',
 )); ?>
+</div>
+
+<hr>
+
+<div id="cell-mfg-details" class="shadow" style="border:1px solid #888888; padding:5px;"></div>
+
+<script type="text/javascript">
+	function cellSelected(target_id){
+		var cell_id;
+		
+		cell_id = $.fn.yiiGridView.getSelection(target_id);
+
+		
+		$.ajax({
+			type:'get',
+    		url: '<?php echo $this->createUrl('cell/ajaxmfgupdate'); ?>',
+    		data:
+    		{
+    			id: cell_id.toString(),
+    		},
+    		success: function(data){
+				$('#cell-mfg-details').html(data);
+    		},
+    	});
+	}
+</script>

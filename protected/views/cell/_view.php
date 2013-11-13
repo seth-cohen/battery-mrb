@@ -13,8 +13,8 @@
 	<?php echo date('G:i \o\n n/j/y', strtotime($data->kit->kitting_date)); ?> [<?php echo CHtml::encode($data->kit->kitter->getFullName()); ?>]
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('ref_num')); ?>:</b>
-	<?php echo CHtml::encode($data->ref_num); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('refnum_search')); ?>:</b>
+	<?php echo CHtml::encode($data->refNum->number); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('eap_num')); ?>:</b>

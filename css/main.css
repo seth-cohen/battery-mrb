@@ -279,13 +279,18 @@ div.search-form
 	background: #80CFFF;
 }
 
-#role-checkbox
+#role-checkboxlist
 {
 	overflow:auto;
 	clear:both;
 }
-#role-checkbox div
+#role-checkboxlist div
 {
-	width: 200px;
+	width: 235px;
 	float: left;
+}
+
+.shadow
+{
+	box-shadow: 5px 5px 8px #888888;
 }

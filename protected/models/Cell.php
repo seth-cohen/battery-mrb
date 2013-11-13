@@ -6,7 +6,7 @@
  * The followings are the available columns in table 'tbl_cell':
  * @property string $id
  * @property string $kit_id
- * @property string $ref_num
+ * @property string $ref_num_id
  * @property string $eap_num
  * @property string $stacker_id
  * @property string $stack_date
@@ -19,6 +19,7 @@
  *
  * The followings are the available model relations:
  * @property Kit $kit
+ * @property RefNum $refNum
  * @property User $stacker
  * @property User $filler
  * @property User $inspector
@@ -41,6 +42,7 @@ class Cell extends CActiveRecord
 	public $filler_search;
 	public $inspector_search;
 	public $location_search;
+	public $refnum_search;
 	
 
 	/**
@@ -51,14 +53,14 @@ class Cell extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('ref_num, stack_date, dry_wt, wet_wt, fill_date, inspection_date', 'required'),
+			array('stack_date, dry_wt, wet_wt, fill_date, inspection_date', 'required'),
 			array('dry_wt, wet_wt', 'numerical'),
-			array('kit_id,stacker_id, filler_id, inspector_id', 'length', 'max'=>10),
-			array('ref_num, eap_num', 'length', 'max'=>50),
+			array('kit_id, ref_num_id, stacker_id, filler_id, inspector_id', 'length', 'max'=>10),
+			array('eap_num', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('ref_num, eap_num, stack_date, dry_wt, wet_wt, fill_date, inspection_date, serial_search, celltype_search, 
-					stacker_search, filler_search, inspector_search, location_search', 'safe', 'on'=>'search'),
+			array('eap_num, stack_date, dry_wt, wet_wt, fill_date, inspection_date, serial_search, celltype_search, 
+					refnum_search, stacker_search, filler_search, inspector_search, location_search', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -71,6 +73,7 @@ class Cell extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'kit' => array(self::BELONGS_TO, 'Kit', 'kit_id'),
+			'refNum' => array(self::BELONGS_TO, 'RefNum', 'ref_num_id'),
 			'stacker' => array(self::BELONGS_TO, 'User', 'stacker_id'),
 			'filler' => array(self::BELONGS_TO, 'User', 'filler_id'),
 			'inspector' => array(self::BELONGS_TO, 'User', 'inspector_id'),
@@ -87,7 +90,7 @@ class Cell extends CActiveRecord
 			'id' => 'ID',
 			'kit_id' => 'Kit',
 			'ref_num' => 'Ref Num',
-			'eap_num' => 'EAP Num',
+			'eap_num' => 'EAP No.',
 			'stacker_id' => 'Stacker',
 			'stack_date' => 'Stack Date',
 			'dry_wt' => 'Dry Wt',
@@ -97,7 +100,8 @@ class Cell extends CActiveRecord
 			'inspector_id' => 'Inspector',
 			'inspection_date' => 'Inspection Date',
 			
-			'serial_search' => 'Serial Number',
+			'refnum_search' => "Reference No.",
+			'serial_search' => 'Serial No.',
 			'celltype_search' => 'Cell Type',
 			'stacker_search' => 'Stacker',
 			'filler_search' => 'Filler',
@@ -124,11 +128,14 @@ class Cell extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->with = array('kit'=>array('with'=>'celltype'), 'stacker'=>array('alias'=>'user')); // needed for kit serial number search
+		$criteria->with = array(
+						'kit'=>array('with'=>'celltype'), 
+						'stacker'=>array('alias'=>'user'), 
+						'refNum'=>array('alias'=>'ref'),
+		); // needed for alias of search parameter tables
 
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('kit_id',$this->kit_id,true);
-		$criteria->compare('t.ref_num',$this->ref_num,true);
 		$criteria->compare('eap_num',$this->eap_num,true);
 		$criteria->compare('stack_date',$this->stack_date,true);
 		$criteria->compare('dry_wt',$this->dry_wt);
@@ -136,6 +143,7 @@ class Cell extends CActiveRecord
 		$criteria->compare('fill_date',$this->fill_date,true);
 		$criteria->compare('inspection_date',$this->inspection_date,true);
 		
+		$criteria->compare('ref.number', $this->refnum_search, true);
 		$criteria->compare('kit.serial_num',$this->serial_search, true);	
 		$criteria->compare('celltype.name',$this->celltype_search, true);
 		$criteria->compare('user.first_name',$this->stacker_search, true, 'OR');
@@ -150,6 +158,10 @@ class Cell extends CActiveRecord
 			'criteria'=>$criteria,
 			'sort'=>array(
 				'attributes'=>array(
+					'refnum_search'=>array(
+						'asc'=>'ref.number',
+						'desc'=>'ref.number DESC',
+					),
 					'serial_search'=>array(
 						'asc'=>"CONCAT(celltype.name, serial_num)",
 						'desc'=>"CONCAT(celltype.name, serial_num) DESC",

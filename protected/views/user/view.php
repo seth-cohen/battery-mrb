@@ -34,6 +34,16 @@ $this->menu=array(
 )); ?>
 
 <hr>
+<?php /* If the user is an admin add the assign roles button */
+	echo CHtml::button('Assign Roles', 
+		array(
+			'id'=>'btnAssign',
+		));
+?>
+
+<div id="role-wrapper" style="display:none">
+<?php echo $this->renderPartial('_roleassign', array('model'=>$model)); ?>
+</div>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'role-grid',
@@ -55,17 +65,6 @@ $this->menu=array(
 	'emptyText'=>'Oops, no roles assigned yet',
 )); 
 ?>
-
-<?php /* If the user is an admin add the assign roles button */
-	echo CHtml::button('Assign Roles', 
-		array(
-			'id'=>'btnAssign',
-		));
-?>
-
-<div id="role-wrapper" style="display:none">
-<?php echo $this->renderPartial('_roleassign', array('model'=>$model)); ?>
-</div>
 
 <?php echo $this->renderPartial('_mfg', array('model'=>$model)); ?>
 

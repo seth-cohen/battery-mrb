@@ -23,8 +23,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'ref_num'); ?>
-		<?php echo $form->textField($model,'ref_num',array('size'=>50,'maxlength'=>50)); ?>
+		<?php echo $form->label($model,'refnum_search'); ?>
+		<?php echo $form->textField($model,'refnum_search',array('size'=>50,'maxlength'=>50)); ?>
 	</div>
 
 	<div class="row">
@@ -38,9 +38,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'stacker_id'); ?>
-		<?php echo $form->textField($model,'stacker_id',array('size'=>10,'maxlength'=>10)); ?>
-	</div>
+		<?php echo $form->label($model,'stacker_search'); ?>
+		<?php echo $form->textField($model,'stacker_search',array('size'=>10,'maxlength'=>10)); ?>	</div>
 
 	<div class="row">
 		<?php echo $form->label($model,'stack_date'); ?>

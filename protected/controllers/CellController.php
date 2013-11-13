@@ -36,8 +36,9 @@ class CellController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'actions'=>array('admin','delete','ajaxmfgupdate'),
+				'roles' => array('admin'),
+				//'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -178,6 +179,30 @@ class CellController extends Controller
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
+		}
+	}
+	
+	/**
+	 * Performs the AJAX update of the detailView on the cellview.
+	 * @param Cell $model the model to be validated
+	 */
+	public function actionAjaxMFGUpdate($id=null)
+	{
+		
+		if($id == null)
+		{
+			echo '';
+		}
+		else
+		{
+			$model = $this->loadModel($id);
+			
+			$this->renderPartial('_ajaxcelldetail', array(
+					'model'=>$model,
+				), 
+				false, 
+				true
+			);
 		}
 	}
 }
