@@ -4,7 +4,7 @@
 
 $this->breadcrumbs=array(
 	'Manufacturing'=>array('/manufacturing'),
-    'Cathodes'=>array('index'),
+    'Cathodes'=>array('viewcathodelots'),
     'Create',
 );
 

@@ -26,23 +26,33 @@
 		<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
 	</div><!-- header -->
 
-	<div id="mainmenu">
-		<?php $this->widget('zii.widgets.CMenu',array(
-			'activeCssClass'=>'active',
-			'activateParents'=>true,
+	<div id="nav-bar">
+		<?php $this->widget('application.extensions.mbmenu.MbMenu',array(
+			//'activeCssClass'=>'active',
+			//'activateParents'=>true,
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),
 				array(
 					'label'=>'Manufacturing', 
-					'url'=>array('/manufacturing/index'),
-					'active'=>(Yii::app()->controller->id=='cell' || Yii::app()->controller->id=='anode' || Yii::app()->controller->id=='cathode' || Yii::app()->controller->id=='manufacturing'),
+					'active'=>(Yii::app()->controller->id=='cell' || Yii::app()->controller->id=='manufacturing'),
 					'visible'=>!Yii::app()->user->isGuest,
-					'linkOptions'=>array('id'=>'menuMFG'),
-					'itemOptions'=>array('id'=>'itemMFG'),
 					'items'=>array(
-						array('label'=>'Cells', 'url'=>array('/cell/'), 'active'=>0),
-						array('label'=>'Anode Lots', 'url'=>array('/anode/'), 'active'=>0),
-						array('label'=>'Cathode Lots', 'url'=>array('/cathode/'), 'active'=>0),
+						array('label'=>'Cells', 'items'=>array(
+							array('label'=>'Create New Kit', 'url'=>array('/manufacturing/createkit'), 'active'=>0),
+							array('label'=>'Stack Cell', 'url'=>array('/manufacturing/stackcell'), 'active'=>0),
+						)),
+						array('label'=>'Electrodes', 'items'=>array(
+							array('label'=>'Create Anode Lot', 'url'=>array('/manufacturing/createanodelot'), 'active'=>0),
+							array('label'=>'View Anode Lots', 'url'=>array('/manufacturing/viewanodelots'), 'active'=>0),
+							array('label'=>'Create Cathode Lot', 'url'=>array('/manufacturing/createcathodelot'), 'active'=>0),
+							array('label'=>'View Cathode Lots', 'url'=>array('/manufacturing/viewcathodelots'), 'active'=>0),
+						)),
+						array('label'=>'Electrodes', 'items'=>array(
+							array('label'=>'Create Anode Lot', 'url'=>array('/manufacturing/createanodelot'), 'active'=>0),
+							array('label'=>'View Anode Lots', 'url'=>array('/manufacturing/viewanodelots'), 'active'=>0),
+							array('label'=>'Create Cathode Lot', 'url'=>array('/manufacturing/createcathodelot'), 'active'=>0),
+							array('label'=>'View Cathode Lots', 'url'=>array('/manufacturing/viewcathodelots'), 'active'=>0),
+						)),
 					),
 				),
 				array(

@@ -7,14 +7,21 @@
  * @property string $id
  * @property string $lot_num
  * @property string $eap_num
+ * @property string $ref_num_id
  * @property string $coater_id
+ * @property string $coat_date
  *
  * The followings are the available model relations:
  * @property User $coater
  * @property Kit[] $kits
+ * @property RefNum $refNum
+ 
  */
 class Anode extends CActiveRecord
 {
+	public $coater_search;
+	public $refnum_search;
+	
 	/**
 	 * @return string the associated database table name
 	 */
@@ -31,12 +38,12 @@ class Anode extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('lot_num', 'required'),
+			array('lot_num, coat_date', 'required'),
 			array('lot_num, eap_num', 'length', 'max'=>50),
-			array('coater_id', 'length', 'max'=>10),
+			array('coater_id, ref_num_id', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, lot_num, eap_num, coater_id', 'safe', 'on'=>'search'),
+			array('id, lot_num, coat_date, eap_num, coater_id, ref_num_id, coater_search, refnum_search', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -50,6 +57,7 @@ class Anode extends CActiveRecord
 		return array(
 			'coater' => array(self::BELONGS_TO, 'User', 'coater_id'),
 			'kits' => array(self::HAS_MANY, 'Kit', 'anode_id'),
+			'refNum' => array(self::BELONGS_TO, 'RefNum', 'ref_num_id'),
 		);
 	}
 
@@ -63,6 +71,11 @@ class Anode extends CActiveRecord
 			'lot_num' => 'Lot Num',
 			'eap_num' => 'Eap Num',
 			'coater_id' => 'Coater',
+			'coat_date' => 'Coated On',
+			'ref_num_id' => 'Reference No.',
+		
+			'coater_search' => 'Coater',
+			'refnum_search' => 'Reference No.',
 		);
 	}
 
@@ -84,13 +97,36 @@ class Anode extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id,true);
+		$criteria->with = array(
+						'coater'=>array('alias'=>'user'), 
+						'refNum'=>array('alias'=>'ref'),
+		); // needed for alias of search parameter tables
+		
+		$criteria->compare('t.id',$this->id,true);
 		$criteria->compare('lot_num',$this->lot_num,true);
 		$criteria->compare('eap_num',$this->eap_num,true);
 		$criteria->compare('coater_id',$this->coater_id,true);
+		$criteria->compare('coat_date',$this->coat_date,true);
+		
+		/* for concatenated user name search */
+		$criteria->addSearchCondition('concat(user.first_name, " ", user.last_name)', $this->coater_search);
+		$criteria->addSearchCondition('ref.number', $this->refnum_search);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>array(
+				'attributes'=>array(
+					'coater_search'=>array(
+						'asc'=>"CONCAT(first_name, ' ', last_name)",
+						'desc'=>"CONCAT(first_name, ' ', last_name) DESC",
+					),
+					'refnum_search'=>array(
+						'asc'=>'ref.number',
+						'desc'=>'ref.number DESC',
+					),
+					'*',		// all others treated normally
+				),
+			),
 		));
 	}
 

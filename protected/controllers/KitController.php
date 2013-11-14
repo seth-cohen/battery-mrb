@@ -1,6 +1,6 @@
 <?php
 
-class CellController extends Controller
+class KitController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -32,13 +32,13 @@ class CellController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('createkit','update'),
+				/* TODO role based access */
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','ajaxmfgupdate','downloadlist'),
-				'roles' => array('admin'),
-				//'users'=>array('admin'),
+				'actions'=>array('admin','delete'),
+				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -52,12 +52,8 @@ class CellController extends Controller
 	 */
 	public function actionView($id)
 	{
-		$model = $this->loadModel($id);
-		
 		$this->render('view',array(
-			'model'=>$model,
-			'kit'=>$model->kit,
-			'celltype'=>$model->kit->celltype,
+			'model'=>$this->loadModel($id),
 		));
 	}
 
@@ -65,26 +61,22 @@ class CellController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreateKit()
 	{
-		$model=new Cell;
-		$kit = new Kit;
-		$celltype = new Celltype;
+		$model=new Kit;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Cell']))
+		if(isset($_POST['Kit']))
 		{
-			$model->attributes=$_POST['Cell'];
+			$model->attributes=$_POST['Kit'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
-			'kit'=>$kit,
-			'celltype'=>$celltype,
 		));
 	}
 
@@ -100,17 +92,15 @@ class CellController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Cell']))
+		if(isset($_POST['Kit']))
 		{
-			$model->attributes=$_POST['Cell'];
+			$model->attributes=$_POST['Kit'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('update',array(
 			'model'=>$model,
-			'kit'=>$model->kit,
-			'celltype'=>$model->kit->celltype,
 		));
 	}
 
@@ -133,7 +123,7 @@ class CellController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Cell');
+		$dataProvider=new CActiveDataProvider('Kit');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -144,14 +134,11 @@ class CellController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Cell('search');
+		$model=new Kit('search');
 		$model->unsetAttributes();  // clear any default values
-		
-		if(isset($_GET['Cell']))
-		{
-			$model->attributes=$_GET['Cell'];
-		}
-				
+		if(isset($_GET['Kit']))
+			$model->attributes=$_GET['Kit'];
+
 		$this->render('admin',array(
 			'model'=>$model,
 		));
@@ -161,12 +148,12 @@ class CellController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return Cell the loaded model
+	 * @return Kit the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=Cell::model()->findByPk($id);
+		$model=Kit::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -174,77 +161,14 @@ class CellController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param Cell $model the model to be validated
+	 * @param Kit $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='cell-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='kit-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
-	}
-	
-	/**
-	 * Performs the AJAX update of the detailView on the cellview.
-	 * @param Cell $model the model to be validated
-	 */
-	public function actionAjaxMFGUpdate($id=null)
-	{	
-		/* load cell detail information */
-		if($id == null)
-		{
-			echo 'hide';
-		}
-		else
-		{
-			$model = $this->loadModel($id);
-			
-			$this->renderPartial('_ajaxcelldetail', array(
-					'model'=>$model,
-				), 
-				false, 
-				true
-			);
-		}
-	}
-	
-	/**
-	 *  user download of csv data for selected cells 
-	 *  
-	 */
-	public function actionDownloadList()
-	{
-		$model=new Cell('search');
-		$model->unsetAttributes();  // clear any default values
-		
-		if(isset($_GET['Cell']))
-			$model->attributes=$_GET['Cell'];
-			
-		$data = array();
-		$dataProvider = $model->search();
-		$dataProvider->setPagination(false);
-		
-		$cells = $dataProvider->getData();
-		foreach($cells as $cell)
-		{
-			$data[] = array($cell->stacker->getFullName(), $cell->stack_date);
-		}
-		
-		header("Content-type: text/csv");
-		header("Cache-Control: no-store, no-cache");
-		header("Content-Disposition: attachment; filename=file.csv");
-		header("Pragma: no-cache");
-		
-		$this->outputCSV($data);
-	}
-		
-	/* TODO move this to an extension or component */
-	function outputCSV($data) {
-	    $output = fopen("php://output", "w");
-	    foreach ($data as $row) {
-	        fputcsv($output, $row);
-	    }
-	    fclose($output);
 	}
 }

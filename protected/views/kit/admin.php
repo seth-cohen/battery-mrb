@@ -1,16 +1,15 @@
 <?php
-/* @var $this ManufacturingController */
-/* @var $model Anode */
+/* @var $this KitController */
+/* @var $model Kit */
 
 $this->breadcrumbs=array(
-	'Manufacturing'=>array('/manufacturing'),
-	'Anodes'=>array('viewanodelots'),
-	'View Lots',
+	'Kits'=>array('index'),
+	'Manage',
 );
 
 $this->menu=array(
-	array('label'=>'Create Anode Lot', 'url'=>array('createcathodelot')),
-	array('label'=>'Create Cathode Lot', 'url'=>array('createanodelot')),
+	array('label'=>'List Kit', 'url'=>array('index')),
+	array('label'=>'Create Kit', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -19,7 +18,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$('#anode-grid').yiiGridView('update', {
+	$('#kit-grid').yiiGridView('update', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -27,7 +26,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>View Anode Lots</h1>
+<h1>Manage Kits</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -36,34 +35,28 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 
 <?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
-<?php $this->renderPartial('_anodesearch',array(
+<?php $this->renderPartial('_search',array(
 	'model'=>$model,
 )); ?>
-
 </div><!-- search-form -->
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'anode-grid',
+	'id'=>'kit-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
 		'id',
-		'lot_num',
-		array(
-			'name'=>'refnum_search',
-			'value'=>'$data->refNum->number',
-		),	
-		'eap_num',
-		array(
-			'name'=>'coater_search',
-			'value'=>'$data->coater->getFullName()',
-		),
-		'coat_date',
+		'serial_num',
+		'ref_num_id',
+		'anode_id',
+		'cathode_id',
+		'kitter_id',
+		/*
+		'kitting_date',
+		'celltype_id',
+		*/
 		array(
 			'class'=>'CButtonColumn',
-			'template'=>'{view} {update}',
-			'viewButtonUrl'=>'Yii::app()->createUrl("/manufacturing/viewanode",array("id"=>$data["id"]))',
-			'updateButtonUrl'=>'Yii::app()->createUrl("/manufacturing/updateanodelot",array("id"=>$data["id"]))',
 		),
 	),
 )); ?>

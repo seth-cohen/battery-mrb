@@ -143,11 +143,11 @@ class Cell extends CActiveRecord
 		$criteria->compare('fill_date',$this->fill_date,true);
 		$criteria->compare('inspection_date',$this->inspection_date,true);
 		
-		$criteria->compare('ref.number', $this->refnum_search, true);
-		$criteria->compare('kit.serial_num',$this->serial_search, true);	
+		$criteria->compare('ref.number', $this->refnum_search, true);	
 		$criteria->compare('celltype.name',$this->celltype_search, true);
 		
 		/* for concatenated user name search */
+		$criteria->addSearchCondition('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
 		$criteria->addSearchCondition('concat(user.first_name, " ", user.last_name)', $this->stacker_search);
 		$criteria->addSearchCondition('concat(user.first_name, " ", user.last_name)', $this->filler_search);
 		$criteria->addSearchCondition('concat(user.first_name, " ", user.last_name)', $this->inspector_search);

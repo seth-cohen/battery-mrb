@@ -37,16 +37,21 @@ return array(
 			'class' => 'WebUser',
 		),
 		// uncomment the following to enable URLs in path-format
-		/*
+		
 		'urlManager'=>array(
 			'urlFormat'=>'path',
 			'rules'=>array(
+				'manufacturing/<controller:\w+>'=>'<controller>/index',
+				'manufacturing/<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+				'manufacturing/<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
+		
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
+			'showScriptName'=>false,
 		),
-		*/
+		
 		/*
 		'db'=>array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
@@ -75,6 +80,7 @@ return array(
 				// uncomment the following to show log messages on web pages
 				array(
 					'class'=>'CWebLogRoute',
+				 	'levels'=>'error, warning',
 				),
 			),
 		),

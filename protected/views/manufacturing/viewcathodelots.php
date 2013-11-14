@@ -1,16 +1,16 @@
 <?php
 /* @var $this ManufacturingController */
-/* @var $model Anode */
+/* @var $model Cathode */
 
 $this->breadcrumbs=array(
 	'Manufacturing'=>array('/manufacturing'),
-	'Anodes'=>array('viewanodelots'),
+	'Cathodes'=>array('viewcathodelots'),
 	'View Lots',
 );
 
 $this->menu=array(
-	array('label'=>'Create Anode Lot', 'url'=>array('createcathodelot')),
-	array('label'=>'Create Cathode Lot', 'url'=>array('createanodelot')),
+	array('label'=>'Create Anode Lot', 'url'=>array('createanodelot')),
+	array('label'=>'Create Cathode Lot', 'url'=>array('createcathodelot')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -27,7 +27,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>View Anode Lots</h1>
+<h1>View Cathode Lots</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -36,14 +36,14 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 
 <?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
-<?php $this->renderPartial('_anodesearch',array(
+<?php $this->renderPartial('_cathodesearch',array(
 	'model'=>$model,
 )); ?>
 
 </div><!-- search-form -->
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'anode-grid',
+	'id'=>'cathode-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
@@ -52,7 +52,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		array(
 			'name'=>'refnum_search',
 			'value'=>'$data->refNum->number',
-		),	
+		),
 		'eap_num',
 		array(
 			'name'=>'coater_search',
@@ -62,8 +62,8 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		array(
 			'class'=>'CButtonColumn',
 			'template'=>'{view} {update}',
-			'viewButtonUrl'=>'Yii::app()->createUrl("/manufacturing/viewanode",array("id"=>$data["id"]))',
-			'updateButtonUrl'=>'Yii::app()->createUrl("/manufacturing/updateanodelot",array("id"=>$data["id"]))',
+			'viewButtonUrl'=>'Yii::app()->createUrl("/manufacturing/viewcathode",array("id"=>$data["id"]))',
+			'updateButtonUrl'=>'Yii::app()->createUrl("/manufacturing/updatecathodelot",array("id"=>$data["id"]))',
 		),
 	),
 )); ?>

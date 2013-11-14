@@ -93,7 +93,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 
 <hr>
 
-<div id="cell-mfg-details" class="shadow" style="border:1px solid #888888; padding:5px;"></div>
+<div id="cell-mfg-details" class="shadow" style="display:none; border:1px solid #888888; padding:5px;"></div>
 
 <script type="text/javascript">
 	function cellSelected(target_id){
