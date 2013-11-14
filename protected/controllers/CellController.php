@@ -36,7 +36,7 @@ class CellController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','ajaxmfgupdate'),
+				'actions'=>array('admin','delete','ajaxmfgupdate','downloadlist'),
 				'roles' => array('admin'),
 				//'users'=>array('admin'),
 			),
@@ -147,8 +147,10 @@ class CellController extends Controller
 		$model=new Cell('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Cell']))
+		{
 			$model->attributes=$_GET['Cell'];
-
+		}
+				
 		$this->render('admin',array(
 			'model'=>$model,
 		));
@@ -187,11 +189,11 @@ class CellController extends Controller
 	 * @param Cell $model the model to be validated
 	 */
 	public function actionAjaxMFGUpdate($id=null)
-	{
-		
+	{	
+		/* load cell detail information */
 		if($id == null)
 		{
-			echo '';
+			echo 'hide';
 		}
 		else
 		{
@@ -204,5 +206,44 @@ class CellController extends Controller
 				true
 			);
 		}
+	}
+	
+	/**
+	 *  user download of csv data for selected cells 
+	 *  
+	 */
+	public function actionDownloadList()
+	{
+		$model=new Cell('search');
+		$model->unsetAttributes();  // clear any default values
+		
+		if(isset($_GET['Cell']))
+			$model->attributes=$_GET['Cell'];
+			
+		$data = array();
+		$dataProvider = $model->search();
+		$dataProvider->setPagination(false);
+		
+		$cells = $dataProvider->getData();
+		foreach($cells as $cell)
+		{
+			$data[] = array($cell->stacker->getFullName(), $cell->stack_date);
+		}
+		
+		header("Content-type: text/csv");
+		header("Cache-Control: no-store, no-cache");
+		header("Content-Disposition: attachment; filename=file.csv");
+		header("Pragma: no-cache");
+		
+		$this->outputCSV($data);
+	}
+		
+	/* TODO move this to an extension or component */
+	function outputCSV($data) {
+	    $output = fopen("php://output", "w");
+	    foreach ($data as $row) {
+	        fputcsv($output, $row);
+	    }
+	    fclose($output);
 	}
 }

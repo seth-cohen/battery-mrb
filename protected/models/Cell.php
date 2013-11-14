@@ -146,12 +146,11 @@ class Cell extends CActiveRecord
 		$criteria->compare('ref.number', $this->refnum_search, true);
 		$criteria->compare('kit.serial_num',$this->serial_search, true);	
 		$criteria->compare('celltype.name',$this->celltype_search, true);
-		$criteria->compare('user.first_name',$this->stacker_search, true, 'OR');
-		$criteria->compare('user.last_name',$this->stacker_search, true, 'OR');
-		$criteria->compare('user.first_name',$this->filler_search, true);
-		$criteria->compare('user.last_name',$this->filler_search, true);
-		$criteria->compare('user.first_name',$this->inspector_search, true);
-		$criteria->compare('user.last_name',$this->inspector_search, true);
+		
+		/* for concatenated user name search */
+		$criteria->addSearchCondition('concat(user.first_name, " ", user.last_name)', $this->stacker_search);
+		$criteria->addSearchCondition('concat(user.first_name, " ", user.last_name)', $this->filler_search);
+		$criteria->addSearchCondition('concat(user.first_name, " ", user.last_name)', $this->inspector_search);
 
 		return new CActiveDataProvider($this, array(
 			'pagination'=>array('pageSize' => 16),

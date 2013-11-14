@@ -12,6 +12,13 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'List Cell', 'url'=>array('index')),
 	array('label'=>'Create Cell', 'url'=>array('create')),
+	array(
+		'label'=>'Download Current', 
+		'url'=>array('admin'),
+		'linkOptions'=>array(
+			'id'=>'csv-download',
+		),
+	),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -91,10 +98,8 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 <script type="text/javascript">
 	function cellSelected(target_id){
 		var cell_id;
-		
-		cell_id = $.fn.yiiGridView.getSelection(target_id);
+		cell_id = $.fn.yiiGridView.getSelection(target_id);		
 
-		
 		$.ajax({
 			type:'get',
     		url: '<?php echo $this->createUrl('cell/ajaxmfgupdate'); ?>',
@@ -103,8 +108,33 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
     			id: cell_id.toString(),
     		},
     		success: function(data){
-				$('#cell-mfg-details').html(data);
+        		if(data == 'hide')
+        		{
+        			$('#cell-mfg-details').hide();
+        		}
+        		else
+        		{
+        			$('#cell-mfg-details').show();
+            		$('#cell-mfg-details').html(data);
+        		}
     		},
     	});
 	}
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$('#csv-download').attr('href','');
+	
+	$('#csv-download').bind('click', function() {	
+		var href = '<?php echo $this->createUrl('downloadlist'); ?>';
+		href += '&';
+		href += $('#cell-search-form :input[name!="r"]').serialize();
+		href += '&';
+		href +=	$('.filters :input').serialize();
+		
+		$('#csv-download').attr('href',href);	
+	});
+});
 </script>
