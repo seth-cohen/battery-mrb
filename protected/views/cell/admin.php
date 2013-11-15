@@ -49,7 +49,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 )); ?>
 </div><!-- search-form -->
 
-<div class="shadow" style="padding:0 5px; margin-bottom:12px; border: 1px solid #888888">
+<div class="shadow border" >
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'cell-grid',
 	'dataProvider'=>$model->search(),

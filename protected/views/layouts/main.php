@@ -34,22 +34,23 @@
 				array('label'=>'Home', 'url'=>array('/site/index')),
 				array(
 					'label'=>'Manufacturing', 
-					'active'=>(Yii::app()->controller->id=='cell' || Yii::app()->controller->id=='manufacturing'),
+					'active'=>(strpos( Yii::app()->request->url, 'manufacturing') > 0),
 					'visible'=>!Yii::app()->user->isGuest,
 					'items'=>array(
+						array('label'=>'Electrodes', 'items'=>array(
+							array('label'=>'Create Electrode Lot', 'url'=>array('/manufacturing/electrode/createlot'), 'active'=>0),
+							array('label'=>'Calender Electrode Lot', 'url'=>array('/manufacturing/electrode/calender'), 'active'=>0),
+							array('label'=>'Bag Cathode Lot', 'url'=>array('/manufacturing/electrode/bag'), 'active'=>0),
+							array('label'=>'View Electrode Lots', 'url'=>array('/manufacturing/electrode/index'), 'active'=>0),
+						)),
 						array('label'=>'Cells', 'items'=>array(
-							array('label'=>'Create New Kit', 'url'=>array('/manufacturing/createkit'), 'active'=>0),
-							array('label'=>'Stack Cell', 'url'=>array('/manufacturing/stackcell'), 'active'=>0),
+							array('label'=>'Create New Kit', 'url'=>array('/manufacturing/kit/createkit'), 'active'=>0),
+							array('label'=>'Stack Cell', 'url'=>array('/manufacturing/cell/stackcell'), 'active'=>0),
+							array('label'=>'Cell List', 'url'=>array('/manufacturing/cell/admin'), 'active'=>0),
 						)),
-						array('label'=>'Electrodes', 'items'=>array(
-							array('label'=>'Create Anode Lot', 'url'=>array('/manufacturing/createanodelot'), 'active'=>0),
-							array('label'=>'View Anode Lots', 'url'=>array('/manufacturing/viewanodelots'), 'active'=>0),
-							array('label'=>'Create Cathode Lot', 'url'=>array('/manufacturing/createcathodelot'), 'active'=>0),
-							array('label'=>'View Cathode Lots', 'url'=>array('/manufacturing/viewcathodelots'), 'active'=>0),
-						)),
-						array('label'=>'Electrodes', 'items'=>array(
-							array('label'=>'Create Anode Lot', 'url'=>array('/manufacturing/createanodelot'), 'active'=>0),
-							array('label'=>'View Anode Lots', 'url'=>array('/manufacturing/viewanodelots'), 'active'=>0),
+						array('label'=>'Batteries', 'items'=>array(
+							array('label'=>'Create Anode Lot', 'url'=>array('/manufacturing/anode/createanodelot'), 'active'=>0),
+							array('label'=>'View Anode Lots', 'url'=>array('/manufacturing/anode/viewanodelots'), 'active'=>0),
 							array('label'=>'Create Cathode Lot', 'url'=>array('/manufacturing/createcathodelot'), 'active'=>0),
 							array('label'=>'View Cathode Lots', 'url'=>array('/manufacturing/viewcathodelots'), 'active'=>0),
 						)),

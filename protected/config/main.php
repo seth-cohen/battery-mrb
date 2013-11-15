@@ -42,9 +42,9 @@ return array(
 			'urlFormat'=>'path',
 			'rules'=>array(
 				'manufacturing/<controller:\w+>'=>'<controller>/index',
-				'manufacturing/<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 				'manufacturing/<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
-		
+				'manufacturing/<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+				
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',

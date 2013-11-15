@@ -294,3 +294,10 @@ div.search-form
 {
 	box-shadow: 5px 5px 8px #888888;
 }
+
+.border
+{
+	padding: 0 5px;
+	margin-bottom:12px;
+	border:1px solid #888888;
+}
