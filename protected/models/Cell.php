@@ -89,7 +89,7 @@ class Cell extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'kit_id' => 'Kit',
-			'ref_num' => 'Ref Num',
+			'ref_num' => 'Reference No.',
 			'eap_num' => 'EAP No.',
 			'stacker_id' => 'Stacker',
 			'stack_date' => 'Stack Date',

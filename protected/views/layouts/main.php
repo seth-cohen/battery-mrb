@@ -33,20 +33,21 @@
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),
 				array(
-					'label'=>'Manufacturing', 
+					'label'=>'Manufacturing',
+					'url'=>array('/manufacturing/index/'), 
 					'active'=>(strpos( Yii::app()->request->url, 'manufacturing') > 0),
 					'visible'=>!Yii::app()->user->isGuest,
 					'items'=>array(
 						array('label'=>'Electrodes', 'items'=>array(
-							array('label'=>'Create Electrode Lot', 'url'=>array('/manufacturing/electrode/createlot'), 'active'=>0),
-							array('label'=>'Calender Electrode Lot', 'url'=>array('/manufacturing/electrode/calender'), 'active'=>0),
-							array('label'=>'Bag Cathode Lot', 'url'=>array('/manufacturing/electrode/bag'), 'active'=>0),
-							array('label'=>'View Electrode Lots', 'url'=>array('/manufacturing/electrode/index'), 'active'=>0),
+							array('label'=>'Create Electrode Lot', 'url'=>array('electrode/createlot'), 'active'=>0),
+							array('label'=>'Calender Electrode Lot', 'url'=>array('electrode/calender'), 'active'=>0),
+							array('label'=>'Bag Cathode Lot', 'url'=>array('electrode/bag'), 'active'=>0),
+							array('label'=>'View Electrode Lots', 'url'=>array('electrode/index'), 'active'=>0),
 						)),
 						array('label'=>'Cells', 'items'=>array(
-							array('label'=>'Create New Kit', 'url'=>array('/manufacturing/kit/createkit'), 'active'=>0),
-							array('label'=>'Stack Cell', 'url'=>array('/manufacturing/cell/stackcell'), 'active'=>0),
-							array('label'=>'Cell List', 'url'=>array('/manufacturing/cell/admin'), 'active'=>0),
+							array('label'=>'Create New Kit', 'url'=>array('kit/createkit'), 'active'=>0),
+							array('label'=>'Stack Cell', 'url'=>array('cell/stackcell'), 'active'=>0),
+							array('label'=>'Cell List', 'url'=>array('cell/admin'), 'active'=>0),
 						)),
 						array('label'=>'Batteries', 'items'=>array(
 							array('label'=>'Create Anode Lot', 'url'=>array('/manufacturing/anode/createanodelot'), 'active'=>0),
@@ -58,11 +59,9 @@
 				),
 				array(
 					'label'=>'TestLab', 
-					'url'=>array('/testlab/index'),
-					'active'=>(Yii::app()->controller->id=='channel' || Yii::app()->controller->id=='chamber' || Yii::app()->controller->id=='cycler' || Yii::app()->controller->id=='testlab'),
+					'url'=>array('/testlab/index/'),
+					'active'=>(strpos( Yii::app()->request->url, 'testlab') > 0),
 					'visible'=>!Yii::app()->user->isGuest,
-					'linkOptions'=>array('id'=>'menuTestLab'),
-					'itemOptions'=>array('id'=>'itemTestLab'),
 					'items'=>array(
 						array('label'=>'Channels', 'url'=>array('/channel/')),
 						array('label'=>'Chambers', 'url'=>array('/chamber/'), 'active'=>0),

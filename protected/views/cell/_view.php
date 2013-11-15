@@ -6,7 +6,7 @@
 <div class="view">
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('serial_num')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->kit->celltype->name.'-'.$data->kit->serial_num), array('view', 'id'=>$data->id)); ?>
+	<?php echo CHtml::link(CHtml::encode($data->kit->getFormattedSerial()), array('view', 'id'=>$data->id)); ?>
 	<br />
 
 	<b>Kitted:</b>

@@ -11,8 +11,6 @@ $this->breadcrumbs=array(
 $this->menu=array(
     array('label'=>'Electrodes List', 'url'=>array('index')),
     array('label'=>'Create Electrode', 'url'=>array('createlot')),
-    array('label'=>'Edit Electrode Lot', 'url'=>array('updatelot', 'id'=>$model->id)),
-    array('label'=>'Delete Electrode', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
     array('label'=>'Electrode Admin', 'url'=>array('admin')),
 );
 
@@ -66,8 +64,8 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		array(
 			'class'=>'CButtonColumn',
 			'template'=>'{view} {update}',
-			'viewButtonUrl'=>'Yii::app()->createUrl("/manufacturing/electrode/viewlot/".$data["id"])',
-			'updateButtonUrl'=>'Yii::app()->createUrl("/manufacturing/electrode/updatelot/".$data["id"])',
+			'viewButtonUrl'=>'Yii::app()->createUrl("/electrode/viewlot",array("id"=>$data["id"]))',
+			'updateButtonUrl'=>'Yii::app()->createUrl("/electrode/updatelot",array("id"=>$data["id"]))',
 		),
 	),
 	'selectionChanged'=>'electrodeSelected',

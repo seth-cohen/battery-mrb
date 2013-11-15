@@ -85,7 +85,7 @@ class UserController extends Controller
 		{
 			$model->attributes=$_POST['User'];
 			if($model->save()){
-				foreach($_POST['User']['roles'] as $role)
+				foreach($_POST['User']['roleIds'] as $role)
 				{
 					$commandInsert->insert('tbl_user_role', array(
 						'user_id'=>$model->id,
@@ -112,12 +112,30 @@ class UserController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
+			
 		if(isset($_POST['User']))
 		{
 			$model->attributes=$_POST['User'];
 			if($model->save())
+			{
+				/* clear the join table of roles */
+				$commandDelete = Yii::app()->db->createCommand();
+				$commandDelete->delete('tbl_user_role', 
+					'user_id = :id',
+					array(':id'=>$id)
+				);
+		
+				/* add new roles list */
+				foreach($_POST['User']['roleIds'] as $role)
+				{
+					$commandInsert = Yii::app()->db->createCommand();
+					$commandInsert->insert('tbl_user_role', array(
+						'user_id'=>$model->id,
+						'role_id'=>$role,
+					));
+				}
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('update',array(
@@ -133,7 +151,7 @@ class UserController extends Controller
 	public function actionDelete($id)
 	{
 		$this->loadModel($id)->delete();
-
+			
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));

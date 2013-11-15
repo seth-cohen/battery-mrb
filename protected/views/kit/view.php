@@ -3,8 +3,9 @@
 /* @var $model Kit */
 
 $this->breadcrumbs=array(
+	'Manufacturing'=>array('/manufacturing'),
 	'Kits'=>array('index'),
-	$model->id,
+	$model->getFormattedSerial(),
 );
 
 $this->menu=array(
@@ -16,18 +17,36 @@ $this->menu=array(
 );
 ?>
 
-<h1>View Kit #<?php echo $model->id; ?></h1>
+<h1>View Kit details for Cell <?php echo $model->getFormattedSerial(); ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id',
-		'serial_num',
-		'ref_num_id',
-		'anode_id',
-		'cathode_id',
-		'kitter_id',
+		array(
+			'label'=>'Cell Type',
+			'value'=>$model->celltype->name,
+		),
+		array(
+			'label'=>'Serial No.',
+			'value'=>$model->celltype->name.'-'.$model->serial_num,
+		),
+		array(
+			'label'=>'Reference No.',
+			'value'=>$model->refNum->number,
+		),
+		'eap_num',
+		array(
+			'label'=>'Anode Lots',
+			'value'=>$model->getElectrodesList(1),
+		),
+		array(
+			'label'=>'Cathode Lots',
+			'value'=>$model->getElectrodesList(0),
+		),
+		array(
+			'label'=>'Kitter',
+			'value'=>$model->kitter->getFullName(),
+		),
 		'kitting_date',
-		'celltype_id',
 	),
 )); ?>

@@ -42,13 +42,14 @@ class Electrode extends CActiveRecord
 			array('lot_num, coat_date, is_anode', 'required'),
 			array('is_anode', 'numerical', 'integerOnly'=>true),
 			array('lot_num, eap_num', 'length', 'max'=>50),
+			array('lot_num', 'unique',),
 			array('coater_id, ref_num_id', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, lot_num, eap_num, coater_id, ref_num_id, coat_date, is_anode, coater_search, refnum_search', 'safe', 'on'=>'search'),
 		);
 	}
-
+	
 	/**
 	 * @return array relational rules.
 	 */
@@ -63,6 +64,26 @@ class Electrode extends CActiveRecord
 		);
 	}
 
+	public function defaultScope()
+    {
+        return array(
+            'order'=>'lot_num DESC',
+        );
+    }
+	/**
+	 * @return array of the query criteria to be used for particular query
+	 */
+	public function scopes()
+	{
+		return array(
+			'anodes'=>array(
+				'condition'=>'is_anode=1',
+			),
+			'cathodes'=>array(
+				'condition'=>'is_anode=0',
+			),
+		);
+	}
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
@@ -75,7 +96,7 @@ class Electrode extends CActiveRecord
 			'coater_id' => 'Coater',
 			'ref_num_id' => 'Ref Num',
 			'coat_date' => 'Coat Date',
-			'is_anode' => 'Anode/Cathode',
+			'is_anode' => 'Type',
 		
 			'coater_search' => 'Coater',
 			'refnum_search' => 'Reference No.',
@@ -146,10 +167,7 @@ class Electrode extends CActiveRecord
 		return parent::model($className);
 	}
 	
-	/**
-	 * 
-	 */
-	public function afterFind()
+	/*public function afterFind()
 	{
 		if (!empty($this->kits))
 		{
@@ -161,6 +179,7 @@ class Electrode extends CActiveRecord
 		
 		return parent::afterFind();
 		
-	}
+	}*/
+	
 	
 }

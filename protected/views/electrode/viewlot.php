@@ -1,6 +1,6 @@
 <?php
 /* @var $this ManufacturingController */
-/* @var $model Anode */
+/* @var $model Electrode */
 
 $this->breadcrumbs=array(
 	'Manufacturing'=>array('/manufacturing'),
@@ -22,8 +22,11 @@ $this->menu=array(
 <?php $this->widget('zii.widgets.CDetailView', array(
     'data'=>$model,
     'attributes'=>array(
-        'id',
         'lot_num',
+		array(
+			'label'=>'Anode/Cathode',
+			'value'=>($model->is_anode)?'Anode':'Cathode',
+		),
         'eap_num',
         array(
         	'label'=>'Coater',
@@ -36,3 +39,7 @@ $this->menu=array(
         ),
     ),
 )); ?>
+
+<?php foreach($model->kits as $kit): ?>
+	<?php echo $kit->getFormattedSerial(); ?>
+<?php endforeach; ?>

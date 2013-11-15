@@ -32,7 +32,7 @@ class KitController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('createkit','update'),
+				'actions'=>array('create','update'),
 				/* TODO role based access */
 				'users'=>array('@'),
 			),
@@ -61,18 +61,46 @@ class KitController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreateKit()
+	public function actionCreate()
 	{
 		$model=new Kit;
-
+		
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
+		$this->performAjaxValidation($model);
+			
 		if(isset($_POST['Kit']))
 		{
 			$model->attributes=$_POST['Kit'];
+			
+			/* needed to validate the anode and cathode lot IDs */
+			if(isset($_POST['Kit']['anodeIds']))
+			{
+				$model->anodeIds = $_POST['Kit']['anodeIds'];
+			}
+			if(isset($_POST['Kit']['cathodeIds']))
+			{
+				$model->cathodeIds = $_POST['Kit']['cathodeIds'];
+			}
+			
 			if($model->save())
+			{
+				$commandInsert = Yii::app()->db->createCommand();
+				foreach($model->anodeIds as $anode)
+				{
+					$commandInsert->insert('tbl_electrode_kit', array(
+						'kit_id'=>$model->id,
+						'electrode_id'=>$anode,
+					));
+				}
+				foreach($model->cathodeIds as $cathode)
+				{
+					$commandInsert->insert('tbl_electrode_kit', array(
+						'kit_id'=>$model->id,
+						'electrode_id'=>$cathode,
+					));
+				}
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('create',array(
@@ -88,15 +116,50 @@ class KitController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-
+		$model->kitter_search = User::getFullNameProper($model->kitter_id);
+		
+		/* needed to validate the anode and cathode lot IDs */
+		if(isset($_POST['Kit']['anodeIds']))
+		{
+			$model->anodeIds = $_POST['Kit']['anodeIds'];
+		}
+		if(isset($_POST['Kit']['cathodeIds']))
+		{
+			$model->cathodeIds = $_POST['Kit']['cathodeIds'];
+		}
+		
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		$this->performAjaxValidation($model);
 
 		if(isset($_POST['Kit']))
 		{
 			$model->attributes=$_POST['Kit'];
 			if($model->save())
+			{
+				/* clear the join table of electrodes */
+				$commandDelete = Yii::app()->db->createCommand();
+				$commandDelete->delete('tbl_electrode_kit', 
+					'kit_id = :id',
+					array(':id'=>$id)
+				);
+				
+				$commandInsert = Yii::app()->db->createCommand();
+				foreach($model->anodeIds as $anode)
+				{
+					$commandInsert->insert('tbl_electrode_kit', array(
+						'kit_id'=>$model->id,
+						'electrode_id'=>$anode,
+					));
+				}
+				foreach($model->cathodeIds as $cathode)
+				{
+					$commandInsert->insert('tbl_electrode_kit', array(
+						'kit_id'=>$model->id,
+						'electrode_id'=>$cathode,
+					));
+				}
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('update',array(

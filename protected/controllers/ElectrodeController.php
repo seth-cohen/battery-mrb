@@ -47,8 +47,8 @@ class ElectrodeController extends Controller
 		{
 			$model->coater_id = Yii::app()->user->id;
 		}
+		
 		// uncomment the following code to enable ajax-based validation
-	   
 	    if(isset($_POST['ajax']) && $_POST['ajax']==='createelectrode-form')
 	    {
 	        echo CActiveForm::validate($model);

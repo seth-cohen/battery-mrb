@@ -165,7 +165,7 @@ div.wide.form .buttons, div.wide.form .hint, div.wide.form .errorMessage
 
 table.double-form
 {
-	width:480px;
+	width:560px;
 }
 
 table.double-form tr td
@@ -177,6 +177,11 @@ table.double-form tr td
 table.double-form tr td div
 {
 	height:60px;
+}
+
+table.double-form tr td div.multidrop5
+{
+	height:125px;
 }
 
 input[type=radio] + label, 
