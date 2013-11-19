@@ -23,15 +23,15 @@ class ElectrodeController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index'),
+				'actions'=>array('index', 'ajaxGetElectrodeCells'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('createlot','viewlot'),
+				'actions'=>array('create','view'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('updatelot'),
+				'actions'=>array('update'),
 				'roles' => array('manufacturing supervisor', 'manufacturing engineer'),
 			),
 			array('deny',  // deny all users
@@ -40,7 +40,7 @@ class ElectrodeController extends Controller
 		);
 	}
 	
-	public function actionCreateLot()
+	public function actionCreate()
 	{
 		$model = new Electrode;
 		if(!Yii::app()->user->checkAccess('manufacturing supervisor') && !Yii::app()->user->checkAccess('manufacturing engineer'))
@@ -85,10 +85,20 @@ class ElectrodeController extends Controller
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionViewLot($id)
+	public function actionView($id)
 	{
+		$model = Electrode::model()->findByPk($id);
+		$kits = array();
+		
+		foreach($model->kits as $key=>$kit){
+			$kits[] = array('num'=>$key+1, 'kit'=>$kit->getFormattedSerial(), 'id'=>$kit->id);
+		}
+		
+		$kitDataProvider = new CArrayDataProvider($kits);
+		
 		$this->render('viewlot',array(
-			'model'=>Electrode::model()->findByPk($id),
+			'model'=>$model,
+			'kitDataProvider'=>$kitDataProvider,
 		));
 	}
 	
@@ -97,7 +107,7 @@ class ElectrodeController extends Controller
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
-	public function actionUpdateLot($id)
+	public function actionUpdate($id)
 	{
 		$model=Electrode::model()->findByPk($id);
 		$model->coater_search = User::getFullNameProper($model->coater_id);
@@ -129,10 +139,18 @@ class ElectrodeController extends Controller
 		}
 		else
 		{
-			$model = $this->loadModel($id);
+			$model = Electrode::model()->findByPk($id);
+			$kits = array();
+		
+			foreach($model->kits as $key=>$kit){
+				$kits[] = array('num'=>$key+1, 'kit'=>$kit->getFormattedSerial(), 'id'=>$kit->id);
+			}
 			
+			$kitDataProvider = new CArrayDataProvider($kits);
+		
 			$this->renderPartial('_ajaxelectrodecells', array(
 					'model'=>$model,
+					'kitDataProvider'=>$kitDataProvider,
 				), 
 				false, 
 				true

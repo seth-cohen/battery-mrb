@@ -1,42 +1,41 @@
 <?php 
 /* @var $this ElectrodeController */
-/* @var $model Cell */
+/* @var $model Electrode */
+/* @var $kitDataProvider CArrayDataProvider */
 ?>
 
 <?php Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/styles.css'); ?>
 
-<h2>Cell <?= $model->kit->celltype->name.'-'.$model->kit->serial_num; ?> manufacturing details</h2>
+<?php 
+Yii::app()->clientScript->scriptMap=array(
+                    'jquery.yiigridview.js'=>false
+                ); 
+?>
+<h2>Cells using <?php echo $model->is_anode?'Anode':'Cathode'; ?> Lot <?= $model->lot_num; ?> </h2>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
+
+<?php $this->widget('zii.widgets.grid.CGridView', array(
+	'id'=>'kit-grid',
+	'dataProvider'=>$kitDataProvider,
+	'columns'=>array(
 		array(
-			'name'=>'serial_search',
-			'value'=>$model->kit->celltype->name.'-'.$model->kit->serial_num,
+			'name'=>'No.',
+			'value'=>'$data["num"]',
 		),
 		array(
-			'name'=>'refnum_search',
-			'value'=>$model->refNum->number,
+			'name'=>'Cell Serial',
+			'value'=>'$data["kit"]',
 		),
-		'eap_num',
 		array(
-			'name'=>'stacker_search',
-			'value'=>$model->stacker->getFullName(),
+			'class'=>'CButtonColumn',
+			'template'=>'{view}',
+			'viewButtonUrl'=>'Yii::app()->createUrl("/kit/view",array("id"=>$data["id"]))',
 		),
-		'stack_date',
-		'dry_wt',
-		'wet_wt',
-		array(
-			'name'=>'filler_search',
-			'value'=>$model->filler->getFullName(),
-		),
-		'fill_date',
-		array(
-			'name'=>'inspector_search',
-			'value'=>$model->inspector->getFullName(),
-		),
-		'inspection_date',
 	),
+	'emptyText'=>'Oops, no cells built yet',
 	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
+	'pager'=>array(
+		'cssFile' => false,
+	),
 )); 
 ?>

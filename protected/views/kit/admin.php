@@ -30,7 +30,8 @@ $('.search-form form').submit(function(){
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
+or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.  
+<br/><br/>Multiple lot numbers may be searched for by separating with a space or comma.  It is an 'OR' comparison.
 </p>
 
 <?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
@@ -40,17 +41,32 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 )); ?>
 </div><!-- search-form -->
 
+<div class="shadow border">
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'kit-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'id',
-		'serial_num',
-		'ref_num_id',
-		'anode_id',
-		'cathode_id',
-		'kitter_id',
+		//'id',
+		array(
+			'name'=>'serial_search',
+			'value'=>'$data->getFormattedSerial()'
+		),
+		array(
+			'name'=>'refnum_search',
+			'value'=>'$data->refNum->number'
+		),
+		array(
+			'name'=>'anode_search',
+			'type'=>'raw',
+			'value'=>'$data->getAnodeList()',
+		),
+		array(
+			'name'=>'cathode_search',
+			'type'=>'raw',
+			'value'=>'$data->getCathodeList()',
+		),
+		//'kitter_id',
 		/*
 		'kitting_date',
 		'celltype_id',
@@ -59,4 +75,9 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 			'class'=>'CButtonColumn',
 		),
 	),
+	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
+	'pager'=>array(
+		'cssFile' => false,
+	),
 )); ?>
+</div>

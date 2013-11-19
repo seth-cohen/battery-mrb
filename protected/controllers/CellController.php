@@ -32,8 +32,9 @@ class CellController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				'users'=>array('@'),
+				'actions'=>array('create','update', 'multistackcells', 'ajaxstackcells'),
+				'roles' => array('manufacturing'),
+				//'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete','ajaxmfgupdate','downloadlist'),
@@ -185,6 +186,73 @@ class CellController extends Controller
 		}
 	}
 	
+	/**
+	 * Allows user to stack mulitple kits that are not associated with a cell yet.
+	 */
+	public function actionMultiStackCells()
+	{
+		$model=new Kit('search');
+		$model->unsetAttributes();  // clear any default values
+		$model->is_stacked = 0;
+		
+		if(isset($_GET['Cell']))
+		{
+			$model->attributes=$_GET['Cell'];
+		}
+				
+		$this->render('stackcells',array(
+			'model'=>$model,
+		));
+	}
+	
+	/**
+	 * Allows user to stack mulitple kits that are not associated with a cell yet.
+	 */
+	public function actionAjaxStackCells()
+	{
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		$stackedKits = $_POST['autoId'];
+		if(count($stackedKits)>0)
+		{
+			foreach($stackedKits as $kitId)
+			{
+				$model = new Cell();
+				$model->kit_id = $kitId;
+			}
+		}
+	}
+	
+	/**
+	 * generates the text fields for the stacker
+	 */
+	protected function getStackerTextField($data,$row)
+	{
+		$disabled = '';
+		$userName = '';
+		
+		if (Yii::app()->user->checkAccess('manufacturing supervisor') || Yii::app()->user->checkAccess('manufacturing engineer'))
+		{
+			
+		}
+		else
+		{
+			$disabled = '"disabled"=>true';
+			$userName = User::getFullNameProper(Yii::app()->user->id);
+		}
+		
+		$returnString = CHtml::textField("user_names[$data->id]",$userName,array(
+				"style"=>"width:150px;",
+				"class"=>"ui-autocomplete-input",
+				"autocomplete"=>"off",'.$disabled.'
+			));
+			
+		$returnString.= CHtml::hiddenField("user_ids[$data->id]");
+	
+		return $returnString;
+	}
+    
 	/**
 	 * Performs the AJAX update of the detailView on the cellview.
 	 * @param Cell $model the model to be validated

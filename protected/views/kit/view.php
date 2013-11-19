@@ -19,6 +19,7 @@ $this->menu=array(
 
 <h1>View Kit details for Cell <?php echo $model->getFormattedSerial(); ?></h1>
 
+<div class="shadow border">
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
@@ -37,11 +38,11 @@ $this->menu=array(
 		'eap_num',
 		array(
 			'label'=>'Anode Lots',
-			'value'=>$model->getElectrodesList(1),
+			'value'=>$model->getAnodeList(),
 		),
 		array(
 			'label'=>'Cathode Lots',
-			'value'=>$model->getElectrodesList(0),
+			'value'=>$model->getCathodeList(),
 		),
 		array(
 			'label'=>'Kitter',
@@ -49,4 +50,6 @@ $this->menu=array(
 		),
 		'kitting_date',
 	),
+	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
 )); ?>
+</div>

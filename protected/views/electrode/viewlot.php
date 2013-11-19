@@ -1,6 +1,7 @@
 <?php
 /* @var $this ManufacturingController */
 /* @var $model Electrode */
+/* @var $kitDataProvider CArrayDataProvider */
 
 $this->breadcrumbs=array(
 	'Manufacturing'=>array('/manufacturing'),
@@ -10,8 +11,8 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
     array('label'=>'Electrodes List', 'url'=>array('index')),
-    array('label'=>'Create Electrode', 'url'=>array('createlot')),
-    array('label'=>'Edit Electrode Lot', 'url'=>array('updatelot', 'id'=>$model->id)),
+    array('label'=>'Create Electrode', 'url'=>array('create')),
+    array('label'=>'Edit Electrode Lot', 'url'=>array('update', 'id'=>$model->id)),
     array('label'=>'Delete Electrode', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
     array('label'=>'Electrode Admin', 'url'=>array('admin')),
 );
@@ -19,6 +20,7 @@ $this->menu=array(
 
 <h1>Electrode Lot <?php echo $model->lot_num; ?> Details</h1>
 
+<div class="shadow border">
 <?php $this->widget('zii.widgets.CDetailView', array(
     'data'=>$model,
     'attributes'=>array(
@@ -38,8 +40,35 @@ $this->menu=array(
         	'value'=>$model->refNum->number,
         ),
     ),
+    'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
 )); ?>
+</div>
 
-<?php foreach($model->kits as $kit): ?>
-	<?php echo $kit->getFormattedSerial(); ?>
-<?php endforeach; ?>
+<div class="shadow border">
+<h2>Cells using <?php echo $model->is_anode?'Anode':'Cathode'; ?> Lot <?= $model->lot_num; ?> </h2>
+<?php $this->widget('zii.widgets.grid.CGridView', array(
+	'id'=>'kit-grid',
+	'dataProvider'=>$kitDataProvider,
+	'columns'=>array(
+		array(
+			'name'=>'No.',
+			'value'=>'$data["num"]',
+		),
+		array(
+			'name'=>'Cell Serial',
+			'value'=>'$data["kit"]',
+		),
+		array(
+			'class'=>'CButtonColumn',
+			'template'=>'{view}',
+			'viewButtonUrl'=>'Yii::app()->createUrl("/kit/view",array("id"=>$data["id"]))',
+		),
+	),
+	'emptyText'=>'Oops, no cells built yet',
+	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
+	'pager'=>array(
+		'cssFile' => false,
+	),
+)); 
+?>
+</div>

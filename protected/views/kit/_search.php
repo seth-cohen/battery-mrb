@@ -27,16 +27,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'anode_id'); ?>
-		<?php echo $form->textField($model,'anode_id',array('size'=>10,'maxlength'=>10)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'cathode_id'); ?>
-		<?php echo $form->textField($model,'cathode_id',array('size'=>10,'maxlength'=>10)); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->label($model,'kitter_id'); ?>
 		<?php echo $form->textField($model,'kitter_id',array('size'=>10,'maxlength'=>10)); ?>
 	</div>

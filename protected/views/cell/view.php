@@ -21,6 +21,7 @@ $this->menu=array(
 
 <h1>Details for Cell #<?php echo $celltype->name.'-'.$kit->serial_num; ?></h1>
 
+<div class="shadow border">
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
@@ -51,4 +52,8 @@ $this->menu=array(
 		),
 		'inspection_date',
 	),
+	'cssFile'=>Yii::app()->baseUrl . '/css/styles.css',
 )); ?>
+</div>
+
+

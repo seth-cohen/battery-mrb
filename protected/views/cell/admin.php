@@ -72,6 +72,10 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 			'name'=>'stacker_search',
 			'value'=>'$data->stacker->getFullName()',
 		),
+		array(
+			'name'=>'filler_search',
+			'value'=>'$data->filler->getFullName()',
+		),
 		/*
 		'stacker_id',
 		'stack_date',
@@ -88,12 +92,16 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	),
 	//'htmlOptions'=>array('class'=>'shadow grid-view'),
 	'selectionChanged'=>'cellSelected',
+	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
+	'pager'=>array(
+		'cssFile' => false,
+	),
 )); ?>
 </div>
 
 <hr>
 
-<div id="cell-mfg-details" class="shadow" style="display:none; border:1px solid #888888; padding:5px;"></div>
+<div id="cell-mfg-details" class="shadow border" style="display:none"></div>
 
 <script type="text/javascript">
 	function cellSelected(target_id){
@@ -129,7 +137,7 @@ $(document).ready(function(){
 	
 	$('#csv-download').bind('click', function() {	
 		var href = '<?php echo $this->createUrl('downloadlist'); ?>';
-		href += '&';
+		href += '?';
 		href += $('#cell-search-form :input[name!="r"]').serialize();
 		href += '&';
 		href +=	$('.filters :input').serialize();

@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
     array('label'=>'Electrodes List', 'url'=>array('index')),
-    array('label'=>'Create Electrode', 'url'=>array('createlot')),
+    array('label'=>'Create Electrode', 'url'=>array('create')),
     array('label'=>'Electrode Admin', 'url'=>array('admin')),
 );
 ?>

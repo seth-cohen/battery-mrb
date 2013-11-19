@@ -66,10 +66,12 @@ class Electrode extends CActiveRecord
 
 	public function defaultScope()
     {
+    	$alias = $this->getTableAlias( false, false );
         return array(
-            'order'=>'lot_num DESC',
+            'order'=>$alias.'.lot_num DESC',
         );
     }
+    
 	/**
 	 * @return array of the query criteria to be used for particular query
 	 */

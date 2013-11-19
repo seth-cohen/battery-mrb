@@ -39,14 +39,15 @@
 					'visible'=>!Yii::app()->user->isGuest,
 					'items'=>array(
 						array('label'=>'Electrodes', 'items'=>array(
-							array('label'=>'Create Electrode Lot', 'url'=>array('electrode/createlot'), 'active'=>0),
+							array('label'=>'Create Electrode Lot', 'url'=>array('electrode/create'), 'active'=>0),
 							array('label'=>'Calender Electrode Lot', 'url'=>array('electrode/calender'), 'active'=>0),
 							array('label'=>'Bag Cathode Lot', 'url'=>array('electrode/bag'), 'active'=>0),
 							array('label'=>'View Electrode Lots', 'url'=>array('electrode/index'), 'active'=>0),
 						)),
 						array('label'=>'Cells', 'items'=>array(
-							array('label'=>'Create New Kit', 'url'=>array('kit/createkit'), 'active'=>0),
-							array('label'=>'Stack Cell', 'url'=>array('cell/stackcell'), 'active'=>0),
+							array('label'=>'Create New Kit', 'url'=>array('kit/create'), 'active'=>0),
+							array('label'=>'Stack Cell (Single)', 'url'=>array('cell/stackcell'), 'active'=>0),
+							array('label'=>'Stack Cell (Multi)', 'url'=>array('cell/multistackcells'), 'active'=>0),
 							array('label'=>'Cell List', 'url'=>array('cell/admin'), 'active'=>0),
 						)),
 						array('label'=>'Batteries', 'items'=>array(

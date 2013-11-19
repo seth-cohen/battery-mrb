@@ -130,13 +130,15 @@ class Cell extends CActiveRecord
 
 		$criteria->with = array(
 						'kit'=>array('with'=>'celltype'), 
-						'stacker'=>array('alias'=>'user'), 
+						'stacker'=>array('alias'=>'stack'), 
+						'filler'=>array('alias'=>'fill'), 
+						'inspector'=>array('alias'=>'insp'), 
 						'refNum'=>array('alias'=>'ref'),
 		); // needed for alias of search parameter tables
 
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('kit_id',$this->kit_id,true);
-		$criteria->compare('eap_num',$this->eap_num,true);
+		$criteria->compare('t.eap_num',$this->eap_num,true);
 		$criteria->compare('stack_date',$this->stack_date,true);
 		$criteria->compare('dry_wt',$this->dry_wt);
 		$criteria->compare('wet_wt',$this->wet_wt);
@@ -148,9 +150,9 @@ class Cell extends CActiveRecord
 		
 		/* for concatenated user name search */
 		$criteria->addSearchCondition('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
-		$criteria->addSearchCondition('concat(user.first_name, " ", user.last_name)', $this->stacker_search);
-		$criteria->addSearchCondition('concat(user.first_name, " ", user.last_name)', $this->filler_search);
-		$criteria->addSearchCondition('concat(user.first_name, " ", user.last_name)', $this->inspector_search);
+		$criteria->addSearchCondition('concat(stack.first_name, " ", stack.last_name)', $this->stacker_search);
+		$criteria->addSearchCondition('concat(fill.first_name, " ", fill.last_name)', $this->filler_search);
+		$criteria->addSearchCondition('concat(insp.first_name, " ", insp.last_name)', $this->inspector_search);
 
 		return new CActiveDataProvider($this, array(
 			'pagination'=>array('pageSize' => 16),
@@ -170,16 +172,16 @@ class Cell extends CActiveRecord
 						'desc'=>'celltype.name DESC',
 					),
 					'stacker_search'=>array(
-						'asc'=>"CONCAT(first_name, ' ', last_name)",
-						'desc'=>"CONCAT(first_name, ' ', last_name) DESC",
+						'asc'=>"CONCAT(stack.first_name, ' ', stack.last_name)",
+						'desc'=>"CONCAT(stack.first_name, ' ', stack.last_name) DESC",
 					),
 					'filler_search'=>array(
-						'asc'=>"CONCAT(first_name, ' ', last_name)",
-						'desc'=>"CONCAT(first_name, ' ', last_name) DESC",
+						'asc'=>"CONCAT(fill.first_name, ' ', fill.last_name)",
+						'desc'=>"CONCAT(fill.first_name, ' ', fill.last_name) DESC",
 					),
 					'inspector_search'=>array(
-						'asc'=>"CONCAT(first_name, ' ', last_name)",
-						'desc'=>"CONCAT(first_name, ' ', last_name) DESC",
+						'asc'=>"CONCAT(insp.first_name, ' ', insp.last_name)",
+						'desc'=>"CONCAT(insp.first_name, ' ', insp.last_name) DESC",
 					),
 					'*',		// all others treated normally
 				),

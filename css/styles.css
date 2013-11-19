@@ -6,7 +6,6 @@ table.detail-view .null
 table.detail-view
 {
 	background: white;
-	border:2px solid #888888;
 	border-collapse: collapse;
 	width: 100%;
 	margin: 0;
@@ -27,9 +26,30 @@ table.detail-view th
 	width: 160px;
 }
 
+
+table.detail-view tr:first-child th,
+table.detail-view tr:first-child td
+{
+	border-top: 0;
+}
+
+
+
+table.detail-view tr td:first-child,
+table.detail-view tr th:first-child
+{
+	border-left: 0;
+}
+
+table.detail-view tr td:last-child,
+table.detail-view tr th:last-child
+{
+	border-right: 0;
+}
+
 table.detail-view tr.odd
 {
-	background:#E5F1F4;
+	background:#DDDDDD;
 }
 
 table.detail-view tr.even
@@ -45,3 +65,195 @@ table.detail-view tr.even th
 {
 }
 
+/* -----------------------------------------------------------------
+---------------------  GRID VIEW -----------------------------------
+--------------------------------------------------------------------*/
+
+.grid-view-loading
+{
+	background:url(loading.gif) no-repeat;
+}
+
+.grid-view
+{
+	padding: 15px 0;
+}
+
+.grid-view table.items
+{
+	background: white;
+	border-collapse: collapse;
+	width: 100%;
+	border: 1px #D0E3EF solid;
+}
+
+.grid-view table.items th, .grid-view table.items td
+{
+	font-size: 0.9em;
+	border: 1px white solid;
+	padding: 0.3em;
+}
+
+.grid-view table.items th
+{
+	color: white;
+	/*background: url("bg.gif") repeat-x scroll left top white;*/
+	background: #666E73;
+	text-align: center;
+}
+
+.grid-view table.items th a
+{
+	color: #EEE;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.grid-view table.items th a:hover
+{
+	color: #FFF;
+}
+
+.grid-view table.items th a.asc
+{
+	background:url(up.gif) right center no-repeat;
+	padding-right: 10px;
+}
+
+.grid-view table.items th a.desc
+{
+	background:url(down.gif) right center no-repeat;
+	padding-right: 10px;
+}
+
+.grid-view table.items tr.even
+{
+	background: #F8F8F8;
+}
+
+.grid-view table.items tr.odd
+{
+	background: #DDDDDD;
+}
+
+.grid-view table.items tr.selected
+{
+	background: #BCE774;
+}
+
+.grid-view table.items tr:hover.selected
+{
+	background: #CCFF66;
+}
+
+.grid-view table.items tbody tr:hover
+{
+	background: #ECFBD4;
+}
+
+.grid-view .link-column img
+{
+	border: 0;
+}
+
+.grid-view .button-column
+{
+	text-align: center;
+	width: 60px;
+}
+
+.grid-view .button-column img
+{
+	border: 0;
+}
+
+.grid-view .checkbox-column
+{
+	width: 15px;
+}
+
+.grid-view .summary
+{
+	margin: 0 0 5px 0;
+	text-align: right;
+}
+
+.grid-view .pager
+{
+	margin: 5px 0 0 0;
+	text-align: right;
+}
+
+.grid-view .empty
+{
+	font-style: italic;
+}
+
+.grid-view .filters input,
+.grid-view .filters select
+{
+	width: 100%;
+	border: 1px solid #ccc;
+}
+
+/* -----------------------------------------------------------------
+---------------------  PAGER     -----------------------------------
+--------------------------------------------------------------------*/
+
+
+ul.yiiPager
+{
+	font-size:11px;
+	border:0;
+	margin:0;
+	padding:0;
+	line-height:100%;
+	display:inline;
+}
+
+ul.yiiPager li
+{
+	display:inline;
+}
+
+ul.yiiPager a:link,
+ul.yiiPager a:visited
+{
+	border:solid 1px #888888;
+	font-weight:bold;
+	color:#2D444F;
+	padding:1px 6px;
+	text-decoration:none;
+}
+
+ul.yiiPager .page a
+{
+	font-weight:normal;
+}
+
+ul.yiiPager a:hover
+{
+	border:solid 1px #000000;
+}
+
+ul.yiiPager .selected a
+{
+	background:#2D444F;
+	color:#FFFFFF;
+	font-weight:bold;
+}
+
+ul.yiiPager .hidden a
+{
+	border:solid 1px #DEDEDE;
+	color:#888888;
+}
+
+/**
+ * Hide first and last buttons by default.
+ */
+ul.yiiPager .first,
+ul.yiiPager .last
+{
+	display:none;
+}

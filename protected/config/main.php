@@ -36,6 +36,9 @@ return array(
 			'allowAutoLogin'=>true,
 			'class' => 'WebUser',
 		),
+		'clientScript' => array(
+			'class' => 'MyClientScript',
+		),
 		// uncomment the following to enable URLs in path-format
 		
 		'urlManager'=>array(

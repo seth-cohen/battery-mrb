@@ -16,6 +16,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update Kit <?php echo $model->id; ?></h1>
+<h1>Edit Kit <?php echo $model->getFormattedSerial(); ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

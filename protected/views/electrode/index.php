@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
     array('label'=>'Electrodes List', 'url'=>array('index')),
-    array('label'=>'Create Electrode', 'url'=>array('createlot')),
+    array('label'=>'Create Electrode', 'url'=>array('create')),
     array('label'=>'Electrode Admin', 'url'=>array('admin')),
 );
 
@@ -49,12 +49,17 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'id',
 		'lot_num',
 		array(
 			'name'=>'refnum_search',
 			'value'=>'$data->refNum->number',
 		),	
+		array(
+			'name'=>'is_anode',
+			'value'=>'$data->is_anode?"Anode":"Cathode"',
+			'filter'=>array('0'=>'Cathode', '1'=>'Anode'),
+			'htmlOptions'=>array('width'=>'60'),
+		),
 		'eap_num',
 		array(
 			'name'=>'coater_search',
@@ -64,15 +69,19 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		array(
 			'class'=>'CButtonColumn',
 			'template'=>'{view} {update}',
-			'viewButtonUrl'=>'Yii::app()->createUrl("/electrode/viewlot",array("id"=>$data["id"]))',
-			'updateButtonUrl'=>'Yii::app()->createUrl("/electrode/updatelot",array("id"=>$data["id"]))',
+			'viewButtonUrl'=>'Yii::app()->createUrl("/electrode/view",array("id"=>$data["id"]))',
+			'updateButtonUrl'=>'Yii::app()->createUrl("/electrode/update",array("id"=>$data["id"]))',
 		),
 	),
 	'selectionChanged'=>'electrodeSelected',
+	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
+	'pager'=>array(
+		'cssFile' => false,
+	),
 )); ?>
 </div>
 
-<div id="cells-list" class="shadow border"></div>
+<div id="cells-list" class="shadow border" style="display:none"></div>
 
 <script type="text/javascript">
 	function electrodeSelected(target_id){
@@ -81,7 +90,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 
 		$.ajax({
 			type:'get',
-    		url: '<?php echo $this->createUrl('anode/ajaxgetelectrodecells'); ?>',
+    		url: '<?php echo $this->createUrl('electrode/ajaxgetelectrodecells'); ?>',
     		data:
     		{
     			id: electrode_id.toString(),
@@ -100,4 +109,12 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
     	});
 	}
 </script>
+<script type="text/javascript">
+$(document).ready(function(){
 
+	$('.page, .previous').bind('click', function(){
+		alert('test');
+		
+	});
+});
+</script>

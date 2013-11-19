@@ -19,11 +19,11 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('anodeIds')); ?>:</b>
-	<?php echo $data->getElectrodesList(1); ?>
+	<?php echo $data->getAnodeList(); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('cathodeIds')); ?>:</b>
-	<?php echo $data->getElectrodesList(0); ?>
+	<?php echo $data->getCathodeList(0); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('kitter_id')); ?>:</b>

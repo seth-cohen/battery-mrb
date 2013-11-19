@@ -36,6 +36,10 @@
 
 div.form
 {
+	background: #DDDDDD;
+	border: 1px solid #888888;
+	padding: 5px;
+	box-shadow: 5px 5px 8px #888888;
 }
 
 div.form input,
@@ -165,7 +169,7 @@ div.wide.form .buttons, div.wide.form .hint, div.wide.form .errorMessage
 
 table.double-form
 {
-	width:560px;
+	width:100%;
 }
 
 table.double-form tr td
@@ -181,7 +185,7 @@ table.double-form tr td div
 
 table.double-form tr td div.multidrop5
 {
-	height:125px;
+	height:135px;
 }
 
 input[type=radio] + label, 

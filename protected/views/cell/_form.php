@@ -28,9 +28,15 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'ref_num'); ?>
-		<?php echo $form->textField($model,'ref_num',array('size'=>50,'maxlength'=>50)); ?>
-		<?php echo $form->error($model,'ref_num'); ?>
+		<?php echo $form->labelEx($model,'ref_num_id'); ?>
+			<?php echo CHtml::activeDropDownList($model, 'ref_num_id', 
+							CHtml::listData(RefNum::model()->findAll(), 'id','number'), 
+							array(
+								'prompt'=>' -Select Reference No.- ',
+								'onchange'=>'refSelected(this)',
+								'style'=>'width:152px'
+							)); ?>
+			<?php echo $form->error($model,'ref_num_id'); ?>
 	</div>
 
 	<div class="row">

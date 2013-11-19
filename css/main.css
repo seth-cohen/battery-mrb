@@ -12,14 +12,14 @@ body
 	margin-top: 5px;
 	margin-bottom: 5px;
 	background: white;
-	border: 1px solid #C9E0ED;
+	border: 1px solid #888888;
 }
 
 #header
 {
 	margin: 0;
 	padding: 0;
-	border-top: 3px solid #C9E0ED;
+	border-top: 3px solid #2D444F;
 }
 
 #content
@@ -212,8 +212,9 @@ div.search-form
 .portlet-decoration
 {
 	padding: 3px 8px;
-	background: #B7D6E7;
-	border-left: 5px solid #6FACCF;
+	background: #666E73;
+	border-left: 5px solid #2D444F;
+	box-shadow: 5px 5px 8px #888888;
 }
 
 .portlet-title
@@ -222,7 +223,8 @@ div.search-form
 	font-weight: bold;
 	padding: 0;
 	margin: 0;
-	color: #298dcd;
+	color: #FFFFFF;
+	
 }
 
 .portlet-content
@@ -230,7 +232,9 @@ div.search-form
 	font-size:0.9em;
 	margin: 0 0 15px 0;
 	padding: 5px 8px;
-	background:#EFFDFF;
+	background:#DDDDDD;
+	border: 1px solid #888888;
+	box-shadow: 5px 5px 8px #888888;
 }
 
 .portlet-content ul
@@ -262,7 +266,7 @@ div.search-form
 .operations li a
 {
 	font: bold 12px Arial;
-	color: #0066A4;
+	color: #2D444F;
 	display: block;
 	padding: 2px 0 2px 8px;
 	line-height: 15px;
@@ -271,12 +275,13 @@ div.search-form
 
 .operations li a:visited
 {
-	color: #0066A4;
+	color: #666E73;
 }
 
 .operations li a:hover
 {
-	background: #80CFFF;
+	background: #2D444F;
+	color: #EFEFEF;
 }
 
 #role-checkboxlist

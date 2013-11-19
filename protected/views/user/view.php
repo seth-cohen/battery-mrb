@@ -19,6 +19,7 @@ $this->menu=array(
 
 <h1>Details for <?php echo $model->getFullName(); ?></h1>
 
+<div class="shadow border">
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
@@ -32,6 +33,7 @@ $this->menu=array(
 	),
 	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
 )); ?>
+</div>
 
 <hr>
 <?php /* If the user is an admin add the assign roles button */
@@ -45,6 +47,7 @@ $this->menu=array(
 <?php echo $this->renderPartial('_roleassign', array('model'=>$model)); ?>
 </div>
 
+<div class="shadow border">
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'role-grid',
 	'dataProvider'=>$roleDataProvider,
@@ -65,6 +68,7 @@ $this->menu=array(
 	'emptyText'=>'Oops, no roles assigned yet',
 )); 
 ?>
+</div>
 
 <?php echo $this->renderPartial('_mfg', array('model'=>$model)); ?>
 
