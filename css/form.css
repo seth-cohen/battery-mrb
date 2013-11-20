@@ -194,3 +194,37 @@ input[type=checkbox] + label
     display:inline !important; 
 }
 
+
+
+
+
+
+
+
+
+.errorSummary
+{
+	border: 2px solid #C00;
+	padding: 7px 7px 12px 7px;
+	margin: 0 0 20px 0;
+	background: #FEE;
+	font-size: 0.9em;
+}
+
+.errorMessage
+{
+	color: red;
+	font-size: 0.9em;
+}
+
+.errorSummary p
+{
+	margin: 0;
+	padding: 5px;
+}
+
+.errorSummary ul
+{
+	margin: 0;
+	padding: 0 0 0 20px;
+}

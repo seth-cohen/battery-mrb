@@ -195,9 +195,9 @@ class CellController extends Controller
 		$model->unsetAttributes();  // clear any default values
 		$model->is_stacked = 0;
 		
-		if(isset($_GET['Cell']))
+		if(isset($_GET['Kit']))
 		{
-			$model->attributes=$_GET['Cell'];
+			$model->attributes=$_GET['Kit'];
 		}
 				
 		$this->render('stackcells',array(
@@ -210,17 +210,51 @@ class CellController extends Controller
 	 */
 	public function actionAjaxStackCells()
 	{
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
+		
+		if(!isset($_POST['autoId']))
+		{
+			echo 'hide';
+			Yii::app()->end();
+		}
+		
 		$stackedKits = $_POST['autoId'];
+		$userIds = $_POST['user_ids'];
+		$dates = $_POST['dates'];
+		$refnumIds = $_POST['refnumIds'];
+		$eaps = $_POST['eaps'];
+		
 		if(count($stackedKits)>0)
 		{
+			$error = null;
+			
 			foreach($stackedKits as $kitId)
 			{
-				$model = new Cell();
+				$model = new Cell('stack');
+				// Uncomment the following line if AJAX validation is needed
+		 		$this->performAjaxValidation($model);
+		 
 				$model->kit_id = $kitId;
+				if(isset($userIds[$kitId]) && isset($dates[$kitId]))
+				{
+					$model->stacker_id = $userIds[$kitId];
+					$model->stack_date = $dates[$kitId];
+					$model->ref_num_id = $refnumIds[$kitId]?null:$refnumIds[$kitId];
+					$model->eap_num = $eaps[$kitId]?null:$eaps[$kitId];
+					
+					if($model->save())
+					{
+						$kit = Kit::model()->findByPk($kitId);
+						$kit->is_stacked = 1;
+						$kit->save()?'':var_dump($kit->getErrors());
+						
+					}
+					else 
+					{
+						$error = CHtml::errorSummary($model);
+					}
+				}
 			}
+			echo $error;
 		}
 	}
 	

@@ -55,7 +55,7 @@ class Kit extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('serial_num, ref_num_id, kitting_date, kitter_id, anodeIds, cathodeIds, kitter_search, celltype_id', 'required'),
+			array('serial_num, ref_num_id, kitting_date, kitter_id, anodeIds, cathodeIds, celltype_id', 'required'),
 			array('anodeIds, cathodeIds', 'checkLotNumbers'),
 			array('serial_num, eap_num', 'length', 'max'=>50),
 			array('serial_num, celltype_id', 'checkUniqueInType'),
@@ -103,6 +103,19 @@ class Kit extends CActiveRecord
 		);
 	}
 
+	/**
+	 * @return array of the query criteria to be used for particular query
+	 */
+	public function scopes()
+	{
+		$alias = $this->getTableAlias( false, false );
+        return array(
+			'oldest'=>array(
+				'order'=>$alias.'.kit_date DESC',
+			),
+		);
+	}
+	
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
@@ -162,6 +175,7 @@ class Kit extends CActiveRecord
 		$criteria->compare('kitter_id',$this->kitter_id,true);
 		$criteria->compare('kitting_date',$this->kitting_date,true);
 		$criteria->compare('is_stacked',$this->is_stacked);
+		$criteria->compare('t.eap_num',$this->eap_num, true);
 		
 		$criteria->compare('ref.number', $this->refnum_search, true);	
 		$criteria->compare('celltype.name',$this->celltype_search, true);
@@ -204,9 +218,7 @@ class Kit extends CActiveRecord
 			'criteria'=>$criteria,
 			'withKeenLoading' => array('anodes', 'cathodes'),
 			'sort'=>array(
-				'defaultOrder'=>array(
-					'refnum_search'=>'ref.number DESC',
-				),
+				'defaultOrder'=>'kitting_date',
 				'attributes'=>array(
 					'refnum_search'=>array(
 						'asc'=>'ref.number',

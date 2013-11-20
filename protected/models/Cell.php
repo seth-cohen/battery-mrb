@@ -53,7 +53,9 @@ class Cell extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('stack_date, dry_wt, wet_wt, fill_date, inspection_date', 'required'),
+			//array('stack_date, dry_wt, wet_wt, fill_date, inspection_date', 'required', 'on'=>'create'),
+			array('stack_date, stacker_id, kit_id', 'required', 'on'=>'stack'),
+			array('eap_num', 'checkEAP'),
 			array('dry_wt, wet_wt', 'numerical'),
 			array('kit_id, ref_num_id, stacker_id, filler_id, inspector_id', 'length', 'max'=>10),
 			array('eap_num', 'length', 'max'=>50),
@@ -64,6 +66,16 @@ class Cell extends CActiveRecord
 		);
 	}
 
+	public function checkEAP($attribute,$params) 
+	{
+		$pattern = '/ADD$/';
+		
+        if(preg_match($pattern, $this->$attribute))
+        {
+        	$this->addError( $attribute, "EAP Addendum is missing!" );
+        }	    
+	}
+	
 	/**
 	 * @return array relational rules.
 	 */
