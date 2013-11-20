@@ -11,11 +11,15 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Cell', 'url'=>array('index')),
-	array('label'=>'Create Cell', 'url'=>array('create')),
 	array('label'=>'Update Cell', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Cell', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Cell', 'url'=>array('admin'), 'visible'=>Yii::app()->user->name=='admin'),
+	array('label'=>'Create New Kit', 'url'=>array('kit/create')),
+	array('label'=>'Stack Cell (single)', 'url'=>array('stackcell')),
+	array('label'=>'Stack Cells (multi)', 'url'=>array('multistackcells')),
+	array('label'=>'Fill Cell (single)', 'url'=>array('fillcell')),
+	array('label'=>'Fill Cells (multi)', 'url'=>array('multifillcells')),
+	array('label'=>'Inspect Cell (single)', 'url'=>array('inspectcell')),
+	array('label'=>'Inspect Cells (multi)', 'url'=>array('multiinspectcells')),
+	array('label'=>'View All Cells', 'url'=>array('index')),
 );
 ?>
 

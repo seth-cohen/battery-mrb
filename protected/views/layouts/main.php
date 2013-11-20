@@ -44,11 +44,15 @@
 							array('label'=>'Bag Cathode Lot', 'url'=>array('electrode/bag'), 'active'=>0),
 							array('label'=>'View Electrode Lots', 'url'=>array('electrode/index'), 'active'=>0),
 						)),
-						array('label'=>'Cells', 'items'=>array(
+						array('label'=>'Kits', 'items'=>array(
 							array('label'=>'Create New Kit', 'url'=>array('kit/create'), 'active'=>0),
-							array('label'=>'Stack Cell (Single)', 'url'=>array('cell/stackcell'), 'active'=>0),
-							array('label'=>'Stack Cell (Multi)', 'url'=>array('cell/multistackcells'), 'active'=>0),
-							array('label'=>'Cell List', 'url'=>array('cell/admin'), 'active'=>0),
+							array('label'=>'View All Kits', 'url'=>array('kit/admin'), 'active'=>0),
+						)),
+						array('label'=>'Cells', 'items'=>array(
+							array('label'=>'Stack Cells (Multi)', 'url'=>array('cell/multistackcells'), 'active'=>0),
+							array('label'=>'Fill Cells (Multi)', 'url'=>array('cell/multifillcells'), 'active'=>0),
+							array('label'=>'Inspect Cells (Multi)', 'url'=>array('cell/multiinspectcells'), 'active'=>0),
+							array('label'=>'View All Cells', 'url'=>array('cell/index'), 'active'=>0),
 						)),
 						array('label'=>'Batteries', 'items'=>array(
 							array('label'=>'Create Anode Lot', 'url'=>array('/manufacturing/anode/createanodelot'), 'active'=>0),
@@ -64,6 +68,7 @@
 					'active'=>(strpos( Yii::app()->request->url, 'testlab') > 0),
 					'visible'=>!Yii::app()->user->isGuest,
 					'items'=>array(
+						array('label'=>'Formation', 'url'=>array('testlab/cellformation')),
 						array('label'=>'Channels', 'url'=>array('/channel/')),
 						array('label'=>'Chambers', 'url'=>array('/chamber/'), 'active'=>0),
 						array('label'=>'Cyclers', 'url'=>array('/cycler/'), 'active'=>0),

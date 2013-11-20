@@ -29,10 +29,10 @@ class CellController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
-				'users'=>array('*'),
+				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update', 'multistackcells', 'ajaxstackcells'),
+				'actions'=>array('create','update', 'multistackcells', 'ajaxstackcells', 'multifillcells', 'ajaxfillcells', 'multiinspectcells', 'ajaxinspectcells'),
 				'roles' => array('manufacturing'),
 				//'users'=>array('@'),
 			),
@@ -134,9 +134,16 @@ class CellController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Cell');
+		$model=new Cell('search');
+		$model->unsetAttributes();  // clear any default values
+		
+		if(isset($_GET['Cell']))
+		{
+			$model->attributes=$_GET['Cell'];
+		}
+				
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'model'=>$model,
 		));
 	}
 
@@ -152,7 +159,7 @@ class CellController extends Controller
 		{
 			$model->attributes=$_GET['Cell'];
 		}
-				
+
 		$this->render('admin',array(
 			'model'=>$model,
 		));
@@ -238,8 +245,8 @@ class CellController extends Controller
 				{
 					$model->stacker_id = $userIds[$kitId];
 					$model->stack_date = $dates[$kitId];
-					$model->ref_num_id = $refnumIds[$kitId]?null:$refnumIds[$kitId];
-					$model->eap_num = $eaps[$kitId]?null:$eaps[$kitId];
+					$model->ref_num_id = $refnumIds[$kitId]?$refnumIds[$kitId]:null;
+					$model->eap_num = $eaps[$kitId]?$eaps[$kitId]:null;
 					
 					if($model->save())
 					{
@@ -261,10 +268,11 @@ class CellController extends Controller
 	/**
 	 * generates the text fields for the stacker
 	 */
-	protected function getStackerTextField($data,$row)
+	protected function getUserInputTextField($data,$row)
 	{
 		$disabled = '';
 		$userName = '';
+		$userId = '';
 		
 		if (Yii::app()->user->checkAccess('manufacturing supervisor') || Yii::app()->user->checkAccess('manufacturing engineer'))
 		{
@@ -272,21 +280,146 @@ class CellController extends Controller
 		}
 		else
 		{
-			$disabled = '"disabled"=>true';
+			$disabled = 'true';
 			$userName = User::getFullNameProper(Yii::app()->user->id);
+			$userId = Yii::app()->user->id;
 		}
 		
 		$returnString = CHtml::textField("user_names[$data->id]",$userName,array(
 				"style"=>"width:150px;",
 				"class"=>"ui-autocomplete-input",
-				"autocomplete"=>"off",'.$disabled.'
+				"autocomplete"=>"off",
+				"disabled"=>$disabled,
 			));
 			
-		$returnString.= CHtml::hiddenField("user_ids[$data->id]");
+		$returnString.= CHtml::hiddenField("user_ids[$data->id]",$userId);
 	
 		return $returnString;
 	}
     
+	/**
+	 * Allows user to stack mulitple kits that are not associated with a cell yet.
+	 */
+	public function actionMultiFillCells()
+	{
+		$model=new Cell('search');
+		$model->unsetAttributes();  // clear any default values
+		$model->filler_id = 1;
+		
+		if(isset($_GET['Cell']))
+		{
+			$model->attributes=$_GET['Cell'];
+		}
+				
+		$this->render('fillcells',array(
+			'model'=>$model,
+		));
+	}
+	
+/**
+	 * Allows user to stack mulitple kits that are not associated with a cell yet.
+	 */
+	public function actionAjaxFillCells()
+	{
+		
+		if(!isset($_POST['autoId']))
+		{
+			echo 'hide';
+			Yii::app()->end();
+		}
+		
+		$filledCells = $_POST['autoId'];
+		$userIds = $_POST['user_ids'];
+		$dates = $_POST['dates'];
+		$wet_wts = $_POST['wet_wts'];
+		$dry_wts = $_POST['dry_wts'];
+		
+		if(count($filledCells)>0)
+		{
+			$error = null;
+			
+			foreach($filledCells as $cell_id)
+			{
+				$model = Cell::model()->findByPk($cell_id);
+				$model->scenario = 'fill';
+		 
+				if(isset($userIds[$cell_id]) && isset($dates[$cell_id]))
+				{
+					$model->filler_id = $userIds[$cell_id];
+					$model->fill_date = $dates[$cell_id];
+					$model->wet_wt = $wet_wts[$cell_id]?$wet_wts[$cell_id]:null;
+					$model->dry_wt = $dry_wts[$cell_id]?$dry_wts[$cell_id]:null;
+					
+					if(!$model->save())
+					{
+						$error = CHtml::errorSummary($model);
+					}	
+				}
+			}
+			echo $error;
+		}
+	}
+	
+/**
+	 * Allows user to stack mulitple kits that are not associated with a cell yet.
+	 */
+	public function actionMultiInspectCells()
+	{
+		$model=new Cell('search');
+		$model->unsetAttributes();  // clear any default values
+		$model->inspector_id = 1;
+		$model->filler_id ='<>1';
+		
+		if(isset($_GET['Cell']))
+		{
+			$model->attributes=$_GET['Cell'];
+		}
+				
+		$this->render('inspectcells',array(
+			'model'=>$model,
+		));
+	}
+	
+/**
+	 * Allows user to stack mulitple kits that are not associated with a cell yet.
+	 */
+	public function actionAjaxInspectCells()
+	{
+		
+		if(!isset($_POST['autoId']))
+		{
+			echo 'hide';
+			Yii::app()->end();
+		}
+		
+		$inspectedCells = $_POST['autoId'];
+		$userIds = $_POST['user_ids'];
+		$dates = $_POST['dates'];
+		
+		if(count($inspectedCells)>0)
+		{
+			$error = null;
+			
+			foreach($inspectedCells as $cell_id)
+			{
+				$model = Cell::model()->findByPk($cell_id);
+				$model->scenario = 'inspect';
+		 
+				if(isset($userIds[$cell_id]) && isset($dates[$cell_id]))
+				{
+					$model->inspector_id = $userIds[$cell_id];
+					$model->inspection_date = $dates[$cell_id];
+					
+					if(!$model->save())
+					{
+						$error = CHtml::errorSummary($model);
+					}	
+				}
+			}
+			echo $error;
+		}
+	}
+	
 	/**
 	 * Performs the AJAX update of the detailView on the cellview.
 	 * @param Cell $model the model to be validated
@@ -328,9 +461,24 @@ class CellController extends Controller
 		$dataProvider->setPagination(false);
 		
 		$cells = $dataProvider->getData();
+
+		$data[] = array(
+			'Serial Number',
+			'Stacker', 'Stack Date', 
+			'Filler', 'Fill Date',
+			'Dry Wt(g)', 'Wet wt(g)',
+			'Inspector', 'Inspection Date',
+		);
+
 		foreach($cells as $cell)
 		{
-			$data[] = array($cell->stacker->getFullName(), $cell->stack_date);
+			$data[] = array(
+				$cell->kit->getFormattedSerial(),
+				$cell->stacker->getFullName(), $cell->stack_date, 
+				$cell->filler->getFullName(), $cell->fill_date,
+				$cell->dry_wt, $cell->wet_wt,
+				$cell->inspector->getFullName(), $cell->inspection_date,
+			);
 		}
 		
 		header("Content-type: text/csv");

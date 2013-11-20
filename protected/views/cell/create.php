@@ -11,8 +11,14 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Cell', 'url'=>array('index')),
-	array('label'=>'Manage Cell', 'url'=>array('admin')),
+	array('label'=>'Create New Kit', 'url'=>array('kit/create')),
+	array('label'=>'Stack Cell (single)', 'url'=>array('stackcell')),
+	array('label'=>'Stack Cells (multi)', 'url'=>array('multistackcells')),
+	array('label'=>'Fill Cell (single)', 'url'=>array('fillcell')),
+	array('label'=>'Fill Cells (multi)', 'url'=>array('multifillcells')),
+	array('label'=>'Inspect Cell (single)', 'url'=>array('inspectcell')),
+	array('label'=>'Inspect Cells (multi)', 'url'=>array('multiinspectcells')),
+	array('label'=>'View All Cells', 'url'=>array('index')),
 );
 ?>
 

@@ -121,4 +121,22 @@ class Chamber extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+	
+	/*
+	 * REturns one dimensional array to use to populate dropdown list for filtering
+	 * @return 1-D array of id=>name
+	 */
+	public function forList()
+	{
+		$arr = array();
+		$chambers = Chamber::model()->findAll();
+	
+		foreach ($chambers as $chamber)
+		{
+			$arr[$chamber->id] = $chamber->name;
+		}
+		 			
+		return $arr;
+	}
+	
 }

@@ -255,8 +255,12 @@ class UserController extends Controller
 		$results = array();
 		
 		$criteria = new CDbCriteria;
+		
 		$criteria->compare('first_name',$term, true, 'OR');
-		$criteria->compare('last_name',$term, true, 'OR');
+		$criteria->compare('last_name',$term, true,'OR');
+		
+		$criteria->addCondition('id<>1');
+		
 		$criteria->order = 'last_name';
 		$criteria->select = 'first_name, last_name, id';
 		

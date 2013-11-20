@@ -44,6 +44,9 @@ class Cell extends CActiveRecord
 	public $location_search;
 	public $refnum_search;
 	
+	public $not_formed=null;
+	public $formed_only=null;
+	
 
 	/**
 	 * @return array validation rules for model attributes.
@@ -55,6 +58,9 @@ class Cell extends CActiveRecord
 		return array(
 			//array('stack_date, dry_wt, wet_wt, fill_date, inspection_date', 'required', 'on'=>'create'),
 			array('stack_date, stacker_id, kit_id', 'required', 'on'=>'stack'),
+			array('fill_date, filler_id, wet_wt, dry_wt', 'required', 'on'=>'fill'),
+			array('inspection_date, inspector_id', 'required', 'on'=>'inspect'),
+			
 			array('eap_num', 'checkEAP'),
 			array('dry_wt, wet_wt', 'numerical'),
 			array('kit_id, ref_num_id, stacker_id, filler_id, inspector_id', 'length', 'max'=>10),
@@ -62,7 +68,8 @@ class Cell extends CActiveRecord
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('eap_num, stack_date, dry_wt, wet_wt, fill_date, inspection_date, serial_search, celltype_search, 
-					refnum_search, stacker_search, filler_search, inspector_search, location_search', 'safe', 'on'=>'search'),
+					refnum_search, stacker_search, filler_search, inspector_search, location_search,
+					not_formed, formed_only', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -146,19 +153,52 @@ class Cell extends CActiveRecord
 						'filler'=>array('alias'=>'fill'), 
 						'inspector'=>array('alias'=>'insp'), 
 						'refNum'=>array('alias'=>'ref'),
+						'formationDetails'=>array('alias'=>'form'),
 		); // needed for alias of search parameter tables
 
+		$criteria->together = true;
+		
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('kit_id',$this->kit_id,true);
 		$criteria->compare('t.eap_num',$this->eap_num,true);
 		$criteria->compare('stack_date',$this->stack_date,true);
 		$criteria->compare('dry_wt',$this->dry_wt);
 		$criteria->compare('wet_wt',$this->wet_wt);
+		$criteria->compare('filler_id',$this->filler_id);
+		$criteria->compare('inspector_id',$this->inspector_id);
 		$criteria->compare('fill_date',$this->fill_date,true);
 		$criteria->compare('inspection_date',$this->inspection_date,true);
 		
-		$criteria->compare('ref.number', $this->refnum_search, true);	
 		$criteria->compare('celltype.name',$this->celltype_search, true);
+		
+		if($this->refnum_search)
+		{
+			$references = explode(',', str_replace(' ', ',', $this->refnum_search));
+			
+			$refCriteria = new CDbCriteria();
+			foreach ($references as $reference)
+			{
+				if(!empty($reference))
+				{
+					$refCriteria->compare('ref.number', $reference, true, 'OR');
+				}
+			}
+			$criteria->mergeWith($refCriteria);
+		}
+		
+		if($this->not_formed)
+		{
+			$formCriteria = new CDbCriteria();
+			$formCriteria->addcondition('form.cell_id IS NULL');
+			$criteria->mergeWith($formCriteria);
+		}
+		
+		if($this->formed_only)
+		{
+			$formCriteria = new CDbCriteria();
+			$formCriteria->addcondition('form.cell_id = t.id');
+			$criteria->mergeWith($formCriteria);
+		}
 		
 		/* for concatenated user name search */
 		$criteria->addSearchCondition('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);

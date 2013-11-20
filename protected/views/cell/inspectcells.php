@@ -1,11 +1,11 @@
 <?php
 /* @var $this CellController */
-/* @var $model Kit */
+/* @var $model Cell */
 
 $this->breadcrumbs=array(
 	'Manufacturing'=>array('/manufacturing'),
 	'Cells'=>array('index'),
-	'Stack Cells',
+	'Fill Cells (multi)',
 );
 
 $this->menu=array(
@@ -20,7 +20,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Stack Cells</h1>
+<h1>Inspect Cells (Multi)</h1>
 
 <?php
 /* ionclude JQuery scripts to allow for autocomplte */
@@ -30,15 +30,16 @@ Yii::app()->clientScript->registerCssFile(
         '/jui/css/base/jquery-ui.css'
 );
 ?>
+
 <?php $form=$this->beginWidget('CActiveForm', array(
     'enableAjaxValidation'=>true,
 	'enableClientValidation'=>true,
-	'id'=>'stacking-form',
+	'id'=>'inspecting-form',
 )); ?>
 
 <div class="shadow border" >
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'stacking-grid',
+	'id'=>'inspecting-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
@@ -48,30 +49,19 @@ Yii::app()->clientScript->registerCssFile(
             'selectableRows' => '50',   
         ),
 		array(
-			'header'=>'Unstacked Kits',
+			'header'=>'Inspect Cells',
 			'name'=>'serial_search',
 			'type'=>'raw',
-			'value'=>'$data->getFormattedSerial()',
+			'value'=>'$data->kit->getFormattedSerial()',
 		),
 		array(
 			'name'=>'refnum_search',
 			'type'=>'raw',
-			'value'=>
-					'CHtml::dropDownList("refnumIds[$data->id]",$data->ref_num_id,
-							CHtml::listData(RefNum::model()->findAll(),"id", "number"),
-							array(
-								"empty"=>"-Select Reference-",
-								"onChange"=>"refSelected(this)",
-							)
-			)',
+			'value'=>'$data->refNum->number',
 		),
+		'eap_num',
 		array(
-			'name'=>'eap_num',
-			'type'=>'raw',
-			'value'=>'CHtml::textField("eaps[$data->id]",$data->eap_num)',
-		),
-		array(
-			'header' => 'Stacker',
+			'header' => 'Inspector',
 			'type' => 'raw',
 			'value' => array($this, 'getUserInputTextField'),
 //			'value'=>'CHtml::textField("user_name[$data->id]",User::getFullNameProper(Yii::app()->user->id),array(
@@ -81,20 +71,10 @@ Yii::app()->clientScript->registerCssFile(
 //			))',
 		),
 		array(
-			'header' => 'Stack Date',
+			'header' => 'Inspection Date',
 			'type' => 'raw',
 			'value'=>'CHtml::textField("dates[$data->id]",date("Y-m-d",time()),array("style"=>"width:100px;", "class"=>"hasDatePicker"))',	
 		),
-		/*
-		'stacker_id',
-		'stack_date',
-		'dry_wt',
-		'wet_wt',
-		'filler_id',
-		'fill_date',
-		'inspector_id',
-		'inspection_date',
-		*/
 	),
 	//'htmlOptions'=>array('class'=>'shadow grid-view'),
 	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
@@ -105,7 +85,7 @@ Yii::app()->clientScript->registerCssFile(
 </div>
 <script>
 function reloadGrid(data) {	
-    $.fn.yiiGridView.update('stacking-grid');
+    $.fn.yiiGridView.update('inspecting-grid');
     
     if(data=='hide')
     {
@@ -113,12 +93,12 @@ function reloadGrid(data) {
     }
     else
     {
-        $('#stacking-form').prepend(data);
+        $('#inspecting-form').prepend(data);
     }
 }
 </script>
-<?php echo CHtml::ajaxSubmitButton('Filter',array('cell/multistackcells'), array(),array("style"=>"display:none;")); ?>
-<?php echo CHtml::ajaxSubmitButton('Submit',array('cell/ajaxstackcells'), array('success'=>'reloadGrid'), array("id"=>"submit-button")); ?>
+<?php echo CHtml::ajaxSubmitButton('Filter',array('cell/multiinspectcells'), array(),array("style"=>"display:none;")); ?>
+<?php echo CHtml::ajaxSubmitButton('Submit',array('cell/ajaxinspectcells'), array('success'=>'reloadGrid'), array("id"=>"submit-button")); ?>
 
 <?php $this->endWidget(); ?>
 
@@ -140,6 +120,7 @@ jQuery('.hasDatePicker').live('focus', function(event) {
 	$(this).datepicker({'showAnim':'slideDown','changeMonth':true,'changeYear':true,'dateFormat':'yy-mm-dd'});
 });
 
+
 jQuery('#submit-button').bind('click', function(event) {
 	var noneChecked = true;
 	$('.errorSummary').remove();
@@ -152,27 +133,9 @@ jQuery('#submit-button').bind('click', function(event) {
 
 	if(noneChecked)
 	{
-		alert('You must select at least one cell to stack');
+		alert('You must select at least one cell to inspect');
 	}
 });
-
-function refSelected(sel)
-{
-	var id = sel.id.toString().replace("refnumIds","eaps");
-	var ref = $('option:selected', $(sel)).text();
-	if(ref=="-Select Reference-")
-	{
-		$("#"+id).attr("value","");
-	}
-	else
-	{
-		$("#"+id).attr("value","EAP "+ ref + " ADD");
-		$("#"+id).focus();
-	}
-		
-	
-	
-}
 
 </script>
 <ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" id="ui-id-1" tabindex="0" style="z-index: 1; display: none;"></ul>

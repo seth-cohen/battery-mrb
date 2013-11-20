@@ -58,8 +58,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'filler_id'); ?>
-		<?php echo $form->textField($model,'filler_id',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->label($model,'filler_search'); ?>
+		<?php echo $form->textField($model,'filler_search',array('size'=>10,'maxlength'=>10)); ?>
 	</div>
 
 	<div class="row">
@@ -68,8 +68,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'inspector_id'); ?>
-		<?php echo $form->textField($model,'inspector_id',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->label($model,'inspector_search'); ?>
+		<?php echo $form->textField($model,'inspector_search',array('size'=>10,'maxlength'=>10)); ?>
 	</div>
 
 	<div class="row">

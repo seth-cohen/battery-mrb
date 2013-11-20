@@ -122,7 +122,6 @@ class Cycler extends CActiveRecord
 		$arr = array();
 		$cyclers = Cycler::model()->findAll();
 	
-		$arr[''] = 'All';
 		foreach ($cyclers as $cycler)
 		{
 			$arr[$cycler->id] = $cycler->name;

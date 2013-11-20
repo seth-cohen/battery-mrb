@@ -9,9 +9,9 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Kit', 'url'=>array('index')),
-	array('label'=>'Create Kit', 'url'=>array('create')),
+	array('label'=>'Create New Kit', 'url'=>array('create')),
 	array('label'=>'View Kit', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'View All Kits', 'url'=>array('index')),
 	array('label'=>'Manage Kit', 'url'=>array('admin')),
 );
 ?>

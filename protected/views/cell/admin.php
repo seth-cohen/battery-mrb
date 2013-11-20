@@ -10,8 +10,14 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Cell', 'url'=>array('index')),
-	array('label'=>'Create Cell', 'url'=>array('create')),
+	array('label'=>'Create New Kit', 'url'=>array('kit/create')),
+	array('label'=>'Stack Cell (single)', 'url'=>array('stackcell')),
+	array('label'=>'Stack Cells (multi)', 'url'=>array('multistackcells')),
+	array('label'=>'Fill Cell (single)', 'url'=>array('fillcell')),
+	array('label'=>'Fill Cells (multi)', 'url'=>array('multifillcells')),
+	array('label'=>'Inspect Cell (single)', 'url'=>array('inspectcell')),
+	array('label'=>'Inspect Cells (multi)', 'url'=>array('multiinspectcells')),
+	array('label'=>'View All Cells', 'url'=>array('index')),
 	array(
 		'label'=>'Download Current', 
 		'url'=>array('admin'),
@@ -63,7 +69,11 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 			'name'=>'refnum_search',
 			'value'=>'$data->refNum->number',
 		),
-		'eap_num',
+		array(
+			'name'=>'eap_num',
+			'type'=>'raw',
+			'value'=>'CHtml::textField("eaps[$data->id]",$data->eap_num)',
+		),
 		array(
 			'name'=>'celltype_search',
 			'value'=>'$data->kit->celltype->name',
@@ -74,7 +84,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		),
 		array(
 			'name'=>'filler_search',
-			'value'=>'$data->filler->getFullName()',
+			'value'=>'($data->filler_id==1)?"Not Filled Yet":$data->filler->getFullName()',
 		),
 		/*
 		'stacker_id',

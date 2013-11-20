@@ -32,7 +32,7 @@ class CyclerController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update', 'ajaxchannellist'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -169,6 +169,23 @@ class CyclerController extends Controller
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
+		}
+	}
+	
+	public function actionAjaxChannelList()
+	{
+		if(!isset($_POST['id']))
+		{
+			Yii::app()->end();
+		}
+		
+		$id = $_POST['id'];
+		$cycler = Cycler::model()->findByPk($id);
+		
+		//echo "<option value=''>-Select Channel-</option>";
+		foreach($cycler->channels as $channel)
+		{
+			echo CHtml::tag('option', array('value'=>$channel->id), CHtml::encode($channel->number), true);
 		}
 	}
 }

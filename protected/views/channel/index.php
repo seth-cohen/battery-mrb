@@ -18,6 +18,7 @@ $this->menu=array(
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
 or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
 </p>
+<div class="shadow border">
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'channel-grid',
 	'dataProvider'=>$model->search(),
@@ -56,4 +57,9 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 			'class'=>'CButtonColumn',
 		),
 	),
+	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
+	'pager'=>array(
+		'cssFile' => false,
+	),
 )); ?>
+</div>

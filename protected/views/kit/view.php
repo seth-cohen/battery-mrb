@@ -9,10 +9,9 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Kit', 'url'=>array('index')),
-	array('label'=>'Create Kit', 'url'=>array('create')),
-	array('label'=>'Update Kit', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Kit', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Create New Kit', 'url'=>array('create')),
+	array('label'=>'Edit Kit', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'View All Kits', 'url'=>array('index')),
 	array('label'=>'Manage Kit', 'url'=>array('admin')),
 );
 ?>

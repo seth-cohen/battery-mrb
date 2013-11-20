@@ -52,9 +52,10 @@ return array(
 				'manufacturing/<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'manufacturing/<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 		
-				'testlab/<controller:\w+>'=>'<controller>/index',
+/*				'testlab/<controller:\w+>'=>'<controller>/index',
 				'testlab/<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'testlab/<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+*/
 	
 			),
 			'showScriptName'=>false,

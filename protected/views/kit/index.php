@@ -7,7 +7,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create Kit', 'url'=>array('create')),
+	array('label'=>'Create New Kit', 'url'=>array('create')),
+	array('label'=>'View All Kits', 'url'=>array('index')),
 	array('label'=>'Manage Kit', 'url'=>array('admin')),
 );
 ?>

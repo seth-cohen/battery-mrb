@@ -23862,3 +23862,1192 @@ HTTP_REFERER=http://localhost/ytpdb/cell/create
 2013/11/20 02:44:37 [warning] [application] Failed to set unsafe attribute "coater_search" of "Electrode".
 in C:\wamp\www\ytpdb\protected\controllers\ElectrodeController.php (61)
 in C:\wamp\www\ytpdb\index.php (13)
+2013/11/20 13:45:19 [error] [php] Trying to get property of non-object (C:\wamp\www\yii\framework\base\CComponent.php(612) : eval()'d code:1)
+Stack trace:
+#0 C:\wamp\www\yii\framework\zii\widgets\grid\CGridColumn.php(151): CDataColumn->renderDataCellContent()
+#1 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(616): CDataColumn->renderDataCell()
+#2 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(572): CGridView->renderTableRow()
+#3 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(482): CGridView->renderTableBody()
+#4 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#5 unknown(0): CGridView->renderSection()
+#6 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback()
+#7 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(135): CGridView->renderContent()
+#8 C:\wamp\www\yii\framework\web\CBaseController.php(173): CGridView->run()
+#9 C:\wamp\www\ytpdb\protected\views\cell\admin.php(99): CellController->widget()
+#10 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#11 C:\wamp\www\yii\framework\web\CBaseController.php(95): CellController->renderInternal()
+#12 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#13 C:\wamp\www\yii\framework\web\CController.php(782): CellController->renderPartial()
+#14 C:\wamp\www\ytpdb\protected\controllers\CellController.php(158): CellController->render()
+#15 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAdmin()
+#16 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#17 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#18 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#19 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#20 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#21 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#22 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#23 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#24 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#25 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#26 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#27 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/cell/admin?Cell%5Bserial_search%5D=8-2&Cell%5Brefnum_search%5D=&Cell%5Beap_num%5D=&Cell%5Bcelltype_search%5D=&Cell%5Bstacker_search%5D=&Cell%5Bfiller_search%5D=&Cell_page=1&ajax=cell-grid
+in C:\wamp\www\ytpdb\protected\views\cell\admin.php (99)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (158)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/20 13:45:37 [error] [php] Trying to get property of non-object (C:\wamp\www\yii\framework\base\CComponent.php(612) : eval()'d code:1)
+Stack trace:
+#0 C:\wamp\www\yii\framework\zii\widgets\grid\CGridColumn.php(151): CDataColumn->renderDataCellContent()
+#1 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(616): CDataColumn->renderDataCell()
+#2 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(572): CGridView->renderTableRow()
+#3 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(482): CGridView->renderTableBody()
+#4 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#5 unknown(0): CGridView->renderSection()
+#6 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback()
+#7 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(135): CGridView->renderContent()
+#8 C:\wamp\www\yii\framework\web\CBaseController.php(173): CGridView->run()
+#9 C:\wamp\www\ytpdb\protected\views\cell\admin.php(99): CellController->widget()
+#10 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#11 C:\wamp\www\yii\framework\web\CBaseController.php(95): CellController->renderInternal()
+#12 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#13 C:\wamp\www\yii\framework\web\CController.php(782): CellController->renderPartial()
+#14 C:\wamp\www\ytpdb\protected\controllers\CellController.php(158): CellController->render()
+#15 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAdmin()
+#16 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#17 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#18 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#19 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#20 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#21 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#22 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#23 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#24 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#25 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#26 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#27 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/cell/admin?Cell%5Bserial_search%5D=&Cell%5Brefnum_search%5D=&Cell%5Beap_num%5D=&Cell%5Bcelltype_search%5D=&Cell%5Bstacker_search%5D=&Cell%5Bfiller_search%5D=&Cell_page=1&Cell_sort=serial_search&ajax=cell-grid
+in C:\wamp\www\ytpdb\protected\views\cell\admin.php (99)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (158)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/20 13:45:45 [error] [php] Trying to get property of non-object (C:\wamp\www\yii\framework\base\CComponent.php(612) : eval()'d code:1)
+Stack trace:
+#0 C:\wamp\www\yii\framework\zii\widgets\grid\CGridColumn.php(151): CDataColumn->renderDataCellContent()
+#1 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(616): CDataColumn->renderDataCell()
+#2 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(572): CGridView->renderTableRow()
+#3 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(482): CGridView->renderTableBody()
+#4 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#5 unknown(0): CGridView->renderSection()
+#6 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback()
+#7 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(135): CGridView->renderContent()
+#8 C:\wamp\www\yii\framework\web\CBaseController.php(173): CGridView->run()
+#9 C:\wamp\www\ytpdb\protected\views\cell\admin.php(99): CellController->widget()
+#10 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#11 C:\wamp\www\yii\framework\web\CBaseController.php(95): CellController->renderInternal()
+#12 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#13 C:\wamp\www\yii\framework\web\CController.php(782): CellController->renderPartial()
+#14 C:\wamp\www\ytpdb\protected\controllers\CellController.php(158): CellController->render()
+#15 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAdmin()
+#16 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#17 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#18 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#19 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#20 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#21 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#22 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#23 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#24 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#25 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#26 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#27 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/cell/admin?Cell%5Bserial_search%5D=&Cell%5Brefnum_search%5D=&Cell%5Beap_num%5D=&Cell%5Bcelltype_search%5D=&Cell%5Bstacker_search%5D=&Cell%5Bfiller_search%5D=&Cell_page=1&Cell_sort=eap_num&ajax=cell-grid
+in C:\wamp\www\ytpdb\protected\views\cell\admin.php (99)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (158)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/20 13:47:44 [error] [php] Trying to get property of non-object (C:\wamp\www\yii\framework\base\CComponent.php(612) : eval()'d code:1)
+Stack trace:
+#0 C:\wamp\www\yii\framework\zii\widgets\grid\CGridColumn.php(151): CDataColumn->renderDataCellContent()
+#1 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(616): CDataColumn->renderDataCell()
+#2 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(572): CGridView->renderTableRow()
+#3 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(482): CGridView->renderTableBody()
+#4 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#5 unknown(0): CGridView->renderSection()
+#6 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback()
+#7 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(135): CGridView->renderContent()
+#8 C:\wamp\www\yii\framework\web\CBaseController.php(173): CGridView->run()
+#9 C:\wamp\www\ytpdb\protected\views\cell\admin.php(99): CellController->widget()
+#10 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#11 C:\wamp\www\yii\framework\web\CBaseController.php(95): CellController->renderInternal()
+#12 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#13 C:\wamp\www\yii\framework\web\CController.php(782): CellController->renderPartial()
+#14 C:\wamp\www\ytpdb\protected\controllers\CellController.php(158): CellController->render()
+#15 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAdmin()
+#16 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#17 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#18 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#19 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#20 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#21 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#22 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#23 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#24 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#25 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#26 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#27 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/cell/admin?Cell_sort=serial_search&ajax=cell-grid
+in C:\wamp\www\ytpdb\protected\views\cell\admin.php (99)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (158)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/20 13:48:41 [error] [php] Trying to get property of non-object (C:\wamp\www\yii\framework\base\CComponent.php(612) : eval()'d code:1)
+Stack trace:
+#0 C:\wamp\www\yii\framework\zii\widgets\grid\CGridColumn.php(151): CDataColumn->renderDataCellContent()
+#1 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(616): CDataColumn->renderDataCell()
+#2 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(572): CGridView->renderTableRow()
+#3 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(482): CGridView->renderTableBody()
+#4 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#5 unknown(0): CGridView->renderSection()
+#6 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback()
+#7 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(135): CGridView->renderContent()
+#8 C:\wamp\www\yii\framework\web\CBaseController.php(173): CGridView->run()
+#9 C:\wamp\www\ytpdb\protected\views\cell\admin.php(99): CellController->widget()
+#10 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#11 C:\wamp\www\yii\framework\web\CBaseController.php(95): CellController->renderInternal()
+#12 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#13 C:\wamp\www\yii\framework\web\CController.php(782): CellController->renderPartial()
+#14 C:\wamp\www\ytpdb\protected\controllers\CellController.php(158): CellController->render()
+#15 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAdmin()
+#16 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#17 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#18 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#19 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#20 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#21 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#22 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#23 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#24 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#25 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#26 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#27 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/cell/admin?Cell_page=2&ajax=cell-grid
+in C:\wamp\www\ytpdb\protected\views\cell\admin.php (99)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (158)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/20 14:08:42 [error] [php] Undefined variable: model (C:\wamp\www\ytpdb\protected\views\cell\index.php:48)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#1 C:\wamp\www\yii\framework\web\CController.php(782): CellController->renderPartial()
+#2 C:\wamp\www\ytpdb\protected\controllers\CellController.php(140): CellController->render()
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionIndex()
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/cell/index
+in C:\wamp\www\ytpdb\protected\views\cell\index.php (48)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (140)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/20 14:27:59 [error] [php] htmlspecialchars() expects parameter 1 to be string, array given (C:\wamp\www\yii\framework\web\helpers\CHtml.php:103)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\helpers\CHtml.php(158): renderAttributes()
+#1 C:\wamp\www\yii\framework\web\helpers\CHtml.php(2255): tag()
+#2 C:\wamp\www\yii\framework\web\helpers\CHtml.php(1434): activeInputField()
+#3 C:\wamp\www\yii\framework\web\widgets\CActiveForm.php(725): activeTextField()
+#4 C:\wamp\www\ytpdb\protected\views\cell\_search.php(72): CActiveForm->textField()
+#5 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#6 C:\wamp\www\yii\framework\web\CBaseController.php(95): CellController->renderInternal()
+#7 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#8 C:\wamp\www\ytpdb\protected\views\cell\admin.php(49): CellController->renderPartial()
+#9 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#10 C:\wamp\www\yii\framework\web\CBaseController.php(95): CellController->renderInternal()
+#11 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#12 C:\wamp\www\yii\framework\web\CController.php(782): CellController->renderPartial()
+#13 C:\wamp\www\ytpdb\protected\controllers\CellController.php(167): CellController->render()
+#14 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAdmin()
+#15 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#16 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#17 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#18 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#19 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#20 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#21 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#22 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#23 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#24 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#25 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#26 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/cell/admin
+in C:\wamp\www\ytpdb\protected\views\cell\_search.php (72)
+in C:\wamp\www\ytpdb\protected\views\cell\admin.php (49)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (167)
+2013/11/20 14:28:42 [error] [php] htmlspecialchars() expects parameter 1 to be string, array given (C:\wamp\www\yii\framework\web\helpers\CHtml.php:103)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\helpers\CHtml.php(158): renderAttributes()
+#1 C:\wamp\www\yii\framework\web\helpers\CHtml.php(2255): tag()
+#2 C:\wamp\www\yii\framework\web\helpers\CHtml.php(1434): activeInputField()
+#3 C:\wamp\www\yii\framework\web\widgets\CActiveForm.php(725): activeTextField()
+#4 C:\wamp\www\ytpdb\protected\views\cell\_search.php(72): CActiveForm->textField()
+#5 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#6 C:\wamp\www\yii\framework\web\CBaseController.php(95): CellController->renderInternal()
+#7 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#8 C:\wamp\www\ytpdb\protected\views\cell\admin.php(49): CellController->renderPartial()
+#9 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#10 C:\wamp\www\yii\framework\web\CBaseController.php(95): CellController->renderInternal()
+#11 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#12 C:\wamp\www\yii\framework\web\CController.php(782): CellController->renderPartial()
+#13 C:\wamp\www\ytpdb\protected\controllers\CellController.php(167): CellController->render()
+#14 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAdmin()
+#15 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#16 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#17 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#18 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#19 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#20 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#21 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#22 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#23 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#24 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#25 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#26 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/cell/admin
+in C:\wamp\www\ytpdb\protected\views\cell\_search.php (72)
+in C:\wamp\www\ytpdb\protected\views\cell\admin.php (49)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (167)
+2013/11/20 14:43:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "multistackcell".' in C:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('multistackcell')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('multistackcell')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/multistack...')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ytpdb/cell/multistackcell
+HTTP_REFERER=http://localhost/ytpdb/cell/index
+---
+2013/11/20 14:44:21 [error] [exception.CException] exception 'CException' with message 'Cell and its behaviors do not have a method or closure named "getFormattedSerial".' in C:\wamp\www\yii\framework\base\CComponent.php:266
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(227): CComponent->__call('getFormattedSer...', Array)
+#1 C:\wamp\www\yii\framework\base\CComponent.php(612) : eval()'d code(1): CActiveRecord->__call('getFormattedSer...', Array)
+#2 C:\wamp\www\yii\framework\base\CComponent.php(612) : eval()'d code(1): Cell->getFormattedSerial()
+#3 C:\wamp\www\yii\framework\base\CComponent.php(612): eval()
+#4 C:\wamp\www\yii\framework\zii\widgets\grid\CDataColumn.php(137): CComponent->evaluateExpression('$data->getForma...', Array)
+#5 C:\wamp\www\yii\framework\zii\widgets\grid\CGridColumn.php(151): CDataColumn->renderDataCellContent(0, Object(Cell))
+#6 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(616): CGridColumn->renderDataCell(0)
+#7 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(572): CGridView->renderTableRow(0)
+#8 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(482): CGridView->renderTableBody()
+#9 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#10 [internal function]: CBaseListView->renderSection(Array)
+#11 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{summary}?{item...')
+#12 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(135): CBaseListView->renderContent()
+#13 C:\wamp\www\yii\framework\web\CBaseController.php(173): CBaseListView->run()
+#14 C:\wamp\www\ytpdb\protected\views\cell\fillcells.php(110): CBaseController->widget('zii.widgets.gri...', Array)
+#15 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#16 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#17 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#18 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('fillcells', Array, true)
+#19 C:\wamp\www\ytpdb\protected\controllers\CellController.php(313): CController->render('fillcells', Array)
+#20 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionMultiFillCells()
+#21 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#22 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#23 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#24 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#25 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#26 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#27 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#28 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#29 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('multifillcells')
+#30 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/multifillc...')
+#31 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#32 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#33 {main}
+REQUEST_URI=/ytpdb/cell/multifillcells
+HTTP_REFERER=http://localhost/ytpdb/cell/index
+---
+2013/11/20 15:09:21 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(WebUser), 'You are not aut...')
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('admin')
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/admin')
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/ytpdb/cell/admin
+HTTP_REFERER=http://localhost/ytpdb/
+---
+2013/11/20 15:09:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "stackcell".' in C:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('stackcell')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('stackcell')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/stackcell')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ytpdb/cell/stackcell
+HTTP_REFERER=http://localhost/ytpdb/kit/create
+---
+2013/11/20 15:15:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "ajaxfillcells".' in C:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('ajaxfillcells')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxfillcells')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxfillce...')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ytpdb/cell/ajaxfillcells
+HTTP_REFERER=http://localhost/ytpdb/cell/multifillcells
+---
+2013/11/20 15:15:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "ajaxfillcells".' in C:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('ajaxfillcells')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxfillcells')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxfillce...')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ytpdb/cell/ajaxfillcells
+HTTP_REFERER=http://localhost/ytpdb/cell/multifillcells
+---
+2013/11/20 15:15:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "ajaxfillcells".' in C:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('ajaxfillcells')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxfillcells')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxfillce...')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ytpdb/cell/ajaxfillcells
+HTTP_REFERER=http://localhost/ytpdb/cell/multifillcells
+---
+2013/11/20 15:23:35 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(WebUser), 'You are not aut...')
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxfillcells')
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxfillce...')
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/ytpdb/cell/ajaxfillcells
+HTTP_REFERER=http://localhost/ytpdb/cell/multifillcells
+---
+2013/11/20 16:12:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "multiinspectcells".' in C:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('multiinspectcel...')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('multiinspectcel...')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/multiinspe...')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ytpdb/cell/multiinspectcells
+HTTP_REFERER=http://localhost/ytpdb/cell/multistackcells
+---
+2013/11/20 16:12:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "multiinspectcells".' in C:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('multiinspectcel...')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('multiinspectcel...')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/multiinspe...')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ytpdb/cell/multiinspectcells
+HTTP_REFERER=http://localhost/ytpdb/cell/multistackcells
+---
+2013/11/20 16:32:51 [error] [php] Object of class User could not be converted to int (C:\wamp\www\yii\framework\base\CComponent.php(612) : eval()'d code:1)
+Stack trace:
+#0 C:\wamp\www\yii\framework\zii\widgets\grid\CGridColumn.php(151): CDataColumn->renderDataCellContent()
+#1 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(616): CDataColumn->renderDataCell()
+#2 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(572): CGridView->renderTableRow()
+#3 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(482): CGridView->renderTableBody()
+#4 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#5 unknown(0): CGridView->renderSection()
+#6 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback()
+#7 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(135): CGridView->renderContent()
+#8 C:\wamp\www\yii\framework\web\CBaseController.php(173): CGridView->run()
+#9 C:\wamp\www\ytpdb\protected\views\cell\index.php(96): CellController->widget()
+#10 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#11 C:\wamp\www\yii\framework\web\CBaseController.php(95): CellController->renderInternal()
+#12 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#13 C:\wamp\www\yii\framework\web\CController.php(782): CellController->renderPartial()
+#14 C:\wamp\www\ytpdb\protected\controllers\CellController.php(147): CellController->render()
+#15 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionIndex()
+#16 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#17 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#18 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#19 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#20 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#21 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#22 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#23 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#24 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#25 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#26 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#27 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/cell/index?Cell_sort=filler_search.desc&ajax=cell-grid
+in C:\wamp\www\ytpdb\protected\views\cell\index.php (96)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (147)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/20 17:57:50 [error] [exception.CException] exception 'CException' with message 'TestlabController and its behaviors do not have a method or closure named "getUserInputTextField".' in C:\wamp\www\yii\framework\base\CComponent.php:266
+Stack trace:
+#0 [internal function]: CComponent->__call('getUserInputTex...', Array)
+#1 [internal function]: TestlabController->getUserInputTextField(Object(Cell), 0, Object(CDataColumn))
+#2 C:\wamp\www\yii\framework\base\CComponent.php(617): call_user_func_array(Array, Array)
+#3 C:\wamp\www\yii\framework\zii\widgets\grid\CDataColumn.php(137): CComponent->evaluateExpression(Array, Array)
+#4 C:\wamp\www\yii\framework\zii\widgets\grid\CGridColumn.php(151): CDataColumn->renderDataCellContent(0, Object(Cell))
+#5 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(616): CGridColumn->renderDataCell(0)
+#6 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(572): CGridView->renderTableRow(0)
+#7 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(482): CGridView->renderTableBody()
+#8 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#9 [internal function]: CBaseListView->renderSection(Array)
+#10 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{summary}?{item...')
+#11 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(135): CBaseListView->renderContent()
+#12 C:\wamp\www\yii\framework\web\CBaseController.php(173): CBaseListView->run()
+#13 C:\wamp\www\ytpdb\protected\views\testlab\cellformation.php(103): CBaseController->widget('zii.widgets.gri...', Array)
+#14 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#15 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#16 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#17 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('cellformation', Array, true)
+#18 C:\wamp\www\ytpdb\protected\controllers\TestlabController.php(72): CController->render('cellformation', Array)
+#19 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): TestlabController->actionCellFormation()
+#20 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#21 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#22 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#23 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#24 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#25 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#26 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#27 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#28 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('cellformation')
+#29 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('testlab/cellfor...')
+#30 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#31 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#32 {main}
+REQUEST_URI=/ytpdb/testlab/cellformation
+---
+2013/11/20 18:19:53 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1) ORDER BY last_name' at line 1. The SQL statement executed was: SELECT first_name, last_name, id FROM `tbl_user` `t` WHERE ((first_name LIKE :ycp0) OR (last_name LIKE :ycp1)) AND (id not 1) ORDER BY last_name.
+in C:\wamp\www\ytpdb\protected\controllers\UserController.php (268)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/20 18:19:53 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1) ORDER BY last_name' at line 1. The SQL statement executed was: SELECT first_name, last_name, id FROM `tbl_user` `t` WHERE ((first_name LIKE :ycp0) OR (last_name LIKE :ycp1)) AND (id not 1) ORDER BY last_name' in C:\wamp\www\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1351): CDbCommand->queryAll()
+#2 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#3 C:\wamp\www\ytpdb\protected\controllers\UserController.php(268): CActiveRecord->findAll(Object(CDbCriteria))
+#4 [internal function]: UserController->actionAjaxUserSearch('n')
+#5 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(UserController), Array)
+#6 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(UserController), Object(ReflectionMethod), Array)
+#7 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#8 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#10 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#14 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxUserSearch')
+#16 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('user/ajaxUserSe...')
+#17 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#18 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/ytpdb/user/ajaxUserSearch?term=n
+HTTP_REFERER=http://localhost/ytpdb/testlab/cellformation
+---
+2013/11/20 18:26:13 [warning] [application] Failed to set unsafe attribute "coater_search" of "Electrode".
+in C:\wamp\www\ytpdb\protected\controllers\ElectrodeController.php (54)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/20 18:26:16 [warning] [application] Failed to set unsafe attribute "coater_search" of "Electrode".
+in C:\wamp\www\ytpdb\protected\controllers\ElectrodeController.php (54)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/20 18:26:19 [warning] [application] Failed to set unsafe attribute "coater_search" of "Electrode".
+in C:\wamp\www\ytpdb\protected\controllers\ElectrodeController.php (54)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/20 18:46:59 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "cyclers/ajaxchannellist".' in C:\wamp\www\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cyclers/ajaxcha...')
+#1 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/ytpdb/cyclers/ajaxchannellist
+HTTP_REFERER=http://localhost/ytpdb/testlab/cellformation
+---
+2013/11/20 18:52:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "cyclers/ajaxchannellist".' in C:\wamp\www\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cyclers/ajaxcha...')
+#1 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/ytpdb/cyclers/ajaxchannellist
+HTTP_REFERER=http://localhost/ytpdb/testlab/cellformation
+---
+2013/11/20 18:53:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "cyclers/ajaxchannellist".' in C:\wamp\www\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cyclers/ajaxcha...')
+#1 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/ytpdb/cyclers/ajaxchannellist
+---
+2013/11/20 19:15:20 [error] [php] Trying to get property of non-object (C:\wamp\www\ytpdb\protected\controllers\CyclerController.php:186)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CyclerController->runAction()
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CyclerController->filterAccessControl()
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): CyclerController->runActionWithFilters()
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CyclerController->run()
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/cycler/ajaxchannellist
+in C:\wamp\www\ytpdb\protected\controllers\CyclerController.php (186)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/20 19:29:39 [warning] [application] Failed to set unsafe attribute "id" of "User".
+in C:\wamp\www\ytpdb\protected\controllers\SiteController.php (124)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/20 19:30:23 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(WebUser), 'You are not aut...')
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('')
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('user')
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/ytpdb/user
+HTTP_REFERER=http://localhost/ytpdb/site/login
+---
+2013/11/20 19:30:32 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(WebUser), 'You are not aut...')
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('cellformation')
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('testlab/cellfor...')
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/ytpdb/testlab/cellformation
+---
+2013/11/20 19:42:37 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(WebUser), 'You are not aut...')
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxfillcells')
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxfillce...')
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/ytpdb/cell/ajaxfillcells
+HTTP_REFERER=http://localhost/ytpdb/testlab/cellformation
+---
+2013/11/20 19:42:40 [error] [php] Trying to get property of non-object (C:\wamp\www\ytpdb\protected\controllers\CyclerController.php:186)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CyclerController->runAction()
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CyclerController->filterAccessControl()
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): CyclerController->runActionWithFilters()
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CyclerController->run()
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/cycler/ajaxchannellist
+in C:\wamp\www\ytpdb\protected\controllers\CyclerController.php (186)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/20 19:42:43 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(WebUser), 'You are not aut...')
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxfillcells')
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxfillce...')
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/ytpdb/cell/ajaxfillcells
+HTTP_REFERER=http://localhost/ytpdb/testlab/cellformation
+---
+2013/11/20 19:42:44 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(WebUser), 'You are not aut...')
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxfillcells')
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxfillce...')
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/ytpdb/cell/ajaxfillcells
+HTTP_REFERER=http://localhost/ytpdb/testlab/cellformation
+---
+2013/11/20 19:53:02 [error] [php] Undefined index: channels (C:\wamp\www\ytpdb\protected\controllers\TestlabController.php:96)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): TestlabController->runAction()
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): TestlabController->filterAccessControl()
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): TestlabController->runActionWithFilters()
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): TestlabController->run()
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/testlab/ajaxformation
+in C:\wamp\www\ytpdb\protected\controllers\TestlabController.php (96)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/20 19:54:13 [error] [php] Undefined index: channels (C:\wamp\www\ytpdb\protected\controllers\TestlabController.php:97)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): TestlabController->runAction()
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): TestlabController->filterAccessControl()
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): TestlabController->runActionWithFilters()
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): TestlabController->run()
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/testlab/ajaxformation
+in C:\wamp\www\ytpdb\protected\controllers\TestlabController.php (97)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/20 20:23:19 [error] [php] Undefined variable: form (C:\wamp\www\ytpdb\protected\models\Cell.php:188)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CBaseController.php(95): TestlabController->renderInternal()
+#1 C:\wamp\www\yii\framework\web\CController.php(869): TestlabController->renderFile()
+#2 C:\wamp\www\yii\framework\web\CController.php(782): TestlabController->renderPartial()
+#3 C:\wamp\www\ytpdb\protected\controllers\TestlabController.php(80): TestlabController->render()
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): TestlabController->actionCellFormation()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): TestlabController->runAction()
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): TestlabController->filterAccessControl()
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): TestlabController->runActionWithFilters()
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): TestlabController->run()
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/testlab/cellformation
+in C:\wamp\www\ytpdb\protected\models\Cell.php (188)
+in C:\wamp\www\ytpdb\protected\views\testlab\cellformation.php (44)
+in C:\wamp\www\ytpdb\protected\controllers\TestlabController.php (80)
+2013/11/20 20:23:59 [error] [php] Undefined variable: form (C:\wamp\www\ytpdb\protected\models\Cell.php:188)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CBaseController.php(95): TestlabController->renderInternal()
+#1 C:\wamp\www\yii\framework\web\CController.php(869): TestlabController->renderFile()
+#2 C:\wamp\www\yii\framework\web\CController.php(782): TestlabController->renderPartial()
+#3 C:\wamp\www\ytpdb\protected\controllers\TestlabController.php(80): TestlabController->render()
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): TestlabController->actionCellFormation()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): TestlabController->runAction()
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): TestlabController->filterAccessControl()
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): TestlabController->runActionWithFilters()
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): TestlabController->run()
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/testlab/cellformation
+in C:\wamp\www\ytpdb\protected\models\Cell.php (188)
+in C:\wamp\www\ytpdb\protected\views\testlab\cellformation.php (44)
+in C:\wamp\www\ytpdb\protected\controllers\TestlabController.php (80)
+2013/11/20 20:24:00 [error] [php] Undefined variable: form (C:\wamp\www\ytpdb\protected\models\Cell.php:188)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CBaseController.php(95): TestlabController->renderInternal()
+#1 C:\wamp\www\yii\framework\web\CController.php(869): TestlabController->renderFile()
+#2 C:\wamp\www\yii\framework\web\CController.php(782): TestlabController->renderPartial()
+#3 C:\wamp\www\ytpdb\protected\controllers\TestlabController.php(80): TestlabController->render()
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): TestlabController->actionCellFormation()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): TestlabController->runAction()
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): TestlabController->filterAccessControl()
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): TestlabController->runActionWithFilters()
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): TestlabController->run()
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/testlab/cellformation
+in C:\wamp\www\ytpdb\protected\models\Cell.php (188)
+in C:\wamp\www\ytpdb\protected\views\testlab\cellformation.php (44)
+in C:\wamp\www\ytpdb\protected\controllers\TestlabController.php (80)
+2013/11/20 20:29:25 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'form.cell_id' in 'where clause'. The SQL statement executed was: SELECT `t`.`id` AS `t0_c0`, `t`.`kit_id` AS `t0_c1`, `t`.`ref_num_id` AS `t0_c2`, `t`.`eap_num` AS `t0_c3`, `t`.`stacker_id` AS `t0_c4`, `t`.`stack_date` AS `t0_c5`, `t`.`dry_wt` AS `t0_c6`, `t`.`wet_wt` AS `t0_c7`, `t`.`filler_id` AS `t0_c8`, `t`.`fill_date` AS `t0_c9`, `t`.`inspector_id` AS `t0_c10`, `t`.`inspection_date` AS `t0_c11`, `kit`.`id` AS `t1_c0`, `kit`.`serial_num` AS `t1_c1`, `kit`.`ref_num_id` AS `t1_c2`, `kit`.`eap_num` AS `t1_c3`, `kit`.`kitter_id` AS `t1_c4`, `kit`.`kitting_date` AS `t1_c5`, `kit`.`celltype_id` AS `t1_c6`, `kit`.`is_stacked` AS `t1_c7`, `celltype`.`id` AS `t2_c0`, `celltype`.`name` AS `t2_c1`, `stack`.`id` AS `t3_c0`, `stack`.`username` AS `t3_c1`, `stack`.`password` AS `t3_c2`, `stack`.`first_name` AS `t3_c3`, `stack`.`last_name` AS `t3_c4`, `stack`.`email` AS `t3_c5`, `stack`.`depart_id` AS `t3_c6`, `fill`.`id` AS `t4_c0`, `fill`.`username` AS `t4_c1`, `fill`.`password` AS `t4_c2`, `fill`.`first_name` AS `t4_c3`, `fill`.`last_name` AS `t4_c4`, `fill`.`email` AS `t4_c5`, `fill`.`depart_id` AS `t4_c6`, `insp`.`id` AS `t5_c0`, `insp`.`username` AS `t5_c1`, `insp`.`password` AS `t5_c2`, `insp`.`first_name` AS `t5_c3`, `insp`.`last_name` AS `t5_c4`, `insp`.`email` AS `t5_c5`, `insp`.`depart_id` AS `t5_c6`, `ref`.`id` AS `t6_c0`, `ref`.`number` AS `t6_c1` FROM `tbl_cell` `t`  LEFT OUTER JOIN `tbl_kit` `kit` ON (`t`.`kit_id`=`kit`.`id`)  LEFT OUTER JOIN `tbl_celltype` `celltype` ON (`kit`.`celltype_id`=`celltype`.`id`)  LEFT OUTER JOIN `tbl_user` `stack` ON (`t`.`stacker_id`=`stack`.`id`)  LEFT OUTER JOIN `tbl_user` `fill` ON (`t`.`filler_id`=`fill`.`id`)  LEFT OUTER JOIN `tbl_user` `insp` ON (`t`.`inspector_id`=`insp`.`id`)  LEFT OUTER JOIN `tbl_ref_num` `ref` ON (`t`.`ref_num_id`=`ref`.`id`)  WHERE ((fill_date>=:ycp0) AND (form.cell_id <> t.id)) LIMIT 16.
+in C:\wamp\www\ytpdb\protected\views\testlab\cellformation.php (109)
+in C:\wamp\www\ytpdb\protected\controllers\TestlabController.php (80)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/20 20:29:25 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'form.cell_id' in 'where clause'. The SQL statement executed was: SELECT `t`.`id` AS `t0_c0`, `t`.`kit_id` AS `t0_c1`, `t`.`ref_num_id` AS `t0_c2`, `t`.`eap_num` AS `t0_c3`, `t`.`stacker_id` AS `t0_c4`, `t`.`stack_date` AS `t0_c5`, `t`.`dry_wt` AS `t0_c6`, `t`.`wet_wt` AS `t0_c7`, `t`.`filler_id` AS `t0_c8`, `t`.`fill_date` AS `t0_c9`, `t`.`inspector_id` AS `t0_c10`, `t`.`inspection_date` AS `t0_c11`, `kit`.`id` AS `t1_c0`, `kit`.`serial_num` AS `t1_c1`, `kit`.`ref_num_id` AS `t1_c2`, `kit`.`eap_num` AS `t1_c3`, `kit`.`kitter_id` AS `t1_c4`, `kit`.`kitting_date` AS `t1_c5`, `kit`.`celltype_id` AS `t1_c6`, `kit`.`is_stacked` AS `t1_c7`, `celltype`.`id` AS `t2_c0`, `celltype`.`name` AS `t2_c1`, `stack`.`id` AS `t3_c0`, `stack`.`username` AS `t3_c1`, `stack`.`password` AS `t3_c2`, `stack`.`first_name` AS `t3_c3`, `stack`.`last_name` AS `t3_c4`, `stack`.`email` AS `t3_c5`, `stack`.`depart_id` AS `t3_c6`, `fill`.`id` AS `t4_c0`, `fill`.`username` AS `t4_c1`, `fill`.`password` AS `t4_c2`, `fill`.`first_name` AS `t4_c3`, `fill`.`last_name` AS `t4_c4`, `fill`.`email` AS `t4_c5`, `fill`.`depart_id` AS `t4_c6`, `insp`.`id` AS `t5_c0`, `insp`.`username` AS `t5_c1`, `insp`.`password` AS `t5_c2`, `insp`.`first_name` AS `t5_c3`, `insp`.`last_name` AS `t5_c4`, `insp`.`email` AS `t5_c5`, `insp`.`depart_id` AS `t5_c6`, `ref`.`id` AS `t6_c0`, `ref`.`number` AS `t6_c1` FROM `tbl_cell` `t`  LEFT OUTER JOIN `tbl_kit` `kit` ON (`t`.`kit_id`=`kit`.`id`)  LEFT OUTER JOIN `tbl_celltype` `celltype` ON (`kit`.`celltype_id`=`celltype`.`id`)  LEFT OUTER JOIN `tbl_user` `stack` ON (`t`.`stacker_id`=`stack`.`id`)  LEFT OUTER JOIN `tbl_user` `fill` ON (`t`.`filler_id`=`fill`.`id`)  LEFT OUTER JOIN `tbl_user` `insp` ON (`t`.`inspector_id`=`insp`.`id`)  LEFT OUTER JOIN `tbl_ref_num` `ref` ON (`t`.`ref_num_id`=`ref`.`id`)  WHERE ((fill_date>=:ycp0) AND (form.cell_id <> t.id)) LIMIT 16' in C:\wamp\www\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(803): CDbCommand->queryAll()
+#2 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(437): CJoinElement->runQuery(Object(CJoinQuery))
+#3 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1356): CActiveFinder->query(Object(CDbCriteria), true)
+#5 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#6 C:\wamp\www\yii\framework\web\CActiveDataProvider.php(199): CActiveRecord->findAll(Object(CDbCriteria))
+#7 C:\wamp\www\yii\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#8 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(111): CDataProvider->getData()
+#9 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(339): CBaseListView->init()
+#10 C:\wamp\www\yii\framework\web\CBaseController.php(147): CGridView->init()
+#11 C:\wamp\www\yii\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#12 C:\wamp\www\ytpdb\protected\views\testlab\cellformation.php(109): CBaseController->widget('zii.widgets.gri...', Array)
+#13 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#14 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#15 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#16 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('cellformation', Array, true)
+#17 C:\wamp\www\ytpdb\protected\controllers\TestlabController.php(80): CController->render('cellformation', Array)
+#18 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): TestlabController->actionCellFormation()
+#19 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#20 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#21 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#22 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#23 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#24 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#25 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#26 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#27 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('cellformation')
+#28 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('testlab/cellfor...')
+#29 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#30 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#31 {main}
+REQUEST_URI=/ytpdb/testlab/cellformation?XDEBUG_SESSION_START=ECLIPSE_DBGP&KEY=13849791988543
+---
+2013/11/20 20:31:34 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'form.cell_id' in 'where clause'. The SQL statement executed was: SELECT `t`.`id` AS `t0_c0`, `t`.`kit_id` AS `t0_c1`, `t`.`ref_num_id` AS `t0_c2`, `t`.`eap_num` AS `t0_c3`, `t`.`stacker_id` AS `t0_c4`, `t`.`stack_date` AS `t0_c5`, `t`.`dry_wt` AS `t0_c6`, `t`.`wet_wt` AS `t0_c7`, `t`.`filler_id` AS `t0_c8`, `t`.`fill_date` AS `t0_c9`, `t`.`inspector_id` AS `t0_c10`, `t`.`inspection_date` AS `t0_c11`, `kit`.`id` AS `t1_c0`, `kit`.`serial_num` AS `t1_c1`, `kit`.`ref_num_id` AS `t1_c2`, `kit`.`eap_num` AS `t1_c3`, `kit`.`kitter_id` AS `t1_c4`, `kit`.`kitting_date` AS `t1_c5`, `kit`.`celltype_id` AS `t1_c6`, `kit`.`is_stacked` AS `t1_c7`, `celltype`.`id` AS `t2_c0`, `celltype`.`name` AS `t2_c1`, `stack`.`id` AS `t3_c0`, `stack`.`username` AS `t3_c1`, `stack`.`password` AS `t3_c2`, `stack`.`first_name` AS `t3_c3`, `stack`.`last_name` AS `t3_c4`, `stack`.`email` AS `t3_c5`, `stack`.`depart_id` AS `t3_c6`, `fill`.`id` AS `t4_c0`, `fill`.`username` AS `t4_c1`, `fill`.`password` AS `t4_c2`, `fill`.`first_name` AS `t4_c3`, `fill`.`last_name` AS `t4_c4`, `fill`.`email` AS `t4_c5`, `fill`.`depart_id` AS `t4_c6`, `insp`.`id` AS `t5_c0`, `insp`.`username` AS `t5_c1`, `insp`.`password` AS `t5_c2`, `insp`.`first_name` AS `t5_c3`, `insp`.`last_name` AS `t5_c4`, `insp`.`email` AS `t5_c5`, `insp`.`depart_id` AS `t5_c6`, `ref`.`id` AS `t6_c0`, `ref`.`number` AS `t6_c1` FROM `tbl_cell` `t`  LEFT OUTER JOIN `tbl_kit` `kit` ON (`t`.`kit_id`=`kit`.`id`)  LEFT OUTER JOIN `tbl_celltype` `celltype` ON (`kit`.`celltype_id`=`celltype`.`id`)  LEFT OUTER JOIN `tbl_user` `stack` ON (`t`.`stacker_id`=`stack`.`id`)  LEFT OUTER JOIN `tbl_user` `fill` ON (`t`.`filler_id`=`fill`.`id`)  LEFT OUTER JOIN `tbl_user` `insp` ON (`t`.`inspector_id`=`insp`.`id`)  LEFT OUTER JOIN `tbl_ref_num` `ref` ON (`t`.`ref_num_id`=`ref`.`id`)  WHERE ((fill_date>=:ycp0) AND (form.cell_id <> t.id)) LIMIT 16.
+in C:\wamp\www\ytpdb\protected\views\testlab\cellformation.php (109)
+in C:\wamp\www\ytpdb\protected\controllers\TestlabController.php (80)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/20 20:31:34 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'form.cell_id' in 'where clause'. The SQL statement executed was: SELECT `t`.`id` AS `t0_c0`, `t`.`kit_id` AS `t0_c1`, `t`.`ref_num_id` AS `t0_c2`, `t`.`eap_num` AS `t0_c3`, `t`.`stacker_id` AS `t0_c4`, `t`.`stack_date` AS `t0_c5`, `t`.`dry_wt` AS `t0_c6`, `t`.`wet_wt` AS `t0_c7`, `t`.`filler_id` AS `t0_c8`, `t`.`fill_date` AS `t0_c9`, `t`.`inspector_id` AS `t0_c10`, `t`.`inspection_date` AS `t0_c11`, `kit`.`id` AS `t1_c0`, `kit`.`serial_num` AS `t1_c1`, `kit`.`ref_num_id` AS `t1_c2`, `kit`.`eap_num` AS `t1_c3`, `kit`.`kitter_id` AS `t1_c4`, `kit`.`kitting_date` AS `t1_c5`, `kit`.`celltype_id` AS `t1_c6`, `kit`.`is_stacked` AS `t1_c7`, `celltype`.`id` AS `t2_c0`, `celltype`.`name` AS `t2_c1`, `stack`.`id` AS `t3_c0`, `stack`.`username` AS `t3_c1`, `stack`.`password` AS `t3_c2`, `stack`.`first_name` AS `t3_c3`, `stack`.`last_name` AS `t3_c4`, `stack`.`email` AS `t3_c5`, `stack`.`depart_id` AS `t3_c6`, `fill`.`id` AS `t4_c0`, `fill`.`username` AS `t4_c1`, `fill`.`password` AS `t4_c2`, `fill`.`first_name` AS `t4_c3`, `fill`.`last_name` AS `t4_c4`, `fill`.`email` AS `t4_c5`, `fill`.`depart_id` AS `t4_c6`, `insp`.`id` AS `t5_c0`, `insp`.`username` AS `t5_c1`, `insp`.`password` AS `t5_c2`, `insp`.`first_name` AS `t5_c3`, `insp`.`last_name` AS `t5_c4`, `insp`.`email` AS `t5_c5`, `insp`.`depart_id` AS `t5_c6`, `ref`.`id` AS `t6_c0`, `ref`.`number` AS `t6_c1` FROM `tbl_cell` `t`  LEFT OUTER JOIN `tbl_kit` `kit` ON (`t`.`kit_id`=`kit`.`id`)  LEFT OUTER JOIN `tbl_celltype` `celltype` ON (`kit`.`celltype_id`=`celltype`.`id`)  LEFT OUTER JOIN `tbl_user` `stack` ON (`t`.`stacker_id`=`stack`.`id`)  LEFT OUTER JOIN `tbl_user` `fill` ON (`t`.`filler_id`=`fill`.`id`)  LEFT OUTER JOIN `tbl_user` `insp` ON (`t`.`inspector_id`=`insp`.`id`)  LEFT OUTER JOIN `tbl_ref_num` `ref` ON (`t`.`ref_num_id`=`ref`.`id`)  WHERE ((fill_date>=:ycp0) AND (form.cell_id <> t.id)) LIMIT 16' in C:\wamp\www\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(803): CDbCommand->queryAll()
+#2 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(437): CJoinElement->runQuery(Object(CJoinQuery))
+#3 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1356): CActiveFinder->query(Object(CDbCriteria), true)
+#5 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#6 C:\wamp\www\yii\framework\web\CActiveDataProvider.php(199): CActiveRecord->findAll(Object(CDbCriteria))
+#7 C:\wamp\www\yii\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#8 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(111): CDataProvider->getData()
+#9 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(339): CBaseListView->init()
+#10 C:\wamp\www\yii\framework\web\CBaseController.php(147): CGridView->init()
+#11 C:\wamp\www\yii\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#12 C:\wamp\www\ytpdb\protected\views\testlab\cellformation.php(109): CBaseController->widget('zii.widgets.gri...', Array)
+#13 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#14 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#15 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#16 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('cellformation', Array, true)
+#17 C:\wamp\www\ytpdb\protected\controllers\TestlabController.php(80): CController->render('cellformation', Array)
+#18 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): TestlabController->actionCellFormation()
+#19 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#20 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#21 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#22 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#23 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#24 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#25 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#26 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#27 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('cellformation')
+#28 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('testlab/cellfor...')
+#29 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#30 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#31 {main}
+REQUEST_URI=/ytpdb/testlab/cellformation?XDEBUG_SESSION_START=ECLIPSE_DBGP&KEY=13849791988543
+---
+2013/11/20 20:41:37 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(WebUser), 'You are not aut...')
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('multifillcells')
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/multifillc...')
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/ytpdb/cell/multifillcells
+HTTP_REFERER=http://localhost/ytpdb/testlab/cellformation?XDEBUG_SESSION_START=ECLIPSE_DBGP&KEY=13849791988543
+---
+2013/11/20 20:46:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "cellformation".' in C:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('cellformation')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('cellformation')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('channel/cellfor...')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ytpdb/channel/cellformation
+HTTP_REFERER=http://localhost/ytpdb/cell/multiinspectcells
+---
+2013/11/20 20:47:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "cellformation".' in C:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('cellformation')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('cellformation')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('channel/cellfor...')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ytpdb/channel/cellformation
+HTTP_REFERER=http://localhost/ytpdb/cell/multiinspectcells
+---
+2013/11/20 20:47:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "cellformation".' in C:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('cellformation')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('cellformation')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('channel/cellfor...')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ytpdb/testlab/channel/cellformation
+HTTP_REFERER=http://localhost/ytpdb/channel/cellformation
+---
+2013/11/20 20:47:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "channel".' in C:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('channel')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('channel')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('testlab/channel...')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ytpdb/testlab/channel/cellformation
+HTTP_REFERER=http://localhost/ytpdb/channel/cellformation
+---
+2013/11/20 20:47:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "channel".' in C:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('channel')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('channel')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('testlab/channel...')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ytpdb/testlab/channel/cellformation
+HTTP_REFERER=http://localhost/ytpdb/channel/cellformation
+---
+2013/11/20 20:47:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "channel".' in C:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('channel')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('channel')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('testlab/channel...')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ytpdb/testlab/channel/cellformation
+HTTP_REFERER=http://localhost/ytpdb/testlab/channel/cellformation
+---
+2013/11/20 20:47:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "channel".' in C:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('channel')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('channel')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('testlab/channel...')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ytpdb/testlab/channel/cellformation
+HTTP_REFERER=http://localhost/ytpdb/testlab/channel/cellformation
+---
+2013/11/20 20:49:49 [error] [php] Trying to get property of non-object (C:\wamp\www\ytpdb\protected\controllers\CyclerController.php:186)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CyclerController->runAction()
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CyclerController->filterAccessControl()
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): CyclerController->runActionWithFilters()
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CyclerController->run()
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/cycler/ajaxchannellist
+in C:\wamp\www\ytpdb\protected\controllers\CyclerController.php (186)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/20 20:51:19 [error] [php] htmlspecialchars() expects parameter 1 to be string, array given (C:\wamp\www\yii\framework\web\helpers\CHtml.php:103)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\helpers\CHtml.php(158): renderAttributes()
+#1 C:\wamp\www\yii\framework\web\helpers\CHtml.php(941): tag()
+#2 C:\wamp\www\yii\framework\base\CComponent.php(612) : eval()'d code(5): dropDownList()
+#3 C:\wamp\www\yii\framework\base\CComponent.php(612): eval()
+#4 C:\wamp\www\yii\framework\zii\widgets\grid\CDataColumn.php(137): CDataColumn->evaluateExpression()
+#5 C:\wamp\www\yii\framework\zii\widgets\grid\CGridColumn.php(151): CDataColumn->renderDataCellContent()
+#6 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(616): CDataColumn->renderDataCell()
+#7 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(572): CGridView->renderTableRow()
+#8 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(482): CGridView->renderTableBody()
+#9 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#10 unknown(0): CGridView->renderSection()
+#11 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback()
+#12 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(135): CGridView->renderContent()
+#13 C:\wamp\www\yii\framework\web\CBaseController.php(173): CGridView->run()
+#14 C:\wamp\www\ytpdb\protected\views\testlab\cellformation.php(111): TestlabController->widget()
+#15 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#16 C:\wamp\www\yii\framework\web\CBaseController.php(95): TestlabController->renderInternal()
+#17 C:\wamp\www\yii\framework\web\CController.php(869): TestlabController->renderFile()
+#18 C:\wamp\www\yii\framework\web\CController.php(782): TestlabController->renderPartial()
+#19 C:\wamp\www\ytpdb\protected\controllers\TestlabController.php(80): TestlabController->render()
+#20 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): TestlabController->actionCellFormation()
+#21 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#22 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): TestlabController->runAction()
+#23 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#24 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#25 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): TestlabController->filterAccessControl()
+#26 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#27 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#28 C:\wamp\www\yii\framework\web\CController.php(265): TestlabController->runActionWithFilters()
+#29 C:\wamp\www\yii\framework\web\CWebApplication.php(282): TestlabController->run()
+#30 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#31 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#32 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/testlab/cellformation
+in C:\wamp\www\ytpdb\protected\views\testlab\cellformation.php (111)
+in C:\wamp\www\ytpdb\protected\controllers\TestlabController.php (80)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/20 20:51:34 [error] [php] htmlspecialchars() expects parameter 1 to be string, array given (C:\wamp\www\yii\framework\web\helpers\CHtml.php:103)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\helpers\CHtml.php(158): renderAttributes()
+#1 C:\wamp\www\yii\framework\web\helpers\CHtml.php(941): tag()
+#2 C:\wamp\www\yii\framework\base\CComponent.php(612) : eval()'d code(5): dropDownList()
+#3 C:\wamp\www\yii\framework\base\CComponent.php(612): eval()
+#4 C:\wamp\www\yii\framework\zii\widgets\grid\CDataColumn.php(137): CDataColumn->evaluateExpression()
+#5 C:\wamp\www\yii\framework\zii\widgets\grid\CGridColumn.php(151): CDataColumn->renderDataCellContent()
+#6 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(616): CDataColumn->renderDataCell()
+#7 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(572): CGridView->renderTableRow()
+#8 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(482): CGridView->renderTableBody()
+#9 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#10 unknown(0): CGridView->renderSection()
+#11 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback()
+#12 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(135): CGridView->renderContent()
+#13 C:\wamp\www\yii\framework\web\CBaseController.php(173): CGridView->run()
+#14 C:\wamp\www\ytpdb\protected\views\testlab\cellformation.php(111): TestlabController->widget()
+#15 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#16 C:\wamp\www\yii\framework\web\CBaseController.php(95): TestlabController->renderInternal()
+#17 C:\wamp\www\yii\framework\web\CController.php(869): TestlabController->renderFile()
+#18 C:\wamp\www\yii\framework\web\CController.php(782): TestlabController->renderPartial()
+#19 C:\wamp\www\ytpdb\protected\controllers\TestlabController.php(80): TestlabController->render()
+#20 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): TestlabController->actionCellFormation()
+#21 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#22 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): TestlabController->runAction()
+#23 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#24 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#25 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): TestlabController->filterAccessControl()
+#26 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#27 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#28 C:\wamp\www\yii\framework\web\CController.php(265): TestlabController->runActionWithFilters()
+#29 C:\wamp\www\yii\framework\web\CWebApplication.php(282): TestlabController->run()
+#30 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#31 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#32 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/testlab/cellformation
+in C:\wamp\www\ytpdb\protected\views\testlab\cellformation.php (111)
+in C:\wamp\www\ytpdb\protected\controllers\TestlabController.php (80)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/20 21:01:12 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "multifillcells".' in C:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('multifillcells')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('multifillcells')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('testlab/multifi...')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ytpdb/testlab/multifillcells
+HTTP_REFERER=http://localhost/ytpdb/testlab/cellformation
+---
+2013/11/20 21:09:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "cellcat".' in C:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('cellcat')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('cellcat')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('testlab/cellcat')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ytpdb/testlab/cellcat
+HTTP_REFERER=http://localhost/ytpdb/testlab/cellformation
+---
+2013/11/20 21:10:22 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(WebUser), 'You are not aut...')
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('cellcat')
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('testlab/cellcat')
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/ytpdb/testlab/cellcat
+HTTP_REFERER=http://localhost/ytpdb/testlab/cellformation
+---
+2013/11/20 21:13:41 [error] [exception.CException] exception 'CException' with message 'Property "Cell.formation_search" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:173
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(161): CComponent->__set('formation_searc...', 1)
+#1 C:\wamp\www\ytpdb\protected\controllers\TestlabController.php(71): CActiveRecord->__set('formation_searc...', 1)
+#2 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): TestlabController->actionCellFormation()
+#3 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('cellformation')
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('testlab/cellfor...')
+#13 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/ytpdb/testlab/cellformation
+HTTP_REFERER=http://localhost/ytpdb/testlab/channel/cellformation
+---
+2013/11/20 21:16:03 [error] [exception.CException] exception 'CException' with message 'Property "Cell.formation_search" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:173
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(161): CComponent->__set('formation_searc...', 1)
+#1 C:\wamp\www\ytpdb\protected\controllers\TestlabController.php(134): CActiveRecord->__set('formation_searc...', 1)
+#2 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): TestlabController->actionCellCAT()
+#3 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('cellcat')
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('testlab/cellcat')
+#13 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/ytpdb/testlab/cellcat
+HTTP_REFERER=http://localhost/ytpdb/testlab/cellformation
+---
+2013/11/20 21:19:23 [error] [exception.CException] exception 'CException' with message 'Property "FormationDetail.serial_search" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('serial_search')
+#1 C:\wamp\www\yii\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('serial_search')
+#2 C:\wamp\www\yii\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(FormationDetail), 'serial_search')
+#3 C:\wamp\www\yii\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(FormationDetail), 'serial_search', Array)
+#4 C:\wamp\www\yii\framework\zii\widgets\grid\CDataColumn.php(103): CHtml::activeTextField(Object(FormationDetail), 'serial_search', Array)
+#5 C:\wamp\www\yii\framework\zii\widgets\grid\CGridColumn.php(116): CDataColumn->renderFilterCellContent()
+#6 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(532): CGridColumn->renderFilterCell()
+#7 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(510): CGridView->renderFilter()
+#8 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(480): CGridView->renderTableHeader()
+#9 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#10 [internal function]: CBaseListView->renderSection(Array)
+#11 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{summary}?{item...')
+#12 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(135): CBaseListView->renderContent()
+#13 C:\wamp\www\yii\framework\web\CBaseController.php(173): CBaseListView->run()
+#14 C:\wamp\www\ytpdb\protected\views\testlab\cellcat.php(108): CBaseController->widget('zii.widgets.gri...', Array)
+#15 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#16 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#17 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#18 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('cellcat', Array, true)
+#19 C:\wamp\www\ytpdb\protected\controllers\TestlabController.php(143): CController->render('cellcat', Array)
+#20 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): TestlabController->actionCellCAT()
+#21 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#22 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#23 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#24 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#25 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#26 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#27 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#28 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#29 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('cellcat')
+#30 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('testlab/cellcat')
+#31 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#32 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#33 {main}
+REQUEST_URI=/ytpdb/testlab/cellcat
+HTTP_REFERER=http://localhost/ytpdb/testlab/cellformation
+---
+2013/11/20 21:19:36 [error] [exception.CException] exception 'CException' with message 'Property "FormationDetail.refnum_search" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('refnum_search')
+#1 C:\wamp\www\yii\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('refnum_search')
+#2 C:\wamp\www\yii\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(FormationDetail), 'refnum_search')
+#3 C:\wamp\www\yii\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(FormationDetail), 'refnum_search', Array)
+#4 C:\wamp\www\yii\framework\zii\widgets\grid\CDataColumn.php(103): CHtml::activeTextField(Object(FormationDetail), 'refnum_search', Array)
+#5 C:\wamp\www\yii\framework\zii\widgets\grid\CGridColumn.php(116): CDataColumn->renderFilterCellContent()
+#6 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(532): CGridColumn->renderFilterCell()
+#7 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(510): CGridView->renderFilter()
+#8 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(480): CGridView->renderTableHeader()
+#9 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#10 [internal function]: CBaseListView->renderSection(Array)
+#11 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{summary}?{item...')
+#12 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(135): CBaseListView->renderContent()
+#13 C:\wamp\www\yii\framework\web\CBaseController.php(173): CBaseListView->run()
+#14 C:\wamp\www\ytpdb\protected\views\testlab\cellcat.php(107): CBaseController->widget('zii.widgets.gri...', Array)
+#15 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#16 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#17 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#18 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('cellcat', Array, true)
+#19 C:\wamp\www\ytpdb\protected\controllers\TestlabController.php(143): CController->render('cellcat', Array)
+#20 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): TestlabController->actionCellCAT()
+#21 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#22 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#23 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#24 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#25 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#26 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#27 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#28 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#29 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('cellcat')
+#30 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('testlab/cellcat')
+#31 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#32 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#33 {main}
+REQUEST_URI=/ytpdb/testlab/cellcat
+HTTP_REFERER=http://localhost/ytpdb/testlab/cellformation
+---
