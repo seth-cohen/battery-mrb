@@ -38,7 +38,7 @@ Yii::app()->clientScript->registerCssFile(
 <div class="shadow border" >
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'cat-grid',
-	'dataProvider'=>$model->searchFormed(),
+	'dataProvider'=>$model->searchAtForm(),
 	'filter'=>$model,
 	'columns'=>array(
 		array(
@@ -108,14 +108,16 @@ Yii::app()->clientScript->registerCssFile(
 </div>
 <script>
 function reloadGrid(data) {	
-    $.fn.yiiGridView.update('cat-grid');
-    
     if(data=='hide')
     {
     	$('.errorSummary').remove();
     }
     else
     {
+        if(data=='')
+        {
+        	$.fn.yiiGridView.update('cat-grid');
+        }
         $('#cat-form').prepend(data);
     }
 }

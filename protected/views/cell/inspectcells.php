@@ -85,14 +85,16 @@ Yii::app()->clientScript->registerCssFile(
 </div>
 <script>
 function reloadGrid(data) {	
-    $.fn.yiiGridView.update('inspecting-grid');
-    
     if(data=='hide')
     {
     	$('.errorSummary').remove();
     }
     else
     {
+        if(data=='')
+        {
+        	$.fn.yiiGridView.update('inspecting-grid');
+        }
         $('#inspecting-form').prepend(data);
     }
 }

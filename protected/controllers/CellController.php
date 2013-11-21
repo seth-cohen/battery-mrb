@@ -232,14 +232,14 @@ class CellController extends Controller
 		
 		if(count($stackedKits)>0)
 		{
-			$error = null;
+			$errorSum = null;
+			$error = 0;
+			$models = array();
 			
 			foreach($stackedKits as $kitId)
 			{
 				$model = new Cell('stack');
-				// Uncomment the following line if AJAX validation is needed
-		 		$this->performAjaxValidation($model);
-		 
+						 
 				$model->kit_id = $kitId;
 				if(isset($userIds[$kitId]) && isset($dates[$kitId]))
 				{
@@ -247,7 +247,20 @@ class CellController extends Controller
 					$model->stack_date = $dates[$kitId];
 					$model->ref_num_id = $refnumIds[$kitId]?$refnumIds[$kitId]:null;
 					$model->eap_num = $eaps[$kitId]?$eaps[$kitId]:null;
+					$model->location = 'stacked';
 					
+					if(!$model->validate())
+					{
+						$error = 1;
+					}
+					$models[] = $model;	
+
+				}
+			}
+			if (!($error==1))
+			{
+				foreach($models as $model)
+				{
 					if($model->save())
 					{
 						$kit = Kit::model()->findByPk($kitId);
@@ -255,13 +268,14 @@ class CellController extends Controller
 						$kit->save()?'':var_dump($kit->getErrors());
 						
 					}
-					else 
-					{
-						$error = CHtml::errorSummary($model);
-					}
 				}
 			}
-			echo $error;
+			else
+			{
+				$errorSum = CHtml::errorSummary($models); 	
+			}			
+				
+			echo $errorSum;
 		}
 	}
 	
@@ -336,7 +350,9 @@ class CellController extends Controller
 		
 		if(count($filledCells)>0)
 		{
-			$error = null;
+			$errorSum = null;
+			$error = 0;
+			$models = array();
 			
 			foreach($filledCells as $cell_id)
 			{
@@ -349,14 +365,29 @@ class CellController extends Controller
 					$model->fill_date = $dates[$cell_id];
 					$model->wet_wt = $wet_wts[$cell_id]?$wet_wts[$cell_id]:null;
 					$model->dry_wt = $dry_wts[$cell_id]?$dry_wts[$cell_id]:null;
+					$model->location = 'filled';
 					
-					if(!$model->save())
+					if(!$model->validate())
 					{
-						$error = CHtml::errorSummary($model);
-					}	
+						$error = 1;
+					}
+					$models[] = $model;		
 				}
 			}
-			echo $error;
+			
+			if (!($error==1))
+			{
+				foreach($models as $model)
+				{
+					$model->save();
+				}
+			}
+			else
+			{
+				$errorSum = CHtml::errorSummary($models); 	
+			}
+			
+			echo $errorSum;
 		}
 	}
 	
@@ -409,6 +440,7 @@ class CellController extends Controller
 				{
 					$model->inspector_id = $userIds[$cell_id];
 					$model->inspection_date = $dates[$cell_id];
+					$model->location = 'inspected';
 					
 					if(!$model->save())
 					{

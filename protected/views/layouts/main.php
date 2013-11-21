@@ -46,7 +46,7 @@
 						)),
 						array('label'=>'Kits', 'items'=>array(
 							array('label'=>'Create New Kit', 'url'=>array('kit/create'), 'active'=>0),
-							array('label'=>'View All Kits', 'url'=>array('kit/admin'), 'active'=>0),
+							array('label'=>'View All Kits', 'url'=>array('kit/index'), 'active'=>0),
 						)),
 						array('label'=>'Cells', 'items'=>array(
 							array('label'=>'Stack Cells (Multi)', 'url'=>array('cell/multistackcells'), 'active'=>0),

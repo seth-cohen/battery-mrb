@@ -104,15 +104,17 @@ Yii::app()->clientScript->registerCssFile(
 )); ?>
 </div>
 <script>
-function reloadGrid(data) {	
-    $.fn.yiiGridView.update('stacking-grid');
-    
+function reloadGrid(data) {	 
     if(data=='hide')
     {
     	$('.errorSummary').remove();
     }
     else
     {
+        if(data=='')
+        {
+        	$.fn.yiiGridView.update('stacking-grid');
+        }
         $('#stacking-form').prepend(data);
     }
 }

@@ -78,11 +78,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 			'name'=>'stacker_search',
 			'value'=>'$data->stacker->getFullName()',
 		),
-		array(
-			'name'=>'filler_search',
-			'value'=>'$data->filler->getFullName()',
-		),
-		'fill_date',
+		'location',
 		array(
 			'class'=>'CButtonColumn',
 			'template'=>'{view} {update}',

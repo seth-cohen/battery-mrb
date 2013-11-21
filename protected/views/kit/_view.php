@@ -3,7 +3,7 @@
 /* @var $data Kit */
 ?>
 
-<div class="view">
+<div class="view shadow border">
 
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('celltype')); ?>:</b>

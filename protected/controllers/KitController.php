@@ -186,9 +186,13 @@ class KitController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Kit');
+		$model=new Kit('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['Kit']))
+			$model->attributes=$_GET['Kit'];
+
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'model'=>$model,
 		));
 	}
 

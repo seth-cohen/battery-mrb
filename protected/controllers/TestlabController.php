@@ -31,7 +31,7 @@ class TestlabController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('cellformation', 'ajaxformation', 'cellcat', 'ajaxcat'),
+				'actions'=>array('cellformation', 'ajaxformation', 'cellcat', 'ajaxcat', 'tipoffdelivery'),
 				'roles' => array('testlab'),
 				//'users'=>array('@'),
 			),
@@ -97,14 +97,27 @@ class TestlabController extends Controller
 		$chambers = $_POST['chambers'];
 		$channels = $_POST['channels'];
 		
+		$channels = array_slice($channels, 0, count($formationCells), true);
+		 
+		/* make sure there are no duplicate channel selections */
+		if (count($channels) !== count(array_unique($channels)))
+		{ /* then we have duplicates set error and bail */		
+			$model = new Cell();
+			$model->addError('channel_error', 'Duplicate Channel Selection!');
+			echo CHtml::errorSummary($model);
+			Yii::app()->end();
+		}
+		
 		if(count($formationCells)>0)
 		{
-			$error = null;
+			$errorSum = null;
+			$error = 0;
+			$models = array();
 			
 			foreach($formationCells as $cell_id)
 			{
 				$model = new TestAssignment();
-		 
+		 		
 				if(isset($userIds[$cell_id]) && isset($dates[$cell_id]))
 				{
 					$model->cell_id = $cell_id;
@@ -114,15 +127,57 @@ class TestlabController extends Controller
 					$model->test_start = $dates[$cell_id];
 					$model->is_formation = 1;
 					
-					if(!$model->save())
+					if(!$model->validate())
 					{
-						$error = CHtml::errorSummary($model);
-					}	
+						$error = 1;
+					}
+					$models[] = $model;		
 				}
 			}
-			echo $error;
+			if (!($error==1))
+			{
+				foreach($models as $model)
+				{
+					if($model->save())
+					{
+						$channelModel = Channel::model()->findByPk($channels[$model->cell_id]);
+						
+						$channelModel->in_use = 1;
+						$channelModel->save();
+						
+						/* update cell location */
+						$model->cell->location = '[FORM] Chamber-'.$model->chamber->name;
+						$model->cell->save();
+					}
+				}
+			}
+			else
+			{
+				$errorSum = CHtml::errorSummary($models); 	
+			}			
+				
+			echo $errorSum;
 		}
 	}
+
+	/**
+	 * Allows user to sdliver multiple cells to MFG for tip-off
+	 */
+	public function actionTipoffDelivery()
+	{
+		$model=new Cell('search');
+		$model->unsetAttributes();  // clear any default values
+		
+		if(isset($_GET['Cell']))
+		{
+			$model->attributes=$_GET['Cell'];
+		}
+				
+		$this->render('tipoff_delivery',array(
+			'model'=>$model,
+		));
+	}
+	
 	
 	/**
 	 * Allows user to stack mulitple kits that are not associated with a cell yet.
@@ -161,11 +216,13 @@ class TestlabController extends Controller
 		
 		if(count($formationCells)>0)
 		{
-			$error = null;
+			$errorSum = null;
+			$error = 0;
+			$models = array();
 			
 			foreach($formationCells as $cell_id)
 			{
-				$model = new FormationDetail();
+				 $model = new FormationDetail();
 		 
 				if(isset($userIds[$cell_id]) && isset($dates[$cell_id]))
 				{
@@ -175,13 +232,27 @@ class TestlabController extends Controller
 					$model->operator_id =  $userIds[$cell_id];
 					$model->formation_start = $dates[$cell_id];
 					
-					if(!$model->save())
+					if(!$model->validate())
 					{
-						$error = CHtml::errorSummary($model);
-					}	
+						$error = 1;
+					}
+					$models[] = $model;	
+
 				}
 			}
-			echo $error;
+			if (!($error==1))
+			{
+				foreach($models as $model)
+				{
+					$model->save();
+				}
+			}
+			else
+			{
+				$errorSum = CHtml::errorSummary($models); 	
+			}
+			
+			echo $errorSum;
 		}
 	}
 	
@@ -215,5 +286,14 @@ class TestlabController extends Controller
 		$returnString.= CHtml::hiddenField("user_ids[$data->id]",$userId, array("class"=>"user-id-input"));
 	
 		return $returnString;
+	}
+	
+	protected function performAjaxValidation($model)
+	{
+		if(isset($_POST['ajax']))
+		{
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
+		}
 	}
 }

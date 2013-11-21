@@ -306,3 +306,9 @@ div.search-form
 	margin-bottom:12px;
 	border:1px solid #888888;
 }
+
+div.link-list ul li
+{
+	margin:3px;
+	margin-left:40px;
+}

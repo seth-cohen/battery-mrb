@@ -122,9 +122,13 @@ class CyclerController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Cycler');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+		$model=new Cycler('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['Cycler']))
+			$model->attributes=$_GET['Cycler'];
+
+		$this->render('admin',array(
+			'model'=>$model,
 		));
 	}
 
@@ -180,7 +184,9 @@ class CyclerController extends Controller
 		}
 		
 		$id = $_POST['id'];
-		$cycler = Cycler::model()->findByPk($id);
+		$cycler = Cycler::model()->with(array(
+			'channels'=>array('condition'=>'in_use=0 AND in_commission=1')
+		))->findByPk($id);
 		
 		//echo "<option value=''>-Select Channel-</option>";
 		foreach($cycler->channels as $channel)

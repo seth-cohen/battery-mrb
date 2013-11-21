@@ -16,6 +16,7 @@
  * @property string $fill_date
  * @property string $inspector_id
  * @property string $inspection_date
+ * @property string $location
  *
  * The followings are the available model relations:
  * @property Kit $kit
@@ -41,11 +42,12 @@ class Cell extends CActiveRecord
 	public $stacker_search;
 	public $filler_search;
 	public $inspector_search;
-	public $location_search;
 	public $refnum_search;
 	
 	public $not_formed=null;
 	public $formed_only=null;
+	
+	public $channel_error;
 	
 
 	/**
@@ -58,21 +60,29 @@ class Cell extends CActiveRecord
 		return array(
 			//array('stack_date, dry_wt, wet_wt, fill_date, inspection_date', 'required', 'on'=>'create'),
 			array('stack_date, stacker_id, kit_id', 'required', 'on'=>'stack'),
+			array('wet_wt', 'greaterThanDry'),
 			array('fill_date, filler_id, wet_wt, dry_wt', 'required', 'on'=>'fill'),
 			array('inspection_date, inspector_id', 'required', 'on'=>'inspect'),
 			
 			array('eap_num', 'checkEAP'),
 			array('dry_wt, wet_wt', 'numerical'),
 			array('kit_id, ref_num_id, stacker_id, filler_id, inspector_id', 'length', 'max'=>10),
-			array('eap_num', 'length', 'max'=>50),
+			array('eap_num, location', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('eap_num, stack_date, dry_wt, wet_wt, fill_date, inspection_date, serial_search, celltype_search, 
-					refnum_search, stacker_search, filler_search, inspector_search, location_search,
+					refnum_search, stacker_search, filler_search, inspector_search, location,
 					not_formed, formed_only', 'safe', 'on'=>'search'),
 		);
 	}
 
+	public function greaterThanDry($attribute,$params) 
+	{
+		if($this->$attribute < $this->dry_wt)
+		{
+			$this->addError($attribute, "Wet Weight must be greater than Dry!");
+		}
+	}
 	public function checkEAP($attribute,$params) 
 	{
 		$pattern = '/ADD$/';
@@ -118,6 +128,7 @@ class Cell extends CActiveRecord
 			'fill_date' => 'Fill Date',
 			'inspector_id' => 'Inspector',
 			'inspection_date' => 'Inspection Date',
+			'location' => 'Location',
 			
 			'refnum_search' => "Reference No.",
 			'serial_search' => 'Serial No.',
@@ -125,7 +136,7 @@ class Cell extends CActiveRecord
 			'stacker_search' => 'Stacker',
 			'filler_search' => 'Filler',
 			'inspector_search' => 'Inspector',
-			'location_search' => 'Location',
+			
 		);
 	}
 
@@ -162,9 +173,10 @@ class Cell extends CActiveRecord
 //		$criteria->compare('kit_id',$this->kit_id,true);
 		$criteria->compare('t.eap_num',$this->eap_num,true);
 		$criteria->compare('stack_date',$this->stack_date,true);
+		$criteria->compare('location',$this->location, true);
 //		$criteria->compare('dry_wt',$this->dry_wt);
 //		$criteria->compare('wet_wt',$this->wet_wt);
-//		$criteria->compare('filler_id',$this->filler_id);
+		$criteria->compare('filler_id',$this->filler_id);
 //		$criteria->compare('inspector_id',$this->inspector_id);
 		$criteria->compare('fill_date',$this->fill_date,true);
 		$criteria->compare('inspection_date',$this->inspection_date,true);
@@ -306,7 +318,7 @@ class Cell extends CActiveRecord
 		));
 	}
 	
-public function searchformed()
+	public function searchAtForm()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
@@ -322,7 +334,7 @@ public function searchformed()
 							),
 						), 
 						'refNum'=>array('alias'=>'ref'),
-						'testAssignments'=>array('alias'=>'test', 'select'=>'is_formation'),
+						//'testAssignments'=>array('alias'=>'test', 'select'=>'is_formation, id'),
 		); // needed for alias of search parameter tables
 
 		$criteria->together = true;
@@ -345,7 +357,10 @@ public function searchformed()
 			$criteria->mergeWith($refCriteria);
 		}
 		
-		$criteria->addcondition('test.cell_id = t.id');
+		/* cells at form will have only 1 test_assignment and it will be formation */
+		//$criteria->addCondition('test.cell_id = t.id HAVING COUNT(*) = 1');
+		$criteria->addcondition('t.location LIKE "[FORM]%"');
+		
 		$criteria->addSearchCondition('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
 		
 		return new KeenActiveDataProvider($this, array(

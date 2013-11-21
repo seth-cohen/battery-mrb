@@ -16,7 +16,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Put Cells on Formation</h1>
+<h1>Deliver Cells to MFG [Fill Port Tipoff]</h1>
 <p>
 *Only cells filled yesterday or today will be listed.
 </p>
@@ -48,7 +48,7 @@ $chamberList = Chamber::forList();
 <div class="shadow border" >
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'formation-grid',
-	'dataProvider'=>$model->searchUnformed(),
+	'dataProvider'=>$model->searchAtForm(),
 	'filter'=>$model,
 	'columns'=>array(
 		array(
@@ -70,44 +70,16 @@ $chamberList = Chamber::forList();
 		),
 		array(
 			'header'=>'Cycler',
-			'type'=>'raw',
-			'value'=>function($data,$row) use ($cyclerList){
-				return CHtml::dropDownList('cyclers['.$data->id.']', '', $cyclerList, array(
-						"prompt"=>"-Cycler-",
-						"class"=>"cycler-dropdown",
-						"onChange"=>"cycSelected(this)",
-						"style"=>"width:100px",
-				));
-			},
-		),
-		array(
-			'header'=>'Channel',
-			'type'=>'raw',
-			'value'=>'CHtml::dropDownList("channels[$data->id]", "", array(),array(
-						"prompt"=>"-N/A-",
-						"class"=>"channel-dropdown",
-			))',
+			'value'=>'$data->testAssignments[0]->channel->cycler->name',
 		),
 		array(
 			'header'=>'Chamber',
-			'type'=>'raw',
-			'value'=>function($data,$row) use ($chamberList){
-				return CHtml::dropDownList('chambers['.$data->id.']', '', $chamberList, array(
-						"prompt"=>"-Chamber-",
-						"class"=>"chamber-dropdown",
-						"style"=>"width:90px",
-				));
-			},
+			'value'=>'$data->testAssignments[0]->chamber->name',
 		),
 		array(
 			'header' => 'Operator',
 			'type' => 'raw',
 			'value' => array($this, 'getUserInputTextField'),
-//			'value'=>'CHtml::textField("user_name[$data->id]",User::getFullNameProper(Yii::app()->user->id),array(
-//				"style"=>"width:150px;",
-//				"class"=>"ui-autocomplete-input",
-//				"autocomplete"=>"off",'.$disabled.'
-//			))',
 		),
 		array(
 			'header' => 'Formation Date',
