@@ -103,7 +103,7 @@ class TestlabController extends Controller
 			
 			foreach($formationCells as $cell_id)
 			{
-				$model = new FormationDetail();
+				$model = new TestAssignment();
 		 
 				if(isset($userIds[$cell_id]) && isset($dates[$cell_id]))
 				{
@@ -111,7 +111,8 @@ class TestlabController extends Controller
 					$model->channel_id =  $channels[$cell_id];
 					$model->chamber_id = $chambers[$cell_id];
 					$model->operator_id =  $userIds[$cell_id];
-					$model->formation_start = $dates[$cell_id];
+					$model->test_start = $dates[$cell_id];
+					$model->is_formation = 1;
 					
 					if(!$model->save())
 					{
@@ -128,10 +129,8 @@ class TestlabController extends Controller
 	 */
 	public function actionCellCAT()
 	{
-		$model=new FormationDetail('search');
+		$model=new Cell('search');
 		$model->unsetAttributes();  // clear any default values
-		//$model->fill_date = '>='.date("Y-m-d",time());
-		//$model->formed_only = 1;
 		
 		if(isset($_GET['Cell']))
 		{

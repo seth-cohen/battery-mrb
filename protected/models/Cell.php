@@ -23,7 +23,7 @@
  * @property User $stacker
  * @property User $filler
  * @property User $inspector
- * @property FormationDetail[] $formationDetails
+ * @property TestAssignment[] $testAssignments
  */
 class Cell extends CActiveRecord
 {
@@ -96,7 +96,7 @@ class Cell extends CActiveRecord
 			'stacker' => array(self::BELONGS_TO, 'User', 'stacker_id'),
 			'filler' => array(self::BELONGS_TO, 'User', 'filler_id'),
 			'inspector' => array(self::BELONGS_TO, 'User', 'inspector_id'),
-			'formationDetails' => array(self::HAS_MANY, 'FormationDetail', 'cell_id'),
+			'testAssignments' => array(self::HAS_MANY, 'TestAssignment', 'cell_id'),
 		);
 	}
 
@@ -153,19 +153,19 @@ class Cell extends CActiveRecord
 						'filler'=>array('alias'=>'fill'), 
 						'inspector'=>array('alias'=>'insp'), 
 						'refNum'=>array('alias'=>'ref'),
-						'formationDetails'=>array('alias'=>'form'),
+						'testAssignments'=>array('alias'=>'test'),
 		); // needed for alias of search parameter tables
 
 		$criteria->together = true;
 		
-		$criteria->compare('id',$this->id,true);
-		$criteria->compare('kit_id',$this->kit_id,true);
+//		$criteria->compare('id',$this->id,true);
+//		$criteria->compare('kit_id',$this->kit_id,true);
 		$criteria->compare('t.eap_num',$this->eap_num,true);
 		$criteria->compare('stack_date',$this->stack_date,true);
-		$criteria->compare('dry_wt',$this->dry_wt);
-		$criteria->compare('wet_wt',$this->wet_wt);
-		$criteria->compare('filler_id',$this->filler_id);
-		$criteria->compare('inspector_id',$this->inspector_id);
+//		$criteria->compare('dry_wt',$this->dry_wt);
+//		$criteria->compare('wet_wt',$this->wet_wt);
+//		$criteria->compare('filler_id',$this->filler_id);
+//		$criteria->compare('inspector_id',$this->inspector_id);
 		$criteria->compare('fill_date',$this->fill_date,true);
 		$criteria->compare('inspection_date',$this->inspection_date,true);
 		
@@ -189,14 +189,14 @@ class Cell extends CActiveRecord
 		if($this->not_formed)
 		{
 			$formCriteria = new CDbCriteria();
-			$formCriteria->addcondition('form.cell_id IS NULL');
+			$formCriteria->addcondition('test.cell_id IS NULL');
 			$criteria->mergeWith($formCriteria);
 		}
 		
 		if($this->formed_only)
 		{
 			$formCriteria = new CDbCriteria();
-			$formCriteria->addcondition('form.cell_id = t.id');
+			$formCriteria->addcondition('test.cell_id = t.id');
 			$criteria->mergeWith($formCriteria);
 		}
 		
@@ -241,6 +241,136 @@ class Cell extends CActiveRecord
 		));
 	}
 
+	public function searchUnformed()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->select = 'id';
+		$criteria->with = array(
+						'kit'=>array(
+							'select'=>array('id','serial_num'),
+							'with'=>array('celltype',
+								'anodes'=>array('select'=>'id'), 
+								'cathodes'=>array('select'=>'id'),
+							),
+						), 
+						'refNum'=>array('alias'=>'ref'),
+						'testAssignments'=>array('alias'=>'test', 'select'=>'is_formation'),
+		); // needed for alias of search parameter tables
+
+		$criteria->together = true;
+		
+		$criteria->compare('stack_date',$this->stack_date,true);
+		$criteria->compare('fill_date',$this->fill_date,true);
+
+		if($this->refnum_search)
+		{
+			$references = explode(',', str_replace(' ', ',', $this->refnum_search));
+			
+			$refCriteria = new CDbCriteria();
+			foreach ($references as $reference)
+			{
+				if(!empty($reference))
+				{
+					$refCriteria->compare('ref.number', $reference, true, 'OR');
+				}
+			}
+			$criteria->mergeWith($refCriteria);
+		}
+		
+		$criteria->addcondition('test.cell_id IS NULL');
+		$criteria->addSearchCondition('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
+		
+		return new KeenActiveDataProvider($this, array(
+			'pagination'=>array('pageSize' => 16),
+			'criteria'=>$criteria,
+			'withKeenLoading' => array(
+				'kit'=>array('select'=>array('celltype','serial_num')),
+				//'testAssignments'=>array('alias'=>'test'),
+			),
+			'sort'=>array(
+				'attributes'=>array(
+					'refnum_search'=>array(
+						'asc'=>'ref.number',
+						'desc'=>'ref.number DESC',
+					),
+					'serial_search'=>array(
+						'asc'=>"CONCAT(celltype.name, serial_num)",
+						'desc'=>"CONCAT(celltype.name, serial_num) DESC",
+					),
+					'*',		// all others treated normally
+				),
+			),
+		));
+	}
+	
+public function searchformed()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->select = 'id';
+		$criteria->with = array(
+						'kit'=>array(
+							'select'=>array('id','serial_num'),
+							'with'=>array('celltype',
+								'anodes'=>array('select'=>'id'), 
+								'cathodes'=>array('select'=>'id'),
+							),
+						), 
+						'refNum'=>array('alias'=>'ref'),
+						'testAssignments'=>array('alias'=>'test', 'select'=>'is_formation'),
+		); // needed for alias of search parameter tables
+
+		$criteria->together = true;
+		
+		$criteria->compare('stack_date',$this->stack_date,true);
+		$criteria->compare('fill_date',$this->fill_date,true);
+
+		if($this->refnum_search)
+		{
+			$references = explode(',', str_replace(' ', ',', $this->refnum_search));
+			
+			$refCriteria = new CDbCriteria();
+			foreach ($references as $reference)
+			{
+				if(!empty($reference))
+				{
+					$refCriteria->compare('ref.number', $reference, true, 'OR');
+				}
+			}
+			$criteria->mergeWith($refCriteria);
+		}
+		
+		$criteria->addcondition('test.cell_id = t.id');
+		$criteria->addSearchCondition('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
+		
+		return new KeenActiveDataProvider($this, array(
+			'pagination'=>array('pageSize' => 16),
+			'criteria'=>$criteria,
+			'withKeenLoading' => array(
+				'kit'=>array('select'=>array('celltype','serial_num')),
+				//'testAssignments'=>array('alias'=>'test'),
+			),
+			'sort'=>array(
+				'attributes'=>array(
+					'refnum_search'=>array(
+						'asc'=>'ref.number',
+						'desc'=>'ref.number DESC',
+					),
+					'serial_search'=>array(
+						'asc'=>"CONCAT(celltype.name, serial_num)",
+						'desc'=>"CONCAT(celltype.name, serial_num) DESC",
+					),
+					'*',		// all others treated normally
+				),
+			),
+		));
+	}
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

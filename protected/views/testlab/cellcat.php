@@ -32,13 +32,13 @@ Yii::app()->clientScript->registerCssFile(
 <?php $form=$this->beginWidget('CActiveForm', array(
     'enableAjaxValidation'=>true,
 	'enableClientValidation'=>true,
-	'id'=>'formation-form',
+	'id'=>'cat-form',
 )); ?>
 
 <div class="shadow border" >
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'formation-grid',
-	'dataProvider'=>$model->search(),
+	'id'=>'cat-grid',
+	'dataProvider'=>$model->searchFormed(),
 	'filter'=>$model,
 	'columns'=>array(
 		array(
@@ -49,12 +49,12 @@ Yii::app()->clientScript->registerCssFile(
 		array(
 			'header'=>'Formed Cells',
 			'type'=>'raw',
-			'value'=>'$data->cell->kit->getFormattedSerial()',
+			'value'=>'$data->kit->getFormattedSerial()',
 		),
 		array(
 			'header'=>'Reference No.',
 			'type'=>'raw',
-			'value'=>'$data->cell->refNum->number',
+			'value'=>'$data->refNum->number',
 			'htmlOptions'=>array('width'=>'60'),
 		),
 		array(
@@ -108,7 +108,7 @@ Yii::app()->clientScript->registerCssFile(
 </div>
 <script>
 function reloadGrid(data) {	
-    $.fn.yiiGridView.update('formation-grid');
+    $.fn.yiiGridView.update('cat-grid');
     
     if(data=='hide')
     {
@@ -116,12 +116,12 @@ function reloadGrid(data) {
     }
     else
     {
-        $('#formation-form').prepend(data);
+        $('#cat-form').prepend(data);
     }
 }
 </script>
-<?php echo CHtml::ajaxSubmitButton('Filter',array('testlab/cellformation'), array(),array("style"=>"display:none;")); ?>
-<?php echo CHtml::ajaxSubmitButton('Submit',array('testlab/ajaxformation'), array('success'=>'reloadGrid'), array("id"=>"submit-button")); ?>
+<?php echo CHtml::ajaxSubmitButton('Filter',array('testlab/cellcat'), array(),array("style"=>"display:none;")); ?>
+<?php echo CHtml::ajaxSubmitButton('Submit',array('testlab/ajaxcat'), array('success'=>'reloadGrid'), array("id"=>"submit-button")); ?>
 
 <?php $this->endWidget(); ?>
 

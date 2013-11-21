@@ -35,10 +35,14 @@ Yii::app()->clientScript->registerCssFile(
 	'id'=>'formation-form',
 )); ?>
 
+<?php 
+$cyclerList = Cycler::forList();
+$chamberList = Chamber::forList();
+?>
 <div class="shadow border" >
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'formation-grid',
-	'dataProvider'=>$model->search(),
+	'dataProvider'=>$model->searchUnformed(),
 	'filter'=>$model,
 	'columns'=>array(
 		array(
@@ -61,12 +65,14 @@ Yii::app()->clientScript->registerCssFile(
 		array(
 			'header'=>'Cycler',
 			'type'=>'raw',
-			'value'=>'CHtml::dropDownList("cyclers[$data->id]", "", Cycler::forList(),array(
+			'value'=>function($data,$row) use ($cyclerList){
+				return CHtml::dropDownList('cyclers['.$data->id.']', '', $cyclerList, array(
 						"prompt"=>"-Cycler-",
 						"class"=>"cycler-dropdown",
 						"onChange"=>"cycSelected(this)",
 						"style"=>"width:100px",
-			))',
+				));
+			},
 		),
 		array(
 			'header'=>'Channel',
@@ -79,10 +85,13 @@ Yii::app()->clientScript->registerCssFile(
 		array(
 			'header'=>'Chamber',
 			'type'=>'raw',
-			'value'=>'CHtml::dropDownList("chambers[$data->id]", "", Chamber::forList(),array(
+			'value'=>function($data,$row) use ($chamberList){
+				return CHtml::dropDownList('chambers['.$data->id.']', '', $chamberList, array(
 						"prompt"=>"-Chamber-",
-						"style"=>"width:100px",
-			))',
+						"class"=>"chamber-dropdown",
+						"style"=>"width:90px",
+				));
+			},
 		),
 		array(
 			'header' => 'Operator',
