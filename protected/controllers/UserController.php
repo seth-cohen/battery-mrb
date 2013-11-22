@@ -55,18 +55,42 @@ class UserController extends Controller
 	 */
 	public function actionView($id)
 	{
-		$model = $this->loadModel($id);
-		$roles = array();
-		
-		foreach($model->roles as $key=>$role){
-			$roles[] = array('id'=>$key+1, 'role'=>$role->name);
+		$model = User::model()->with(array(
+			'cellsStacked'=>array('with'=>array(
+				'kit', 
+				'kit.celltype', 
+				'kit.anodes', 
+				'kit.cathodes'
+			)),
+		))->findByPk($id);
+
+		if($model == null)
+		{
+			$model = User::model()->findByPk($id);
 		}
+		$roles = array();
+		$cells = array();
 		
+		if(!empty($model->roles))
+		{
+			foreach($model->roles as $key=>$role){
+				$roles[] = array('id'=>$key+1, 'role'=>$role->name);
+			}
+		}		
 		$roleDataProvider = new CArrayDataProvider($roles);
+		
+		if(!empty($model->cellsStacked))
+		{
+			foreach($model->cellsStacked as $key=>$cell){
+				$cells[] = array('num'=>$key+1, 'serial'=>$cell->kit->getFormattedSerial(), 'id'=>$cell->id);
+			}
+		}	
+		$cellDataProvider = new CArrayDataProvider($cells);
 	
 		$this->render('view',array(
 			'model'=>$model,
 			'roleDataProvider'=>$roleDataProvider,
+			'cellDataProvider'=>$cellDataProvider,
 		));
 	}
 
@@ -162,9 +186,13 @@ class UserController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('User');
+		$model=new User('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['User']))
+			$model->attributes=$_GET['User'];
+
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'model'=>$model,
 		));
 	}
 

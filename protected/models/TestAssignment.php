@@ -20,6 +20,8 @@
  */
 class TestAssignment extends CActiveRecord
 {
+	
+	public $serial_search;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -41,7 +43,7 @@ class TestAssignment extends CActiveRecord
 			array('test_start', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, cell_id, channel_id, chamber_id, operator_id, test_start', 'safe', 'on'=>'search'),
+			array('id, cell_id, channel_id, chamber_id, operator_id, test_start, serial_search', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -72,6 +74,7 @@ class TestAssignment extends CActiveRecord
 			'chamber_id' => 'Chamber',
 			'operator_id' => 'Operator',
 			'test_start' => 'Test Date',
+			'serial_search' => 'Cell Serial',
 		);
 	}
 
@@ -93,6 +96,15 @@ class TestAssignment extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
+		$criteria->with = array(
+			'channel'=>array('with'=>array('cycler')),
+			'cell'=>array(
+				'alias'=>'cell',
+				'with'=>array(
+					'kit'=>array('alias'=>'kit', 'with'=>array('celltype', 'anodes', 'cathodes')),
+				),
+			),
+		);
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('cell_id',$this->cell_id,true);
 		$criteria->compare('channel_id',$this->channel_id,true);
@@ -101,10 +113,19 @@ class TestAssignment extends CActiveRecord
 		$criteria->compare('test_start',$this->test_start,true);
 		$criteria->compare('is_formation',$this->is_formation,true);
 
+		/* for concatenated user name search */
+		$criteria->addSearchCondition('concat(celltype.name,"-",serial_num)',$this->serial_search, true);
+		
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 			'sort'=>array(
 				'defaultOrder'=>'test_start DESC',
+				'attributes'=>array(
+					'serial_search'=>array(
+						'asc'=>"CONCAT(celltype.name, serial_num)",
+						'desc'=>"CONCAT(celltype.name, serial_num) DESC",
+					),
+				),
 			),
 		));
 	}

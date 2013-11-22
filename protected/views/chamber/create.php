@@ -9,8 +9,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Chamber', 'url'=>array('index')),
-	array('label'=>'Manage Chamber', 'url'=>array('admin')),
+	array('label'=>'View All Chambers', 'url'=>array('index')),
+	array('label'=>'Manage Chambers', 'url'=>array('admin')),
 );
 ?>
 

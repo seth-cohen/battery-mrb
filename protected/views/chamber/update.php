@@ -10,10 +10,10 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Chamber', 'url'=>array('index')),
-	array('label'=>'Create Chamber', 'url'=>array('create')),
+	array('label'=>'Add New Chamber', 'url'=>array('create')),
 	array('label'=>'View Chamber', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Chamber', 'url'=>array('admin')),
+	array('label'=>'View All Chambers', 'url'=>array('index')),
+	array('label'=>'Manage Chambers', 'url'=>array('admin')),
 );
 ?>
 

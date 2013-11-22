@@ -112,6 +112,7 @@ class Channel extends CActiveRecord
 		$criteria->compare('in_commission',$this->in_commission);
 		$criteria->compare('min_voltage',$this->min_voltage);
 		$criteria->compare('max_voltage',$this->max_voltage);
+		
 		$criteria->compare('cycler.id',$this->cycler_search, true);	// needed to change this to id to make the dropdownlist filter work.
 
 		return new CActiveDataProvider($this, array(

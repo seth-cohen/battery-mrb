@@ -35,11 +35,13 @@ class ChamberController extends Controller
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update'),
-				'users'=>array('@'),
+				'roles'=>array('admin', 'engineering', 'testlab'),
+				//'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'roles'=>array('admin', 'engineering', 'testlab'),
+				//'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -52,9 +54,31 @@ class ChamberController extends Controller
 	 * @param integer $id the ID of the model to be displayed
 	 */
 	public function actionView($id)
-	{
+	{		
+		$model = Chamber::model()->with(array(
+			'testAssignments'=>array('with'=>array(
+				'cell'=>array('with'=>array(
+					'kit.celltype',
+					'kit.anodes',
+					'kit.cathodes',
+				)),
+			)),
+		))->findByPk($id);
+		
+		$testAssignment = new TestAssignment('search');
+		$testAssignment->unsetAttributes();  // clear any default values
+		$testAssignment->chamber_id = $id;
+		
+		if(isset($_GET['TestAssignment']))
+		{
+			$testAssignment->attributes = $_GET['TestAssignment'];
+		}
+		$testAssignmentDataProvider = $testAssignment->search();
+		
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$model,
+			'testAssignmentDataProvider'=>$testAssignmentDataProvider,
+			'testAssignment'=>$testAssignment,
 		));
 	}
 
@@ -124,9 +148,13 @@ class ChamberController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Chamber');
+		$model=new Chamber('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['Chamber']))
+			$model->attributes=$_GET['Chamber'];
+
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'model'=>$model,
 		));
 	}
 

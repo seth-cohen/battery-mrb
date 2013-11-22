@@ -1,6 +1,8 @@
 <?php
 /* @var $this CyclerController */
 /* @var $model Cycler */
+/* @var $channel Channel */
+/* @var $channelDataProvider CArrayDataProvider */
 
 $this->breadcrumbs=array(
 	'Testlab'=>array('/testlab'),
@@ -9,16 +11,16 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Cycler', 'url'=>array('index')),
-	array('label'=>'Create Cycler', 'url'=>array('create')),
-	array('label'=>'Update Cycler', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Cycler', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Cycler', 'url'=>array('admin')),
+	array('label'=>'Add New Cycler', 'url'=>array('create')),
+	array('label'=>'Edit Cycler Details', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'View All Cyclers', 'url'=>array('index')),
+	array('label'=>'Manage Cyclers', 'url'=>array('admin')),
 );
 ?>
 
-<h1>View Cycler #<?php echo $model->id; ?></h1>
+<h1>View <?php echo $model->name; ?> Details</h1>
 
+<div class="shadow border">
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
@@ -35,14 +37,39 @@ $this->menu=array(
 		'maccor_job_num',
 		'govt_tag_num',
 	),
+	'cssFile'=>Yii::app()->baseUrl . '/css/styles.css',
 )); ?>
+</div>
 
-<h1>Channel Details</h1>
-<div> 
-	<table>
-		<tr><th>number</th><th>availability</th></tr>
-		<?php foreach($model->channels as $channel): ?>
-		<tr><td><?php echo $channel->number; ?></td><td><?php echo ($channel->in_commission && !$channel->in_use)?'YES':'NO'; ?>
-		<?php endforeach; ?>
-	</table>
+<div class="shadow border">
+<h2>Channel Details for <?php echo $model->name; ?></h2>
+<?php $this->widget('zii.widgets.grid.CGridView', array(
+	'id'=>'channel-grid',
+	'dataProvider'=>$channelDataProvider,
+	'filter'=>$channel,
+	'columns'=>array(
+		'number',
+		array(
+			'name'=>'in_use',
+			'value'=>'($data->in_use)?"Yes":"No"',
+			'filter'=>array(''=>'All', '0'=>'No', '1'=>'Yes'),
+		),
+		array(
+			'name'=>'in_commission',
+			'value'=>'($data->in_commission)?"Yes":"No"',
+			'filter'=>array(''=>'All', '0'=>'No', '1'=>'Yes'),
+		),
+		array(
+			'class'=>'CButtonColumn',
+			'template'=>'{view}',
+			'viewButtonUrl'=>'Yii::app()->createUrl("/channel/view",array("id"=>$data["id"]))',
+		),
+	),
+	'emptyText'=>'Oops, no cells built yet',
+	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
+	'pager'=>array(
+		'cssFile' => false,
+	),
+)); 
+?>
 </div>

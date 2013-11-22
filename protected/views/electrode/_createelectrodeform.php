@@ -117,8 +117,8 @@
 	function refSelected(sel)
 	{
 		var ref = $('option:selected', $(sel)).text();
-		$("#Electrode_eap_num").attr("value","EAP "+ ref + " ADD ");
-		$("#Electrode_eap_num").focus();
+		$("#Electrode_eap_num").attr("value","EAP "+ ref + " ADD ").focus();
+		//$("#Electrode_eap_num").focus();
 	}
 </script>
 	

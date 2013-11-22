@@ -2,22 +2,22 @@
 /* @var $this UserController */
 /* @var $model User */
 /* @var $roleDataProvider CArrayDataProvider */
+/* @var $cellDataProvider CArrayDataProvider */
 
 $this->breadcrumbs=array(
 	'Users'=>array('index'),
 	$model->getFullName(),
 );
 
+
 $this->menu=array(
-	array('label'=>'List User', 'url'=>array('index')),
 	array('label'=>'Create User', 'url'=>array('create')),
-	array('label'=>'Update User', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete User', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage User', 'url'=>array('admin')),
+	array('label'=>'View All Users', 'url'=>array('index')),
+	array('label'=>'Manage Users', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Details for <?php echo $model->getFullName(); ?></h1>
+<h1>Details for "<?php echo $model->getFullName(); ?>"</h1>
 
 <div class="shadow border">
 <?php $this->widget('zii.widgets.CDetailView', array(
@@ -66,11 +66,15 @@ $this->menu=array(
 		),
 	),
 	'emptyText'=>'Oops, no roles assigned yet',
+	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
+	'pager' => array(
+		'cssFile' => false,
+	)
 )); 
 ?>
 </div>
 
-<?php echo $this->renderPartial('_mfg', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_mfg', array('cellDataProvider'=>$cellDataProvider)); ?>
 
 <?php Yii::app()->clientScript->registerScript('testscript',"
     $('#btnAssign').bind('click',function(){

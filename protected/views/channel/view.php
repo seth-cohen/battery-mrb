@@ -33,8 +33,8 @@ $this->menu=array(
 <?php echo CHtml::dropDownList('channel_id', '-Select Cycler-', array(),
 		array(
 			'onchange'=>
-				'url = "'.CController::createUrl('channel/view').'";
-				url += "&id="+this.value;
+				'url = "'.CController::createUrl('channel/').'";
+				url += "/"+this.value;
 				window.location=url;',
 			'style'=>'display:block; float:left; width:50px; margin-right:15px;',
 		))?>
@@ -53,7 +53,7 @@ $this->menu=array(
 								'id'=>$model->id+1,
 							),
 							array(
-								'style'=>'float:right; margin-left:25px;',
+								'style'=>'float:right; margin-left:25px; margin-right:25px;',
 							));
 	}?>
 <?php 
@@ -76,6 +76,7 @@ $this->menu=array(
 
 
 
+<div class="shadow border">
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
@@ -92,4 +93,6 @@ $this->menu=array(
 		'min_voltage',
 		'max_voltage',
 	),
+	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
 )); ?>
+</div>

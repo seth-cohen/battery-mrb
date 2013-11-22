@@ -9,8 +9,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Cycler', 'url'=>array('index')),
-	array('label'=>'Manage Cycler', 'url'=>array('admin')),
+	array('label'=>'View All Cyclers', 'url'=>array('index')),
+	array('label'=>'Manage Cyclers', 'url'=>array('admin')),
 );
 ?>
 

@@ -17,6 +17,8 @@
  *
  * The followings are the available model relations:
  * @property Cycler $cycler
+ * @property TestAssignment $testAssignments
+ * 
  */
 class Chamber extends CActiveRecord
 {
@@ -55,6 +57,7 @@ class Chamber extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'cycler' => array(self::BELONGS_TO, 'Cycler', 'cycler_id'),
+			'testAssignments' => array(self::HAS_MANY, 'TestAssignment', 'chamber_id'),
 		);
 	}
 

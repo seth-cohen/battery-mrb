@@ -1,11 +1,33 @@
 <?php
 /* @var $this UserController */
-/* @var $model User */
+/* @var $cellDataProvider CArrayDataProvider */
 ?>
 
-<div class="mfg-user">
+<div class="shadow border">
 <h2>Manufacturing Employee Details</h2>
-<?php foreach($model->cellsStacked as $cell): ?>
-		<p> <?php echo 'stacked '.$cell->kit->serial_num;  ?> </p>
-<?php endforeach; ?>
+<?php $this->widget('zii.widgets.grid.CGridView', array(
+	'id'=>'cell-grid',
+	'dataProvider'=>$cellDataProvider,
+	'columns'=>array(
+		array(
+			'name'=>'No.',
+			'value'=>'$data["num"]',
+		),
+		array(
+			'name'=>'Cells Stacked',
+			'value'=>'$data["serial"]',
+		),
+		array(
+			'class'=>'CButtonColumn',
+			'template'=>'{view}',
+			'viewButtonUrl'=>'Yii::app()->createUrl("/cell/view",array("id"=>$data["id"]))',
+		),
+	),
+	'emptyText'=>'Oops, no cells stacked for User',
+	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
+	'pager' => array(
+		'cssFile' => false,
+	)
+)); 
+?>
 </div>

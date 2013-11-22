@@ -10,10 +10,9 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Cycler', 'url'=>array('index')),
-	array('label'=>'Create Cycler', 'url'=>array('create')),
-	array('label'=>'View Cycler', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Cycler', 'url'=>array('admin')),
+	array('label'=>'Add New Cycler', 'url'=>array('create')),
+	array('label'=>'View All Cyclers', 'url'=>array('index')),
+	array('label'=>'Manage Cyclers', 'url'=>array('admin')),
 );
 ?>
 

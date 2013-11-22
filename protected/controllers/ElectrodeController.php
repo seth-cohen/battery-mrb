@@ -87,7 +87,14 @@ class ElectrodeController extends Controller
 	 */
 	public function actionView($id)
 	{
-		$model = Electrode::model()->findByPk($id);
+		$model = Electrode::model()->with(array(
+			'kits'=>array('with'=>array(
+				'anodes', 
+				'cathodes',
+				'celltype',
+			)),
+			'coater',
+		))->findByPk($id);
 		$kits = array();
 		
 		foreach($model->kits as $key=>$kit){

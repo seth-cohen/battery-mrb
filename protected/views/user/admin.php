@@ -7,9 +7,12 @@ $this->breadcrumbs=array(
 	'Manage',
 );
 
+
 $this->menu=array(
-	array('label'=>'List User', 'url'=>array('index')),
 	array('label'=>'Create User', 'url'=>array('create')),
+	array('label'=>'Update User', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'View All Users', 'url'=>array('index')),
+	array('label'=>'Manage Users', 'url'=>array('admin')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -40,6 +43,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 )); ?>
 </div><!-- search-form -->
 
+<div class="shadow border">
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'user-grid',
 	'dataProvider'=>$model->search(),
@@ -47,7 +51,6 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'columns'=>array(
 		'id',
 		'username',
-		'password',
 		'first_name',
 		'last_name',
 		'email',
@@ -58,4 +61,9 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 			'class'=>'CButtonColumn',
 		),
 	),
+	'cssFile'=>Yii::app()->baseUrl . '/css/styles.css',
+	'pager' => array(
+		'cssFile'=> false,
+	),
 )); ?>
+</div>

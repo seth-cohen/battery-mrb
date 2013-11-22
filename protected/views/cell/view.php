@@ -55,6 +55,7 @@ $this->menu=array(
 			'value'=>$model->inspector->getFullName(),
 		),
 		'inspection_date',
+		'location',
 	),
 	'cssFile'=>Yii::app()->baseUrl . '/css/styles.css',
 )); ?>

@@ -44,7 +44,7 @@ $this->menu=array(
 </div>
 
 <div class="shadow border">
-<h2>Cells using <?php echo $model->is_anode?'Anode':'Cathode'; ?> Lot <?= $model->lot_num; ?> </h2>
+<h2>Kits using <?php echo $model->is_anode?'Anode':'Cathode'; ?> Lot <?= $model->lot_num; ?> </h2>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'kit-grid',
 	'dataProvider'=>$kitDataProvider,

@@ -74,6 +74,15 @@
 						array('label'=>'Cyclers', 'url'=>array('/cycler/'), 'active'=>0),
 					),
 				),
+				array(
+					'label'=>'Admin', 
+					'url'=>array('/admin/index/'),
+					'active'=>(strpos( Yii::app()->request->url, 'user') > 0),
+					'visible'=>Yii::app()->user->checkAccess('admin'),
+					'items'=>array(
+						array('label'=>'View Users', 'url'=>array('user/admin')),
+					),
+				),
 				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
 				array('label'=>'Contact', 'url'=>array('/site/contact')),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),

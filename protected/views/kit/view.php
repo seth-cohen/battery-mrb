@@ -48,6 +48,11 @@ $this->menu=array(
 			'value'=>$model->kitter->getFullName(),
 		),
 		'kitting_date',
+		array(
+			'label'=>'Cell Link',
+			'type'=>'html',
+			'value'=>(empty($model->cells))?'Not stacked yet':CHtml::link('View Cell Details', $this->createUrl('cell/view', array('id'=>$model->cells[0]->id))),
+		),
 	),
 	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
 )); ?>

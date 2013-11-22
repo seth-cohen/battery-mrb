@@ -9,8 +9,9 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Chamber', 'url'=>array('index')),
-	array('label'=>'Create Chamber', 'url'=>array('create')),
+	array('label'=>'Add New Chamber', 'url'=>array('create')),
+	array('label'=>'View All Chambers', 'url'=>array('index')),
+	array('label'=>'Manage Chambers', 'url'=>array('admin')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -41,6 +42,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 )); ?>
 </div><!-- search-form -->
 
+<div class="shadow border">
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'chamber-grid',
 	'dataProvider'=>$model->search(),
@@ -62,4 +64,9 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 			'class'=>'CButtonColumn',
 		),
 	),
+	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
+	'pager' => array(
+		'cssFile' => false,
+	),
 )); ?>
+</div>

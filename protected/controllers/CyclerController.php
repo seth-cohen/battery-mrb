@@ -50,9 +50,32 @@ class CyclerController extends Controller
 	 * @param integer $id the ID of the model to be displayed
 	 */
 	public function actionView($id)
-	{
+	{	
+		
+		$model = Cycler::model()->with(array(
+			'channels',
+		))->findByPk($id);
+		
+		$channel = new Channel('search');
+		$channel->unsetAttributes();  // clear any default values
+		$channel->cycler_id = $id;
+		
+		if(isset($_GET['Channel']))
+		{
+			$channel->attributes = $_GET['Channel'];
+		}
+		
+		$channelDataProvider = $channel->search();
+//		foreach($model->channels as $channel){
+//			$channels[] = array('num'=>$channel->number, 'in_use'=>$channel->in_use, 'id'=>$channel->id, 'commission'=>$channel->in_commission);
+//		}
+//		
+//		$channelDataProvider = new CArrayDataProvider($channels);
+		
 		$this->render('view',array(
-			'model'=>$this->loadModel($id)->with('channels'),
+			'model'=>$model,
+			'channelDataProvider'=>$channelDataProvider,
+			'channel'=>$channel,
 		));
 	}
 
@@ -127,7 +150,7 @@ class CyclerController extends Controller
 		if(isset($_GET['Cycler']))
 			$model->attributes=$_GET['Cycler'];
 
-		$this->render('admin',array(
+		$this->render('index',array(
 			'model'=>$model,
 		));
 	}
