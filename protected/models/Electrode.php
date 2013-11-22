@@ -42,12 +42,24 @@ class Electrode extends CActiveRecord
 			array('lot_num, coat_date, is_anode', 'required'),
 			array('is_anode', 'numerical', 'integerOnly'=>true),
 			array('lot_num, eap_num', 'length', 'max'=>50),
+			
+			array('eap_num', 'checkEAP'),
 			array('lot_num', 'unique',),
 			array('coater_id, ref_num_id', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, lot_num, eap_num, coater_id, ref_num_id, coat_date, is_anode, coater_search, refnum_search', 'safe', 'on'=>'search'),
 		);
+	}
+	
+	public function checkEAP($attribute,$params) 
+	{
+		$pattern = '/ADD\s$|ADD$/';
+		
+        if(preg_match($pattern, $this->$attribute))
+        {
+        	$this->addError( $attribute, "EAP Addendum is missing!" );
+        }	    
 	}
 	
 	/**

@@ -318,7 +318,9 @@ class CellController extends Controller
 	{
 		$model=new Cell('search');
 		$model->unsetAttributes();  // clear any default values
+		
 		$model->filler_id = 1;
+		$model->inspector_id = '>1';
 		
 		if(isset($_GET['Cell']))
 		{
@@ -399,7 +401,7 @@ class CellController extends Controller
 		$model=new Cell('search');
 		$model->unsetAttributes();  // clear any default values
 		$model->inspector_id = 1;
-		$model->filler_id ='<>1';
+		//$model->filler_id ='1';
 		
 		if(isset($_GET['Cell']))
 		{

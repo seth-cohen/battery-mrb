@@ -9,8 +9,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-    array('label'=>'Electrodes List', 'url'=>array('index')),
     array('label'=>'Create Electrode', 'url'=>array('create')),
+    array('label'=>'Viw All Electrodes', 'url'=>array('index')),
     array('label'=>'Electrode Admin', 'url'=>array('admin')),
 );
 ?>

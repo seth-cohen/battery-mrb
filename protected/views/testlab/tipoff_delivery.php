@@ -57,7 +57,7 @@ $chamberList = Chamber::forList();
             'selectableRows' => '50',   
         ),
 		array(
-			'header'=>'Filled Cells',
+			'header'=>'Cells on Formation',
 			'name'=>'serial_search',
 			'type'=>'raw',
 			'value'=>'$data->kit->getFormattedSerial()',

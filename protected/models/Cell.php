@@ -177,7 +177,7 @@ class Cell extends CActiveRecord
 //		$criteria->compare('dry_wt',$this->dry_wt);
 //		$criteria->compare('wet_wt',$this->wet_wt);
 		$criteria->compare('filler_id',$this->filler_id);
-//		$criteria->compare('inspector_id',$this->inspector_id);
+		$criteria->compare('inspector_id',$this->inspector_id);
 		$criteria->compare('fill_date',$this->fill_date,true);
 		$criteria->compare('inspection_date',$this->inspection_date,true);
 		
@@ -358,8 +358,13 @@ class Cell extends CActiveRecord
 		}
 		
 		/* cells at form will have only 1 test_assignment and it will be formation */
-		//$criteria->addCondition('test.cell_id = t.id HAVING COUNT(*) = 1');
-		$criteria->addcondition('t.location LIKE "[FORM]%"');
+		$criteria->addCondition('EXISTS (SELECT test.id, test.is_formation
+											FROM tbl_test_assignment test
+											WHERE t.id = test.cell_id
+											GROUP BY t.id
+											HAVING COUNT(test.id) = 1
+											AND test.is_formation = 1)');
+		//$criteria->addcondition('t.location LIKE "[FORM]%"');
 		
 		$criteria->addSearchCondition('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
 		
