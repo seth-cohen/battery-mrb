@@ -64,28 +64,14 @@ class UserController extends Controller
 			)),
 		))->findByPk($id);
 
+		/* if user didn't have any stacked cells then model will show as null */
 		if($model == null)
 		{
 			$model = User::model()->findByPk($id);
 		}
-		$roles = array();
-		$cells = array();
 		
-		if(!empty($model->roles))
-		{
-			foreach($model->roles as $key=>$role){
-				$roles[] = array('id'=>$key+1, 'role'=>$role->name);
-			}
-		}		
-		$roleDataProvider = new CArrayDataProvider($roles);
-		
-		if(!empty($model->cellsStacked))
-		{
-			foreach($model->cellsStacked as $key=>$cell){
-				$cells[] = array('num'=>$key+1, 'serial'=>$cell->kit->getFormattedSerial(), 'id'=>$cell->id);
-			}
-		}	
-		$cellDataProvider = new CArrayDataProvider($cells);
+		$roleDataProvider = new CArrayDataProvider($model->getUserRoles());
+		$cellDataProvider = new CArrayDataProvider($model->getUserStackedCells());
 	
 		$this->render('view',array(
 			'model'=>$model,
@@ -109,13 +95,9 @@ class UserController extends Controller
 		{
 			$model->attributes=$_POST['User'];
 			if($model->save()){
-				foreach($_POST['User']['roleIds'] as $role)
-				{
-					$commandInsert->insert('tbl_user_role', array(
-						'user_id'=>$model->id,
-						'role_id'=>$role,
-					));
-				}
+				$roles = $_POST['User']['roleIds'];
+				$model->saveUserRoles($roles);
+				
 				$this->redirect(array('view','id'=>$model->id));
 			}
 		}
@@ -142,22 +124,9 @@ class UserController extends Controller
 			$model->attributes=$_POST['User'];
 			if($model->save())
 			{
-				/* clear the join table of roles */
-				$commandDelete = Yii::app()->db->createCommand();
-				$commandDelete->delete('tbl_user_role', 
-					'user_id = :id',
-					array(':id'=>$id)
-				);
-		
-				/* add new roles list */
-				foreach($_POST['User']['roleIds'] as $role)
-				{
-					$commandInsert = Yii::app()->db->createCommand();
-					$commandInsert->insert('tbl_user_role', array(
-						'user_id'=>$model->id,
-						'role_id'=>$role,
-					));
-				}
+				$roles = $_POST['User']['roleIds'];
+				$model->saveUserRoles($roles);
+				
 				$this->redirect(array('view','id'=>$model->id));
 			}
 		}
@@ -249,28 +218,10 @@ class UserController extends Controller
 		if(isset($_POST['id']))
 		{
 			$id = $_POST['id'];
-			$roles = array();
-						
-			/* clear the join table of roles */
-			$commandDelete = Yii::app()->db->createCommand();
-			$commandDelete->delete('tbl_user_role', 
-				'user_id = :id',
-				array(':id'=>$id)
-			);
-				
-			if(isset($_POST['roles']))
-			{
-				$roles = $_POST['roles'];
-				/* save the roles in the join table */
-				$commandInsert = Yii::app()->db->createCommand();
-				foreach($roles as $role)
-				{
-					$commandInsert->insert('tbl_user_role', array(
-						'user_id'=>$id,
-						'role_id'=>$role,
-					));
-				}	
-			}
+			$model=$this->loadModel($id);
+			
+			$roles = isset($_POST['roles'])?$_POST['roles']:array();
+			$model->saveUserRoles($roles);
 		}
 	}
 	
@@ -280,28 +231,7 @@ class UserController extends Controller
 	 */
 	public function actionAjaxUserSearch($term)
 	{	
-		$results = array();
-		
-		$criteria = new CDbCriteria;
-		
-		$criteria->compare('first_name',$term, true, 'OR');
-		$criteria->compare('last_name',$term, true,'OR');
-		
-		$criteria->addCondition('id<>1');
-		
-		$criteria->order = 'last_name';
-		$criteria->select = 'first_name, last_name, id';
-		
-		$users = User::model()->findAll($criteria);
-		
-		foreach ($users as $user){
-			$results[] = array(
-					'value'=>$user->last_name.', '.$user->first_name,
-					'id'=>$user->id,
-			);
-		}
-		
-		echo json_encode($results);
+		echo json_encode(User::getAllUserNamesProper($term));
 		
 		Yii::app()->end();
 	}

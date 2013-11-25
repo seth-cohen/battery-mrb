@@ -200,6 +200,8 @@ class CellController extends Controller
 	{
 		$model=new Kit('search');
 		$model->unsetAttributes();  // clear any default values
+		
+		/* get all kits that haven't been stacked yet */
 		$model->is_stacked = 0;
 		
 		if(isset($_GET['Kit']))
@@ -217,7 +219,7 @@ class CellController extends Controller
 	 */
 	public function actionAjaxStackCells()
 	{
-		
+		/* TODO move most of this logic into the cell model */
 		if(!isset($_POST['autoId']))
 		{
 			echo 'hide';

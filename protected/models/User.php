@@ -180,6 +180,31 @@ class User extends CActiveRecord
 		return $user->last_name.', '.$user->first_name;
 	}
 	
+	public static function getAllUserNamesProper($term)
+	{
+		$results = array();
+		
+		$criteria = new CDbCriteria;
+		
+		$criteria->compare('first_name',$term, true, 'OR');
+		$criteria->compare('last_name',$term, true,'OR');
+		
+		$criteria->addCondition('id<>1');
+		
+		$criteria->order = 'last_name';
+		$criteria->select = 'first_name, last_name, id';
+		
+		$users = User::model()->findAll($criteria);
+		
+		foreach ($users as $user){
+			$results[] = array(
+					'value'=>$user->last_name.', '.$user->first_name,
+					'id'=>$user->id,
+			);
+		}
+		return $results;
+	}
+	
 /*
 	 * REturns one dimensional array to use to populate dropdown list for filtering
 	 * @return 1-D array of id=>name
@@ -196,5 +221,52 @@ class User extends CActiveRecord
 		}
 		 			
 		return $arr;
+	}
+	
+	public function getUserRoles()
+	{
+		$roles = array();
+		if(!empty($this->roles))
+		{
+			foreach($this->roles as $key=>$role){
+				$roles[] = array('id'=>$key+1, 'role'=>$role->name);
+			}
+		}	
+		return $roles;
+	}
+	
+	public function getUserStackedCells()
+	{
+		$cells = array();
+		if(!empty($this->cellsStacked))
+		{
+			foreach($this->cellsStacked as $key=>$cell){
+				$cells[] = array('num'=>$key+1, 'serial'=>$cell->kit->getFormattedSerial(), 'id'=>$cell->id);
+			}
+		}	
+		return $cells;
+	}
+	
+	public function saveUserRoles($roles)
+	{
+		/* clear the join table of roles */
+		$commandDelete = Yii::app()->db->createCommand();
+		$commandDelete->delete('tbl_user_role', 
+			'user_id = :id',
+			array(':id'=>$this->id)
+		);
+
+		if(!empty($roles))
+		{
+			/* add new roles list */
+			foreach($roles as $role)
+			{
+				$commandInsert = Yii::app()->db->createCommand();
+				$commandInsert->insert('tbl_user_role', array(
+					'user_id'=>$this->id,
+					'role_id'=>$role,
+				));
+			}
+		}
 	}
 }

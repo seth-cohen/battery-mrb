@@ -12,6 +12,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'Create User', 'url'=>array('create')),
+	array('label'=>'Edit User', 'url'=>array('update', 'id'=>$model->id)),
 	array('label'=>'View All Users', 'url'=>array('index')),
 	array('label'=>'Manage Users', 'url'=>array('admin')),
 );
