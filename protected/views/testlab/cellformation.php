@@ -199,7 +199,7 @@ jQuery('#submit-button').bind('click', function(event) {
 
 	if(noneChecked)
 	{
-		alert('You must select at least one cell to fill');
+		alert('You must select at least one cell to put on formation');
 	}
 });
 

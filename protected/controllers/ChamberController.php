@@ -65,6 +65,10 @@ class ChamberController extends Controller
 			)),
 		))->findByPk($id);
 		
+		if($model == null){
+			$model = Chamber::model()->findByPk($id);
+		}
+		
 		$testAssignment = new TestAssignment('search');
 		$testAssignment->unsetAttributes();  // clear any default values
 		$testAssignment->chamber_id = $id;

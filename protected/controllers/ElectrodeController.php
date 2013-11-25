@@ -62,7 +62,7 @@ class ElectrodeController extends Controller
 	   	 	if($model->save())
 	        {
 	            // form inputs are valid, do something here
-	            $this->redirect(array('viewlot','id'=>$model->id));
+	            $this->redirect(array('view','id'=>$model->id));
 	        }
 	    }
 	    $this->render('createlot',array('model'=>$model));
@@ -95,10 +95,19 @@ class ElectrodeController extends Controller
 			)),
 			'coater',
 		))->findByPk($id);
-		$kits = array();
 		
-		foreach($model->kits as $key=>$kit){
-			$kits[] = array('num'=>$key+1, 'kit'=>$kit->getFormattedSerial(), 'id'=>$kit->id);
+		if ($model == null)
+		{
+			$model = Electrode::model()->findByPk($id);
+		}
+		
+		$kits = array();
+		if(!empty($model->kits))
+		{
+			foreach($model->kits as $key=>$kit){
+				$kits[] = array('num'=>$key+1, 'kit'=>$kit->getFormattedSerial(), 'id'=>$kit->id);
+		
+			}
 		}
 		
 		$kitDataProvider = new CArrayDataProvider($kits);

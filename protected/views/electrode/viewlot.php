@@ -63,7 +63,7 @@ $this->menu=array(
 			'viewButtonUrl'=>'Yii::app()->createUrl("/kit/view",array("id"=>$data["id"]))',
 		),
 	),
-	'emptyText'=>'Oops, no cells built yet',
+	'emptyText'=>'Oops, no kits using this lot yet',
 	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
 	'pager'=>array(
 		'cssFile' => false,

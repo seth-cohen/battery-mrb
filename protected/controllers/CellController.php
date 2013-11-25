@@ -502,6 +502,7 @@ class CellController extends Controller
 			'Filler', 'Fill Date',
 			'Dry Wt(g)', 'Wet wt(g)',
 			'Inspector', 'Inspection Date',
+			'Location'
 		);
 
 		foreach($cells as $cell)
@@ -512,6 +513,7 @@ class CellController extends Controller
 				$cell->filler->getFullName(), $cell->fill_date,
 				$cell->dry_wt, $cell->wet_wt,
 				$cell->inspector->getFullName(), $cell->inspection_date,
+				$cell->location,
 			);
 		}
 		
