@@ -11,6 +11,7 @@
  * @property string $operator_id
  * @property string $formation_start
  * @property string $is_formation
+ * @property string $is_active
  *
  * The followings are the available model relations:
  * @property Cell $cell
@@ -38,7 +39,7 @@ class TestAssignment extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cell_id, channel_id, chamber_id, operator_id, test_start', 'required'),
+			array('cell_id, channel_id, chamber_id, operator_id, test_start, is_formation, is_active', 'required'),
 			array('cell_id, channel_id, chamber_id, operator_id', 'length', 'max'=>10),
 			array('test_start', 'safe'),
 			// The following rule is used by search().
@@ -78,6 +79,20 @@ class TestAssignment extends CActiveRecord
 		);
 	}
 
+	/**
+	 * @return array of the query criteria to be used for particular query
+	 */
+	public function scopes()
+	{
+		$alias = $this->getTableAlias( false, false );
+        return array(
+			'latest'=>array(
+				'order'=>$alias.'.id DESC',
+        		'limit'=>1,
+			),
+		);
+	}
+	
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *
@@ -139,5 +154,72 @@ class TestAssignment extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+	
+	public static function putCellsOnTest($cellsFormation)
+	{
+		$error = 0;
+		$models = array();
+
+		/* oops, we were passed bad data */
+		if(empty($cellsFormation))
+			return;
+			
+		foreach($cellsFormation as $cell)
+		{
+			$model = new TestAssignment();
+					 
+			$model->cell_id = $cell['cell_id'];
+			$model->channel_id = $cell['channel_id'];
+			$model->chamber_id = $cell['chamber_id'];
+			$model->operator_id = $cell['operator_id'];
+			$model->test_start = $cell['test_start'];
+			$model->is_formation = $cell['is_formation'];
+			$model->is_active = 1;
+				
+			if(!$model->validate())
+			{
+				$error = 1;
+			}
+			$models[] = $model;	
+		}
+		
+		/* all models validated save them all */
+		if ($error==0)
+		{
+			/* create array to return with JSON */
+			$result = array();
+			foreach($models as $model)
+			{
+				if($model->save())
+				{
+					/* update the cell location */
+					$cell = Cell::model()->findByPk($model->cell_id);
+					$cell->location = $model->is_formation ? '[FORM]':'[CAT]';
+					$cell->location .= $model->channel->cycler->name.
+										'{'.$model->channel->number.'} '.
+										'('.$model->chamber->name.')';
+					$cell->save();
+					
+					/* set the channel status as in_use */
+					$channel = Channel::model()->findByPk($model->channel_id);
+						
+					$channel->in_use = 1;
+					$channel->save();
+						
+					$result[] = array(
+						'serial'=>$cell->kit->getFormattedSerial(), 
+						'cycler'=>$model->channel->cycler->name,
+						'channel'=>$model->channel->number,
+					);
+				}
+			}
+			return json_encode($result);
+		}
+		else /* a model failed, don't save any */
+		{
+			return CHtml::errorSummary($models); 	
+		}			
+		return null;
 	}
 }

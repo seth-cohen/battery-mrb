@@ -5,7 +5,7 @@
 $this->breadcrumbs=array(
 	'Manufacturing'=>array('/manufacturing'),
 	'Cells'=>array('index'),
-	'Fill Cells (multi)',
+	'Laser Weld Cells (multi)',
 );
 
 $this->menu=array(
@@ -19,8 +19,10 @@ $this->menu=array(
 );
 ?>
 
-<h1>Inspect Cells (Multi)</h1>
-<p>*Only cells that have been stacked but not yet inspected will be visible in this list.</p>
+<h1>Fill Port Weld Cells (Multi)</h1>
+
+<p>*Only cells that have been filled and not yet had the fill port welded will be visible.
+	Regardless of whether or not they have been put on formation yet.</p>
 <?php
 /* ionclude JQuery scripts to allow for autocomplte */
 Yii::app()->clientScript->registerCoreScript('jquery.ui'); 
@@ -33,13 +35,13 @@ Yii::app()->clientScript->registerCssFile(
 <?php $form=$this->beginWidget('CActiveForm', array(
     'enableAjaxValidation'=>true,
 	'enableClientValidation'=>true,
-	'id'=>'inspecting-form',
+	'id'=>'portwelding-form',
 )); ?>
 
 <div class="shadow border" >
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'inspecting-grid',
-	'dataProvider'=>$model->search(),
+	'id'=>'portwelding-grid',
+	'dataProvider'=>$model->searchAtForm(),
 	'filter'=>$model,
 	'columns'=>array(
 		array(
@@ -48,7 +50,7 @@ Yii::app()->clientScript->registerCssFile(
             'selectableRows' => '50',   
         ),
 		array(
-			'header'=>'Uninspected Cells',
+			'header'=>'Cells at Formation',
 			'name'=>'serial_search',
 			'type'=>'raw',
 			'value'=>'$data->kit->getFormattedSerial()',
@@ -60,7 +62,7 @@ Yii::app()->clientScript->registerCssFile(
 		),
 		'eap_num',
 		array(
-			'header' => 'Inspector',
+			'header' => 'Fill Port Welder',
 			'type' => 'raw',
 			'value' => array($this, 'getUserInputTextField'),
 //			'value'=>'CHtml::textField("user_name[$data->id]",User::getFullNameProper(Yii::app()->user->id),array(
@@ -70,7 +72,7 @@ Yii::app()->clientScript->registerCssFile(
 //			))',
 		),
 		array(
-			'header' => 'Inspection Date',
+			'header' => 'Port Weld Date',
 			'type' => 'raw',
 			'value'=>'CHtml::textField("dates[$data->id]",date("Y-m-d",time()),array("style"=>"width:100px;", "class"=>"hasDatePicker"))',	
 		),
@@ -93,23 +95,23 @@ function reloadGrid(data) {
     	try
     	{
     	   var cells = $.parseJSON(data);
-    	   var alertString = cells.length+' cells were inspected. Serial numbers: \n';
+    	   var alertString = cells.length+' cells were tipped off. Serial numbers: \n';
     	   cells.forEach(function(cell) {
-    		   alertString += cell.serial + ' <> ' + cell.inspector + '\n';
+    		   alertString += cell.serial + ' <> ' + cell.portwelder + '\n';
     	   });
     	   alert(alertString);
-    	   $.fn.yiiGridView.update('inspecting-grid');
+    	   $.fn.yiiGridView.update('portwelding-grid');
     	}
     	catch(e)
     	{
-    		$('#inspecting-form').prepend(data);
+    		$('#portwelding-form').prepend(data);
     		console.log(e.message);
     	}
     }
 }
 </script>
-<?php echo CHtml::ajaxSubmitButton('Filter',array('cell/multiinspectcells'), array(),array("style"=>"display:none;")); ?>
-<?php echo CHtml::ajaxSubmitButton('Submit',array('cell/ajaxinspectcells'), array('success'=>'reloadGrid'), array("id"=>"submit-button")); ?>
+<?php echo CHtml::ajaxSubmitButton('Filter',array('cell/multitipoffcells'), array(),array("style"=>"display:none;")); ?>
+<?php echo CHtml::ajaxSubmitButton('Submit',array('cell/ajaxtipoffcells'), array('success'=>'reloadGrid'), array("id"=>"submit-button")); ?>
 
 <?php $this->endWidget(); ?>
 
@@ -144,7 +146,7 @@ jQuery('#submit-button').bind('click', function(event) {
 
 	if(noneChecked)
 	{
-		alert('You must select at least one cell to inspect');
+		alert('You must select at least one cell to fillport weld');
 	}
 });
 

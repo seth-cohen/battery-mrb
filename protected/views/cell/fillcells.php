@@ -10,18 +10,17 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'Create New Kit', 'url'=>array('kit/create')),
-	array('label'=>'Stack Cell (single)', 'url'=>array('stackcell')),
 	array('label'=>'Stack Cells (multi)', 'url'=>array('multistackcells')),
-	array('label'=>'Fill Cell (single)', 'url'=>array('fillcell')),
-	array('label'=>'Fill Cells (multi)', 'url'=>array('multifillcells')),
-	array('label'=>'Inspect Cell (single)', 'url'=>array('inspectcell')),
 	array('label'=>'Inspect Cells (multi)', 'url'=>array('multiinspectcells')),
+	array('label'=>'Laser Weld Cells (multi)', 'url'=>array('multilasercells')),
+	array('label'=>'Fill Cells (multi)', 'url'=>array('multifillcells')),
+	array('label'=>'Fillport Weld Cells (multi)', 'url'=>array('multitipoffcells')),
 	array('label'=>'View All Cells', 'url'=>array('index')),
 );
 ?>
 
 <h1>Fill Cells (Multi)</h1>
-
+<p>*Only cells that have had covers laser welded on but haven't yet been filled will be visible in this list.</p>
 <?php
 /* ionclude JQuery scripts to allow for autocomplte */
 Yii::app()->clientScript->registerCoreScript('jquery.ui'); 
@@ -105,17 +104,27 @@ Yii::app()->clientScript->registerCssFile(
 </div>
 <script>
 function reloadGrid(data) {	
-    if(data=='hide')
+	if(data=='hide')
     {
     	$('.errorSummary').remove();
     }
     else
     {
-        if(data=='')
-        {
-        	$.fn.yiiGridView.update('filling-grid');
-        }
-        $('#filling-form').prepend(data);
+    	try
+    	{
+    	   var cells = $.parseJSON(data);
+    	   var alertString = cells.length+' cells were filled. Serial numbers: \n';
+    	   cells.forEach(function(cell) {
+    		   alertString += cell.serial + ' <> ' + cell.filler + '\n';
+    	   });
+    	   alert(alertString);
+    	   $.fn.yiiGridView.update('filling-grid');
+    	}
+    	catch(e)
+    	{
+    		$('#filling-form').prepend(data);
+    		console.log(e.message);
+    	}
     }
 }
 </script>

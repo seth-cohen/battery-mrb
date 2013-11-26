@@ -10,18 +10,17 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'Create New Kit', 'url'=>array('kit/create')),
-	array('label'=>'Stack Cell (single)', 'url'=>array('stackcell')),
 	array('label'=>'Stack Cells (multi)', 'url'=>array('multistackcells')),
-	array('label'=>'Fill Cell (single)', 'url'=>array('fillcell')),
-	array('label'=>'Fill Cells (multi)', 'url'=>array('multifillcells')),
-	array('label'=>'Inspect Cell (single)', 'url'=>array('inspectcell')),
 	array('label'=>'Inspect Cells (multi)', 'url'=>array('multiinspectcells')),
+	array('label'=>'Laser Weld Cells (multi)', 'url'=>array('multilasercells')),
+	array('label'=>'Fill Cells (multi)', 'url'=>array('multifillcells')),
+	array('label'=>'Fillport Weld Cells (multi)', 'url'=>array('multitipoffcells')),
 	array('label'=>'View All Cells', 'url'=>array('index')),
 );
 ?>
 
 <h1>Stack Cells</h1>
-
+<p>*Only kits that have not yet been stacked will be visible in this list.</p>
 <?php
 /* ionclude JQuery scripts to allow for autocomplte */
 Yii::app()->clientScript->registerCoreScript('jquery.ui'); 
@@ -114,8 +113,7 @@ function reloadGrid(data) {
     	try
     	{
     	   var cells = $.parseJSON(data);
-    	   alert(cells.length);
-    	   var alertString = 'You stacked '+cells.length+' cells. Serial numbers: \n';
+    	   var alertString = cells.length+' cells were stacked. Serial numbers: \n';
     	   cells.forEach(function(cell) {
     		   alertString += cell.serial + '-' + cell.stacker + '\n';
     	   });

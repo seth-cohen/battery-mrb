@@ -67,8 +67,10 @@ class TestlabController extends Controller
 	{
 		$model=new Cell('search');
 		$model->unsetAttributes();  // clear any default values
+		
+		/* Uses cell->searchUnFormed to find all cells with no
+		 * test assignments and that were filled today */
 		$model->fill_date = '>='.date("Y-m-d",time());
-		$model->not_formed = 1;
 		
 		if(isset($_GET['Cell']))
 		{
@@ -79,6 +81,7 @@ class TestlabController extends Controller
 			'model'=>$model,
 		));
 	}
+	
 	/**
 	 * Allows user to stack mulitple kits that are not associated with a cell yet.
 	 */
@@ -97,9 +100,9 @@ class TestlabController extends Controller
 		$chambers = $_POST['chambers'];
 		$channels = $_POST['channels'];
 		
-		$channels = array_slice($channels, 0, count($formationCells), true);
-		 
 		/* make sure there are no duplicate channel selections */
+		$channels = array_slice($channels, 0, count($formationCells), true);
+
 		if (count($channels) !== count(array_unique($channels)))
 		{ /* then we have duplicates set error and bail */		
 			$model = new Cell();
@@ -110,82 +113,43 @@ class TestlabController extends Controller
 		
 		if(count($formationCells)>0)
 		{
-			$errorSum = null;
-			$error = 0;
-			$models = array();
+			$cellsFormation = array();
 			
 			foreach($formationCells as $cell_id)
 			{
-				$model = new TestAssignment();
-		 		
-				if(isset($userIds[$cell_id]) && isset($dates[$cell_id]))
-				{
-					$model->cell_id = $cell_id;
-					$model->channel_id =  $channels[$cell_id];
-					$model->chamber_id = $chambers[$cell_id];
-					$model->operator_id =  $userIds[$cell_id];
-					$model->test_start = $dates[$cell_id];
-					$model->is_formation = 1;
-					
-					if(!$model->validate())
-					{
-						$error = 1;
-					}
-					$models[] = $model;		
-				}
+				$cellsFormation[] = array(
+					'cell_id'=> $cell_id,
+					'channel_id' => $channels[$cell_id],
+					'chamber_id' => $chambers[$cell_id],
+					'operator_id' => $userIds[$cell_id],
+					'test_start' => $dates[$cell_id],
+					'is_formation' => 1,
+				);
 			}
-			if (!($error==1))
-			{
-				foreach($models as $model)
-				{
-					if($model->save())
-					{
-						$channelModel = Channel::model()->findByPk($channels[$model->cell_id]);
-						
-						$channelModel->in_use = 1;
-						$channelModel->save();
-						
-						/* update cell location */
-						$model->cell->location = '[FORM] Chamber-'.$model->chamber->name;
-						$model->cell->save();
-					}
-				}
+			
+			$result = TestAssignment::putCellsOnTest($cellsFormation);  
+			
+			if (!json_decode($result))
+			{ /* the save failed otherwise result would be json_encoded*/
+				echo $result;
+			} 
+			else 
+			{ /* success so show count and serial numbers */
+				echo $result;
 			}
-			else
-			{
-				$errorSum = CHtml::errorSummary($models); 	
-			}			
-				
-			echo $errorSum;
 		}
 	}
-
-	/**
-	 * Allows user to sdliver multiple cells to MFG for tip-off
-	 */
-	public function actionTipoffDelivery()
-	{
-		$model=new Cell('search');
-		$model->unsetAttributes();  // clear any default values
-		
-		if(isset($_GET['Cell']))
-		{
-			$model->attributes=$_GET['Cell'];
-		}
-				
-		$this->render('tipoff_delivery',array(
-			'model'=>$model,
-		));
-	}
-	
 	
 	/**
 	 * Allows user to stack mulitple kits that are not associated with a cell yet.
 	 */
 	public function actionCellCAT()
 	{
-		$model=new Cell('search');
+		$model=new Cell('search'); 
 		$model->unsetAttributes();  // clear any default values
+		
+		/* uses cell->searchFormed() to get all cells that have been through 
+		 * formation and are not actively on test */
 		
 		if(isset($_GET['Cell']))
 		{
@@ -196,6 +160,7 @@ class TestlabController extends Controller
 			'model'=>$model,
 		));
 	}
+	
 	/**
 	 * Allows user to stack mulitple kits that are not associated with a cell yet.
 	 */
@@ -208,51 +173,49 @@ class TestlabController extends Controller
 			Yii::app()->end();
 		}
 		
-		$formationCells = $_POST['autoId'];
+		$catCells = $_POST['autoId'];
 		$userIds = $_POST['user_ids'];
 		$dates = $_POST['dates'];
 		$chambers = $_POST['chambers'];
 		$channels = $_POST['channels'];
 		
-		if(count($formationCells)>0)
-		{
-			$errorSum = null;
-			$error = 0;
-			$models = array();
-			
-			foreach($formationCells as $cell_id)
-			{
-				 $model = new FormationDetail();
-		 
-				if(isset($userIds[$cell_id]) && isset($dates[$cell_id]))
-				{
-					$model->cell_id = $cell_id;
-					$model->channel_id =  $channels[$cell_id];
-					$model->chamber_id = $chambers[$cell_id];
-					$model->operator_id =  $userIds[$cell_id];
-					$model->formation_start = $dates[$cell_id];
-					
-					if(!$model->validate())
-					{
-						$error = 1;
-					}
-					$models[] = $model;	
+		/* make sure there are no duplicate channel selections */
+		$channels = array_slice($channels, 0, count($catCells), true);
 
-				}
-			}
-			if (!($error==1))
+		if (count($channels) !== count(array_unique($channels)))
+		{ /* then we have duplicates set error and bail */		
+			$model = new Cell();
+			$model->addError('channel_error', 'Duplicate Channel Selection!');
+			echo CHtml::errorSummary($model);
+			Yii::app()->end();
+		}
+		
+		if(count($catCells)>0)
+		{
+			$cellsCAT = array();
+			
+			foreach($catCells as $cell_id)
 			{
-				foreach($models as $model)
-				{
-					$model->save();
-				}
-			}
-			else
-			{
-				$errorSum = CHtml::errorSummary($models); 	
+				$cellsCAT[] = array(
+					'cell_id'=> $cell_id,
+					'channel_id' => $channels[$cell_id],
+					'chamber_id' => $chambers[$cell_id],
+					'operator_id' => $userIds[$cell_id],
+					'test_start' => $dates[$cell_id],
+					'is_formation' => 0,
+				);
 			}
 			
-			echo $errorSum;
+			$result = TestAssignment::putCellsOnTest($cellsCAT);  
+			
+			if (!json_decode($result))
+			{ /* the save failed otherwise result would be json_encoded*/
+				echo $result;
+			} 
+			else 
+			{ /* success so show count and serial numbers */
+				echo $result;
+			}
 		}
 	}
 	

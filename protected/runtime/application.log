@@ -27818,3 +27818,404 @@ REQUEST_URI=/ytpdb/kit/23
 in C:\wamp\www\ytpdb\protected\views\kit\view.php (53)
 in C:\wamp\www\ytpdb\protected\controllers\KitController.php (57)
 in C:\wamp\www\ytpdb\index.php (13)
+2013/11/26 13:03:47 [error] [php] Undefined index: filler_id (C:\wamp\www\ytpdb\protected\models\Cell.php:677)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/cell/ajaxtipoffcells
+in C:\wamp\www\ytpdb\protected\models\Cell.php (677)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (518)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/26 13:04:07 [error] [exception.CException] exception 'CException' with message 'Property "Cell.portwelder_date" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('portwelder_date')
+#1 C:\wamp\www\yii\framework\validators\CRequiredValidator.php(58): CActiveRecord->__get('portwelder_date')
+#2 C:\wamp\www\yii\framework\validators\CValidator.php(213): CRequiredValidator->validateAttribute(Object(Cell), 'portwelder_date')
+#3 C:\wamp\www\yii\framework\base\CModel.php(159): CValidator->validate(Object(Cell), NULL)
+#4 C:\wamp\www\ytpdb\protected\models\Cell.php(681): CModel->validate()
+#5 C:\wamp\www\ytpdb\protected\controllers\CellController.php(518): Cell::tipoffCells(Array)
+#6 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAjaxTipoffCells()
+#7 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#8 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#10 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#14 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxtipoffcells')
+#16 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxtipoff...')
+#17 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#18 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/ytpdb/cell/ajaxtipoffcells
+HTTP_REFERER=http://localhost/ytpdb/cell/multitipoffcells
+---
+2013/11/26 13:04:19 [error] [exception.CException] exception 'CException' with message 'Property "Cell.portwelder_date" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('portwelder_date')
+#1 C:\wamp\www\yii\framework\validators\CRequiredValidator.php(58): CActiveRecord->__get('portwelder_date')
+#2 C:\wamp\www\yii\framework\validators\CValidator.php(213): CRequiredValidator->validateAttribute(Object(Cell), 'portwelder_date')
+#3 C:\wamp\www\yii\framework\base\CModel.php(159): CValidator->validate(Object(Cell), NULL)
+#4 C:\wamp\www\ytpdb\protected\models\Cell.php(681): CModel->validate()
+#5 C:\wamp\www\ytpdb\protected\controllers\CellController.php(518): Cell::tipoffCells(Array)
+#6 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAjaxTipoffCells()
+#7 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#8 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#10 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#14 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxtipoffcells')
+#16 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxtipoff...')
+#17 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#18 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/ytpdb/cell/ajaxtipoffcells
+HTTP_REFERER=http://localhost/ytpdb/cell/multitipoffcells
+---
+2013/11/26 13:42:41 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`yardney`.`tbl_cell`, CONSTRAINT `FK_tbl_cell_tbl_ref_num` FOREIGN KEY (`ref_num_id`) REFERENCES `tbl_ref_num` (`id`) ON DELETE SET NULL ON UPDATE CASCADE). The SQL statement executed was: INSERT INTO `tbl_cell` (`filler_id`, `inspector_id`, `portwelder_id`, `laserwelder_id`, `stacker_id`, `stack_date`, `ref_num_id`, `eap_num`, `kit_id`, `location`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9).
+in C:\wamp\www\ytpdb\protected\models\Cell.php (496)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (256)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/26 13:42:41 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`yardney`.`tbl_cell`, CONSTRAINT `FK_tbl_cell_tbl_ref_num` FOREIGN KEY (`ref_num_id`) REFERENCES `tbl_ref_num` (`id`) ON DELETE SET NULL ON UPDATE CASCADE). The SQL statement executed was: INSERT INTO `tbl_cell` (`filler_id`, `inspector_id`, `portwelder_id`, `laserwelder_id`, `stacker_id`, `stack_date`, `ref_num_id`, `eap_num`, `kit_id`, `location`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9)' in C:\wamp\www\yii\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 C:\wamp\www\ytpdb\protected\models\Cell.php(496): CActiveRecord->save()
+#3 C:\wamp\www\ytpdb\protected\controllers\CellController.php(256): Cell::createStackedCells(Array)
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAjaxStackCells()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxstackcells')
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxstackc...')
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/ytpdb/cell/ajaxstackcells
+HTTP_REFERER=http://localhost/ytpdb/cell/multistackcells
+---
+2013/11/26 14:17:57 [error] [php] include(TestAssigment.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory (C:\wamp\www\yii\framework\YiiBase.php:427)
+Stack trace:
+#0 C:\wamp\www\ytpdb\protected\models\Cell.php(702): spl_autoload_call()
+#1 C:\wamp\www\ytpdb\protected\controllers\CellController.php(517): tipoffCells()
+#2 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAjaxTipoffCells()
+#3 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#5 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#7 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#8 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#9 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#11 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#13 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/cell/ajaxtipoffcells
+in C:\wamp\www\ytpdb\protected\models\Cell.php (702)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (517)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/26 14:18:12 [error] [php] include(TestAssigment.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory (C:\wamp\www\yii\framework\YiiBase.php:427)
+Stack trace:
+#0 C:\wamp\www\ytpdb\protected\models\Cell.php(702): spl_autoload_call()
+#1 C:\wamp\www\ytpdb\protected\controllers\CellController.php(517): tipoffCells()
+#2 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAjaxTipoffCells()
+#3 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#5 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#7 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#8 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#9 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#11 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#13 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/cell/ajaxtipoffcells
+in C:\wamp\www\ytpdb\protected\models\Cell.php (702)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (517)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/11/26 14:31:19 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(WebUser), 'You are not aut...')
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('cellformation')
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('testlab/cellfor...')
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/ytpdb/testlab/cellformation
+HTTP_REFERER=http://localhost/ytpdb/cell/multitipoffcells
+---
+2013/11/26 14:32:22 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(WebUser), 'You are not aut...')
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('cellformation')
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('testlab/cellfor...')
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/ytpdb/testlab/cellformation
+HTTP_REFERER=http://localhost/ytpdb/cell/multitipoffcells
+---
+2013/11/26 14:32:24 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(WebUser), 'You are not aut...')
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('cellformation')
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('testlab/cellfor...')
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/ytpdb/testlab/cellformation
+HTTP_REFERER=http://localhost/ytpdb/cell/multitipoffcells
+---
+2013/11/26 14:32:32 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(WebUser), 'You are not aut...')
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('cellformation')
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('testlab/cellfor...')
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/ytpdb/testlab/cellformation
+HTTP_REFERER=http://localhost/ytpdb/testlab/index
+---
+2013/11/26 15:23:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "formationindex".' in C:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('formationindex')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('formationindex')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('testlab/formati...')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ytpdb/testlab/formationindex
+HTTP_REFERER=http://localhost/ytpdb/testlab/cellcat
+---
+2013/11/26 15:33:24 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'test.is_active' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM (SELECT `t`.`id` AS `t0_c0`, `t`.`eap_num` AS `t0_c3`, `kit`.`id` AS `t1_c0`, `kit`.`serial_num` AS `t1_c1`, `celltype`.`id` AS `t2_c0`, `celltype`.`name` AS `t2_c1`, `anode`.`id` AS `t3_c0`, `cathode`.`id` AS `t4_c0`, `ref`.`id` AS `t5_c0`, `ref`.`number` AS `t5_c1` FROM `tbl_cell` `t`  LEFT OUTER JOIN `tbl_kit` `kit` ON (`t`.`kit_id`=`kit`.`id`)  LEFT OUTER JOIN `tbl_celltype` `celltype` ON (`kit`.`celltype_id`=`celltype`.`id`)  LEFT OUTER JOIN `tbl_electrode_kit` `anodes_anode` ON (`kit`.`id`=`anodes_anode`.`kit_id`) LEFT OUTER JOIN `tbl_electrode` `anode` ON (`anode`.`id`=`anodes_anode`.`electrode_id`)  LEFT OUTER JOIN `tbl_electrode_kit` `cathodes_cathode` ON (`kit`.`id`=`cathodes_cathode`.`kit_id`) LEFT OUTER JOIN `tbl_electrode` `cathode` ON (`cathode`.`id`=`cathodes_cathode`.`electrode_id`)  LEFT OUTER JOIN `tbl_ref_num` `ref` ON (`t`.`ref_num_id`=`ref`.`id`)  LEFT OUTER JOIN `tbl_test_assignment` `testAssignments` ON (`testAssignments`.`cell_id`=`t`.`id`)  WHERE ((test.is_active=:ycp0) AND (EXISTS (SELECT test.id, test.is_formation
+											FROM tbl_test_assignment test
+											WHERE t.id = test.cell_id
+											GROUP BY t.id
+											AND test.is_formation = 1))) AND (anode.is_anode=1) AND (cathode.is_anode=0) GROUP BY t.id) sq.
+in C:\wamp\www\ytpdb\protected\components\KeenActiveDataProvider.php (139)
+in C:\wamp\www\ytpdb\protected\views\testlab\cellcat.php (107)
+in C:\wamp\www\ytpdb\protected\controllers\TestlabController.php (162)
+2013/11/26 15:33:24 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'test.is_active' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM (SELECT `t`.`id` AS `t0_c0`, `t`.`eap_num` AS `t0_c3`, `kit`.`id` AS `t1_c0`, `kit`.`serial_num` AS `t1_c1`, `celltype`.`id` AS `t2_c0`, `celltype`.`name` AS `t2_c1`, `anode`.`id` AS `t3_c0`, `cathode`.`id` AS `t4_c0`, `ref`.`id` AS `t5_c0`, `ref`.`number` AS `t5_c1` FROM `tbl_cell` `t`  LEFT OUTER JOIN `tbl_kit` `kit` ON (`t`.`kit_id`=`kit`.`id`)  LEFT OUTER JOIN `tbl_celltype` `celltype` ON (`kit`.`celltype_id`=`celltype`.`id`)  LEFT OUTER JOIN `tbl_electrode_kit` `anodes_anode` ON (`kit`.`id`=`anodes_anode`.`kit_id`) LEFT OUTER JOIN `tbl_electrode` `anode` ON (`anode`.`id`=`anodes_anode`.`electrode_id`)  LEFT OUTER JOIN `tbl_electrode_kit` `cathodes_cathode` ON (`kit`.`id`=`cathodes_cathode`.`kit_id`) LEFT OUTER JOIN `tbl_electrode` `cathode` ON (`cathode`.`id`=`cathodes_cathode`.`electrode_id`)  LEFT OUTER JOIN `tbl_ref_num` `ref` ON (`t`.`ref_num_id`=`ref`.`id`)  LEFT OUTER JOIN `tbl_test_assignment` `testAssignments` ON (`testAssignments`.`cell_id`=`t`.`id`)  WHERE ((test.is_active=:ycp0) AND (EXISTS (SELECT test.id, test.is_formation
+											FROM tbl_test_assignment test
+											WHERE t.id = test.cell_id
+											GROUP BY t.id
+											AND test.is_formation = 1))) AND (anode.is_anode=1) AND (cathode.is_anode=0) GROUP BY t.id) sq' in C:\wamp\www\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(740): CDbCommand->queryScalar()
+#2 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(151): CJoinElement->count(Object(CDbCriteria))
+#3 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1605): CActiveFinder->count(Object(CDbCriteria))
+#4 C:\wamp\www\yii\framework\web\CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#5 C:\wamp\www\yii\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#6 C:\wamp\www\yii\framework\web\CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#7 C:\wamp\www\ytpdb\protected\components\KeenActiveDataProvider.php(139): CActiveDataProvider->fetchData()
+#8 C:\wamp\www\yii\framework\web\CDataProvider.php(168): KeenActiveDataProvider->fetchData()
+#9 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(111): CDataProvider->getData()
+#10 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(339): CBaseListView->init()
+#11 C:\wamp\www\yii\framework\web\CBaseController.php(147): CGridView->init()
+#12 C:\wamp\www\yii\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#13 C:\wamp\www\ytpdb\protected\views\testlab\cellcat.php(107): CBaseController->widget('zii.widgets.gri...', Array)
+#14 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#15 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#16 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#17 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('cellcat', Array, true)
+#18 C:\wamp\www\ytpdb\protected\controllers\TestlabController.php(162): CController->render('cellcat', Array)
+#19 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): TestlabController->actionCellCAT()
+#20 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#21 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#22 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#23 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#24 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#25 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#26 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#27 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#28 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('cellcat')
+#29 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('testlab/cellcat')
+#30 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#31 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#32 {main}
+REQUEST_URI=/ytpdb/testlab/cellcat
+HTTP_REFERER=http://localhost/ytpdb/testlab/cellformation
+---
+2013/11/26 15:35:54 [error] [exception.CDbException] exception 'CDbException' with message 'Relation "test" is not defined in active record class "Cell".' in C:\wamp\www\yii\framework\db\ar\CActiveFinder.php:226
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(296): CActiveFinder->buildJoinTree(Object(CJoinElement), 'test')
+#1 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(48): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#2 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(909): CActiveFinder->__construct(Object(Cell), Array)
+#3 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1355): CActiveRecord->getActiveFinder(Array)
+#4 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1536): CActiveRecord->query(Object(CDbCriteria), true)
+#5 C:\wamp\www\ytpdb\protected\components\KeenActiveDataProvider.php(236): CActiveRecord->findAllByAttributes(Array, Array)
+#6 C:\wamp\www\ytpdb\protected\components\KeenActiveDataProvider.php(141): KeenActiveDataProvider->afterFetch(Array)
+#7 C:\wamp\www\yii\framework\web\CDataProvider.php(168): KeenActiveDataProvider->fetchData()
+#8 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(111): CDataProvider->getData()
+#9 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(339): CBaseListView->init()
+#10 C:\wamp\www\yii\framework\web\CBaseController.php(147): CGridView->init()
+#11 C:\wamp\www\yii\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#12 C:\wamp\www\ytpdb\protected\views\testlab\cellcat.php(107): CBaseController->widget('zii.widgets.gri...', Array)
+#13 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#14 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#15 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#16 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('cellcat', Array, true)
+#17 C:\wamp\www\ytpdb\protected\controllers\TestlabController.php(162): CController->render('cellcat', Array)
+#18 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): TestlabController->actionCellCAT()
+#19 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#20 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#21 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#22 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#23 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#24 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#25 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#26 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#27 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('cellcat')
+#28 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('testlab/cellcat')
+#29 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#30 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#31 {main}
+REQUEST_URI=/ytpdb/testlab/cellcat
+HTTP_REFERER=http://localhost/ytpdb/testlab/cellformation
+---
+2013/11/26 15:36:23 [error] [exception.CDbException] exception 'CDbException' with message 'Relation "testAssignment" is not defined in active record class "Cell".' in C:\wamp\www\yii\framework\db\ar\CActiveFinder.php:226
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(298): CActiveFinder->buildJoinTree(Object(CJoinElement), 'testAssignment', Array)
+#1 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(48): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#2 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(909): CActiveFinder->__construct(Object(Cell), Array)
+#3 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1355): CActiveRecord->getActiveFinder(Array)
+#4 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1536): CActiveRecord->query(Object(CDbCriteria), true)
+#5 C:\wamp\www\ytpdb\protected\components\KeenActiveDataProvider.php(236): CActiveRecord->findAllByAttributes(Array, Array)
+#6 C:\wamp\www\ytpdb\protected\components\KeenActiveDataProvider.php(141): KeenActiveDataProvider->afterFetch(Array)
+#7 C:\wamp\www\yii\framework\web\CDataProvider.php(168): KeenActiveDataProvider->fetchData()
+#8 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(111): CDataProvider->getData()
+#9 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(339): CBaseListView->init()
+#10 C:\wamp\www\yii\framework\web\CBaseController.php(147): CGridView->init()
+#11 C:\wamp\www\yii\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#12 C:\wamp\www\ytpdb\protected\views\testlab\cellcat.php(107): CBaseController->widget('zii.widgets.gri...', Array)
+#13 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#14 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#15 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#16 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('cellcat', Array, true)
+#17 C:\wamp\www\ytpdb\protected\controllers\TestlabController.php(162): CController->render('cellcat', Array)
+#18 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): TestlabController->actionCellCAT()
+#19 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#20 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#21 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#22 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#23 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#24 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#25 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#26 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#27 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('cellcat')
+#28 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('testlab/cellcat')
+#29 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#30 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#31 {main}
+REQUEST_URI=/ytpdb/testlab/cellcat
+HTTP_REFERER=http://localhost/ytpdb/testlab/cellformation
+---
+2013/11/26 15:36:30 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'test.is_active' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM (SELECT `t`.`id` AS `t0_c0`, `t`.`eap_num` AS `t0_c3`, `kit`.`id` AS `t1_c0`, `kit`.`serial_num` AS `t1_c1`, `celltype`.`id` AS `t2_c0`, `celltype`.`name` AS `t2_c1`, `anode`.`id` AS `t3_c0`, `cathode`.`id` AS `t4_c0`, `ref`.`id` AS `t5_c0`, `ref`.`number` AS `t5_c1` FROM `tbl_cell` `t`  LEFT OUTER JOIN `tbl_kit` `kit` ON (`t`.`kit_id`=`kit`.`id`)  LEFT OUTER JOIN `tbl_celltype` `celltype` ON (`kit`.`celltype_id`=`celltype`.`id`)  LEFT OUTER JOIN `tbl_electrode_kit` `anodes_anode` ON (`kit`.`id`=`anodes_anode`.`kit_id`) LEFT OUTER JOIN `tbl_electrode` `anode` ON (`anode`.`id`=`anodes_anode`.`electrode_id`)  LEFT OUTER JOIN `tbl_electrode_kit` `cathodes_cathode` ON (`kit`.`id`=`cathodes_cathode`.`kit_id`) LEFT OUTER JOIN `tbl_electrode` `cathode` ON (`cathode`.`id`=`cathodes_cathode`.`electrode_id`)  LEFT OUTER JOIN `tbl_ref_num` `ref` ON (`t`.`ref_num_id`=`ref`.`id`)  LEFT OUTER JOIN `tbl_test_assignment` `testAssignments` ON (`testAssignments`.`cell_id`=`t`.`id`)  WHERE ((test.is_active=:ycp0) AND (EXISTS (SELECT test.id, test.is_formation
+											FROM tbl_test_assignment test
+											WHERE t.id = test.cell_id
+											GROUP BY t.id
+											AND test.is_formation = 1))) AND (anode.is_anode=1) AND (cathode.is_anode=0) GROUP BY t.id) sq.
+in C:\wamp\www\ytpdb\protected\components\KeenActiveDataProvider.php (139)
+in C:\wamp\www\ytpdb\protected\views\testlab\cellcat.php (107)
+in C:\wamp\www\ytpdb\protected\controllers\TestlabController.php (162)
+2013/11/26 15:36:30 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'test.is_active' in 'where clause'. The SQL statement executed was: SELECT COUNT(*) FROM (SELECT `t`.`id` AS `t0_c0`, `t`.`eap_num` AS `t0_c3`, `kit`.`id` AS `t1_c0`, `kit`.`serial_num` AS `t1_c1`, `celltype`.`id` AS `t2_c0`, `celltype`.`name` AS `t2_c1`, `anode`.`id` AS `t3_c0`, `cathode`.`id` AS `t4_c0`, `ref`.`id` AS `t5_c0`, `ref`.`number` AS `t5_c1` FROM `tbl_cell` `t`  LEFT OUTER JOIN `tbl_kit` `kit` ON (`t`.`kit_id`=`kit`.`id`)  LEFT OUTER JOIN `tbl_celltype` `celltype` ON (`kit`.`celltype_id`=`celltype`.`id`)  LEFT OUTER JOIN `tbl_electrode_kit` `anodes_anode` ON (`kit`.`id`=`anodes_anode`.`kit_id`) LEFT OUTER JOIN `tbl_electrode` `anode` ON (`anode`.`id`=`anodes_anode`.`electrode_id`)  LEFT OUTER JOIN `tbl_electrode_kit` `cathodes_cathode` ON (`kit`.`id`=`cathodes_cathode`.`kit_id`) LEFT OUTER JOIN `tbl_electrode` `cathode` ON (`cathode`.`id`=`cathodes_cathode`.`electrode_id`)  LEFT OUTER JOIN `tbl_ref_num` `ref` ON (`t`.`ref_num_id`=`ref`.`id`)  LEFT OUTER JOIN `tbl_test_assignment` `testAssignments` ON (`testAssignments`.`cell_id`=`t`.`id`)  WHERE ((test.is_active=:ycp0) AND (EXISTS (SELECT test.id, test.is_formation
+											FROM tbl_test_assignment test
+											WHERE t.id = test.cell_id
+											GROUP BY t.id
+											AND test.is_formation = 1))) AND (anode.is_anode=1) AND (cathode.is_anode=0) GROUP BY t.id) sq' in C:\wamp\www\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(740): CDbCommand->queryScalar()
+#2 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(151): CJoinElement->count(Object(CDbCriteria))
+#3 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1605): CActiveFinder->count(Object(CDbCriteria))
+#4 C:\wamp\www\yii\framework\web\CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#5 C:\wamp\www\yii\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#6 C:\wamp\www\yii\framework\web\CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#7 C:\wamp\www\ytpdb\protected\components\KeenActiveDataProvider.php(139): CActiveDataProvider->fetchData()
+#8 C:\wamp\www\yii\framework\web\CDataProvider.php(168): KeenActiveDataProvider->fetchData()
+#9 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(111): CDataProvider->getData()
+#10 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(339): CBaseListView->init()
+#11 C:\wamp\www\yii\framework\web\CBaseController.php(147): CGridView->init()
+#12 C:\wamp\www\yii\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#13 C:\wamp\www\ytpdb\protected\views\testlab\cellcat.php(107): CBaseController->widget('zii.widgets.gri...', Array)
+#14 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#15 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#16 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#17 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('cellcat', Array, true)
+#18 C:\wamp\www\ytpdb\protected\controllers\TestlabController.php(162): CController->render('cellcat', Array)
+#19 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): TestlabController->actionCellCAT()
+#20 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#21 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#22 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#23 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#24 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#25 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#26 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#27 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#28 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('cellcat')
+#29 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('testlab/cellcat')
+#30 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#31 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#32 {main}
+REQUEST_URI=/ytpdb/testlab/cellcat
+HTTP_REFERER=http://localhost/ytpdb/testlab/cellformation
+---
+2013/11/26 15:46:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "formationindex".' in C:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('formationindex')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('formationindex')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('testlab/formati...')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ytpdb/testlab/formationindex
+HTTP_REFERER=http://localhost/ytpdb/testlab/cellcat
+---

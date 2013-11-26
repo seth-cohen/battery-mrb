@@ -16,6 +16,10 @@
  * @property string $fill_date
  * @property string $inspector_id
  * @property string $inspection_date
+ * @property string $laserwelder_id
+ * @property string $laserweld_date
+ * @property string $portwelder_id
+ * @property string $portweld_date
  * @property string $location
  *
  * The followings are the available model relations:
@@ -24,6 +28,8 @@
  * @property User $stacker
  * @property User $filler
  * @property User $inspector
+ * @property User $portwelder
+ * @property User $laserwelder
  * @property TestAssignment[] $testAssignments
  */
 class Cell extends CActiveRecord
@@ -42,6 +48,8 @@ class Cell extends CActiveRecord
 	public $stacker_search;
 	public $filler_search;
 	public $inspector_search;
+	public $portwelder_search;
+	public $laserwelder_search;
 	public $refnum_search;
 	
 	public $not_formed=null;
@@ -59,10 +67,13 @@ class Cell extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			//array('stack_date, dry_wt, wet_wt, fill_date, inspection_date', 'required', 'on'=>'create'),
-			array('stack_date, stacker_id, kit_id', 'required', 'on'=>'stack'),
 			array('wet_wt', 'greaterThanDry'),
-			array('fill_date, filler_id, wet_wt, dry_wt', 'required', 'on'=>'fill'),
+			
+			array('stack_date, stacker_id, kit_id, ref_num_id, eap_num', 'required', 'on'=>'stack'),
 			array('inspection_date, inspector_id', 'required', 'on'=>'inspect'),
+			array('laserweld_date, laserwelder_id', 'required', 'on'=>'laser'),
+			array('fill_date, filler_id, wet_wt, dry_wt', 'required', 'on'=>'fill'),
+			array('portweld_date, portwelder_id', 'required', 'on'=>'tipoff'),
 			
 			array('eap_num', 'checkEAP'),
 			array('dry_wt, wet_wt', 'numerical'),
@@ -71,8 +82,9 @@ class Cell extends CActiveRecord
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('eap_num, stack_date, dry_wt, wet_wt, fill_date, inspection_date, serial_search, celltype_search, 
-					refnum_search, stacker_search, filler_search, inspector_search, location,
-					not_formed, formed_only', 'safe', 'on'=>'search'),
+					refnum_search, stacker_search, filler_search, inspector_search, laserwelder_search, portwelder_search,
+					location, not_formed, formed_only, inspector_id, laserwelder_id, portwelder_id', 
+					'safe', 'on'=>'search'),
 		);
 	}
 
@@ -106,6 +118,8 @@ class Cell extends CActiveRecord
 			'stacker' => array(self::BELONGS_TO, 'User', 'stacker_id'),
 			'filler' => array(self::BELONGS_TO, 'User', 'filler_id'),
 			'inspector' => array(self::BELONGS_TO, 'User', 'inspector_id'),
+			'laserwelder' => array(self::BELONGS_TO, 'User', 'laserwelder_id'),
+			'portwelder' => array(self::BELONGS_TO, 'User', 'portwelder_id'),
 			'testAssignments' => array(self::HAS_MANY, 'TestAssignment', 'cell_id'),
 		);
 	}
@@ -118,7 +132,7 @@ class Cell extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'kit_id' => 'Kit',
-			'ref_num' => 'Reference No.',
+			'ref_num_id' => 'Reference No.',
 			'eap_num' => 'EAP No.',
 			'stacker_id' => 'Stacker',
 			'stack_date' => 'Stack Date',
@@ -128,14 +142,21 @@ class Cell extends CActiveRecord
 			'fill_date' => 'Fill Date',
 			'inspector_id' => 'Inspector',
 			'inspection_date' => 'Inspection Date',
+			'laserwelder_id' => 'Laser Welder',
+			'laserweld_date' => 'Laser Weld Date',
+			'portwelder_id' => 'Fill Port Welder',
+			'portweld_date' => 'Fill Port Weld Date',
 			'location' => 'Location',
 			
 			'refnum_search' => "Reference No.",
 			'serial_search' => 'Serial No.',
 			'celltype_search' => 'Cell Type',
 			'stacker_search' => 'Stacker',
+			'laserwelder_search' => 'Laser Welder',
 			'filler_search' => 'Filler',
+			'portwelder_search' => 'Fill Port Welder',
 			'inspector_search' => 'Inspector',
+			'activetest_search' => 'Active Test',
 			
 		);
 	}
@@ -159,10 +180,19 @@ class Cell extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->with = array(
-						'kit'=>array('with'=>'celltype'), 
+						'kit'=>array(
+							'select'=>array('id','serial_num'),
+							'with'=>array(
+								'celltype',
+								'anodes'=>array('select'=>'id'), 
+								'cathodes'=>array('select'=>'id'),
+							), 
+						),
 						'stacker'=>array('alias'=>'stack'), 
 						'filler'=>array('alias'=>'fill'), 
 						'inspector'=>array('alias'=>'insp'), 
+						'laserwelder'=>array('alias'=>'laser'),
+						'portwelder'=>array('alias'=>'port'),
 						'refNum'=>array('alias'=>'ref'),
 						'testAssignments'=>array('alias'=>'test'),
 		); // needed for alias of search parameter tables
@@ -174,10 +204,18 @@ class Cell extends CActiveRecord
 		$criteria->compare('t.eap_num',$this->eap_num,true);
 		$criteria->compare('stack_date',$this->stack_date,true);
 		$criteria->compare('location',$this->location, true);
-//		$criteria->compare('dry_wt',$this->dry_wt);
-//		$criteria->compare('wet_wt',$this->wet_wt);
+		$criteria->compare('dry_wt',$this->dry_wt);
+		$criteria->compare('wet_wt',$this->wet_wt);
+		
+		$criteria->compare('stacker_id',$this->stacker_id);
 		$criteria->compare('filler_id',$this->filler_id);
 		$criteria->compare('inspector_id',$this->inspector_id);
+		$criteria->compare('laserwelder_id',$this->laserwelder_id);
+		$criteria->compare('portwelder_id',$this->portwelder_id);
+		
+		$criteria->compare('stack_date',$this->stack_date,true);
+		$criteria->compare('laserweld_date',$this->laserweld_date,true);
+		$criteria->compare('portweld_date',$this->portweld_date,true);
 		$criteria->compare('fill_date',$this->fill_date,true);
 		$criteria->compare('inspection_date',$this->inspection_date,true);
 		
@@ -217,8 +255,14 @@ class Cell extends CActiveRecord
 		$criteria->addSearchCondition('concat(stack.first_name, " ", stack.last_name)', $this->stacker_search);
 		$criteria->addSearchCondition('concat(fill.first_name, " ", fill.last_name)', $this->filler_search);
 		$criteria->addSearchCondition('concat(insp.first_name, " ", insp.last_name)', $this->inspector_search);
+		$criteria->addSearchCondition('concat(laser.first_name, " ", laser.last_name)', $this->laserwelder_search);
+		$criteria->addSearchCondition('concat(port.first_name, " ", port.last_name)', $this->portwelder_search);
 
-		return new CActiveDataProvider($this, array(
+		return new KeenActiveDataProvider($this, array(
+			'withKeenLoading' => array(
+				'kit'=>array('select'=>array('celltype','serial_num')),
+				//'testAssignments'=>array('alias'=>'test'),
+			),
 			'pagination'=>array('pageSize' => 16),
 			'criteria'=>$criteria,
 			'sort'=>array(
@@ -247,6 +291,14 @@ class Cell extends CActiveRecord
 						'asc'=>"CONCAT(insp.first_name, ' ', insp.last_name)",
 						'desc'=>"CONCAT(insp.first_name, ' ', insp.last_name) DESC",
 					),
+					'laserwelder_search'=>array(
+						'asc'=>"CONCAT(laser.first_name, ' ', laser.last_name)",
+						'desc'=>"CONCAT(laser.first_name, ' ', laser.last_name) DESC",
+					),
+					'portwelder_search'=>array(
+						'asc'=>"CONCAT(port.first_name, ' ', port.last_name)",
+						'desc'=>"CONCAT(port.first_name, ' ', port.last_name) DESC",
+					),
 					'*',		// all others treated normally
 				),
 			),
@@ -263,7 +315,8 @@ class Cell extends CActiveRecord
 		$criteria->with = array(
 						'kit'=>array(
 							'select'=>array('id','serial_num'),
-							'with'=>array('celltype',
+							'with'=>array(
+								'celltype',
 								'anodes'=>array('select'=>'id'), 
 								'cathodes'=>array('select'=>'id'),
 							),
@@ -324,11 +377,12 @@ class Cell extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->select = 'id';
+		$criteria->select = 'id, eap_num';
 		$criteria->with = array(
 						'kit'=>array(
 							'select'=>array('id','serial_num'),
-							'with'=>array('celltype',
+							'with'=>array(
+								'celltype',
 								'anodes'=>array('select'=>'id'), 
 								'cathodes'=>array('select'=>'id'),
 							),
@@ -342,6 +396,10 @@ class Cell extends CActiveRecord
 		$criteria->compare('stack_date',$this->stack_date,true);
 		$criteria->compare('fill_date',$this->fill_date,true);
 
+		/* for tipoff filtering */
+		$criteria->compare('filler_id',$this->filler_id);
+		$criteria->compare('portwelder_id',$this->portwelder_id);
+		
 		if($this->refnum_search)
 		{
 			$references = explode(',', str_replace(' ', ',', $this->refnum_search));
@@ -357,13 +415,13 @@ class Cell extends CActiveRecord
 			$criteria->mergeWith($refCriteria);
 		}
 		
-		/* cells at form will have only 1 test_assignment and it will be formation */
-		$criteria->addCondition('EXISTS (SELECT test.id, test.is_formation
+		/* look for cells with formation test assignments  that are active*/
+		$criteria->addCondition('EXISTS (SELECT test.id, test.is_formation, test.is_active
 											FROM tbl_test_assignment test
 											WHERE t.id = test.cell_id
-											GROUP BY t.id
-											HAVING COUNT(test.id) = 1
-											AND test.is_formation = 1)');
+											AND test.is_formation = 1
+											AND test.is_active = 1
+											GROUP BY t.id)');
 		//$criteria->addcondition('t.location LIKE "[FORM]%"');
 		
 		$criteria->addSearchCondition('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
@@ -374,6 +432,85 @@ class Cell extends CActiveRecord
 			'withKeenLoading' => array(
 				'kit'=>array('select'=>array('celltype','serial_num')),
 				//'testAssignments'=>array('alias'=>'test'),
+			),
+			'sort'=>array(
+				'attributes'=>array(
+					'refnum_search'=>array(
+						'asc'=>'ref.number',
+						'desc'=>'ref.number DESC',
+					),
+					'serial_search'=>array(
+						'asc'=>"CONCAT(celltype.name, serial_num)",
+						'desc'=>"CONCAT(celltype.name, serial_num) DESC",
+					),
+					'*',		// all others treated normally
+				),
+			),
+		));
+	}
+	
+	public function searchFormed()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->select = 'id, eap_num';
+		$criteria->with = array(
+						'kit'=>array(
+							'select'=>array('id','serial_num'),
+							'with'=>array(
+								'celltype',
+								'anodes'=>array('select'=>'id'), 
+								'cathodes'=>array('select'=>'id'),
+							),
+						), 
+						'refNum'=>array('alias'=>'ref'),
+						'testAssignments'=>array('alias'=>'test', 'select'=>'is_active, id'),
+		); // needed for alias of search parameter tables
+
+		$criteria->together = true;
+		
+		if($this->refnum_search)
+		{
+			$references = explode(',', str_replace(' ', ',', $this->refnum_search));
+			
+			$refCriteria = new CDbCriteria();
+			foreach ($references as $reference)
+			{
+				if(!empty($reference))
+				{
+					$refCriteria->compare('ref.number', $reference, true, 'OR');
+				}
+			}
+			$criteria->mergeWith($refCriteria);
+		}
+		
+		/* cells that have been through formation */
+		$criteria->addCondition('EXISTS (SELECT test.id, test.is_formation
+											FROM tbl_test_assignment test
+											WHERE t.id = test.cell_id
+											AND test.is_formation = 1
+											AND test.is_active = 0
+											GROUP BY t.id)');
+		
+		/* but are not currently on CAT*/
+		$criteria->addCondition('NOT EXISTS (SELECT test.id, test.is_active
+											FROM tbl_test_assignment test
+											WHERE t.id = test.cell_id
+											AND test.is_active = 1
+											GROUP BY t.id)');
+		
+		//$criteria->addcondition('t.location LIKE "[FORM]%"');
+		
+		$criteria->addSearchCondition('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
+		
+		return new KeenActiveDataProvider($this, array(
+			'pagination'=>array('pageSize' => 16),
+			'criteria'=>$criteria,
+			'withKeenLoading' => array(
+				'kit'=>array('select'=>array('celltype','serial_num')),
+				'testAssignments'=>array('alias'=>'test'),
 			),
 			'sort'=>array(
 				'attributes'=>array(
@@ -419,9 +556,8 @@ class Cell extends CActiveRecord
 			$model->stack_date = $cell['stack_date'];
 			$model->ref_num_id = $cell['ref_num_id'];
 			$model->eap_num = $cell['eap_num'];
-			$model->location = $cell['location'];
 			$model->kit_id = $cell['kit_id'];
-				
+			$model->location = 'stacked';
 				
 			if(!$model->validate())
 			{
@@ -446,6 +582,221 @@ class Cell extends CActiveRecord
 					$result[] = array(
 						'serial'=>$kit->getFormattedSerial(), 
 						'stacker'=>User::getFullNameProper($model->stacker_id),
+					);
+				}
+			}
+			return json_encode($result);
+		}
+		else /* a model failed, don't save any */
+		{
+			return CHtml::errorSummary($models); 	
+		}			
+		return null;
+	}
+	
+	public static function inspectCells($inspectedCells)
+	{
+		$error = 0;
+		$models = array();
+
+		/* oops, we were passed bad data */
+		if(empty($inspectedCells))
+			return;
+			
+		foreach($inspectedCells as $cell)
+		{
+			$model = Cell::model()->findByPk($cell['cell_id']);
+			$model->scenario = 'inspect';
+					 
+			$model->inspector_id = $cell['inspector_id'];
+			$model->inspection_date = $cell['inspection_date'];
+			$model->location = 'inspected';
+				
+			if(!$model->validate())
+			{
+				$error = 1;
+			}
+			$models[] = $model;	
+		}
+		
+		/* all models validated save them all */
+		if ($error==0)
+		{
+			/* create array to return with JSON */
+			$result = array();
+			foreach($models as $model)
+			{
+				if($model->save())
+				{
+					$result[] = array(
+						'serial'=>$model->kit->getFormattedSerial(), 
+						'inspector'=>User::getFullNameProper($model->inspector_id),
+					);
+				}
+			}
+			return json_encode($result);
+		}
+		else /* a model failed, don't save any */
+		{
+			return CHtml::errorSummary($models); 	
+		}			
+		return null;
+	}
+
+	public static function laserCells($laseredCells)
+	{
+		$error = 0;
+		$models = array();
+
+		/* oops, we were passed bad data */
+		if(empty($laseredCells))
+			return;
+			
+		foreach($laseredCells as $cell)
+		{
+			$model = Cell::model()->findByPk($cell['cell_id']);
+			$model->scenario = 'laser';
+					 
+			$model->laserwelder_id = $cell['laserwelder_id'];
+			$model->laserweld_date = $cell['laserweld_date'];
+			$model->location = 'laserwelded';
+				
+			if(!$model->validate())
+			{
+				$error = 1;
+			}
+			$models[] = $model;	
+		}
+		
+		/* all models validated save them all */
+		if ($error==0)
+		{
+			/* create array to return with JSON */
+			$result = array();
+			foreach($models as $model)
+			{
+				if($model->save())
+				{
+					$result[] = array(
+						'serial'=>$model->kit->getFormattedSerial(), 
+						'laserwelder'=>User::getFullNameProper($model->laserwelder_id),
+					);
+				}
+			}
+			return json_encode($result);
+		}
+		else /* a model failed, don't save any */
+		{
+			return CHtml::errorSummary($models); 	
+		}			
+		return null;
+	}
+
+	public static function fillCells($filledCells)
+	{
+		$error = 0;
+		$models = array();
+
+		/* oops, we were passed bad data */
+		if(empty($filledCells))
+			return;
+			
+		foreach($filledCells as $cell)
+		{
+			$model = Cell::model()->findByPk($cell['cell_id']);
+			$model->scenario = 'fill';
+					 
+			$model->filler_id = $cell['filler_id'];
+			$model->fill_date = $cell['fill_date'];
+			$model->dry_wt = $cell['dry_wt'];
+			$model->wet_wt = $cell['wet_wt'];
+			$model->location = 'filled';
+				
+			if(!$model->validate())
+			{
+				$error = 1;
+			}
+			$models[] = $model;	
+		}
+		
+		/* all models validated save them all */
+		if ($error==0)
+		{
+			/* create array to return with JSON */
+			$result = array();
+			foreach($models as $model)
+			{
+				if($model->save())
+				{
+					$result[] = array(
+						'serial'=>$model->kit->getFormattedSerial(), 
+						'filler'=>User::getFullNameProper($model->filler_id),
+					);
+				}
+			}
+			return json_encode($result);
+		}
+		else /* a model failed, don't save any */
+		{
+			return CHtml::errorSummary($models); 	
+		}			
+		return null;
+	}
+	
+	public static function tipoffCells($cellsTippedoff)
+	{
+		$error = 0;
+		$models = array();
+
+		/* oops, we were passed bad data */
+		if(empty($cellsTippedoff))
+			return;
+			
+		foreach($cellsTippedoff as $cell)
+		{
+			$model = Cell::model()->findByPk($cell['cell_id']);
+			$model->scenario = 'tipoff';
+					 
+			$model->portwelder_id = $cell['portwelder_id'];
+			$model->portweld_date = $cell['portweld_date'];
+			$model->location = 'Fillport Weld';
+				
+			if(!$model->validate())
+			{
+				$error = 1;
+			}
+			$models[] = $model;	
+		}
+		
+		/* all models validated save them all */
+		if ($error==0)
+		{
+			/* create array to return with JSON */
+			$result = array();
+			foreach($models as $model)
+			{
+				if($model->save())
+				{
+					/* set previous channel assignment to free */
+					/* get the latest testAssignment to find current channel */
+					$testAssignment = TestAssignment::model()->latest()->findByAttributes(
+						array(
+							'cell_id'=>$model->id,
+							'is_formation'=>1,
+						)
+					);
+					
+					if($testAssignment!=null)
+					{
+						$testAssignment->is_active = 0;
+						$testAssignment->save();
+						
+						$testAssignment->channel->in_use = 0;
+						$testAssignment->channel->save();
+					}
+					$result[] = array(
+						'serial'=>$model->kit->getFormattedSerial(), 
+						'portwelder'=>User::getFullNameProper($model->portwelder_id),
 					);
 				}
 			}

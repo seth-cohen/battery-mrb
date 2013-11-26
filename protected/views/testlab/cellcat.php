@@ -38,7 +38,7 @@ Yii::app()->clientScript->registerCssFile(
 <div class="shadow border" >
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'cat-grid',
-	'dataProvider'=>$model->searchAtForm(),
+	'dataProvider'=>$model->searchFormed(),
 	'filter'=>$model,
 	'columns'=>array(
 		array(
@@ -94,7 +94,7 @@ Yii::app()->clientScript->registerCssFile(
 //			))',
 		),
 		array(
-			'header' => 'Formation Date',
+			'header' => 'CAT Date',
 			'type' => 'raw',
 			'value'=>'CHtml::textField("dates[$data->id]",date("Y-m-d",time()),array("style"=>"width:100px;", "class"=>"hasDatePicker"))',	
 		),
@@ -108,17 +108,27 @@ Yii::app()->clientScript->registerCssFile(
 </div>
 <script>
 function reloadGrid(data) {	
-    if(data=='hide')
+	if(data=='hide')
     {
     	$('.errorSummary').remove();
     }
     else
     {
-        if(data=='')
-        {
-        	$.fn.yiiGridView.update('cat-grid');
-        }
-        $('#cat-form').prepend(data);
+    	try
+    	{
+    	   var cells = $.parseJSON(data);
+    	   var alertString = cells.length+' cells were put on CAT. Serial numbers: \n';
+    	   cells.forEach(function(cell) {
+    		   alertString += cell.serial + ' on ' + cell.cycler + '-' + cell.channel + '\n';
+    	   });
+    	   alert(alertString);
+    	   $.fn.yiiGridView.update('cat-grid');
+    	}
+    	catch(e)
+    	{
+    		$('#cat-form').prepend(data);
+    		console.log(e.message);
+    	}
     }
 }
 </script>

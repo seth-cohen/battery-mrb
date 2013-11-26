@@ -124,17 +124,27 @@ $chamberList = Chamber::forList();
 </div>
 <script>
 function reloadGrid(data) {	
-    if(data=='hide')
+	if(data=='hide')
     {
     	$('.errorSummary').remove();
     }
     else
     {
-        if(data=='')
-        {
-        	$.fn.yiiGridView.update('formation-grid');
-        }
-        $('#formation-form').prepend(data);
+    	try
+    	{
+    	   var cells = $.parseJSON(data);
+    	   var alertString = cells.length+' cells were put on formation. Serial numbers: \n';
+    	   cells.forEach(function(cell) {
+    		   alertString += cell.serial + ' on ' + cell.cycler + '-' + cell.channel + '\n';
+    	   });
+    	   alert(alertString);
+    	   $.fn.yiiGridView.update('formation-grid');
+    	}
+    	catch(e)
+    	{
+    		$('#formation-form').prepend(data);
+    		console.log(e.message);
+    	}
     }
 }
 </script>

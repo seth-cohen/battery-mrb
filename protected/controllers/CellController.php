@@ -32,7 +32,13 @@ class CellController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update', 'multistackcells', 'ajaxstackcells', 'multifillcells', 'ajaxfillcells', 'multiinspectcells', 'ajaxinspectcells'),
+				'actions'=>array('create','update', 
+								'multistackcells', 'ajaxstackcells', 
+								'multiinspectcells', 'ajaxinspectcells',
+								'multilasercells', 'ajaxlasercells',
+								'multifillcells', 'ajaxfillcells', 
+								'multitipoffcells', 'ajaxtipoffcells',			
+				),
 				'roles' => array('manufacturing'),
 				//'users'=>array('@'),
 			),
@@ -217,73 +223,6 @@ class CellController extends Controller
 	/**
 	 * Allows user to stack mulitple kits that are not associated with a cell yet.
 	 */
-	public function actionAjaxStackCells_OG()
-	{
-		/* TODO move most of this logic into the cell model */
-		if(!isset($_POST['autoId']))
-		{
-			echo 'hide';
-			Yii::app()->end();
-		}
-		
-		$stackedKits = $_POST['autoId'];
-		$userIds = $_POST['user_ids'];
-		$dates = $_POST['dates'];
-		$refnumIds = $_POST['refnumIds'];
-		$eaps = $_POST['eaps'];
-		
-		if(count($stackedKits)>0)
-		{
-			$errorSum = null;
-			$error = 0;
-			$models = array();
-			
-			foreach($stackedKits as $kitId)
-			{
-				$model = new Cell('stack');
-						 
-				$model->kit_id = $kitId;
-				if(isset($userIds[$kitId]) && isset($dates[$kitId]))
-				{
-					$model->stacker_id = $userIds[$kitId];
-					$model->stack_date = $dates[$kitId];
-					$model->ref_num_id = $refnumIds[$kitId]?$refnumIds[$kitId]:null;
-					$model->eap_num = $eaps[$kitId]?$eaps[$kitId]:null;
-					$model->location = 'stacked';
-					
-					if(!$model->validate())
-					{
-						$error = 1;
-					}
-					$models[] = $model;	
-
-				}
-			}
-			if (!($error==1))
-			{
-				foreach($models as $model)
-				{
-					if($model->save())
-					{
-						$kit = Kit::model()->findByPk($kitId);
-						$kit->is_stacked = 1;
-						$kit->save()?'':var_dump($kit->getErrors());
-						
-					}
-				}
-			}
-			else
-			{
-				$errorSum = CHtml::errorSummary($models); 	
-			}			
-				
-			echo $errorSum;
-		}
-	}
-	
-	/**
-	 * Allows user to stack mulitple kits that are not associated with a cell yet.
-	 */
 	public function actionAjaxStackCells()
 	{
 		/* TODO move most of this logic into the cell model */
@@ -308,9 +247,8 @@ class CellController extends Controller
 				$cellsStacked[] = array(
 					'stacker_id'=> $userIds[$kitId],
 					'stack_date' => $dates[$kitId],
-					'ref_num_id' => $refnumIds[$kitId] ? $refnumIds[$kitId]:null,
-					'eap_num' => $eaps[$kitId] ? $eaps[$kitId]:null,
-					'location' => 'stacked',
+					'ref_num_id' => $refnumIds[$kitId],
+					'eap_num' => $eaps[$kitId],
 					'kit_id' => $kitId,
 				);
 			}
@@ -318,16 +256,300 @@ class CellController extends Controller
 			$result = Cell::createStackedCells($cellsStacked);  
 			
 			if (!json_decode($result))
-			{ /* the save failed */
+			{ /* the save failed otherwise result would be json_encoded*/
 				echo $result;
 			} 
 			else 
 			{ /* success so show count and serial numbers */
 				echo $result;
 			}
+		}
+	}
+
+	/**
+	 * Allows user to inspect mulitple cells.
+	 */
+	public function actionMultiInspectCells()
+	{
+		$model=new Cell('search');
+		$model->unsetAttributes();  // clear any default values
+		
+		/* any cell that is stacked and not inspected can be inspected */
+		$model->inspector_id = 1; 
+		
+		if(isset($_GET['Cell']))
+		{
+			$model->attributes=$_GET['Cell'];
+		}
 				
+		$this->render('inspectcells',array(
+			'model'=>$model,
+		));
+	}
 	
+	/**
+	 * Ajax action to save the model for inspected cells.
+	 */
+	public function actionAjaxInspectCells()
+	{
+		
+		if(!isset($_POST['autoId']))
+		{
+			echo 'hide';
+			Yii::app()->end();
+		}
+		
+		$inspectedCells = $_POST['autoId'];
+		$userIds = $_POST['user_ids'];
+		$dates = $_POST['dates'];
+		
+		if(count($inspectedCells)>0)
+		{
+			$cellsInspected = array();
 			
+			foreach($inspectedCells as $cell_id)
+			{
+				$cellsInspected[] = array(
+					'cell_id' => $cell_id,
+					'inspector_id' => $userIds[$cell_id],
+					'inspection_date' => $dates[$cell_id],
+				);
+			}
+			
+			$result = Cell::inspectCells($cellsInspected);
+			
+			if (!json_decode($result))
+			{ /* the save failed otherwise result would be json_encoded*/
+				echo $result;
+			} 
+			else 
+			{ /* success so show count and serial numbers */
+				echo $result;
+			}
+		}
+	}
+	
+	/**
+	 * Allows user to laser weld mulitple cells.
+	 */
+	public function actionMultiLaserCells()
+	{
+		$model=new Cell('search');
+		$model->unsetAttributes();  // clear any default values
+		
+		/* only cells that have been inspected and not welded can
+		 * be laser welded */
+		$model->laserwelder_id = 1;
+		$model->inspector_id = '>1'; 
+		
+		if(isset($_GET['Cell']))
+		{
+			$model->attributes=$_GET['Cell'];
+		}
+				
+		$this->render('lasercells',array(
+			'model'=>$model,
+		));
+	}
+	
+	/**
+	 * Ajax action to save the model for laser welded cells.
+	 */
+	public function actionAjaxLaserCells()
+	{
+		
+		if(!isset($_POST['autoId']))
+		{
+			echo 'hide';
+			Yii::app()->end();
+		}
+		
+		$laseredCells = $_POST['autoId'];
+		$userIds = $_POST['user_ids'];
+		$dates = $_POST['dates'];
+		
+		if(count($laseredCells)>0)
+		{
+			$cellsLasered = array();
+			
+			foreach($laseredCells as $cell_id)
+			{
+				$cellsLasered[] = array(
+					'cell_id' => $cell_id,
+					'laserwelder_id' => $userIds[$cell_id],
+					'laserweld_date' => $dates[$cell_id],
+				);
+			}
+			
+			$result = Cell::laserCells($cellsLasered);
+			
+			if (!json_decode($result))
+			{ /* the save failed otherwise result would be json_encoded*/
+				echo $result;
+			} 
+			else 
+			{ /* success so show count and serial numbers */
+				echo $result;
+			}
+		}
+	}
+	
+	/**
+	 * Allows user to fill mulitple cells that have been welded.
+	 */
+	public function actionMultiFillCells()
+	{
+		$model=new Cell('search');
+		$model->unsetAttributes();  // clear any default values
+		
+		/* any cell that has been laser welded but not filled yet */
+		$model->filler_id = 1;
+		$model->laserwelder_id = '>1';
+		
+		if(isset($_GET['Cell']))
+		{
+			$model->attributes=$_GET['Cell'];
+		}
+				
+		$this->render('fillcells',array(
+			'model'=>$model,
+		));
+	}
+	
+	/**
+	 * Allows user to fill mulitple kits that are not associated with a cell yet.
+	 */
+	public function actionAjaxFillCells()
+	{
+		
+		if(!isset($_POST['autoId']))
+		{
+			echo 'hide';
+			Yii::app()->end();
+		}
+		
+		$filledCells = $_POST['autoId'];
+		$userIds = $_POST['user_ids'];
+		$dates = $_POST['dates'];
+		$wet_wts = $_POST['wet_wts'];
+		$dry_wts = $_POST['dry_wts'];
+		
+		if(count($filledCells)>0)
+		{
+			$cellsFilled = array();
+			
+			foreach($filledCells as $cell_id)
+			{
+				$cellsFilled[] = array(
+					'cell_id' => $cell_id,
+					'filler_id' => $userIds[$cell_id],
+					'fill_date' => $dates[$cell_id],
+					'dry_wt' => $dry_wts[$cell_id],
+					'wet_wt' => $wet_wts[$cell_id],
+				);
+			}
+			
+			$result = Cell::fillCells($cellsFilled);
+			
+			if (!json_decode($result))
+			{ /* the save failed otherwise result would be json_encoded*/
+				echo $result;
+			} 
+			else 
+			{ /* success so show count and serial numbers */
+				echo $result;
+			}
+		}
+	}
+		
+	/**
+	 * Allows user to weld the fill port on mulitple cells.
+	 */
+	public function actionMultiTipoffCells()
+	{
+		$model=new Cell('search');
+		$model->unsetAttributes();  // clear any default values
+		
+		/* only cells that have been filled and not port welded can
+		 * be port welded */
+		//$model->portwelder_id = 1;
+		//$model->filler_id = '>1'; 
+		
+		/* uses cell->searchAtForm() to find cells actively on formation */
+		
+		if(isset($_GET['Cell']))
+		{
+			$model->attributes=$_GET['Cell'];
+		}
+				
+		$this->render('tipoffcells',array(
+			'model'=>$model,
+		));
+	}
+	
+	/**
+	 * Ajax action to save the model for fill port welded cells.
+	 */
+	public function actionAjaxTipoffCells()
+	{
+		
+		if(!isset($_POST['autoId']))
+		{
+			echo 'hide';
+			Yii::app()->end();
+		}
+		
+		$tippedoffCells = $_POST['autoId'];
+		$userIds = $_POST['user_ids'];
+		$dates = $_POST['dates'];
+		
+		if(count($tippedoffCells)>0)
+		{
+			$cellsTippedoff = array();
+			
+			foreach($tippedoffCells as $cell_id)
+			{
+				$cellsTippedoff[] = array(
+					'cell_id' => $cell_id,
+					'portwelder_id' => $userIds[$cell_id],
+					'portweld_date' => $dates[$cell_id],
+				);
+			}
+			
+			$result = Cell::tipoffCells($cellsTippedoff);
+			
+			if (!json_decode($result))
+			{ /* the save failed otherwise result would be json_encoded*/
+				echo $result;
+			} 
+			else 
+			{ /* success so show count and serial numbers */
+				echo $result;
+			}
+		}
+	}
+	
+	/**
+	 * Performs the AJAX update of the detailView on the cellview.
+	 * @param Cell $model the model to be validated
+	 */
+	public function actionAjaxMFGUpdate($id=null)
+	{	
+		/* load cell detail information */
+		if($id == null)
+		{
+			echo 'hide';
+		}
+		else
+		{
+			$model = $this->loadModel($id);
+			
+			$this->renderPartial('_ajaxcelldetail', array(
+					'model'=>$model,
+				), 
+				false, 
+				true
+			);
 		}
 	}
 	
@@ -361,173 +583,6 @@ class CellController extends Controller
 		$returnString.= CHtml::hiddenField("user_ids[$data->id]",$userId);
 	
 		return $returnString;
-	}
-    
-	/**
-	 * Allows user to stack mulitple kits that are not associated with a cell yet.
-	 */
-	public function actionMultiFillCells()
-	{
-		$model=new Cell('search');
-		$model->unsetAttributes();  // clear any default values
-		
-		$model->filler_id = 1;
-		$model->inspector_id = '>1';
-		
-		if(isset($_GET['Cell']))
-		{
-			$model->attributes=$_GET['Cell'];
-		}
-				
-		$this->render('fillcells',array(
-			'model'=>$model,
-		));
-	}
-	
-/**
-	 * Allows user to stack mulitple kits that are not associated with a cell yet.
-	 */
-	public function actionAjaxFillCells()
-	{
-		
-		if(!isset($_POST['autoId']))
-		{
-			echo 'hide';
-			Yii::app()->end();
-		}
-		
-		$filledCells = $_POST['autoId'];
-		$userIds = $_POST['user_ids'];
-		$dates = $_POST['dates'];
-		$wet_wts = $_POST['wet_wts'];
-		$dry_wts = $_POST['dry_wts'];
-		
-		if(count($filledCells)>0)
-		{
-			$errorSum = null;
-			$error = 0;
-			$models = array();
-			
-			foreach($filledCells as $cell_id)
-			{
-				$model = Cell::model()->findByPk($cell_id);
-				$model->scenario = 'fill';
-		 
-				if(isset($userIds[$cell_id]) && isset($dates[$cell_id]))
-				{
-					$model->filler_id = $userIds[$cell_id];
-					$model->fill_date = $dates[$cell_id];
-					$model->wet_wt = $wet_wts[$cell_id]?$wet_wts[$cell_id]:null;
-					$model->dry_wt = $dry_wts[$cell_id]?$dry_wts[$cell_id]:null;
-					$model->location = 'filled';
-					
-					if(!$model->validate())
-					{
-						$error = 1;
-					}
-					$models[] = $model;		
-				}
-			}
-			
-			if (!($error==1))
-			{
-				foreach($models as $model)
-				{
-					$model->save();
-				}
-			}
-			else
-			{
-				$errorSum = CHtml::errorSummary($models); 	
-			}
-			
-			echo $errorSum;
-		}
-	}
-	
-/**
-	 * Allows user to stack mulitple kits that are not associated with a cell yet.
-	 */
-	public function actionMultiInspectCells()
-	{
-		$model=new Cell('search');
-		$model->unsetAttributes();  // clear any default values
-		$model->inspector_id = 1;
-		//$model->filler_id ='1';
-		
-		if(isset($_GET['Cell']))
-		{
-			$model->attributes=$_GET['Cell'];
-		}
-				
-		$this->render('inspectcells',array(
-			'model'=>$model,
-		));
-	}
-	
-/**
-	 * Allows user to stack mulitple kits that are not associated with a cell yet.
-	 */
-	public function actionAjaxInspectCells()
-	{
-		
-		if(!isset($_POST['autoId']))
-		{
-			echo 'hide';
-			Yii::app()->end();
-		}
-		
-		$inspectedCells = $_POST['autoId'];
-		$userIds = $_POST['user_ids'];
-		$dates = $_POST['dates'];
-		
-		if(count($inspectedCells)>0)
-		{
-			$error = null;
-			
-			foreach($inspectedCells as $cell_id)
-			{
-				$model = Cell::model()->findByPk($cell_id);
-				$model->scenario = 'inspect';
-		 
-				if(isset($userIds[$cell_id]) && isset($dates[$cell_id]))
-				{
-					$model->inspector_id = $userIds[$cell_id];
-					$model->inspection_date = $dates[$cell_id];
-					$model->location = 'inspected';
-					
-					if(!$model->save())
-					{
-						$error = CHtml::errorSummary($model);
-					}	
-				}
-			}
-			echo $error;
-		}
-	}
-	
-	/**
-	 * Performs the AJAX update of the detailView on the cellview.
-	 * @param Cell $model the model to be validated
-	 */
-	public function actionAjaxMFGUpdate($id=null)
-	{	
-		/* load cell detail information */
-		if($id == null)
-		{
-			echo 'hide';
-		}
-		else
-		{
-			$model = $this->loadModel($id);
-			
-			$this->renderPartial('_ajaxcelldetail', array(
-					'model'=>$model,
-				), 
-				false, 
-				true
-			);
-		}
 	}
 	
 	/**
