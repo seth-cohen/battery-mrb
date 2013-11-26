@@ -401,4 +401,60 @@ class Cell extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+	
+	public static function createStackedCells($stackedCells)
+	{
+		$error = 0;
+		$models = array();
+
+		/* oops, we were passed bad data */
+		if(empty($stackedCells))
+			return;
+			
+		foreach($stackedCells as $cell)
+		{
+			$model = new Cell('stack');
+					 
+			$model->stacker_id = $cell['stacker_id'];
+			$model->stack_date = $cell['stack_date'];
+			$model->ref_num_id = $cell['ref_num_id'];
+			$model->eap_num = $cell['eap_num'];
+			$model->location = $cell['location'];
+			$model->kit_id = $cell['kit_id'];
+				
+				
+			if(!$model->validate())
+			{
+				$error = 1;
+			}
+			$models[] = $model;	
+		}
+		
+		/* all models validated save them all */
+		if ($error==0)
+		{
+			/* create array to return with JSON */
+			$result = array();
+			foreach($models as $model)
+			{
+				if($model->save())
+				{
+					$kit = Kit::model()->findByPk($model->kit_id);
+					$kit->is_stacked = 1;
+					$kit->save();
+					
+					$result[] = array(
+						'serial'=>$kit->getFormattedSerial(), 
+						'stacker'=>User::getFullNameProper($model->stacker_id),
+					);
+				}
+			}
+			return json_encode($result);
+		}
+		else /* a model failed, don't save any */
+		{
+			return CHtml::errorSummary($models); 	
+		}			
+		return null;
+	}
 }

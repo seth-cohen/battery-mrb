@@ -111,11 +111,22 @@ function reloadGrid(data) {
     }
     else
     {
-        if(data=='')
-        {
-        	$.fn.yiiGridView.update('stacking-grid');
-        }
-        $('#stacking-form').prepend(data);
+    	try
+    	{
+    	   var cells = $.parseJSON(data);
+    	   alert(cells.length);
+    	   var alertString = 'You stacked '+cells.length+' cells. Serial numbers: \n';
+    	   cells.forEach(function(cell) {
+    		   alertString += cell.serial + '-' + cell.stacker + '\n';
+    	   });
+    	   alert(alertString);
+    	   $.fn.yiiGridView.update('stacking-grid');
+    	}
+    	catch(e)
+    	{
+    		$('#stacking-form').prepend(data);
+    		console.log(e.message);
+    	}
     }
 }
 </script>

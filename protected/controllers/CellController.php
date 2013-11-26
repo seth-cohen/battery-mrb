@@ -217,7 +217,7 @@ class CellController extends Controller
 	/**
 	 * Allows user to stack mulitple kits that are not associated with a cell yet.
 	 */
-	public function actionAjaxStackCells()
+	public function actionAjaxStackCells_OG()
 	{
 		/* TODO move most of this logic into the cell model */
 		if(!isset($_POST['autoId']))
@@ -278,6 +278,56 @@ class CellController extends Controller
 			}			
 				
 			echo $errorSum;
+		}
+	}
+	
+	/**
+	 * Allows user to stack mulitple kits that are not associated with a cell yet.
+	 */
+	public function actionAjaxStackCells()
+	{
+		/* TODO move most of this logic into the cell model */
+		if(!isset($_POST['autoId']))
+		{
+			echo 'hide';
+			Yii::app()->end();
+		}
+		
+		$stackedKits = $_POST['autoId'];
+		$userIds = $_POST['user_ids'];
+		$dates = $_POST['dates'];
+		$refnumIds = $_POST['refnumIds'];
+		$eaps = $_POST['eaps'];
+		
+		if(count($stackedKits)>0)
+		{
+			$cellsStacked = array();
+			
+			foreach($stackedKits as $kitId)
+			{
+				$cellsStacked[] = array(
+					'stacker_id'=> $userIds[$kitId],
+					'stack_date' => $dates[$kitId],
+					'ref_num_id' => $refnumIds[$kitId] ? $refnumIds[$kitId]:null,
+					'eap_num' => $eaps[$kitId] ? $eaps[$kitId]:null,
+					'location' => 'stacked',
+					'kit_id' => $kitId,
+				);
+			}
+			
+			$result = Cell::createStackedCells($cellsStacked);  
+			
+			if (!json_decode($result))
+			{ /* the save failed */
+				echo $result;
+			} 
+			else 
+			{ /* success so show count and serial numbers */
+				echo $result;
+			}
+				
+	
+			
 		}
 	}
 	

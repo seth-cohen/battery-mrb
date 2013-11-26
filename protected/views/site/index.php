@@ -8,7 +8,7 @@ $this->pageTitle=Yii::app()->name;
 
 
 <p>You may navigate to the necessary action using the quick links below.</p>
-<div class=" link-list" id="mfg-link-list" style="width:47%; float:left;">
+<div class=" link-list" id="mfg-link-list" style="width:33%; float:left;">
 <h3 style="text-align:center">Manufacturing</h3>
 	<b>ELECTRODES</b>
 	<ul>
@@ -31,7 +31,7 @@ $this->pageTitle=Yii::app()->name;
 	</ul>
 </div>
 
-<div class=" link-list" id="testlab-link-list" style="width:47%; float:right;">
+<div class=" link-list" id="testlab-links" style="width:33%; float:right;">
 <h3 style="text-align:center">Test Lab</h3>
 	<b>CELL TESTING</b>
 	<ul>
@@ -52,6 +52,16 @@ $this->pageTitle=Yii::app()->name;
 		<li><?php echo CHtml::link('Deliver Cells to Battery Assembly', array('cell/multistackcells'));?></li>
 		<li><?php echo CHtml::link('Move Cells to Storage', array('cell/multifillcells'));?></li>
 		<li><?php echo CHtml::link('Scrap Cells', array('cell/multiinspectcells'));?></li>
+	</ul>
+</div>
+
+<div class="link-list" id="quality-links" style="padding:0 35% 5px 35%;">
+<h3 style="text-align:center">Quality</h3>
+	<b>CELL TESTING</b>
+	<ul>
+		<li><?php echo CHtml::link('Put Cells on Formation', array('quality/ncr'));?></li>
+		<li><?php echo CHtml::link('Put Cells on CAT', array('testlab/cellcat'));?></li>
+		<li><?php echo CHtml::link('View All Cells on Test', array('testlab/cellindex'));?></li>
 	</ul>
 </div>
 <div style="clear:both"></div>

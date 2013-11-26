@@ -307,6 +307,11 @@ div.search-form
 	border:1px solid #888888;
 }
 
+div.link-list
+{
+	height: 400px;
+}
+
 div.link-list ul li
 {
 	margin:3px;
