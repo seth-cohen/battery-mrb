@@ -23,6 +23,9 @@ class TestAssignment extends CActiveRecord
 {
 	
 	public $serial_search;
+	public $chamber_search;
+	public $cycler_search;
+	
 	/**
 	 * @return string the associated database table name
 	 */
@@ -44,7 +47,8 @@ class TestAssignment extends CActiveRecord
 			array('test_start', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, cell_id, channel_id, chamber_id, operator_id, test_start, serial_search', 'safe', 'on'=>'search'),
+			array('id, cell_id, channel_id, chamber_id, operator_id, test_start, is_active, is_formation 
+					serial_search, chamber_search, cycler_search', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -75,7 +79,10 @@ class TestAssignment extends CActiveRecord
 			'chamber_id' => 'Chamber',
 			'operator_id' => 'Operator',
 			'test_start' => 'Test Date',
+		
 			'serial_search' => 'Cell Serial',
+			'chamber_search' => 'Chamber',
+			'cycler_search' => 'Cycler {Channel}',
 		);
 	}
 
@@ -112,7 +119,13 @@ class TestAssignment extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->with = array(
-			'channel'=>array('with'=>array('cycler')),
+			'channel'=>array(
+				'alias'=>'chan', 
+				'with'=>array(
+					'cycler'=>array('alias'=>'cyc'),
+				),
+			),
+			'chamber'=>array('alias'=>'cham'),
 			'cell'=>array(
 				'alias'=>'cell',
 				'with'=>array(
@@ -127,19 +140,34 @@ class TestAssignment extends CActiveRecord
 		$criteria->compare('operator_id',$this->operator_id,true);
 		$criteria->compare('test_start',$this->test_start,true);
 		$criteria->compare('is_formation',$this->is_formation,true);
+		$criteria->compare('is_active',$this->is_active,true);
 
 		/* for concatenated user name search */
 		$criteria->addSearchCondition('concat(celltype.name,"-",serial_num)',$this->serial_search, true);
 		
-		return new CActiveDataProvider($this, array(
+		return new KeenActiveDataProvider($this, array(
+			'withKeenLoading'=>array(
+				'cell',
+				'chamber',
+				'channel'=>array('with'=>'cycler'),
+			),
 			'criteria'=>$criteria,
 			'sort'=>array(
 				'defaultOrder'=>'test_start DESC',
 				'attributes'=>array(
 					'serial_search'=>array(
-						'asc'=>"CONCAT(celltype.name, serial_num)",
-						'desc'=>"CONCAT(celltype.name, serial_num) DESC",
+						'asc'=>"CONCAT(celltype.name, kit.serial_num)",
+						'desc'=>"CONCAT(celltype.name, kit.serial_num) DESC",
 					),
+					'chamber_search'=>array(
+						'asc'=>'cham.name',
+						'desc'=>'cham.name DESC',
+					),
+					'cycler_search'=>array(
+						'asc'=>'CONCAT(cyc.name, chan.number)',
+						'desc'=>'CONCAT(cyc.name, chan.number) DESC',
+					),
+					'*',		// all others treated normally
 				),
 			),
 		));

@@ -68,7 +68,13 @@
 					'active'=>(strpos( Yii::app()->request->url, 'testlab') > 0),
 					'visible'=>!Yii::app()->user->isGuest,
 					'items'=>array(
-						array('label'=>'Formation', 'url'=>array('testlab/cellformation')),
+						array('label'=>'Testing', 'items'=>array(
+							array('label'=>'Put Cells on Formation', 'url'=>array('testlab/cellformation'), 'active'=>0),
+							array('label'=>'Put Cells on CAT', 'url'=>array('testlab/cellcat'), 'active'=>0),
+							array('label'=>'View Active Formation', 'url'=>array('testlab/formationindex'), 'active'=>0),
+							array('label'=>'Change Channel Assignment', 'url'=>array('testlab/changechannelassignment'), 'active'=>0),
+							array('label'=>'View Active CAT', 'url'=>array('testlab/catindex'), 'active'=>0),
+						)),	
 						array('label'=>'Channels', 'url'=>array('/channel/')),
 						array('label'=>'Chambers', 'url'=>array('/chamber/'), 'active'=>0),
 						array('label'=>'Cyclers', 'url'=>array('/cycler/'), 'active'=>0),

@@ -8,11 +8,6 @@ class TestlabController extends Controller
 	 */
 	public $layout='//layouts/column2';
 	
-	public function actionIndex()
-	{
-		$this->render('index');
-	}
-
 	// Uncomment the following methods and override them if needed
 	
 	public function filters()
@@ -31,7 +26,12 @@ class TestlabController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('cellformation', 'ajaxformation', 'cellcat', 'ajaxcat', 'tipoffdelivery'),
+				'actions'=>array(
+					'cellformation', 'ajaxformation', 
+					'cellcat', 'ajaxcat', 
+					'formationindex', 'catindex',
+					'changechannelassignment', 'ajaxchannelreassignment',
+				),
 				'roles' => array('testlab'),
 				//'users'=>array('@'),
 			),
@@ -46,22 +46,54 @@ class TestlabController extends Controller
 		);
 	}
 	
-	/*
-	public function actions()
+	/**
+	 * Lists all cells that are actively on formation.
+	 */
+	public function actionFormationIndex()
 	{
-		// return external action classes, e.g.:
-		return array(
-			'action1'=>'path.to.ActionClass',
-			'action2'=>array(
-				'class'=>'path.to.AnotherActionClass',
-				'propertyName'=>'propertyValue',
-			),
-		);
+		$model=new TestAssignment('search');
+		$model->unsetAttributes();  // clear any default values
+		
+		/* uses TestAssignment->search() to find all active formation
+		 * test assignments	 */
+		$model->is_formation = 1;
+		$model->is_active = 1;
+		
+		if(isset($_GET['Cell']))
+		{
+			$model->attributes=$_GET['Cell'];
+		}
+				
+		$this->render('formationindex',array(
+			'model'=>$model,
+		));
 	}
-	*/
 	
 	/**
-	 * Allows user to stack mulitple kits that are not associated with a cell yet.
+	 * Lists all cells that are actively on formation.
+	 */
+	public function actionCATIndex()
+	{
+		$model=new TestAssignment('search');
+		$model->unsetAttributes();  // clear any default values
+		
+		/* uses TestAssignment->search() to find all active formation
+		 * test assignments	 */
+		$model->is_formation = 0;
+		$model->is_active = 1;
+		
+		if(isset($_GET['Cell']))
+		{
+			$model->attributes=$_GET['Cell'];
+		}
+				
+		$this->render('catindex',array(
+			'model'=>$model,
+		));
+	}
+	/**
+	 * Allows user to put multiple cells on formation as long as they have been
+	 * filled today or yesterday
 	 */
 	public function actionCellFormation()
 	{
@@ -83,7 +115,9 @@ class TestlabController extends Controller
 	}
 	
 	/**
-	 * Allows user to stack mulitple kits that are not associated with a cell yet.
+	 * This is the ajax action to save the formation test assignments
+	 * TODO it should be possible to combine CAT and FORM into one action
+	 * by passing a parameter
 	 */
 	public function actionAjaxFormation()
 	{
@@ -141,7 +175,8 @@ class TestlabController extends Controller
 	}
 	
 	/**
-	 * Allows user to stack mulitple kits that are not associated with a cell yet.
+	 * Allows user to put multiple cells on CAT as long as they have been
+	 * filled today or yesterday
 	 */
 	public function actionCellCAT()
 	{
@@ -162,7 +197,9 @@ class TestlabController extends Controller
 	}
 	
 	/**
-	 * Allows user to stack mulitple kits that are not associated with a cell yet.
+	 * This is the ajax action to save the CAT test assignments
+	 * TODO it should be possible to combine CAT and FORM into one action
+	 * by passing a parameter
 	 */
 	public function actionAjaxCAT()
 	{
@@ -219,6 +256,91 @@ class TestlabController extends Controller
 		}
 	}
 	
+	/**
+	 * This action will allow the operator to change the channel that a
+	 * cell is currently testing on... gives the operator a chance to 
+	 * label that channel as out of commission
+	 */
+	public function actionChangeChannelAssignment()
+	{
+		$model=new TestAssignment('search');
+		$model->unsetAttributes();  // clear any default values
+		
+		/* uses TestAssignment->search() to find all active 
+		 * test assignments	 */
+		$model->is_active = 1;
+		
+		if(isset($_GET['Cell']))
+		{
+			$model->attributes=$_GET['Cell'];
+		}
+				
+		$this->render('changechannelassignment',array(
+			'model'=>$model,
+		));
+		
+	} 
+	
+	/**
+	 * This is the ajax action to save the testassignment channel
+	 * reassignments.  User has option to mark the channel as 'BAD' 
+	 * or out of commission.
+	 */
+	public function actionAjaxChannelReassignment()
+	{
+		
+		if(!isset($_POST['autoId']))
+		{
+			echo 'hide';
+			Yii::app()->end();
+		}
+		
+		$changedTests = $_POST['autoId'];
+		/* array of testAssignments where channel needs to be set out of commission */
+		$badTestChannels = isset($_POST['badId'])?$_POST['badId']:null; 
+		
+		$chambers = $_POST['chambers'];
+		$channels = $_POST['channels'];
+		
+		/* make sure there are no duplicate channel selections */
+		$channels = array_slice($channels, 0, count($changedTests), true);
+
+		if (count($channels) !== count(array_unique($channels)))
+		{ /* then we have duplicates set error and bail */		
+			$model = new Cell();
+			$model->addError('channel_error', 'Duplicate Channel Selection!');
+			echo CHtml::errorSummary($model);
+			Yii::app()->end();
+		}
+		
+		if(count($changedTests)>0)
+		{
+			$testsChanged = array();
+			
+			foreach($changedTests as $test_id)
+			{
+				$testsChanged[] = array(
+					'test_id'=> $test_id,
+					'channel_id' => $channels[$test_id],
+					'chamber_id' => $chambers[$test_id],
+					'operator_id' => $userIds[$test_id],
+					'test_start' => date("Y-m-d",time()),
+					'is_formation' => 0,
+				);
+			}
+			
+			$result = TestAssignment::putCellsOnTest($cellsCAT);  
+			
+			if (!json_decode($result))
+			{ /* the save failed otherwise result would be json_encoded*/
+				echo $result;
+			} 
+			else 
+			{ /* success so show count and serial numbers */
+				echo $result;
+			}
+		}
+	}
 	/**
 	 * generates the text fields for the stacker
 	 */

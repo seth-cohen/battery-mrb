@@ -18,7 +18,9 @@ $this->menu=array(
 
 <h1>Put Cells on CAT</h1>
 <p>
-*Only cells that have been put on formation will be listed.
+*Only cells that have been put on formation and are not currently on test will be listed. 
+If the cell you are looking for is currently on test please use the 
+<?php echo CHtml::link('Change Test Assignment', array('changetestassignment')); ?> action.
 </p>
 <?php
 /* ionclude JQuery scripts to allow for autocomplte */

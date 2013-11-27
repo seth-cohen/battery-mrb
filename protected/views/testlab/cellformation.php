@@ -8,10 +8,11 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Formation', 'url'=>array('cellformation')),
-	array('label'=>'All on Formation', 'url'=>array('formationindex')),
-	array('label'=>'CAT', 'url'=>array('cellcat')),
-	array('label'=>'All on CAT', 'url'=>array('catindex')),
+	array('label'=>'Put cells on Formation', 'url'=>array('cellformation')),
+	array('label'=>'Active Formation', 'url'=>array('formationindex')),
+	array('label'=>'Put cells on CAT', 'url'=>array('cellcat')),
+	array('label'=>'Active CAT', 'url'=>array('catindex')),
+	array('label'=>'Channel Reassignments', 'url'=>array('changechannelassignment')),
 	array('label'=>'View All Cells', 'url'=>array('/cell/index')),
 );
 ?>
@@ -156,8 +157,8 @@ function reloadGrid(data) {
 <script type="text/javascript">
 
 jQuery(function($) {
-jQuery('.ui-autocomplete-input').live('keydown', function(event) {
-	$(this).autocomplete({
+	jQuery('.ui-autocomplete-input').live('keydown', function(event) {
+		$(this).autocomplete({
 			'select': function(event, ui){
 				
 				var id = event.target.id.toString().replace("names","ids");
@@ -193,8 +194,6 @@ function cycSelected(sel)
 			$('.channel-dropdown').html(data);
 		},
 	});
-	
-
 }
 
 jQuery('#submit-button').bind('click', function(event) {
