@@ -8,10 +8,11 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Formation', 'url'=>array('cellformation')),
-	array('label'=>'All on Formation', 'url'=>array('formationindex')),
-	array('label'=>'CAT', 'url'=>array('cellcat')),
-	array('label'=>'All on CAT', 'url'=>array('catindex')),
+	array('label'=>'Put cells on Formation', 'url'=>array('cellformation')),
+	array('label'=>'Active Formation', 'url'=>array('formationindex')),
+	array('label'=>'Put cells on CAT', 'url'=>array('cellcat')),
+	array('label'=>'Active CAT', 'url'=>array('catindex')),
+	array('label'=>'Channel Reassignments', 'url'=>array('changechannelassignment')),
 	array('label'=>'View All Cells', 'url'=>array('/cell/index')),
 );
 ?>
@@ -50,11 +51,12 @@ Yii::app()->clientScript->registerCssFile(
         ),
 		array(
 			'header'=>'Formed Cells',
+			'name'=>'serial_search',
 			'type'=>'raw',
 			'value'=>'$data->kit->getFormattedSerial()',
 		),
 		array(
-			'header'=>'Reference No.',
+			'name'=>'refnum_search',
 			'type'=>'raw',
 			'value'=>'$data->refNum->number',
 			'htmlOptions'=>array('width'=>'60'),

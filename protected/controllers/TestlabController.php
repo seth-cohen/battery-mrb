@@ -59,9 +59,9 @@ class TestlabController extends Controller
 		$model->is_formation = 1;
 		$model->is_active = 1;
 		
-		if(isset($_GET['Cell']))
+		if(isset($_GET['TestAssignment']))
 		{
-			$model->attributes=$_GET['Cell'];
+			$model->attributes=$_GET['TestAssignment'];
 		}
 				
 		$this->render('formationindex',array(
@@ -82,15 +82,16 @@ class TestlabController extends Controller
 		$model->is_formation = 0;
 		$model->is_active = 1;
 		
-		if(isset($_GET['Cell']))
+		if(isset($_GET['TestAssignment']))
 		{
-			$model->attributes=$_GET['Cell'];
+			$model->attributes=$_GET['TestAssignment'];
 		}
 				
 		$this->render('catindex',array(
 			'model'=>$model,
 		));
 	}
+	
 	/**
 	 * Allows user to put multiple cells on formation as long as they have been
 	 * filled today or yesterday
@@ -132,10 +133,14 @@ class TestlabController extends Controller
 		$userIds = $_POST['user_ids'];
 		$dates = $_POST['dates'];
 		$chambers = $_POST['chambers'];
-		$channels = $_POST['channels'];
+		$tempChannels = $_POST['channels'];
 		
 		/* make sure there are no duplicate channel selections */
-		$channels = array_slice($channels, 0, count($formationCells), true);
+		$channels = array();
+		foreach($formationCells as $cell_id)
+		{
+			$channels[$cell_id] = $tempChannels[$cell_id];		
+		}
 
 		if (count($channels) !== count(array_unique($channels)))
 		{ /* then we have duplicates set error and bail */		
@@ -151,14 +156,16 @@ class TestlabController extends Controller
 			
 			foreach($formationCells as $cell_id)
 			{
-				$cellsFormation[] = array(
-					'cell_id'=> $cell_id,
-					'channel_id' => $channels[$cell_id],
-					'chamber_id' => $chambers[$cell_id],
-					'operator_id' => $userIds[$cell_id],
-					'test_start' => $dates[$cell_id],
-					'is_formation' => 1,
-				);
+				$tempTest = new TestAssignment;
+				
+				$tempTest->cell_id = $cell_id;
+				$tempTest->channel_id = $channels[$cell_id];
+				$tempTest->chamber_id = $chambers[$cell_id];
+				$tempTest->operator_id = $userIds[$cell_id];
+				$tempTest->test_start = date("Y-m-d",time());
+				$tempTest->is_formation = 1;
+				
+				$cellsFormation[$cell_id] = $tempTest;
 			}
 			
 			$result = TestAssignment::putCellsOnTest($cellsFormation);  
@@ -214,10 +221,14 @@ class TestlabController extends Controller
 		$userIds = $_POST['user_ids'];
 		$dates = $_POST['dates'];
 		$chambers = $_POST['chambers'];
-		$channels = $_POST['channels'];
+		$tempChannels = $_POST['channels'];
 		
 		/* make sure there are no duplicate channel selections */
-		$channels = array_slice($channels, 0, count($catCells), true);
+		$channels = array();
+		foreach($catCells as $test_id)
+		{
+			$channels[$test_id] = $tempChannels[$test_id];		
+		}
 
 		if (count($channels) !== count(array_unique($channels)))
 		{ /* then we have duplicates set error and bail */		
@@ -232,15 +243,18 @@ class TestlabController extends Controller
 			$cellsCAT = array();
 			
 			foreach($catCells as $cell_id)
-			{
-				$cellsCAT[] = array(
-					'cell_id'=> $cell_id,
-					'channel_id' => $channels[$cell_id],
-					'chamber_id' => $chambers[$cell_id],
-					'operator_id' => $userIds[$cell_id],
-					'test_start' => $dates[$cell_id],
-					'is_formation' => 0,
-				);
+			{	
+				$tempTest = new TestAssignment;
+				
+				$tempTest->cell_id = $cell_id;
+				$tempTest->channel_id = $channels[$cell_id];
+				$tempTest->chamber_id = $chambers[$cell_id];
+				$tempTest->operator_id = $userIds[$cell_id];
+				$tempTest->test_start = date("Y-m-d",time());
+				$tempTest->is_formation = 0;
+					
+				$cellsCAT[$cell_id] = $tempTest;
+				
 			}
 			
 			$result = TestAssignment::putCellsOnTest($cellsCAT);  
@@ -270,9 +284,9 @@ class TestlabController extends Controller
 		 * test assignments	 */
 		$model->is_active = 1;
 		
-		if(isset($_GET['Cell']))
+		if(isset($_GET['TestAssignment']))
 		{
-			$model->attributes=$_GET['Cell'];
+			$model->attributes=$_GET['TestAssignment'];
 		}
 				
 		$this->render('changechannelassignment',array(
@@ -296,14 +310,22 @@ class TestlabController extends Controller
 		}
 		
 		$changedTests = $_POST['autoId'];
-		/* array of testAssignments where channel needs to be set out of commission */
-		$badTestChannels = isset($_POST['badId'])?$_POST['badId']:null; 
 		
 		$chambers = $_POST['chambers'];
-		$channels = $_POST['channels'];
+		$tempChannels = $_POST['channels'];
+		$userIds = $_POST['user_ids'];
+		$cellIds = $_POST['cell_ids'];
+		$is_formation = $_POST['is_formation'];
 		
 		/* make sure there are no duplicate channel selections */
-		$channels = array_slice($channels, 0, count($changedTests), true);
+		$channels = array();
+		foreach($changedTests as $test_id)
+		{
+			$channels[$test_id] = $tempChannels[$test_id];		
+			/* array of testAssignments where channel needs to be set out of commission */
+			$testArray = isset($_POST['badId'])?$_POST['badId']:array();
+			$badTestChannels[$test_id] = in_array($test_id, $testArray); 
+		}
 
 		if (count($channels) !== count(array_unique($channels)))
 		{ /* then we have duplicates set error and bail */		
@@ -319,17 +341,19 @@ class TestlabController extends Controller
 			
 			foreach($changedTests as $test_id)
 			{
-				$testsChanged[] = array(
-					'test_id'=> $test_id,
-					'channel_id' => $channels[$test_id],
-					'chamber_id' => $chambers[$test_id],
-					'operator_id' => $userIds[$test_id],
-					'test_start' => date("Y-m-d",time()),
-					'is_formation' => 0,
-				);
+				$tempTest = new TestAssignment;
+				
+				$tempTest->cell_id = $cellIds[$test_id];
+				$tempTest->channel_id = $channels[$test_id];
+				$tempTest->chamber_id = $chambers[$test_id];
+				$tempTest->operator_id = $userIds[$test_id];
+				$tempTest->test_start = date("Y-m-d",time());
+				$tempTest->is_formation = $is_formation[$test_id];
+					
+				$testsChanged[$test_id] = $tempTest;
 			}
 			
-			$result = TestAssignment::putCellsOnTest($cellsCAT);  
+			$result = TestAssignment::channelReassignment($testsChanged, $badTestChannels);  
 			
 			if (!json_decode($result))
 			{ /* the save failed otherwise result would be json_encoded*/
@@ -341,6 +365,7 @@ class TestlabController extends Controller
 			}
 		}
 	}
+	
 	/**
 	 * generates the text fields for the stacker
 	 */

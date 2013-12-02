@@ -83,6 +83,7 @@ class TestAssignment extends CActiveRecord
 			'serial_search' => 'Cell Serial',
 			'chamber_search' => 'Chamber',
 			'cycler_search' => 'Cycler {Channel}',
+			'refNum_search' => 'Reference No.',
 		);
 	}
 
@@ -142,8 +143,11 @@ class TestAssignment extends CActiveRecord
 		$criteria->compare('is_formation',$this->is_formation,true);
 		$criteria->compare('is_active',$this->is_active,true);
 
+		$criteria->compare('cham.name',$this->chamber_search,true);
+		
 		/* for concatenated user name search */
-		$criteria->addSearchCondition('concat(celltype.name,"-",serial_num)',$this->serial_search, true);
+		$criteria->addSearchCondition('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
+		$criteria->addSearchCondition('concat(cyc.name,"-",chan.number)',$this->cycler_search, true);
 		
 		return new KeenActiveDataProvider($this, array(
 			'withKeenLoading'=>array(
@@ -184,25 +188,18 @@ class TestAssignment extends CActiveRecord
 		return parent::model($className);
 	}
 	
-	public static function putCellsOnTest($cellsFormation)
+	public static function putCellsOnTest($testAssignments)
 	{
 		$error = 0;
 		$models = array();
 
 		/* oops, we were passed bad data */
-		if(empty($cellsFormation))
+		if(empty($testAssignments))
 			return;
 			
-		foreach($cellsFormation as $cell)
+		foreach($testAssignments as $testAssignment)
 		{
-			$model = new TestAssignment();
-					 
-			$model->cell_id = $cell['cell_id'];
-			$model->channel_id = $cell['channel_id'];
-			$model->chamber_id = $cell['chamber_id'];
-			$model->operator_id = $cell['operator_id'];
-			$model->test_start = $cell['test_start'];
-			$model->is_formation = $cell['is_formation'];
+			$model = $testAssignment;
 			$model->is_active = 1;
 				
 			if(!$model->validate())
@@ -237,6 +234,91 @@ class TestAssignment extends CActiveRecord
 						
 					$result[] = array(
 						'serial'=>$cell->kit->getFormattedSerial(), 
+						'cycler'=>$model->channel->cycler->name,
+						'channel'=>$model->channel->number,
+					);
+				}
+			}
+			return json_encode($result);
+		}
+		else /* a model failed, don't save any */
+		{
+			return CHtml::errorSummary($models); 	
+		}			
+		return null;
+	}
+	
+	/**
+	 * 
+	 * Creates new test assignment and set previous test assignment and channel details 
+	 * to default states 
+	 * 
+	 * @param TestAssignmnet[] $testAssignments
+	 * @param Array $badTestChannels associative array of testassignmnets with bad channels
+	 */
+	public static function channelReassignment($testAssignments, $badTestChannels)
+	{
+		$error = 0;
+		$models = array();
+
+		/* oops, we were passed bad data */
+		if(empty($testAssignments))
+			return;
+			
+		foreach($testAssignments as $test_id=>$testAssignment)
+		{
+			$model = $testAssignment;
+			$model->is_active = 1;
+				
+			if(!$model->validate())
+			{
+				$error = 1;
+			}
+			$models[$test_id] = $model;	
+		}
+		
+		/* all models validated save them all */
+		if ($error==0)
+		{
+			/* create array to return with JSON */
+			$result = array();
+			foreach($models as $test_id=>$model)
+			{
+				if($model->save())
+				{ 	
+					/* update the cell location */
+					$cell = Cell::model()->findByPk($model->cell_id);
+					$cell->location = $model->is_formation ? '[FORM]':'[CAT]';
+					$cell->location .= $model->channel->cycler->name.
+										'{'.$model->channel->number.'} '.
+										'('.$model->chamber->name.')';
+					$cell->save();
+					
+					/* update the channel status */
+					$channel = Channel::model()->findByPk($model->channel_id);
+					$channel->in_use = 1;
+					$channel->save();
+					
+					/* need to find the previous testAssignment and channel
+					 * -must set channel in_use to false and in_commission to false if
+					 * 	marked as bad.
+					 */	
+					$oldTest = TestAssignment::model()->with('channel')->findByPk($test_id);
+					$oldTest->is_active = 0;
+					$oldTest->save();
+					
+					/*  set old channel as no longer in use. Do we need to set it out of 
+					 * commission as well 
+					 */
+					$oldChannel = $oldTest->channel;
+					$oldChannel->in_use = 0;
+					$oldChannel->in_commission = $badTestChannels[$test_id]?0:$oldChannel->in_commission;
+					$oldChannel->save();
+					
+					$result[] = array(
+						'serial'=>$cell->kit->getFormattedSerial(), 
+						'ogCycler'=>$oldTest->channel->cycler->name,
+						'ogChannel'=>$oldTest->channel->number,
 						'cycler'=>$model->channel->cycler->name,
 						'channel'=>$model->channel->number,
 					);

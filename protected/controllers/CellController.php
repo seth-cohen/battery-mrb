@@ -244,13 +244,15 @@ class CellController extends Controller
 			
 			foreach($stackedKits as $kitId)
 			{
-				$cellsStacked[] = array(
-					'stacker_id'=> $userIds[$kitId],
-					'stack_date' => $dates[$kitId],
-					'ref_num_id' => $refnumIds[$kitId],
-					'eap_num' => $eaps[$kitId],
-					'kit_id' => $kitId,
-				);
+				$tempCell = new Cell();
+				
+				$tempCell->stacker_id =  $userIds[$kitId];
+				$tempCell->stack_date = $dates[$kitId];
+				$tempCell->ref_num_id = $refnumIds[$kitId];
+				$tempCell->eap_num = $eaps[$kitId];
+				$tempCell->kit_id = $kitId;
+				
+				$cellsStacked[$kitId] = $tempCell;
 			}
 			
 			$result = Cell::createStackedCells($cellsStacked);  
@@ -309,11 +311,12 @@ class CellController extends Controller
 			
 			foreach($inspectedCells as $cell_id)
 			{
-				$cellsInspected[] = array(
-					'cell_id' => $cell_id,
-					'inspector_id' => $userIds[$cell_id],
-					'inspection_date' => $dates[$cell_id],
-				);
+				$tempCell = new Cell();
+				
+				$tempCell->inspector_id = $userIds[$cell_id];
+				$tempCell->inspection_date = $dates[$cell_id];
+				
+				$cellsInspected[$cell_id] = $tempCell;
 			}
 			
 			$result = Cell::inspectCells($cellsInspected);
@@ -374,11 +377,12 @@ class CellController extends Controller
 			
 			foreach($laseredCells as $cell_id)
 			{
-				$cellsLasered[] = array(
-					'cell_id' => $cell_id,
-					'laserwelder_id' => $userIds[$cell_id],
-					'laserweld_date' => $dates[$cell_id],
-				);
+				$tempCell = new Cell();
+				
+				$tempCell->laserwelder_id = $userIds[$cell_id];
+				$tempCell->laserweld_date = $dates[$cell_id];
+				
+				$cellsLasered[$cell_id] = $tempCell;
 			}
 			
 			$result = Cell::laserCells($cellsLasered);
@@ -440,13 +444,14 @@ class CellController extends Controller
 			
 			foreach($filledCells as $cell_id)
 			{
-				$cellsFilled[] = array(
-					'cell_id' => $cell_id,
-					'filler_id' => $userIds[$cell_id],
-					'fill_date' => $dates[$cell_id],
-					'dry_wt' => $dry_wts[$cell_id],
-					'wet_wt' => $wet_wts[$cell_id],
-				);
+				$tempCell = new Cell();
+				
+				$tempCell->filler_id = $userIds[$cell_id];
+				$tempCell->fill_date = $dates[$cell_id];
+				$tempCell->dry_wt = $dry_wts[$cell_id];
+				$tempCell->wet_wt = $wet_wts[$cell_id];
+				
+				$cellsFilled[$cell_id] = $tempCell;
 			}
 			
 			$result = Cell::fillCells($cellsFilled);
@@ -509,11 +514,12 @@ class CellController extends Controller
 			
 			foreach($tippedoffCells as $cell_id)
 			{
-				$cellsTippedoff[] = array(
-					'cell_id' => $cell_id,
-					'portwelder_id' => $userIds[$cell_id],
-					'portweld_date' => $dates[$cell_id],
-				);
+				$tempCell = new Cell();
+				
+				$tempCell->portwelder_id = $userIds[$cell_id];
+				$tempCell->portweld_date = $dates[$cell_id];
+				
+				$cellsTippedoff[$cell_id] = $tempCell;
 			}
 			
 			$result = Cell::tipoffCells($cellsTippedoff);

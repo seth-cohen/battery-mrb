@@ -44,6 +44,11 @@ Yii::app()->clientScript->registerCssFile(
 	'id'=>'channelassignment-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
+	'afterAjaxUpdate'=>'function(id,data){
+		$(".cycler-dropdown").each(function(index){
+    			cycSelected(this);
+    		})
+    }',
 	'columns'=>array(
 		array(
             'id'=>'autoId',
@@ -69,6 +74,17 @@ Yii::app()->clientScript->registerCssFile(
 			'value'=>'$data->channel->cycler->name." {".$data->channel->number."}"',
 		),
 		array(
+			'type'=>'raw',
+			'htmlOptions'=>array('style'=>'display:none'),
+			'headerHtmlOptions'=>array('style'=>'display:none'),
+			'value'=>function($data,$row){
+				return 
+					CHtml::hiddenField("cell_ids[$data->id]", $data->cell_id) .
+					CHtml::hiddenField("is_formation[$data->id]", $data->is_formation);
+			},
+			
+		),
+		array(
 			'header'=>'New Cycler',
 			'type'=>'raw',
 			'value'=>function($data,$row) use ($cyclerList){
@@ -86,6 +102,7 @@ Yii::app()->clientScript->registerCssFile(
 			'value'=>'CHtml::dropDownList("channels[$data->id]", "", array(),array(
 						"prompt"=>"-N/A-",
 						"class"=>"channel-dropdown",
+						"style"=>"width:50px",
 			))',
 		),
 		array(
@@ -107,6 +124,8 @@ Yii::app()->clientScript->registerCssFile(
 		array(
 			'class'=>'CButtonColumn',
 			'template'=>'{view} {update}',
+			'viewButtonUrl'=>'Yii::app()->createUrl("/cell/view", array("id"=>$data->cell->id))',
+			'updateButtonUrl'=>'Yii::app()->createUrl("/cell/update", array("id"=>$data->cell->id))',
 		),
 		
 	),
@@ -203,8 +222,9 @@ function cycSelected(sel)
 			/* set all following test assignments to the same channel */
 			//$('.cycler-dropdown').val(cycler_id);
 			
-			$(sel).attr('disabled',false);
-			$(sel).html(data);
+			$('#'+id).attr('disabled',false);
+			$('#'+id).html(data);
+			$('#'+id).val('select');
 		},
 	});
 }

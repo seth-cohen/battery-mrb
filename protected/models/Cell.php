@@ -95,6 +95,7 @@ class Cell extends CActiveRecord
 			$this->addError($attribute, "Wet Weight must be greater than Dry!");
 		}
 	}
+	
 	public function checkEAP($attribute,$params) 
 	{
 		$pattern = '/ADD$/';
@@ -134,28 +135,28 @@ class Cell extends CActiveRecord
 			'kit_id' => 'Kit',
 			'ref_num_id' => 'Reference No.',
 			'eap_num' => 'EAP No.',
-			'stacker_id' => 'Stacker',
+			'stacker_id' => 'Stacked By',
 			'stack_date' => 'Stack Date',
 			'dry_wt' => 'Dry Wt',
 			'wet_wt' => 'Wet Wt',
-			'filler_id' => 'Filler',
+			'filler_id' => 'Filled By',
 			'fill_date' => 'Fill Date',
-			'inspector_id' => 'Inspector',
+			'inspector_id' => 'Inspected By',
 			'inspection_date' => 'Inspection Date',
-			'laserwelder_id' => 'Laser Welder',
+			'laserwelder_id' => 'Laser Welded By',
 			'laserweld_date' => 'Laser Weld Date',
-			'portwelder_id' => 'Fill Port Welder',
+			'portwelder_id' => 'Fill Port Welded By',
 			'portweld_date' => 'Fill Port Weld Date',
 			'location' => 'Location',
 			
 			'refnum_search' => "Reference No.",
 			'serial_search' => 'Serial No.',
 			'celltype_search' => 'Cell Type',
-			'stacker_search' => 'Stacker',
-			'laserwelder_search' => 'Laser Welder',
-			'filler_search' => 'Filler',
-			'portwelder_search' => 'Fill Port Welder',
-			'inspector_search' => 'Inspector',
+			'stacker_search' => 'Stacked By',
+			'laserwelder_search' => 'Laser Welded By',
+			'filler_search' => 'Filled By',
+			'portwelder_search' => 'Fill Port Welded By',
+			'inspector_search' => 'Inspected By',
 			'activetest_search' => 'Active Test',
 			
 		);
@@ -550,13 +551,7 @@ class Cell extends CActiveRecord
 			
 		foreach($stackedCells as $cell)
 		{
-			$model = new Cell('stack');
-					 
-			$model->stacker_id = $cell['stacker_id'];
-			$model->stack_date = $cell['stack_date'];
-			$model->ref_num_id = $cell['ref_num_id'];
-			$model->eap_num = $cell['eap_num'];
-			$model->kit_id = $cell['kit_id'];
+			$model = $cell;
 			$model->location = 'stacked';
 				
 			if(!$model->validate())
@@ -593,7 +588,7 @@ class Cell extends CActiveRecord
 		}			
 		return null;
 	}
-	
+
 	public static function inspectCells($inspectedCells)
 	{
 		$error = 0;
@@ -603,13 +598,13 @@ class Cell extends CActiveRecord
 		if(empty($inspectedCells))
 			return;
 			
-		foreach($inspectedCells as $cell)
+		foreach($inspectedCells as $cell_id=>$cell)
 		{
-			$model = Cell::model()->findByPk($cell['cell_id']);
+			$model = Cell::model()->findByPk($cell_id);
 			$model->scenario = 'inspect';
 					 
-			$model->inspector_id = $cell['inspector_id'];
-			$model->inspection_date = $cell['inspection_date'];
+			$model->inspector_id = $cell->inspector_id;
+			$model->inspection_date = $cell->inspection_date;
 			$model->location = 'inspected';
 				
 			if(!$model->validate())
@@ -652,13 +647,13 @@ class Cell extends CActiveRecord
 		if(empty($laseredCells))
 			return;
 			
-		foreach($laseredCells as $cell)
+		foreach($laseredCells as $cell_id=>$cell)
 		{
-			$model = Cell::model()->findByPk($cell['cell_id']);
+			$model = Cell::model()->findByPk($cell_id);
 			$model->scenario = 'laser';
 					 
-			$model->laserwelder_id = $cell['laserwelder_id'];
-			$model->laserweld_date = $cell['laserweld_date'];
+			$model->laserwelder_id = $cell->laserwelder_id;
+			$model->laserweld_date = $cell->laserweld_date;
 			$model->location = 'laserwelded';
 				
 			if(!$model->validate())
@@ -701,15 +696,15 @@ class Cell extends CActiveRecord
 		if(empty($filledCells))
 			return;
 			
-		foreach($filledCells as $cell)
+		foreach($filledCells as $cell_id=>$cell)
 		{
-			$model = Cell::model()->findByPk($cell['cell_id']);
+			$model = Cell::model()->findByPk($cell_id);
 			$model->scenario = 'fill';
 					 
-			$model->filler_id = $cell['filler_id'];
-			$model->fill_date = $cell['fill_date'];
-			$model->dry_wt = $cell['dry_wt'];
-			$model->wet_wt = $cell['wet_wt'];
+			$model->filler_id = $cell->filler_id;
+			$model->fill_date = $cell->fill_date;
+			$model->dry_wt = $cell->dry_wt;
+			$model->wet_wt = $cell->wet_wt;
 			$model->location = 'filled';
 				
 			if(!$model->validate())
@@ -752,13 +747,13 @@ class Cell extends CActiveRecord
 		if(empty($cellsTippedoff))
 			return;
 			
-		foreach($cellsTippedoff as $cell)
+		foreach($cellsTippedoff as $cell_id=>$cell)
 		{
-			$model = Cell::model()->findByPk($cell['cell_id']);
+			$model = Cell::model()->findByPk($cell_id);
 			$model->scenario = 'tipoff';
 					 
-			$model->portwelder_id = $cell['portwelder_id'];
-			$model->portweld_date = $cell['portweld_date'];
+			$model->portwelder_id = $cell->portwelder_id;
+			$model->portweld_date = $cell->portweld_date;
 			$model->location = 'Fillport Weld';
 				
 			if(!$model->validate())
