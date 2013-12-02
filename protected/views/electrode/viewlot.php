@@ -10,9 +10,9 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-    array('label'=>'Create Electrode', 'url'=>array('create')),
+    array('label'=>'Create Electrode Lot', 'url'=>array('create')),
     array('label'=>'Edit Electrode Lot', 'url'=>array('update', 'id'=>$model->id)),
-    array('label'=>'Viw All Electrodes', 'url'=>array('index')),
+    array('label'=>'View All Electrodes', 'url'=>array('index')),
     array('label'=>'Electrode Admin', 'url'=>array('admin')),
 );
 ?>

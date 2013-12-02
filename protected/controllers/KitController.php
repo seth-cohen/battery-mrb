@@ -32,9 +32,12 @@ class KitController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				/* TODO role based access */
-				'users'=>array('@'),
+				'actions'=>array(
+					'create','update', 
+					'multicreate', 'ajaxmulticreate',
+				),
+				'roles'=>array('manufacturing'),
+				//'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
@@ -108,6 +111,76 @@ class KitController extends Controller
 		));
 	}
 
+	/**
+	 * Creates multiple new models.
+	 * If creation is successful, the browser will be redirected to the 'view all' page.
+	 */
+	public function actionMultiCreate()
+	{
+		$pageSize = 16;
+		
+		$model=new Kit;
+		$dataProvider = new CArrayDataProvider($model->getListForMulti($pageSize), array(
+			'id'=>'kits',
+			'pagination'=>array(
+				'pageSize'=>$pageSize,
+			),
+		));
+		
+		// Uncomment the following line if AJAX validation is needed
+		$this->performAjaxValidation($model);
+			
+		if(isset($_POST['Kit']))
+		{
+			$model->attributes=$_POST['Kit'];
+			
+			/* needed to validate the anode and cathode lot IDs */
+			if(isset($_POST['Kit']['anodeIds']))
+			{
+				$model->anodeIds = $_POST['Kit']['anodeIds'];
+			}
+			if(isset($_POST['Kit']['cathodeIds']))
+			{
+				$model->cathodeIds = $_POST['Kit']['cathodeIds'];
+			}
+			
+			if($model->save())
+			{
+				$commandInsert = Yii::app()->db->createCommand();
+				foreach($model->anodeIds as $anode)
+				{
+					$commandInsert->insert('tbl_electrode_kit', array(
+						'kit_id'=>$model->id,
+						'electrode_id'=>$anode,
+					));
+				}
+				foreach($model->cathodeIds as $cathode)
+				{
+					$commandInsert->insert('tbl_electrode_kit', array(
+						'kit_id'=>$model->id,
+						'electrode_id'=>$cathode,
+					));
+				}
+				$this->redirect(array('index'));
+			}
+		}
+
+		$this->render('multicreate',array(
+			'model'=>$model,
+			'dataProvider'=>$dataProvider,
+		));
+	}
+	
+	/**
+	 * Creates multiple new models.
+	 * If creation is successful, the browser will be redirected to the 'view all' page.
+	 */
+	public function actionAjaxMultiCreate()
+	{
+		
+	}
+	
+	
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
@@ -237,5 +310,37 @@ class KitController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+	
+	/**
+	 * generates the text fields for the stacker
+	 */
+	protected function getUserInputTextField($data,$row)
+	{
+		$disabled = '';
+		$userName = '';
+		$userId = '';
+		
+		if (Yii::app()->user->checkAccess('manufacturing supervisor') || Yii::app()->user->checkAccess('manufacturing engineer'))
+		{
+			
+		}
+		else
+		{
+			$disabled = 'true';
+			$userName = User::getFullNameProper(Yii::app()->user->id);
+			$userId = Yii::app()->user->id;
+		}
+		
+		$returnString = CHtml::textField('user_names[$data["id"]]',$userName,array(
+				"style"=>"width:110px;",
+				"class"=>"ui-autocomplete-input",
+				"autocomplete"=>"off",
+				"disabled"=>$disabled,
+			));
+			
+		$returnString.= CHtml::hiddenField('user_ids[$data["id"]]',$userId, array("class"=>"user-id-input"));
+	
+		return $returnString;
 	}
 }

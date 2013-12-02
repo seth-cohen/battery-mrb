@@ -1,6 +1,6 @@
 <?php
 /* @var $this ManufacturingController */
-/* @var $model Anode */
+/* @var $model Electrode */
 
 $this->breadcrumbs=array(
 	'Manufacturing'=>array('/manufacturing'),
@@ -9,8 +9,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-    array('label'=>'Create Electrode', 'url'=>array('create')),
-    array('label'=>'Viw All Electrodes', 'url'=>array('index')),
+    array('label'=>'Create Electrode Lot', 'url'=>array('create')),
+    array('label'=>'View All Electrodes', 'url'=>array('index')),
     array('label'=>'Electrode Admin', 'url'=>array('admin')),
 );
 

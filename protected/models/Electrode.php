@@ -154,6 +154,7 @@ class Electrode extends CActiveRecord
 		
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			
 			'sort'=>array(
 				'attributes'=>array(
 					'coater_search'=>array(

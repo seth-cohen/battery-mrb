@@ -46,16 +46,19 @@
 						)),
 						array('label'=>'Kits', 'items'=>array(
 							array('label'=>'Create New Kit', 'url'=>array('kit/create'), 'active'=>0),
+							array('label'=>'Create Kits (Multi)', 'url'=>array('kit/multicreate'), 'active'=>0),
 							array('label'=>'View All Kits', 'url'=>array('kit/index'), 'active'=>0),
 						)),
 						array('label'=>'Cells', 'items'=>array(
 							array('label'=>'Stack Cells (Multi)', 'url'=>array('cell/multistackcells'), 'active'=>0),
-							array('label'=>'Fill Cells (Multi)', 'url'=>array('cell/multifillcells'), 'active'=>0),
 							array('label'=>'Inspect Cells (Multi)', 'url'=>array('cell/multiinspectcells'), 'active'=>0),
+							array('label'=>'Laser Weld Cells (Multi)', 'url'=>array('cell/multilasercells'), 'active'=>0),
+							array('label'=>'Fill Cells (Multi)', 'url'=>array('cell/multifillcells'), 'active'=>0),
+							array('label'=>'Fillport Weld Cells (Multi)', 'url'=>array('cell/multitipoffcells'), 'active'=>0),
 							array('label'=>'View All Cells', 'url'=>array('cell/index'), 'active'=>0),
 						)),
 						array('label'=>'Batteries', 'items'=>array(
-							array('label'=>'Create Anode Lot', 'url'=>array('/manufacturing/anode/createanodelot'), 'active'=>0),
+							array('label'=>'Battery EAP', 'url'=>array('/manufacturing/anode/createanodelot'), 'active'=>0),
 							array('label'=>'View Anode Lots', 'url'=>array('/manufacturing/anode/viewanodelots'), 'active'=>0),
 							array('label'=>'Create Cathode Lot', 'url'=>array('/manufacturing/createcathodelot'), 'active'=>0),
 							array('label'=>'View Cathode Lots', 'url'=>array('/manufacturing/viewcathodelots'), 'active'=>0),
@@ -70,10 +73,11 @@
 					'items'=>array(
 						array('label'=>'Testing', 'items'=>array(
 							array('label'=>'Put Cells on Formation', 'url'=>array('testlab/cellformation'), 'active'=>0),
+							array('label'=>'View All Cells on Formation', 'url'=>array('testlab/formationindex'), 'active'=>0),
 							array('label'=>'Put Cells on CAT', 'url'=>array('testlab/cellcat'), 'active'=>0),
-							array('label'=>'View Active Formation', 'url'=>array('testlab/formationindex'), 'active'=>0),
+							array('label'=>'View All Cells on CAT', 'url'=>array('testlab/catindex'), 'active'=>0),
+							array('label'=>'View All Cells on Test', 'url'=>array('testlab/cellindex'), 'active'=>0),
 							array('label'=>'Change Channel Assignment', 'url'=>array('testlab/changechannelassignment'), 'active'=>0),
-							array('label'=>'View Active CAT', 'url'=>array('testlab/catindex'), 'active'=>0),
 						)),	
 						array('label'=>'Channels', 'url'=>array('/channel/')),
 						array('label'=>'Chambers', 'url'=>array('/chamber/'), 'active'=>0),

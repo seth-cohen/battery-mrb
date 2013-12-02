@@ -55,7 +55,8 @@ class Kit extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('serial_num, ref_num_id, kitting_date, kitter_id, anodeIds, cathodeIds, celltype_id', 'required'),
+			//array('serial_num, ref_num_id, kitting_date, kitter_id, anodeIds, cathodeIds, celltype_id', 'required'),
+			array('serial_num, ref_num_id, kitting_date, kitter_id, celltype_id', 'required'),
 			array('anodeIds, cathodeIds', 'checkLotNumbers'),
 			array('serial_num, eap_num', 'length', 'max'=>50),
 			array('serial_num, celltype_id', 'checkUniqueInType'),
@@ -82,7 +83,7 @@ class Kit extends CActiveRecord
 	{
         if(in_array(0,$this->$attribute))
         {
-        	$this->addError( $attribute, 'Please select valid '.$this->getAttributeLabel($attribute));
+        	$this->addError( $attribute, 'Select only valid '.$this->getAttributeLabel($attribute));
         }	    
 	}
 	
@@ -365,8 +366,16 @@ class Kit extends CActiveRecord
 	
 	public function getFormattedSerial()
 	{
-
 		return $this->celltype->name.'-'.$this->serial_num;
-
+	}
+	
+	public function getListForMulti($length)
+	{
+		$list = array();
+		for ($i=1; $i<=$length; $i++)
+		{
+			$list[] = array('id'=>$i);
+		}
+		return $list;
 	}
 }

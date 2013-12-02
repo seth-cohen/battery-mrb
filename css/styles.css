@@ -174,7 +174,7 @@ table.detail-view tr.even th
 
 .grid-view .summary
 {
-	margin: 0 0 5px 0;
+	margin: 0 10px 5px 0;
 	text-align: right;
 }
 
@@ -206,6 +206,7 @@ ul.yiiPager
 	font-size:11px;
 	border:0;
 	margin:0;
+	margin-right: 10px;
 	padding:0;
 	line-height:100%;
 	display:inline;
