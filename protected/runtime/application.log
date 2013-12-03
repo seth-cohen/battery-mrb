@@ -31925,3 +31925,192 @@ Stack trace:
 REQUEST_URI=/ytpdb/kit/ajaxmulticreate
 HTTP_REFERER=http://localhost/ytpdb/kit/multicreate
 ---
+2013/12/02 19:24:46 [error] [exception.CException] exception 'CException' with message 'CActiveForm and its behaviors do not have a method or closure named "activeDropDownList".' in C:\wamp\www\yii\framework\base\CComponent.php:266
+Stack trace:
+#0 C:\wamp\www\ytpdb\protected\views\kit\multicreate.php(54): CComponent->__call('activeDropDownL...', Array)
+#1 C:\wamp\www\ytpdb\protected\views\kit\multicreate.php(54): CActiveForm->activeDropDownList(Object(Kit), 'ref_num_id', Array, Array)
+#2 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#3 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#4 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#5 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('multicreate', Array, true)
+#6 C:\wamp\www\ytpdb\protected\controllers\KitController.php(171): CController->render('multicreate', Array)
+#7 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): KitController->actionMultiCreate()
+#8 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#12 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#13 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#15 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('multicreate')
+#17 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('kit/multicreate')
+#18 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#19 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/ytpdb/kit/multicreate
+HTTP_REFERER=http://localhost/ytpdb/site/index
+---
+2013/12/02 19:25:05 [error] [php] Trying to get property of non-object (C:\wamp\www\yii\framework\web\helpers\CHtml.php:2529)
+Stack trace:
+#0 C:\wamp\www\ytpdb\protected\views\kit\multicreate.php(78): CActiveForm->dropDownList()
+#1 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#2 C:\wamp\www\yii\framework\web\CBaseController.php(95): KitController->renderInternal()
+#3 C:\wamp\www\yii\framework\web\CController.php(869): KitController->renderFile()
+#4 C:\wamp\www\yii\framework\web\CController.php(782): KitController->renderPartial()
+#5 C:\wamp\www\ytpdb\protected\controllers\KitController.php(171): KitController->render()
+#6 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): KitController->actionMultiCreate()
+#7 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#8 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): KitController->runAction()
+#9 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#10 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#11 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): KitController->filterAccessControl()
+#12 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#13 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#14 C:\wamp\www\yii\framework\web\CController.php(265): KitController->runActionWithFilters()
+#15 C:\wamp\www\yii\framework\web\CWebApplication.php(282): KitController->run()
+#16 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#17 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#18 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/kit/multicreate
+in C:\wamp\www\ytpdb\protected\views\kit\multicreate.php (78)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (171)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/02 20:03:48 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (296)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (72)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/02 20:03:54 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (296)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (72)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/02 20:03:55 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (296)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (72)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/02 20:03:59 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (296)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (72)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/02 20:04:00 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (296)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (72)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/02 20:04:01 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (296)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (72)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/02 20:04:08 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (296)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (72)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/02 20:04:10 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (76)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/02 20:04:10 [error] [php] Undefined variable: anodes (C:\wamp\www\ytpdb\protected\models\Kit.php:394)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): KitController->runAction()
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): KitController->filterAccessControl()
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): KitController->runActionWithFilters()
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): KitController->run()
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/kit/create
+in C:\wamp\www\ytpdb\protected\models\Kit.php (394)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (90)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/02 20:04:30 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (76)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/02 20:05:32 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (76)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/02 20:05:32 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'it_id' in 'field list'. The SQL statement executed was: INSERT INTO `tbl_user_role` (`it_id`, `electrode_id`) VALUES (:it_id, :electrode_id).
+in C:\wamp\www\ytpdb\protected\models\Kit.php (400)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (90)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/02 20:05:32 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'it_id' in 'field list'. The SQL statement executed was: INSERT INTO `tbl_user_role` (`it_id`, `electrode_id`) VALUES (:it_id, :electrode_id)' in C:\wamp\www\yii\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\CDbCommand.php(1250): CDbCommand->execute(Array)
+#1 C:\wamp\www\ytpdb\protected\models\Kit.php(400): CDbCommand->insert('tbl_user_role', Array)
+#2 C:\wamp\www\ytpdb\protected\controllers\KitController.php(90): Kit->saveKitElectrodes(Array)
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): KitController->actionCreate()
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('kit/create')
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/ytpdb/kit/create
+HTTP_REFERER=http://localhost/ytpdb/kit/create
+---
+2013/12/02 20:05:53 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (76)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/02 20:06:11 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (76)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/02 20:06:38 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (296)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (191)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/02 20:06:39 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (296)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (191)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/02 20:06:41 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (296)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (191)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/02 20:06:41 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (195)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/02 20:07:42 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (268)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (177)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/02 20:07:43 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (268)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (177)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/02 20:07:43 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (181)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/02 21:29:30 [error] [exception.CException] exception 'CException' with message 'KitController has an extra endWidget() call in its view.' in C:\wamp\www\yii\framework\web\CBaseController.php:210
+Stack trace:
+#0 C:\wamp\www\ytpdb\protected\views\kit\multicreate.php(186): CBaseController->endWidget()
+#1 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#2 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#3 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#4 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('multicreate', Array, true)
+#5 C:\wamp\www\ytpdb\protected\controllers\KitController.php(143): CController->render('multicreate', Array)
+#6 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): KitController->actionMultiCreate()
+#7 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#8 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#10 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#14 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('multicreate')
+#16 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('kit/multicreate')
+#17 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#18 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/ytpdb/kit/multicreate
+HTTP_REFERER=http://localhost/ytpdb/testlab/changechannelassignment
+---

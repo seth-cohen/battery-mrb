@@ -378,4 +378,27 @@ class Kit extends CActiveRecord
 		}
 		return $list;
 	}
+	
+	public function saveKitElectrodes($electrodes)
+	{
+		/* clear the join table of roles */
+		$commandDelete = Yii::app()->db->createCommand();
+		$commandDelete->delete('tbl_electrode_kit', 
+			'kit_id = :id',
+			array(':id'=>$this->id)
+		);
+
+		if(!empty($electrodes))
+		{
+			/* add new roles list */
+			foreach($electrodes as $electrode)
+			{
+				$commandInsert = Yii::app()->db->createCommand();
+				$commandInsert->insert('tbl_electrode_kit', array(
+					'kit_id'=>$this->id,
+					'electrode_id'=>$electrode,
+				));
+			}
+		}
+	}
 }

@@ -24,16 +24,12 @@ Yii::app()->clientScript->registerCssFile(
 );
 ?>
 
-<div class="form" style="margin-bottom:15px;">
 <?php $form=$this->beginWidget('CActiveForm', array(
     'enableAjaxValidation'=>true,
 	'enableClientValidation'=>true,
-	'enableClientValidation'=>true,
-	'clientOptions' => array(
-		'validateOnSubmit' => true,
-	),
 	'id'=>'kit-form',
 )); ?>
+<div class="form" style="margin-bottom:15px;">
 <p class ="note">
 *Create multiple kits for a single cell type that use exactly the same electrode lots. <br/>
 If any additional or fewer electrode lots are being used an additional form needs to be filled
@@ -45,7 +41,7 @@ out.
 	<td>
 		<div class="row">
 			<?php echo $form->labelEx($model,'ref_num_id'); ?>
-			<?php echo CHtml::activeDropDownList($model, 'ref_num_id', 
+			<?php echo $form->dropDownList($model, 'ref_num_id', 
 							CHtml::listData(RefNum::model()->findAll(), 'id','number'), 
 							array(
 								'prompt'=>' -Select Reference No.- ',
@@ -65,6 +61,18 @@ out.
 								'size'=>5,
 							)); ?>
 			<?php echo $form->error($model,'anodeIds'); ?>
+		</div>
+		<div class="row">
+			<?php echo $form->labelEx($model,'celltype_id'); ?>
+			<?php echo $form->dropDownList($model, 'celltype_id', 
+							CHtml::listData(Celltype::model()->findAll(), 'id','name'),
+							array(
+								'prompt'=>'-Select Type-',
+								'class'=>'celltype-dropdown',
+								'onChange'=>'typeSelected(this)',
+								'style'=>'width:152px',
+							)); ?>
+			<?php echo $form->error($model,'celltype_id'); ?>
 		</div>
 	</td>
 	<td>
@@ -108,29 +116,19 @@ out.
 			'value'=>'$data["id"]',
 		),
 		array(
-			'header' => 'Cell Type',
-			'type' => 'raw',
-			'value'=>function($data,$row){
-				return 
-				CHtml::dropDownList('celltypes['.$data['id'].']', '', 
-					CHtml::listData(Celltype::model()->findAll(), 'id','name'),
-					array(
-						'prompt'=>'-Select Type-',
-						'class'=>'celltype-dropdown',
-						'onChange'=>'typeSelected(this)',
-						'style'=>'width:100px',
-					)	
-				);
-			},	
-		),
-		array(
 			'header' => 'Serial No.',
 			'type' => 'raw',
 			'value'=>function($data,$row){
-				return CHtml::textField('serials[$data["id"]','',array(
-					'style'=>'width:100px;', 
-				));
+				return 
+					'<span></span>'.
+					CHtml::textField('serials['.$data["id"].']','',array(
+						'style'=>'width:100px;', 
+					));
 			},	
+			'htmlOptions'=>array(
+				'style'=>'width:200px;',
+				'class'=>'serial-cell',
+			),
 		),
 		array(
 			'header' => 'Kitter',
@@ -141,7 +139,7 @@ out.
 			'header' => 'Kitting Date',
 			'type' => 'raw',
 			'value'=>function($data,$row){
-				return CHtml::textField('dates[$data["id"]',date('Y-m-d',time()),array(
+				return CHtml::textField('dates['.$data["id"].']',date('Y-m-d',time()),array(
 					'style'=>'width:100px;', 
 					'class'=>'hasDatePicker',
 				));
@@ -185,7 +183,6 @@ function reloadGrid(data) {
 <?php echo CHtml::ajaxSubmitButton('Submit',array('kit/ajaxmulticreate'), array('success'=>'reloadGrid'), array("id"=>"submit-button")); ?>
 
 <?php $this->endWidget(); ?>
-
 <script type="text/javascript">
 
 jQuery(function($) {
@@ -209,9 +206,9 @@ jQuery('.hasDatePicker').live('focus', function(event) {
 
 function typeSelected(sel)
 {
-	var celltype_id = $('option:selected', $(sel)).attr("value");
+	var celltype = $('option:selected', $(sel)).text();
 
-	$('.celltype-dropdown').val(celltype_id);
+	$('.serial-cell span').text(celltype+'-');
 }
 
 function refSelected(sel)

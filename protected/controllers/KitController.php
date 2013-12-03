@@ -87,21 +87,7 @@ class KitController extends Controller
 			
 			if($model->save())
 			{
-				$commandInsert = Yii::app()->db->createCommand();
-				foreach($model->anodeIds as $anode)
-				{
-					$commandInsert->insert('tbl_electrode_kit', array(
-						'kit_id'=>$model->id,
-						'electrode_id'=>$anode,
-					));
-				}
-				foreach($model->cathodeIds as $cathode)
-				{
-					$commandInsert->insert('tbl_electrode_kit', array(
-						'kit_id'=>$model->id,
-						'electrode_id'=>$cathode,
-					));
-				}
+				$model->saveKitElectrodes(array_merge($model->anodeIds, $model->cathodeIds));
 				$this->redirect(array('view','id'=>$model->id));
 			}
 		}
@@ -146,21 +132,7 @@ class KitController extends Controller
 			
 			if($model->save())
 			{
-				$commandInsert = Yii::app()->db->createCommand();
-				foreach($model->anodeIds as $anode)
-				{
-					$commandInsert->insert('tbl_electrode_kit', array(
-						'kit_id'=>$model->id,
-						'electrode_id'=>$anode,
-					));
-				}
-				foreach($model->cathodeIds as $cathode)
-				{
-					$commandInsert->insert('tbl_electrode_kit', array(
-						'kit_id'=>$model->id,
-						'electrode_id'=>$cathode,
-					));
-				}
+				$model->saveKitElectrodes(array_merge($model->anodeIds, $model->cathodeIds));
 				$this->redirect(array('index'));
 			}
 		}
@@ -177,7 +149,7 @@ class KitController extends Controller
 	 */
 	public function actionAjaxMultiCreate()
 	{
-		
+		$i = 16;
 	}
 	
 	
@@ -209,28 +181,7 @@ class KitController extends Controller
 			$model->attributes=$_POST['Kit'];
 			if($model->save())
 			{
-				/* clear the join table of electrodes */
-				$commandDelete = Yii::app()->db->createCommand();
-				$commandDelete->delete('tbl_electrode_kit', 
-					'kit_id = :id',
-					array(':id'=>$id)
-				);
-				
-				$commandInsert = Yii::app()->db->createCommand();
-				foreach($model->anodeIds as $anode)
-				{
-					$commandInsert->insert('tbl_electrode_kit', array(
-						'kit_id'=>$model->id,
-						'electrode_id'=>$anode,
-					));
-				}
-				foreach($model->cathodeIds as $cathode)
-				{
-					$commandInsert->insert('tbl_electrode_kit', array(
-						'kit_id'=>$model->id,
-						'electrode_id'=>$cathode,
-					));
-				}
+				$model->saveKitElectrodes(array_merge($model->anodeIds, $model->cathodeIds));
 				$this->redirect(array('view','id'=>$model->id));
 			}
 		}
@@ -332,14 +283,14 @@ class KitController extends Controller
 			$userId = Yii::app()->user->id;
 		}
 		
-		$returnString = CHtml::textField('user_names[$data["id"]]',$userName,array(
+		$returnString = CHtml::textField('user_names['.$data["id"].']',$userName,array(
 				"style"=>"width:110px;",
 				"class"=>"ui-autocomplete-input",
 				"autocomplete"=>"off",
 				"disabled"=>$disabled,
 			));
 			
-		$returnString.= CHtml::hiddenField('user_ids[$data["id"]]',$userId, array("class"=>"user-id-input"));
+		$returnString.= CHtml::hiddenField('user_ids['.$data["id"].']',$userId, array("class"=>"user-id-input"));
 	
 		return $returnString;
 	}
