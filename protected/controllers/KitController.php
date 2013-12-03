@@ -35,6 +35,7 @@ class KitController extends Controller
 				'actions'=>array(
 					'create','update', 
 					'multicreate', 'ajaxmulticreate',
+					'lastserial'
 				),
 				'roles'=>array('manufacturing'),
 				//'users'=>array('@'),
@@ -115,27 +116,6 @@ class KitController extends Controller
 		
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
-			
-		if(isset($_POST['Kit']))
-		{
-			$model->attributes=$_POST['Kit'];
-			
-			/* needed to validate the anode and cathode lot IDs */
-			if(isset($_POST['Kit']['anodeIds']))
-			{
-				$model->anodeIds = $_POST['Kit']['anodeIds'];
-			}
-			if(isset($_POST['Kit']['cathodeIds']))
-			{
-				$model->cathodeIds = $_POST['Kit']['cathodeIds'];
-			}
-			
-			if($model->save())
-			{
-				$model->saveKitElectrodes(array_merge($model->anodeIds, $model->cathodeIds));
-				$this->redirect(array('index'));
-			}
-		}
 
 		$this->render('multicreate',array(
 			'model'=>$model,
@@ -149,7 +129,73 @@ class KitController extends Controller
 	 */
 	public function actionAjaxMultiCreate()
 	{
-		$i = 16;
+		/* nothing was selected; this shouldn't be possible given the 
+		 * Ajax checkbox validation... but still checking
+		 */
+		if(!isset($_POST['index']))
+		{
+			echo 'hide';
+			Yii::app()->end();
+		}
+		
+		$kitIndices = $_POST['index'];
+		$userIds = $_POST['user_ids'];
+		$dates = $_POST['dates'];
+		$tempSerials = $_POST['serials'];
+		
+		/* make sure there are no duplicate serial numbers */
+		$serials = array();
+		foreach($kitIndices as $index)
+		{
+			$serials[$index] = $tempSerials[$index];		
+		}
+
+		if (count($serials) !== count(array_unique($serials)))
+		{ /* then we have duplicates set error and bail */		
+			$model = new Kit();
+			$model->addError('serial_num', 'Serial No. are not unique!');
+			echo CHtml::errorSummary($model);
+			Yii::app()->end();
+		}
+		
+		if(count($kitIndices) > 0)
+		{
+			$kitModels = array();
+			foreach($kitIndices as $index)
+			{
+				$tempKit = new Kit();
+				
+				if(isset($_POST['Kit']))
+				{
+					$tempKit->attributes = $_POST['Kit'];
+					/* needed to validate the anode and cathode lot IDs */
+					if(isset($_POST['Kit']['anodeIds']))
+					{
+						$model->anodeIds = $_POST['Kit']['anodeIds'];
+					}
+					if(isset($_POST['Kit']['cathodeIds']))
+					{
+						$model->cathodeIds = $_POST['Kit']['cathodeIds'];
+					}
+				}
+				
+				$tempKit->kitter_id =$userIds[$index];
+				$tempKit->kitting_date = $dates[$index];
+				$tempKit->serial_num = $serials[$index];
+				
+				$kitModels[$index] = $tempKit;
+			}
+			$result = Kit::multiSaveKits($kitModels);  
+			
+			if (!json_decode($result))
+			{ /* the save failed otherwise result would be json_encoded*/
+				echo $result;
+			} 
+			else 
+			{ /* success so show count and serial numbers */
+				echo $result;
+			}
+		}
 	}
 	
 	
@@ -259,6 +305,30 @@ class KitController extends Controller
 		if(isset($_POST['ajax']) && $_POST['ajax']==='kit-form')
 		{
 			echo CActiveForm::validate($model);
+			Yii::app()->end();
+		}
+	}
+	
+	
+	/**
+	 * Returns the highest cell serial number used for this cell type
+	 * @param $celltype_id
+	 */
+	public function actionLastSerial($celltype_id)
+	{
+		$model = Kit::model()->findByAttributes(
+			array('celltype_id'=>$celltype_id),
+			array('order'=>'serial_num DESC', 'limit'=>1)
+		);
+		
+		if($model)
+		{
+			echo $model->serial_num;
+			Yii::app()->end();
+		}
+		else 
+		{
+			echo 'N/A';
 			Yii::app()->end();
 		}
 	}

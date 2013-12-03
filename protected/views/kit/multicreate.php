@@ -9,6 +9,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
+	array('label'=>'Create Single Kit', 'url'=>array('create')),
 	array('label'=>'View All Kits', 'url'=>array('index')),
 	array('label'=>'Manage Kit', 'url'=>array('admin')),
 );
@@ -95,6 +96,9 @@ out.
 							)); ?>
 			<?php echo $form->error($model,'cathodeIds'); ?>
 		</div>
+		<div class="row">
+			<div style="padding-top:10px; width:300px"><span id="last-serial"></span></div>
+		</div>
 	</td>
 </tr></table>
 </div>
@@ -105,8 +109,7 @@ out.
 	'dataProvider'=>$dataProvider,
 	'columns'=>array(
 		array(
-			'header' => 'Mark Bad',
-            'id'=>'badId',
+            'id'=>'index',
             'class'=>'CCheckBoxColumn',
             'selectableRows' => '50', 
 			'value'=>'$data["id"]', 
@@ -163,13 +166,13 @@ function reloadGrid(data) {
     {
     	try
     	{
-    	   var cells = $.parseJSON(data);
-    	   var alertString = cells.length+' cells were put on formation. Serial numbers: \n';
-    	   cells.forEach(function(cell) {
-    		   alertString += cell.serial + ' on ' + cell.cycler + '-' + cell.channel + '\n';
+    	   var kits = $.parseJSON(data);
+    	   var alertString = kits.length+' kits were kitted. Serial numbers: \n';
+    	   kits.forEach(function(kit) {
+    		   alertString += kit.serial + ' by ' + kit.kitter + '\n';
     	   });
     	   alert(alertString);
-    	   $.fn.yiiGridView.update('kit-grid');
+    	   $.fn.yiiGridView.update('#kit-grid');
     	}
     	catch(e)
     	{
@@ -185,8 +188,8 @@ function reloadGrid(data) {
 <?php $this->endWidget(); ?>
 <script type="text/javascript">
 
-jQuery(function($) {
-	jQuery('.ui-autocomplete-input').live('keydown', function(event) {
+$(document).ready(function($) {
+	jQuery('.ui-autocomplete-input').on('keydown', function(event) {
 		$(this).autocomplete({
 			'select': function(event, ui){
 				
@@ -198,17 +201,50 @@ jQuery(function($) {
 			'source':'/ytpdb/user/ajaxUserSearch'
 		});
 	});
-});
 
-jQuery('.hasDatePicker').live('focus', function(event) {
-	$(this).datepicker({'showAnim':'slideDown','changeMonth':true,'changeYear':true,'dateFormat':'yy-mm-dd'});
+	$('#submit-button').on('click', function(event) {
+		var noneChecked = true;
+		$('.errorSummary').remove();
+		
+		$('input[type=checkbox]').each(function () {
+	        if (this.checked) {
+	            noneChecked = false; 
+	        }
+		});
+
+		if(noneChecked)
+		{
+			alert('You must select at least one kit to create');
+			return false;
+		}
+	});
+
+	jQuery('body').on('focus', '.hasDatePicker', function(event) {
+		$(this).datepicker({'showAnim':'slideDown','changeMonth':true,'changeYear':true,'dateFormat':'yy-mm-dd'});
+	});
 });
 
 function typeSelected(sel)
 {
 	var celltype = $('option:selected', $(sel)).text();
+	var celltype_id = $('option:selected', $(sel)).val();
 
 	$('.serial-cell span').text(celltype+'-');
+
+	$.ajax({
+		type:'get',
+		url: '<?php echo $this->createUrl('kit/lastserial'); ?>',
+		data:
+		{
+			celltype_id: celltype_id.toString(),
+		},
+		success: function(data){
+			$('#last-serial').text(
+					"Highest serial number used for this cell type was: " +
+					celltype + "-" + data
+			 );
+		},
+	});
 }
 
 function refSelected(sel)
@@ -218,22 +254,5 @@ function refSelected(sel)
 	$("#Kit_eap_num").focus();
 }
 
-jQuery('#submit-button').bind('click', function(event) {
-	var noneChecked = true;
-	$('.errorSummary').remove();
-	
-	$('input[type=checkbox]').each(function () {
-        if (this.checked) {
-            noneChecked = false; 
-        }
-	});
-
-	if(noneChecked)
-	{
-		alert('You must select at least one kit to create');
-	}
-});
 
 </script>
-<ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" id="ui-id-1" tabindex="0" style="z-index: 1; display: none;"></ul>
-<div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>

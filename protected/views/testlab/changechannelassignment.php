@@ -176,7 +176,7 @@ jQuery(function($) {
 		cycSelected(this);
 	});
 
-	jQuery('.ui-autocomplete-input').live('keydown', function(event) {
+	jQuery('.ui-autocomplete-input').on('keydown', function(event) {
 		$(this).autocomplete({
 			'select': function(event, ui){
 				
@@ -188,23 +188,30 @@ jQuery(function($) {
 			'source':'/ytpdb/user/ajaxUserSearch'
 		});
 	});
-});
 
-jQuery('#submit-button').bind('click', function(event) {
-	var noneChecked = true;
-	$('.errorSummary').remove();
-	
-	$('input[name="autoId[]"]').each(function () {
-        if (this.checked) {
-            noneChecked = false; 
-        }
+	jQuery('#submit-button').on('click', function(event) {
+		var noneChecked = true;
+		$('.errorSummary').remove();
+		
+		$('input[name="autoId[]"]').each(function () {
+	        if (this.checked) {
+	            noneChecked = false; 
+	        }
+		});
+
+		if(noneChecked)
+		{
+			alert('You must select at least one cell to reassign channels');
+			return false;
+		}
 	});
 
-	if(noneChecked)
-	{
-		alert('You must select at least one cell to reassign channels');
-	}
+	jQuery('body').on('focus', '.hasDatePicker', function(event) {
+		$(this).datepicker({'showAnim':'slideDown','changeMonth':true,'changeYear':true,'dateFormat':'yy-mm-dd'});
+	});
 });
+
+
 
 function cycSelected(sel)
 {

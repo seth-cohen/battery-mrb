@@ -8,6 +8,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
+	array('label'=>'Create Kits (Multi)', 'url'=>array('multicreate')),
 	array('label'=>'View All Kits', 'url'=>array('index')),
 	array('label'=>'Manage Kit', 'url'=>array('admin')),
 );

@@ -51,6 +51,8 @@ class Cell extends CActiveRecord
 	public $portwelder_search;
 	public $laserwelder_search;
 	public $refnum_search;
+	public $anode_search;
+	public $cathode_search;
 	
 	public $not_formed=null;
 	public $formed_only=null;
@@ -83,7 +85,7 @@ class Cell extends CActiveRecord
 			// @todo Please remove those attributes that should not be searched.
 			array('eap_num, stack_date, dry_wt, wet_wt, fill_date, inspection_date, serial_search, celltype_search, 
 					refnum_search, stacker_search, filler_search, inspector_search, laserwelder_search, portwelder_search,
-					location, not_formed, formed_only, inspector_id, laserwelder_id, portwelder_id', 
+					location, not_formed, formed_only, inspector_id, laserwelder_id, portwelder_id, anode_search, cathode_search', 
 					'safe', 'on'=>'search'),
 		);
 	}
@@ -158,6 +160,8 @@ class Cell extends CActiveRecord
 			'portwelder_search' => 'Fill Port Welded By',
 			'inspector_search' => 'Inspected By',
 			'activetest_search' => 'Active Test',
+			'anode_search' => 'Anode Lots',
+			'cathode_search' => 'Cathode Lots',
 			
 		);
 	}
@@ -185,8 +189,8 @@ class Cell extends CActiveRecord
 							'select'=>array('id','serial_num'),
 							'with'=>array(
 								'celltype',
-								'anodes'=>array('select'=>'id'), 
-								'cathodes'=>array('select'=>'id'),
+								'anodes'=>array('select'=>'id, lot_num', 'alias'=>'anode'), 
+								'cathodes'=>array('select'=>'id, lot_num', 'alias'=>'cathode'),
 							), 
 						),
 						'stacker'=>array('alias'=>'stack'), 
@@ -219,6 +223,7 @@ class Cell extends CActiveRecord
 		$criteria->compare('portweld_date',$this->portweld_date,true);
 		$criteria->compare('fill_date',$this->fill_date,true);
 		$criteria->compare('inspection_date',$this->inspection_date,true);
+		$criteria->compare('location',$this->location,true);
 		
 		$criteria->compare('celltype.name',$this->celltype_search, true);
 		
@@ -237,19 +242,34 @@ class Cell extends CActiveRecord
 			$criteria->mergeWith($refCriteria);
 		}
 		
-		if($this->not_formed)
+		/*  enable searching for multiple lots using comma or spaces */
+		if ($this->anode_search)
 		{
-			$formCriteria = new CDbCriteria();
-			$formCriteria->addcondition('test.cell_id IS NULL');
-			$criteria->mergeWith($formCriteria);
+			$anodeLots = explode(',', str_replace(' ', ',', $this->anode_search));
+			$anodeLotCriteria = new CDbCriteria();
+			foreach ($anodeLots as $anodeLot)
+			{
+				if(!empty($anodeLot))
+				{
+					$anodeLotCriteria->compare('anode.lot_num', $anodeLot, true, 'OR');
+				}
+			}
+			$criteria->mergeWith($anodeLotCriteria);
 		}
 		
-		if($this->formed_only)
+		if ($this->cathode_search)
 		{
-			$formCriteria = new CDbCriteria();
-			$formCriteria->addcondition('test.cell_id = t.id');
-			$criteria->mergeWith($formCriteria);
-		}
+			$cathodeLots = explode(',', str_replace(' ', ',', $this->cathode_search));
+			$cathodeLotCriteria = new CDbCriteria();
+			foreach ($cathodeLots as $cathodeLot)
+			{
+				if(!empty($cathodeLot))
+				{
+					$cathodeLotCriteria->compare('cathode.lot_num', $cathodeLot, true, 'OR');
+				}
+			}
+			$criteria->mergeWith($cathodeLotCriteria);
+		}	
 		
 		/* for concatenated user name search */
 		$criteria->addSearchCondition('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
@@ -261,7 +281,8 @@ class Cell extends CActiveRecord
 
 		return new KeenActiveDataProvider($this, array(
 			'withKeenLoading' => array(
-				'kit'=>array('select'=>array('celltype','serial_num')),
+				array('kit'),
+				array('kit.anodes', 'kit.cathodes', 'kit.celltype'),		
 				//'testAssignments'=>array('alias'=>'test'),
 			),
 			'pagination'=>array('pageSize' => 16),
@@ -552,6 +573,8 @@ class Cell extends CActiveRecord
 		foreach($stackedCells as $cell)
 		{
 			$model = $cell;
+			$model->scenario = 'stack';
+			
 			$model->location = 'stacked';
 				
 			if(!$model->validate())
@@ -800,7 +823,30 @@ class Cell extends CActiveRecord
 		else /* a model failed, don't save any */
 		{
 			return CHtml::errorSummary($models); 	
-		}			
+		}			 
 		return null;
+	}
+	
+	public static function getColumnList()
+	{
+		$results = array();
+		
+		$columns = array(
+			'Serial No.', 'Reference No.',
+			'EAP No.', 'Cell Type',
+			'Stacker', 'Stack Date',
+			'Inspector', 'Inspection Date',
+			'Laser Welder', 'Laser Weld Date',
+			'Filler', 'Fill Date',
+			'Fillport Welder', 'Fillport Weld Date',
+			'Dry Wt(g)', 'Wet wt(g)',
+			'Anode Lots', 'Cathode Lots',
+			'Location'
+		);
+		foreach($columns as $id=>$column)
+		{
+			$result[] = array('id'=>$id+1, 'value'=>$column);
+		}
+		return $result;
 	}
 }

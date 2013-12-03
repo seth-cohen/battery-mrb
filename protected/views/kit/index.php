@@ -27,7 +27,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Kits</h1>
+<h1>All Kits</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -67,6 +67,12 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 			'type'=>'raw',
 			'value'=>'$data->getCathodeList()',
 		),
+		array(
+			'name'=>'is_stacked',
+			'filter'=>array(''=>'-All-', 0=>'No', 1=>'Yes'),
+			'type'=>'raw',
+			'value'=>'$data->is_stacked?"Yes":"No"',
+		),
 		//'kitter_id',
 		/*
 		'kitting_date',
@@ -74,6 +80,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		*/
 		array(
 			'class'=>'CButtonColumn',
+			'template'=>'{view} {update}',
 		),
 	),
 	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',

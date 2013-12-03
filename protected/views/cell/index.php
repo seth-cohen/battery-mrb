@@ -1,6 +1,7 @@
 <?php
 /* @var $this CellController */
 /* @var $model Cell */
+/* @var $visibleColumns array() */
 /* @var $mfgDataProvider CArrayDataProvider */
 
 $this->breadcrumbs=array(
@@ -54,6 +55,23 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 )); ?>
 </div><!-- search-form -->
 
+<div id="column-wrapper" class="border" style="padding:5px;">
+<em><b>Visible Columns</b></em>
+<?php  echo $this->renderPartial('_columnvisibility', array('visibleColumns'=>$visibleColumns)); ?>
+</div>
+
+<div id="column-wrapper" class="border" style="padding:5px;">
+<em><b>CSV Columns</b></em>
+<?php  echo $this->renderPartial('_columnprinting', array('printColumns'=>$visibleColumns)); ?>
+</div>
+
+<?php echo CHtml::button('Hide Column', 
+			array(
+				'title'=>'Hide First Column',
+				'onClick'=>'js:refreshColumns();',
+			)
+); ?>
+
 <div class="shadow border" >
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'cell-grid',
@@ -63,19 +81,84 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		array(
 			'name'=>'serial_search',
 			'value'=>'$data->kit->celltype->name."-".$data->kit->serial_num',
+			'visible'=>in_array(1,$visibleColumns),
 		),
 		array(
 			'name'=>'refnum_search',
 			'value'=>'$data->refNum->number',
+			'visible'=>in_array(2,$visibleColumns),
 		),
-		'eap_num',
+		array(
+			'name'=>'eap_num',
+			'visible'=>in_array(3,$visibleColumns),
+		),
 		array(
 			'name'=>'celltype_search',
 			'value'=>'$data->kit->celltype->name',
+			'visible'=>in_array(4,$visibleColumns),
 		),
 		array(
 			'name'=>'stacker_search',
 			'value'=>'$data->stacker->getFullName()',
+			'visible'=>in_array(5,$visibleColumns),
+		),
+		array(
+			'name'=>'stack_date',
+			'visible'=>in_array(6,$visibleColumns),
+		),
+		array(
+			'name'=>'inspector_search',
+			'value'=>'$data->inspector->getFullName()',
+			'visible'=>in_array(7,$visibleColumns),
+		),
+		array(
+			'name'=>'inspection_date',
+			'visible'=>in_array(8,$visibleColumns),
+		),
+		array(
+			'name'=>'laserwelder_search',
+			'value'=>'$data->laserwelder->getFullName()',
+			'visible'=>in_array(9,$visibleColumns),
+		),
+		array(
+			'name'=>'laserweld_date',
+			'visible'=>in_array(10,$visibleColumns),
+		),
+		array(
+			'name'=>'filler_search',
+			'value'=>'$data->filler->getFullName()',
+			'visible'=>in_array(11,$visibleColumns),
+		),
+		array(
+			'name'=>'fill_date',
+			'visible'=>in_array(12,$visibleColumns),
+		),
+		array(
+			'name'=>'portwelder_search',
+			'value'=>'$data->filler->getFullName()',
+			'visible'=>in_array(13,$visibleColumns),
+		),
+		array(
+			'name'=>'portweld_date',
+			'visible'=>in_array(14,$visibleColumns),
+		),
+		array(
+			'name'=>'dry_wt',
+			'visible'=>in_array(15,$visibleColumns),
+		),
+		array(
+			'name'=>'wet_wt',
+			'visible'=>in_array(16,$visibleColumns),
+		),
+		array(
+			'name'=>'anode_search',
+			'value'=>'$data->kit->getAnodeList()',
+			'visible'=>in_array(17,$visibleColumns),
+		),
+		array(
+			'name'=>'cathode_search',
+			'value'=>'$data->kit->getCathodeList()',
+			'visible'=>in_array(18,$visibleColumns),
 		),
 		'location',
 		array(
@@ -128,7 +211,7 @@ $(document).ready(function(){
 
 	$('#csv-download').attr('href','');
 	
-	$('#csv-download').bind('click', function() {	
+	$('#csv-download').on('click', function() {	
 		var href = '<?php echo $this->createUrl('downloadlist'); ?>';
 		href += '?';
 		href += $('#cell-search-form :input[name!="r"]').serialize();
@@ -137,5 +220,32 @@ $(document).ready(function(){
 		
 		$('#csv-download').attr('href',href);	
 	});
+
+	$('#column-checkboxlist').on('change', 'input[name="Columns[]"]', function(event){
+		/* limit to 10 columns visible */
+		var bMaxColumns = $('input[name="Columns[]"]:checked').length >= 10;
+		$('input[name="Columns[]"]').not(':checked').attr('disabled', bMaxColumns);
+
+		/* all visible columns shouls be printed to CSV also */
+		$('input[name="Columns[]"]:checked').each(function(){
+			$('input[name="Printcolumns[]"][value='+this.value+']').prop('checked',true);
+		});
+		$('input[name="Columns[]"]').not(':checked').each(function(){
+			$('input[name="Printcolumns[]"][value='+this.value+']').prop('checked',false);
+		});
+		
+		var data = $('input[name="Columns[]"]:checked').serialize();
+		$.fn.yiiGridView.update('cell-grid', {
+			data: data,
+	    });
+	});
 });
+
+function toggleColumn() {
+    grid = $('#cell-grid');
+    $('tr', grid).each(function() {
+        $('td:eq(0), th:eq(0)',this).toggle();
+    });
+}
+
 </script>

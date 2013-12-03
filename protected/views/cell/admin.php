@@ -144,7 +144,7 @@ $(document).ready(function(){
 
 	$('#csv-download').attr('href','');
 	
-	$('#csv-download').bind('click', function() {	
+	$('#csv-download').on('click', function() {	
 		var href = '<?php echo $this->createUrl('downloadlist'); ?>';
 		href += '?';
 		href += $('#cell-search-form :input[name!="r"]').serialize();

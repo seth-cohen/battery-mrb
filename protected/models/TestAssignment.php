@@ -220,7 +220,7 @@ class TestAssignment extends CActiveRecord
 				{
 					/* update the cell location */
 					$cell = Cell::model()->findByPk($model->cell_id);
-					$cell->location = $model->is_formation ? '[FORM]':'[CAT]';
+					$cell->location = $model->is_formation ? '[FORM] ':'[CAT] ';
 					$cell->location .= $model->channel->cycler->name.
 										'{'.$model->channel->number.'} '.
 										'('.$model->chamber->name.')';
@@ -288,7 +288,7 @@ class TestAssignment extends CActiveRecord
 				{ 	
 					/* update the cell location */
 					$cell = Cell::model()->findByPk($model->cell_id);
-					$cell->location = $model->is_formation ? '[FORM]':'[CAT]';
+					$cell->location = $model->is_formation ? '[FORM] ':'[CAT] ';
 					$cell->location .= $model->channel->cycler->name.
 										'{'.$model->channel->number.'} '.
 										'('.$model->chamber->name.')';

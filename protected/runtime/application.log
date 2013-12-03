@@ -32114,3 +32114,1423 @@ Stack trace:
 REQUEST_URI=/ytpdb/kit/multicreate
 HTTP_REFERER=http://localhost/ytpdb/testlab/changechannelassignment
 ---
+2013/12/03 09:19:01 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`yardney`.`tbl_cell`, CONSTRAINT `FK_tbl_cell_tbl_user` FOREIGN KEY (`stacker_id`) REFERENCES `tbl_user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE). The SQL statement executed was: INSERT INTO `tbl_cell` (`filler_id`, `inspector_id`, `portwelder_id`, `laserwelder_id`, `stacker_id`, `stack_date`, `ref_num_id`, `eap_num`, `kit_id`, `location`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9).
+in C:\wamp\www\ytpdb\protected\models\Cell.php (571)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (258)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 09:19:01 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`yardney`.`tbl_cell`, CONSTRAINT `FK_tbl_cell_tbl_user` FOREIGN KEY (`stacker_id`) REFERENCES `tbl_user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE). The SQL statement executed was: INSERT INTO `tbl_cell` (`filler_id`, `inspector_id`, `portwelder_id`, `laserwelder_id`, `stacker_id`, `stack_date`, `ref_num_id`, `eap_num`, `kit_id`, `location`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9)' in C:\wamp\www\yii\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 C:\wamp\www\ytpdb\protected\models\Cell.php(571): CActiveRecord->save()
+#3 C:\wamp\www\ytpdb\protected\controllers\CellController.php(258): Cell::createStackedCells(Array)
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAjaxStackCells()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxstackcells')
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxstackc...')
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/ytpdb/cell/ajaxstackcells
+HTTP_REFERER=http://localhost/ytpdb/cell/multistackcells
+---
+2013/12/03 09:19:05 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`yardney`.`tbl_cell`, CONSTRAINT `FK_tbl_cell_tbl_user` FOREIGN KEY (`stacker_id`) REFERENCES `tbl_user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE). The SQL statement executed was: INSERT INTO `tbl_cell` (`filler_id`, `inspector_id`, `portwelder_id`, `laserwelder_id`, `stacker_id`, `stack_date`, `ref_num_id`, `eap_num`, `kit_id`, `location`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9).
+in C:\wamp\www\ytpdb\protected\models\Cell.php (571)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (258)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 09:19:05 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`yardney`.`tbl_cell`, CONSTRAINT `FK_tbl_cell_tbl_user` FOREIGN KEY (`stacker_id`) REFERENCES `tbl_user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE). The SQL statement executed was: INSERT INTO `tbl_cell` (`filler_id`, `inspector_id`, `portwelder_id`, `laserwelder_id`, `stacker_id`, `stack_date`, `ref_num_id`, `eap_num`, `kit_id`, `location`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9)' in C:\wamp\www\yii\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 C:\wamp\www\ytpdb\protected\models\Cell.php(571): CActiveRecord->save()
+#3 C:\wamp\www\ytpdb\protected\controllers\CellController.php(258): Cell::createStackedCells(Array)
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAjaxStackCells()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxstackcells')
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxstackc...')
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/ytpdb/cell/ajaxstackcells
+HTTP_REFERER=http://localhost/ytpdb/cell/multistackcells
+---
+2013/12/03 09:19:32 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`yardney`.`tbl_cell`, CONSTRAINT `FK_tbl_cell_tbl_user` FOREIGN KEY (`stacker_id`) REFERENCES `tbl_user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE). The SQL statement executed was: INSERT INTO `tbl_cell` (`filler_id`, `inspector_id`, `portwelder_id`, `laserwelder_id`, `stacker_id`, `stack_date`, `ref_num_id`, `eap_num`, `kit_id`, `location`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9).
+in C:\wamp\www\ytpdb\protected\models\Cell.php (571)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (258)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 09:19:32 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`yardney`.`tbl_cell`, CONSTRAINT `FK_tbl_cell_tbl_user` FOREIGN KEY (`stacker_id`) REFERENCES `tbl_user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE). The SQL statement executed was: INSERT INTO `tbl_cell` (`filler_id`, `inspector_id`, `portwelder_id`, `laserwelder_id`, `stacker_id`, `stack_date`, `ref_num_id`, `eap_num`, `kit_id`, `location`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9)' in C:\wamp\www\yii\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 C:\wamp\www\ytpdb\protected\models\Cell.php(571): CActiveRecord->save()
+#3 C:\wamp\www\ytpdb\protected\controllers\CellController.php(258): Cell::createStackedCells(Array)
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAjaxStackCells()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxstackcells')
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxstackc...')
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/ytpdb/cell/ajaxstackcells
+HTTP_REFERER=http://localhost/ytpdb/cell/multistackcells
+---
+2013/12/03 09:19:37 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`yardney`.`tbl_cell`, CONSTRAINT `FK_tbl_cell_tbl_user` FOREIGN KEY (`stacker_id`) REFERENCES `tbl_user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE). The SQL statement executed was: INSERT INTO `tbl_cell` (`filler_id`, `inspector_id`, `portwelder_id`, `laserwelder_id`, `stacker_id`, `stack_date`, `ref_num_id`, `eap_num`, `kit_id`, `location`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9).
+in C:\wamp\www\ytpdb\protected\models\Cell.php (571)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (258)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 09:19:37 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`yardney`.`tbl_cell`, CONSTRAINT `FK_tbl_cell_tbl_user` FOREIGN KEY (`stacker_id`) REFERENCES `tbl_user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE). The SQL statement executed was: INSERT INTO `tbl_cell` (`filler_id`, `inspector_id`, `portwelder_id`, `laserwelder_id`, `stacker_id`, `stack_date`, `ref_num_id`, `eap_num`, `kit_id`, `location`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9)' in C:\wamp\www\yii\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 C:\wamp\www\ytpdb\protected\models\Cell.php(571): CActiveRecord->save()
+#3 C:\wamp\www\ytpdb\protected\controllers\CellController.php(258): Cell::createStackedCells(Array)
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAjaxStackCells()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxstackcells')
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxstackc...')
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/ytpdb/cell/ajaxstackcells
+HTTP_REFERER=http://localhost/ytpdb/cell/multistackcells
+---
+2013/12/03 09:20:31 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`yardney`.`tbl_cell`, CONSTRAINT `FK_tbl_cell_tbl_user` FOREIGN KEY (`stacker_id`) REFERENCES `tbl_user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE). The SQL statement executed was: INSERT INTO `tbl_cell` (`filler_id`, `inspector_id`, `portwelder_id`, `laserwelder_id`, `stacker_id`, `stack_date`, `ref_num_id`, `eap_num`, `kit_id`, `location`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9).
+in C:\wamp\www\ytpdb\protected\models\Cell.php (571)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (258)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 09:20:31 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`yardney`.`tbl_cell`, CONSTRAINT `FK_tbl_cell_tbl_user` FOREIGN KEY (`stacker_id`) REFERENCES `tbl_user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE). The SQL statement executed was: INSERT INTO `tbl_cell` (`filler_id`, `inspector_id`, `portwelder_id`, `laserwelder_id`, `stacker_id`, `stack_date`, `ref_num_id`, `eap_num`, `kit_id`, `location`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9)' in C:\wamp\www\yii\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 C:\wamp\www\ytpdb\protected\models\Cell.php(571): CActiveRecord->save()
+#3 C:\wamp\www\ytpdb\protected\controllers\CellController.php(258): Cell::createStackedCells(Array)
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAjaxStackCells()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxstackcells')
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxstackc...')
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/ytpdb/cell/ajaxstackcells
+HTTP_REFERER=http://localhost/ytpdb/cell/multistackcells
+---
+2013/12/03 09:22:44 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`yardney`.`tbl_cell`, CONSTRAINT `FK_tbl_cell_tbl_user` FOREIGN KEY (`stacker_id`) REFERENCES `tbl_user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE). The SQL statement executed was: INSERT INTO `tbl_cell` (`filler_id`, `inspector_id`, `portwelder_id`, `laserwelder_id`, `stacker_id`, `stack_date`, `ref_num_id`, `eap_num`, `kit_id`, `location`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9).
+in C:\wamp\www\ytpdb\protected\models\Cell.php (571)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (258)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 09:22:44 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`yardney`.`tbl_cell`, CONSTRAINT `FK_tbl_cell_tbl_user` FOREIGN KEY (`stacker_id`) REFERENCES `tbl_user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE). The SQL statement executed was: INSERT INTO `tbl_cell` (`filler_id`, `inspector_id`, `portwelder_id`, `laserwelder_id`, `stacker_id`, `stack_date`, `ref_num_id`, `eap_num`, `kit_id`, `location`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9)' in C:\wamp\www\yii\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 C:\wamp\www\ytpdb\protected\models\Cell.php(571): CActiveRecord->save()
+#3 C:\wamp\www\ytpdb\protected\controllers\CellController.php(258): Cell::createStackedCells(Array)
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAjaxStackCells()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxstackcells')
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxstackc...')
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/ytpdb/cell/ajaxstackcells
+HTTP_REFERER=http://localhost/ytpdb/cell/multistackcells?XDEBUG_SESSION_START=ECLIPSE_DBGP&KEY=13860804748451
+---
+2013/12/03 09:24:30 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`yardney`.`tbl_cell`, CONSTRAINT `FK_tbl_cell_tbl_user` FOREIGN KEY (`stacker_id`) REFERENCES `tbl_user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE). The SQL statement executed was: INSERT INTO `tbl_cell` (`filler_id`, `inspector_id`, `portwelder_id`, `laserwelder_id`, `stacker_id`, `stack_date`, `ref_num_id`, `eap_num`, `kit_id`, `location`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9).
+in C:\wamp\www\ytpdb\protected\models\Cell.php (571)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (258)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 09:24:30 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`yardney`.`tbl_cell`, CONSTRAINT `FK_tbl_cell_tbl_user` FOREIGN KEY (`stacker_id`) REFERENCES `tbl_user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE). The SQL statement executed was: INSERT INTO `tbl_cell` (`filler_id`, `inspector_id`, `portwelder_id`, `laserwelder_id`, `stacker_id`, `stack_date`, `ref_num_id`, `eap_num`, `kit_id`, `location`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9)' in C:\wamp\www\yii\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 C:\wamp\www\ytpdb\protected\models\Cell.php(571): CActiveRecord->save()
+#3 C:\wamp\www\ytpdb\protected\controllers\CellController.php(258): Cell::createStackedCells(Array)
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAjaxStackCells()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxstackcells')
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxstackc...')
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/ytpdb/cell/ajaxstackcells
+HTTP_REFERER=http://localhost/ytpdb/cell/multistackcells
+---
+2013/12/03 09:24:32 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`yardney`.`tbl_cell`, CONSTRAINT `FK_tbl_cell_tbl_user` FOREIGN KEY (`stacker_id`) REFERENCES `tbl_user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE). The SQL statement executed was: INSERT INTO `tbl_cell` (`filler_id`, `inspector_id`, `portwelder_id`, `laserwelder_id`, `stacker_id`, `stack_date`, `ref_num_id`, `eap_num`, `kit_id`, `location`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9).
+in C:\wamp\www\ytpdb\protected\models\Cell.php (571)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (258)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 09:24:32 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`yardney`.`tbl_cell`, CONSTRAINT `FK_tbl_cell_tbl_user` FOREIGN KEY (`stacker_id`) REFERENCES `tbl_user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE). The SQL statement executed was: INSERT INTO `tbl_cell` (`filler_id`, `inspector_id`, `portwelder_id`, `laserwelder_id`, `stacker_id`, `stack_date`, `ref_num_id`, `eap_num`, `kit_id`, `location`) VALUES (:yp0, :yp1, :yp2, :yp3, :yp4, :yp5, :yp6, :yp7, :yp8, :yp9)' in C:\wamp\www\yii\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1077): CDbCommand->execute()
+#1 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(806): CActiveRecord->insert(NULL)
+#2 C:\wamp\www\ytpdb\protected\models\Cell.php(571): CActiveRecord->save()
+#3 C:\wamp\www\ytpdb\protected\controllers\CellController.php(258): Cell::createStackedCells(Array)
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionAjaxStackCells()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxstackcells')
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/ajaxstackc...')
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/ytpdb/cell/ajaxstackcells
+HTTP_REFERER=http://localhost/ytpdb/cell/multistackcells
+---
+2013/12/03 09:29:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "changetestassignment".' in C:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('changetestassig...')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('changetestassig...')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('testlab/changet...')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ytpdb/testlab/changetestassignment
+HTTP_REFERER=http://localhost/ytpdb/testlab/cellcat
+---
+2013/12/03 09:53:51 [error] [exception.CException] exception 'CException' with message 'Kit and its behaviors do not have a method or closure named "saveKitElectrode".' in C:\wamp\www\yii\framework\base\CComponent.php:266
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(227): CComponent->__call('saveKitElectrod...', Array)
+#1 C:\wamp\www\ytpdb\protected\models\Kit.php(440): CActiveRecord->__call('saveKitElectrod...', Array)
+#2 C:\wamp\www\ytpdb\protected\models\Kit.php(440): Kit->saveKitElectrode(Array)
+#3 C:\wamp\www\ytpdb\protected\controllers\KitController.php(163): Kit::multiSaveKits(Array)
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): KitController->actionAjaxMultiCreate()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmulticreate')
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('kit/ajaxmulticr...')
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/ytpdb/kit/ajaxmulticreate
+HTTP_REFERER=http://localhost/ytpdb/kit/multicreate
+---
+2013/12/03 09:55:47 [error] [exception.CException] exception 'CException' with message 'Kit and its behaviors do not have a method or closure named "saveKitElectrode".' in C:\wamp\www\yii\framework\base\CComponent.php:266
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(227): CComponent->__call('saveKitElectrod...', Array)
+#1 C:\wamp\www\ytpdb\protected\models\Kit.php(440): CActiveRecord->__call('saveKitElectrod...', Array)
+#2 C:\wamp\www\ytpdb\protected\models\Kit.php(440): Kit->saveKitElectrode(Array)
+#3 C:\wamp\www\ytpdb\protected\controllers\KitController.php(163): Kit::multiSaveKits(Array)
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): KitController->actionAjaxMultiCreate()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmulticreate')
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('kit/ajaxmulticr...')
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/ytpdb/kit/ajaxmulticreate
+HTTP_REFERER=http://localhost/ytpdb/kit/multicreate
+---
+2013/12/03 09:57:18 [error] [exception.CException] exception 'CException' with message 'Kit and its behaviors do not have a method or closure named "saveKitElectrode".' in C:\wamp\www\yii\framework\base\CComponent.php:266
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(227): CComponent->__call('saveKitElectrod...', Array)
+#1 C:\wamp\www\ytpdb\protected\models\Kit.php(440): CActiveRecord->__call('saveKitElectrod...', Array)
+#2 C:\wamp\www\ytpdb\protected\models\Kit.php(440): Kit->saveKitElectrode(Array)
+#3 C:\wamp\www\ytpdb\protected\controllers\KitController.php(163): Kit::multiSaveKits(Array)
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): KitController->actionAjaxMultiCreate()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmulticreate')
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('kit/ajaxmulticr...')
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/ytpdb/kit/ajaxmulticreate
+HTTP_REFERER=http://localhost/ytpdb/kit/multicreate
+---
+2013/12/03 10:03:54 [error] [exception.CException] exception 'CException' with message 'Kit and its behaviors do not have a method or closure named "saveKitElectrode".' in C:\wamp\www\yii\framework\base\CComponent.php:266
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(227): CComponent->__call('saveKitElectrod...', Array)
+#1 C:\wamp\www\ytpdb\protected\models\Kit.php(440): CActiveRecord->__call('saveKitElectrod...', Array)
+#2 C:\wamp\www\ytpdb\protected\models\Kit.php(440): Kit->saveKitElectrode(Array)
+#3 C:\wamp\www\ytpdb\protected\controllers\KitController.php(163): Kit::multiSaveKits(Array)
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): KitController->actionAjaxMultiCreate()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmulticreate')
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('kit/ajaxmulticr...')
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/ytpdb/kit/ajaxmulticreate
+HTTP_REFERER=http://localhost/ytpdb/kit/multicreate
+---
+2013/12/03 10:05:38 [error] [exception.CException] exception 'CException' with message 'Kit and its behaviors do not have a method or closure named "saveKitElectrode".' in C:\wamp\www\yii\framework\base\CComponent.php:266
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(227): CComponent->__call('saveKitElectrod...', Array)
+#1 C:\wamp\www\ytpdb\protected\models\Kit.php(440): CActiveRecord->__call('saveKitElectrod...', Array)
+#2 C:\wamp\www\ytpdb\protected\models\Kit.php(440): Kit->saveKitElectrode(Array)
+#3 C:\wamp\www\ytpdb\protected\controllers\KitController.php(163): Kit::multiSaveKits(Array)
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): KitController->actionAjaxMultiCreate()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmulticreate')
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('kit/ajaxmulticr...')
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/ytpdb/kit/ajaxmulticreate
+HTTP_REFERER=http://localhost/ytpdb/kit/multicreate
+---
+2013/12/03 10:10:05 [error] [exception.CException] exception 'CException' with message 'Kit and its behaviors do not have a method or closure named "saveKitElectrode".' in C:\wamp\www\yii\framework\base\CComponent.php:266
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(227): CComponent->__call('saveKitElectrod...', Array)
+#1 C:\wamp\www\ytpdb\protected\models\Kit.php(440): CActiveRecord->__call('saveKitElectrod...', Array)
+#2 C:\wamp\www\ytpdb\protected\models\Kit.php(440): Kit->saveKitElectrode(Array)
+#3 C:\wamp\www\ytpdb\protected\controllers\KitController.php(180): Kit::multiSaveKits(Array)
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): KitController->actionAjaxMultiCreate()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmulticreate')
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('kit/ajaxmulticr...')
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/ytpdb/kit/ajaxmulticreate
+HTTP_REFERER=http://localhost/ytpdb/kit/multicreate
+---
+2013/12/03 10:11:41 [error] [exception.CException] exception 'CException' with message 'Property "Kit.stacker_id" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('stacker_id')
+#1 C:\wamp\www\ytpdb\protected\models\Kit.php(444): CActiveRecord->__get('stacker_id')
+#2 C:\wamp\www\ytpdb\protected\controllers\KitController.php(180): Kit::multiSaveKits(Array)
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): KitController->actionAjaxMultiCreate()
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmulticreate')
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('kit/ajaxmulticr...')
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/ytpdb/kit/ajaxmulticreate
+HTTP_REFERER=http://localhost/ytpdb/kit/multicreate
+---
+2013/12/03 10:12:39 [error] [exception.CException] exception 'CException' with message 'Property "Kit.stacker_id" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('stacker_id')
+#1 C:\wamp\www\ytpdb\protected\models\Kit.php(444): CActiveRecord->__get('stacker_id')
+#2 C:\wamp\www\ytpdb\protected\controllers\KitController.php(180): Kit::multiSaveKits(Array)
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): KitController->actionAjaxMultiCreate()
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmulticreate')
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('kit/ajaxmulticr...')
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/ytpdb/kit/ajaxmulticreate
+HTTP_REFERER=http://localhost/ytpdb/kit/multicreate
+---
+2013/12/03 10:17:08 [error] [exception.CException] exception 'CException' with message 'Property "Kit.stacker_id" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('stacker_id')
+#1 C:\wamp\www\ytpdb\protected\models\Kit.php(444): CActiveRecord->__get('stacker_id')
+#2 C:\wamp\www\ytpdb\protected\controllers\KitController.php(180): Kit::multiSaveKits(Array)
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): KitController->actionAjaxMultiCreate()
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxmulticreate')
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('kit/ajaxmulticr...')
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/ytpdb/kit/ajaxmulticreate
+HTTP_REFERER=http://localhost/ytpdb/kit/multicreate
+---
+2013/12/03 10:40:26 [error] [php] Undefined index: anodeIds (C:\wamp\www\ytpdb\protected\controllers\KitController.php:170)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): KitController->runAction()
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): KitController->filterAccessControl()
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): KitController->runActionWithFilters()
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): KitController->run()
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/kit/ajaxmulticreate
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (170)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 10:40:30 [error] [php] Undefined index: anodeIds (C:\wamp\www\ytpdb\protected\controllers\KitController.php:170)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): KitController->runAction()
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): KitController->filterAccessControl()
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): KitController->runActionWithFilters()
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): KitController->run()
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/kit/ajaxmulticreate
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (170)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 10:41:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "lastserial".' in C:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('lastserial')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('lastserial')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('kit/lastserial')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ytpdb/kit/lastserial?celltype_id=5
+HTTP_REFERER=http://localhost/ytpdb/kit/multicreate
+---
+2013/12/03 10:42:32 [error] [exception.ReflectionException] exception 'ReflectionException' with message 'Trying to invoke protected method KitController::actionLastSerial() from scope ReflectionMethod' in C:\wamp\www\yii\framework\web\actions\CAction.php:108
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(KitController), Array)
+#1 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(KitController), Object(ReflectionMethod), Array)
+#2 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#3 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#4 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#5 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#7 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#8 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#9 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('lastserial')
+#11 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('kit/lastserial')
+#12 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#13 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/ytpdb/kit/lastserial?celltype_id=4
+HTTP_REFERER=http://localhost/ytpdb/kit/multicreate
+---
+2013/12/03 10:43:00 [error] [php] Trying to get property of non-object (C:\wamp\www\ytpdb\protected\controllers\KitController.php:324)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): KitController->runAction()
+#3 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#4 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#5 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): KitController->filterAccessControl()
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#7 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(265): KitController->runActionWithFilters()
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(282): KitController->run()
+#10 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/kit/lastserial?celltype_id=7
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (324)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 10:46:44 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 10:46:44 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 10:46:46 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 10:46:46 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 10:46:48 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 10:46:50 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 10:46:50 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 10:46:51 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 10:46:55 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 10:47:45 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (77)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 10:47:49 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 10:47:52 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 10:47:53 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 10:47:55 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 10:47:58 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 10:48:02 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (77)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 10:48:04 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 10:48:05 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (77)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 10:49:53 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (77)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 10:54:28 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 10:56:44 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 10:57:22 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 10:57:37 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 10:57:52 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 10:57:54 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 10:58:40 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 10:58:40 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:00:23 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:00:42 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:00:52 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:00:57 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:00:59 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:01:00 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:01:00 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:01:01 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:01:01 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:01:02 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:01:07 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:01:08 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (77)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:01:25 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:01:27 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:01:31 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:02:14 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:02:15 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (77)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:02:18 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:02:19 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:02:21 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:02:29 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:02:40 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:02:41 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (77)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:02:43 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:02:45 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:02:47 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:02:51 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:02:56 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:02:58 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:03:01 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:03:44 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (77)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:03:48 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:03:51 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:04:05 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:04:05 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (77)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:04:07 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:04:11 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:04:14 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:04:18 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (77)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:05:19 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (227)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:19:04 [error] [exception.CException] exception 'CException' with message 'Property "Kit.stacked" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('stacked')
+#1 C:\wamp\www\yii\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('stacked')
+#2 C:\wamp\www\yii\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(Kit), 'stacked')
+#3 C:\wamp\www\yii\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(Kit), 'stacked', Array)
+#4 C:\wamp\www\yii\framework\zii\widgets\grid\CDataColumn.php(103): CHtml::activeTextField(Object(Kit), 'stacked', Array)
+#5 C:\wamp\www\yii\framework\zii\widgets\grid\CGridColumn.php(116): CDataColumn->renderFilterCellContent()
+#6 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(532): CGridColumn->renderFilterCell()
+#7 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(510): CGridView->renderFilter()
+#8 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(480): CGridView->renderTableHeader()
+#9 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#10 [internal function]: CBaseListView->renderSection(Array)
+#11 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{summary}?{item...')
+#12 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(135): CBaseListView->renderContent()
+#13 C:\wamp\www\yii\framework\web\CBaseController.php(173): CBaseListView->run()
+#14 C:\wamp\www\ytpdb\protected\views\kit\index.php(86): CBaseController->widget('zii.widgets.gri...', Array)
+#15 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#16 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#17 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#18 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('index', Array, true)
+#19 C:\wamp\www\ytpdb\protected\controllers\KitController.php(266): CController->render('index', Array)
+#20 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): KitController->actionIndex()
+#21 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#22 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#23 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#24 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#25 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#26 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#27 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#28 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#29 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('index')
+#30 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('kit/index')
+#31 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#32 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#33 {main}
+REQUEST_URI=/ytpdb/kit/index
+HTTP_REFERER=http://localhost/ytpdb/kit/index
+---
+2013/12/03 11:21:57 [warning] [application] Failed to set unsafe attribute "is_stacked" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (262)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:21:58 [warning] [application] Failed to set unsafe attribute "is_stacked" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (262)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:22:13 [warning] [application] Failed to set unsafe attribute "is_stacked" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (262)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:22:15 [warning] [application] Failed to set unsafe attribute "is_stacked" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (262)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:22:16 [warning] [application] Failed to set unsafe attribute "is_stacked" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (262)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:22:17 [warning] [application] Failed to set unsafe attribute "is_stacked" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (262)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 11:50:20 [error] [exception.CException] exception 'CException' with message 'CellController cannot find the requested view "_roleassign".' in C:\wamp\www\yii\framework\web\CController.php:878
+Stack trace:
+#0 C:\wamp\www\ytpdb\protected\views\cell\index.php(58): CController->renderPartial('_roleassign', Array)
+#1 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#2 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#3 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#4 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('index', Array, true)
+#5 C:\wamp\www\ytpdb\protected\controllers\CellController.php(153): CController->render('index', Array)
+#6 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionIndex()
+#7 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#8 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#10 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#14 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('index')
+#16 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/index')
+#17 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#18 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/ytpdb/cell/index
+HTTP_REFERER=http://localhost/ytpdb/cell/6
+---
+2013/12/03 11:55:59 [error] [php] Missing argument 2 for CHtml::listData(), called in C:\wamp\www\ytpdb\protected\views\cell\_columnvisibility.php on line 4 and defined (C:\wamp\www\yii\framework\web\helpers\CHtml.php:2073)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CBaseController.php(95): CellController->renderInternal()
+#1 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#2 C:\wamp\www\ytpdb\protected\views\cell\index.php(58): CellController->renderPartial()
+#3 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#4 C:\wamp\www\yii\framework\web\CBaseController.php(95): CellController->renderInternal()
+#5 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#6 C:\wamp\www\yii\framework\web\CController.php(782): CellController->renderPartial()
+#7 C:\wamp\www\ytpdb\protected\controllers\CellController.php(153): CellController->render()
+#8 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionIndex()
+#9 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#11 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#13 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#14 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#15 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#16 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#17 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#18 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#19 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/cell/index
+in C:\wamp\www\ytpdb\protected\views\cell\_columnvisibility.php (4)
+in C:\wamp\www\ytpdb\protected\views\cell\index.php (58)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (153)
+2013/12/03 11:56:29 [error] [php] Missing argument 2 for CHtml::listData(), called in C:\wamp\www\ytpdb\protected\views\cell\_columnvisibility.php on line 4 and defined (C:\wamp\www\yii\framework\web\helpers\CHtml.php:2073)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CBaseController.php(95): CellController->renderInternal()
+#1 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#2 C:\wamp\www\ytpdb\protected\views\cell\index.php(58): CellController->renderPartial()
+#3 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#4 C:\wamp\www\yii\framework\web\CBaseController.php(95): CellController->renderInternal()
+#5 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#6 C:\wamp\www\yii\framework\web\CController.php(782): CellController->renderPartial()
+#7 C:\wamp\www\ytpdb\protected\controllers\CellController.php(153): CellController->render()
+#8 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionIndex()
+#9 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#11 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#13 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#14 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#15 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#16 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#17 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#18 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#19 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/cell/index
+in C:\wamp\www\ytpdb\protected\views\cell\_columnvisibility.php (4)
+in C:\wamp\www\ytpdb\protected\views\cell\index.php (58)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (153)
+2013/12/03 11:56:56 [error] [exception.CException] exception 'CException' with message 'Property "Cell.roleIds" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('roleIds')
+#1 C:\wamp\www\yii\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('roleIds')
+#2 C:\wamp\www\yii\framework\web\helpers\CHtml.php(1905): CHtml::resolveValue(Object(Cell), 'roleIds')
+#3 C:\wamp\www\ytpdb\protected\views\cell\_columnvisibility.php(10): CHtml::activeCheckBoxList(Object(Cell), 'roleIds', Array, Array)
+#4 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#5 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#6 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#7 C:\wamp\www\ytpdb\protected\views\cell\index.php(58): CController->renderPartial('_columnvisibili...', Array)
+#8 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#9 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#10 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#11 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('index', Array, true)
+#12 C:\wamp\www\ytpdb\protected\controllers\CellController.php(153): CController->render('index', Array)
+#13 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionIndex()
+#14 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#15 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#16 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#17 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#18 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#19 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#20 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#21 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#22 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('index')
+#23 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/index')
+#24 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#25 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#26 {main}
+REQUEST_URI=/ytpdb/cell/index
+HTTP_REFERER=http://localhost/ytpdb/cell/6
+---
+2013/12/03 14:31:16 [error] [php] Undefined variable: columns (C:\wamp\www\ytpdb\protected\views\cell\index.php:94)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#1 C:\wamp\www\yii\framework\web\CController.php(782): CellController->renderPartial()
+#2 C:\wamp\www\ytpdb\protected\controllers\CellController.php(160): CellController->render()
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionIndex()
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/cell/index
+in C:\wamp\www\ytpdb\protected\views\cell\index.php (94)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (160)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 14:31:28 [error] [php] Undefined offset: 6 (C:\wamp\www\ytpdb\protected\views\cell\index.php:94)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#1 C:\wamp\www\yii\framework\web\CController.php(782): CellController->renderPartial()
+#2 C:\wamp\www\ytpdb\protected\controllers\CellController.php(160): CellController->render()
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionIndex()
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/cell/index
+in C:\wamp\www\ytpdb\protected\views\cell\index.php (94)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (160)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 14:31:41 [error] [php] Undefined index: 6 (C:\wamp\www\ytpdb\protected\views\cell\index.php:94)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#1 C:\wamp\www\yii\framework\web\CController.php(782): CellController->renderPartial()
+#2 C:\wamp\www\ytpdb\protected\controllers\CellController.php(160): CellController->render()
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionIndex()
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/cell/index
+in C:\wamp\www\ytpdb\protected\views\cell\index.php (94)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (160)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 14:59:52 [error] [exception.CException] exception 'CException' with message 'Property "Cell.filportwelder_search" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('filportwelder_s...')
+#1 C:\wamp\www\yii\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('filportwelder_s...')
+#2 C:\wamp\www\yii\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(Cell), 'filportwelder_s...')
+#3 C:\wamp\www\yii\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(Cell), 'filportwelder_s...', Array)
+#4 C:\wamp\www\yii\framework\zii\widgets\grid\CDataColumn.php(103): CHtml::activeTextField(Object(Cell), 'filportwelder_s...', Array)
+#5 C:\wamp\www\yii\framework\zii\widgets\grid\CGridColumn.php(116): CDataColumn->renderFilterCellContent()
+#6 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(532): CGridColumn->renderFilterCell()
+#7 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(510): CGridView->renderFilter()
+#8 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(480): CGridView->renderTableHeader()
+#9 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#10 [internal function]: CBaseListView->renderSection(Array)
+#11 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{summary}?{item...')
+#12 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(135): CBaseListView->renderContent()
+#13 C:\wamp\www\yii\framework\web\CBaseController.php(173): CBaseListView->run()
+#14 C:\wamp\www\ytpdb\protected\views\cell\index.php(152): CBaseController->widget('zii.widgets.gri...', Array)
+#15 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#16 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#17 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#18 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('index', Array, true)
+#19 C:\wamp\www\ytpdb\protected\controllers\CellController.php(160): CController->render('index', Array)
+#20 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionIndex()
+#21 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#22 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#23 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#24 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#25 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#26 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#27 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#28 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#29 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('index')
+#30 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/index')
+#31 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#32 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#33 {main}
+REQUEST_URI=/ytpdb/cell/index?Columns%5B%5D=1&Columns%5B%5D=2&Columns%5B%5D=5&Columns%5B%5D=13&ajax=cell-grid
+HTTP_REFERER=http://localhost/ytpdb/cell/index
+---
+2013/12/03 15:00:04 [error] [exception.CException] exception 'CException' with message 'Property "Cell.fillportwelder_search" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('fillportwelder_...')
+#1 C:\wamp\www\yii\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('fillportwelder_...')
+#2 C:\wamp\www\yii\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(Cell), 'fillportwelder_...')
+#3 C:\wamp\www\yii\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(Cell), 'fillportwelder_...', Array)
+#4 C:\wamp\www\yii\framework\zii\widgets\grid\CDataColumn.php(103): CHtml::activeTextField(Object(Cell), 'fillportwelder_...', Array)
+#5 C:\wamp\www\yii\framework\zii\widgets\grid\CGridColumn.php(116): CDataColumn->renderFilterCellContent()
+#6 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(532): CGridColumn->renderFilterCell()
+#7 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(510): CGridView->renderFilter()
+#8 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(480): CGridView->renderTableHeader()
+#9 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#10 [internal function]: CBaseListView->renderSection(Array)
+#11 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{summary}?{item...')
+#12 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(135): CBaseListView->renderContent()
+#13 C:\wamp\www\yii\framework\web\CBaseController.php(173): CBaseListView->run()
+#14 C:\wamp\www\ytpdb\protected\views\cell\index.php(152): CBaseController->widget('zii.widgets.gri...', Array)
+#15 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#16 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#17 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#18 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('index', Array, true)
+#19 C:\wamp\www\ytpdb\protected\controllers\CellController.php(160): CController->render('index', Array)
+#20 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionIndex()
+#21 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#22 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#23 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#24 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#25 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#26 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#27 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#28 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#29 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('index')
+#30 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/index')
+#31 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#32 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#33 {main}
+REQUEST_URI=/ytpdb/cell/index?Columns%5B%5D=1&Columns%5B%5D=2&Columns%5B%5D=5&Columns%5B%5D=13&ajax=cell-grid
+HTTP_REFERER=http://localhost/ytpdb/cell/index
+---
+2013/12/03 15:22:48 [error] [exception.CException] exception 'CException' with message 'Property "Cell.wer_wt" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('wer_wt')
+#1 C:\wamp\www\yii\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('wer_wt')
+#2 C:\wamp\www\yii\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(Cell), 'wer_wt')
+#3 C:\wamp\www\yii\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(Cell), 'wer_wt', Array)
+#4 C:\wamp\www\yii\framework\zii\widgets\grid\CDataColumn.php(103): CHtml::activeTextField(Object(Cell), 'wer_wt', Array)
+#5 C:\wamp\www\yii\framework\zii\widgets\grid\CGridColumn.php(116): CDataColumn->renderFilterCellContent()
+#6 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(532): CGridColumn->renderFilterCell()
+#7 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(510): CGridView->renderFilter()
+#8 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(480): CGridView->renderTableHeader()
+#9 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#10 [internal function]: CBaseListView->renderSection(Array)
+#11 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{summary}?{item...')
+#12 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(135): CBaseListView->renderContent()
+#13 C:\wamp\www\yii\framework\web\CBaseController.php(173): CBaseListView->run()
+#14 C:\wamp\www\ytpdb\protected\views\cell\index.php(160): CBaseController->widget('zii.widgets.gri...', Array)
+#15 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#16 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#17 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#18 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('index', Array, true)
+#19 C:\wamp\www\ytpdb\protected\controllers\CellController.php(160): CController->render('index', Array)
+#20 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionIndex()
+#21 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#22 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#23 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#24 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#25 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#26 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#27 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#28 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#29 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('index')
+#30 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/index')
+#31 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#32 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#33 {main}
+REQUEST_URI=/ytpdb/cell/index?Columns%5B%5D=1&Columns%5B%5D=2&Columns%5B%5D=5&Columns%5B%5D=15&ajax=cell-grid
+HTTP_REFERER=http://localhost/ytpdb/cell/index
+---
+2013/12/03 15:25:11 [error] [exception.CException] exception 'CException' with message 'Property "Cell.anode_search" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('anode_search')
+#1 C:\wamp\www\yii\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('anode_search')
+#2 C:\wamp\www\yii\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(Cell), 'anode_search')
+#3 C:\wamp\www\yii\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(Cell), 'anode_search', Array)
+#4 C:\wamp\www\yii\framework\zii\widgets\grid\CDataColumn.php(103): CHtml::activeTextField(Object(Cell), 'anode_search', Array)
+#5 C:\wamp\www\yii\framework\zii\widgets\grid\CGridColumn.php(116): CDataColumn->renderFilterCellContent()
+#6 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(532): CGridColumn->renderFilterCell()
+#7 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(510): CGridView->renderFilter()
+#8 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(480): CGridView->renderTableHeader()
+#9 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#10 [internal function]: CBaseListView->renderSection(Array)
+#11 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{summary}?{item...')
+#12 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(135): CBaseListView->renderContent()
+#13 C:\wamp\www\yii\framework\web\CBaseController.php(173): CBaseListView->run()
+#14 C:\wamp\www\ytpdb\protected\views\cell\index.php(170): CBaseController->widget('zii.widgets.gri...', Array)
+#15 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#16 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#17 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#18 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('index', Array, true)
+#19 C:\wamp\www\ytpdb\protected\controllers\CellController.php(160): CController->render('index', Array)
+#20 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionIndex()
+#21 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#22 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#23 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#24 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#25 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#26 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#27 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#28 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#29 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('index')
+#30 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/index')
+#31 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#32 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#33 {main}
+REQUEST_URI=/ytpdb/cell/index?Columns%5B%5D=1&Columns%5B%5D=2&Columns%5B%5D=5&Columns%5B%5D=17&ajax=cell-grid
+HTTP_REFERER=http://localhost/ytpdb/cell/index
+---
+2013/12/03 15:28:59 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'name' in order clause is ambiguous. The SQL statement executed was: SELECT `t`.`id` AS `t0_c0`, `t`.`kit_id` AS `t0_c1`, `t`.`ref_num_id` AS `t0_c2`, `t`.`eap_num` AS `t0_c3`, `t`.`stacker_id` AS `t0_c4`, `t`.`stack_date` AS `t0_c5`, `t`.`dry_wt` AS `t0_c6`, `t`.`wet_wt` AS `t0_c7`, `t`.`filler_id` AS `t0_c8`, `t`.`fill_date` AS `t0_c9`, `t`.`inspector_id` AS `t0_c10`, `t`.`inspection_date` AS `t0_c11`, `t`.`location` AS `t0_c12`, `t`.`portwelder_id` AS `t0_c13`, `t`.`portweld_date` AS `t0_c14`, `t`.`laserwelder_id` AS `t0_c15`, `t`.`laserweld_date` AS `t0_c16`, `kit`.`id` AS `t1_c0`, `kit`.`serial_num` AS `t1_c1`, `celltype`.`id` AS `t2_c0`, `celltype`.`name` AS `t2_c1`, `anode`.`id` AS `t3_c0`, `cathode`.`id` AS `t4_c0`, `stack`.`id` AS `t5_c0`, `stack`.`username` AS `t5_c1`, `stack`.`password` AS `t5_c2`, `stack`.`first_name` AS `t5_c3`, `stack`.`last_name` AS `t5_c4`, `stack`.`email` AS `t5_c5`, `stack`.`depart_id` AS `t5_c6`, `roles`.`id` AS `t6_c0`, `roles`.`name` AS `t6_c1`, `fill`.`id` AS `t7_c0`, `fill`.`username` AS `t7_c1`, `fill`.`password` AS `t7_c2`, `fill`.`first_name` AS `t7_c3`, `fill`.`last_name` AS `t7_c4`, `fill`.`email` AS `t7_c5`, `fill`.`depart_id` AS `t7_c6`, `insp`.`id` AS `t8_c0`, `insp`.`username` AS `t8_c1`, `insp`.`password` AS `t8_c2`, `insp`.`first_name` AS `t8_c3`, `insp`.`last_name` AS `t8_c4`, `insp`.`email` AS `t8_c5`, `insp`.`depart_id` AS `t8_c6`, `laser`.`id` AS `t9_c0`, `laser`.`username` AS `t9_c1`, `laser`.`password` AS `t9_c2`, `laser`.`first_name` AS `t9_c3`, `laser`.`last_name` AS `t9_c4`, `laser`.`email` AS `t9_c5`, `laser`.`depart_id` AS `t9_c6`, `port`.`id` AS `t10_c0`, `port`.`username` AS `t10_c1`, `port`.`password` AS `t10_c2`, `port`.`first_name` AS `t10_c3`, `port`.`last_name` AS `t10_c4`, `port`.`email` AS `t10_c5`, `port`.`depart_id` AS `t10_c6`, `ref`.`id` AS `t11_c0`, `ref`.`number` AS `t11_c1`, `test`.`id` AS `t12_c0`, `test`.`cell_id` AS `t12_c1`, `test`.`channel_id` AS `t12_c2`, `test`.`chamber_id` AS `t12_c3`, `test`.`operator_id` AS `t12_c4`, `test`.`test_start` AS `t12_c5`, `test`.`is_formation` AS `t12_c6`, `test`.`is_active` AS `t12_c7` FROM `tbl_cell` `t`  LEFT OUTER JOIN `tbl_kit` `kit` ON (`t`.`kit_id`=`kit`.`id`)  LEFT OUTER JOIN `tbl_celltype` `celltype` ON (`kit`.`celltype_id`=`celltype`.`id`)  LEFT OUTER JOIN `tbl_electrode_kit` `anodes_anode` ON (`kit`.`id`=`anodes_anode`.`kit_id`) LEFT OUTER JOIN `tbl_electrode` `anode` ON (`anode`.`id`=`anodes_anode`.`electrode_id`)  LEFT OUTER JOIN `tbl_electrode_kit` `cathodes_cathode` ON (`kit`.`id`=`cathodes_cathode`.`kit_id`) LEFT OUTER JOIN `tbl_electrode` `cathode` ON (`cathode`.`id`=`cathodes_cathode`.`electrode_id`)  LEFT OUTER JOIN `tbl_user` `stack` ON (`t`.`stacker_id`=`stack`.`id`)  LEFT OUTER JOIN `tbl_user_role` `roles_roles` ON (`stack`.`id`=`roles_roles`.`user_id`) LEFT OUTER JOIN `tbl_role` `roles` ON (`roles`.`id`=`roles_roles`.`role_id`)  LEFT OUTER JOIN `tbl_user` `fill` ON (`t`.`filler_id`=`fill`.`id`)  LEFT OUTER JOIN `tbl_user` `insp` ON (`t`.`inspector_id`=`insp`.`id`)  LEFT OUTER JOIN `tbl_user` `laser` ON (`t`.`laserwelder_id`=`laser`.`id`)  LEFT OUTER JOIN `tbl_user` `port` ON (`t`.`portwelder_id`=`port`.`id`)  LEFT OUTER JOIN `tbl_ref_num` `ref` ON (`t`.`ref_num_id`=`ref`.`id`)  LEFT OUTER JOIN `tbl_test_assignment` `test` ON (`test`.`cell_id`=`t`.`id`)  WHERE (anode.is_anode=1) AND (cathode.is_anode=0) GROUP BY t.id ORDER BY anode.lot_num DESC, cathode.lot_num DESC, name LIMIT 16.
+in C:\wamp\www\ytpdb\protected\components\KeenActiveDataProvider.php (139)
+in C:\wamp\www\ytpdb\protected\views\cell\index.php (170)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (160)
+2013/12/03 15:28:59 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'name' in order clause is ambiguous. The SQL statement executed was: SELECT `t`.`id` AS `t0_c0`, `t`.`kit_id` AS `t0_c1`, `t`.`ref_num_id` AS `t0_c2`, `t`.`eap_num` AS `t0_c3`, `t`.`stacker_id` AS `t0_c4`, `t`.`stack_date` AS `t0_c5`, `t`.`dry_wt` AS `t0_c6`, `t`.`wet_wt` AS `t0_c7`, `t`.`filler_id` AS `t0_c8`, `t`.`fill_date` AS `t0_c9`, `t`.`inspector_id` AS `t0_c10`, `t`.`inspection_date` AS `t0_c11`, `t`.`location` AS `t0_c12`, `t`.`portwelder_id` AS `t0_c13`, `t`.`portweld_date` AS `t0_c14`, `t`.`laserwelder_id` AS `t0_c15`, `t`.`laserweld_date` AS `t0_c16`, `kit`.`id` AS `t1_c0`, `kit`.`serial_num` AS `t1_c1`, `celltype`.`id` AS `t2_c0`, `celltype`.`name` AS `t2_c1`, `anode`.`id` AS `t3_c0`, `cathode`.`id` AS `t4_c0`, `stack`.`id` AS `t5_c0`, `stack`.`username` AS `t5_c1`, `stack`.`password` AS `t5_c2`, `stack`.`first_name` AS `t5_c3`, `stack`.`last_name` AS `t5_c4`, `stack`.`email` AS `t5_c5`, `stack`.`depart_id` AS `t5_c6`, `roles`.`id` AS `t6_c0`, `roles`.`name` AS `t6_c1`, `fill`.`id` AS `t7_c0`, `fill`.`username` AS `t7_c1`, `fill`.`password` AS `t7_c2`, `fill`.`first_name` AS `t7_c3`, `fill`.`last_name` AS `t7_c4`, `fill`.`email` AS `t7_c5`, `fill`.`depart_id` AS `t7_c6`, `insp`.`id` AS `t8_c0`, `insp`.`username` AS `t8_c1`, `insp`.`password` AS `t8_c2`, `insp`.`first_name` AS `t8_c3`, `insp`.`last_name` AS `t8_c4`, `insp`.`email` AS `t8_c5`, `insp`.`depart_id` AS `t8_c6`, `laser`.`id` AS `t9_c0`, `laser`.`username` AS `t9_c1`, `laser`.`password` AS `t9_c2`, `laser`.`first_name` AS `t9_c3`, `laser`.`last_name` AS `t9_c4`, `laser`.`email` AS `t9_c5`, `laser`.`depart_id` AS `t9_c6`, `port`.`id` AS `t10_c0`, `port`.`username` AS `t10_c1`, `port`.`password` AS `t10_c2`, `port`.`first_name` AS `t10_c3`, `port`.`last_name` AS `t10_c4`, `port`.`email` AS `t10_c5`, `port`.`depart_id` AS `t10_c6`, `ref`.`id` AS `t11_c0`, `ref`.`number` AS `t11_c1`, `test`.`id` AS `t12_c0`, `test`.`cell_id` AS `t12_c1`, `test`.`channel_id` AS `t12_c2`, `test`.`chamber_id` AS `t12_c3`, `test`.`operator_id` AS `t12_c4`, `test`.`test_start` AS `t12_c5`, `test`.`is_formation` AS `t12_c6`, `test`.`is_active` AS `t12_c7` FROM `tbl_cell` `t`  LEFT OUTER JOIN `tbl_kit` `kit` ON (`t`.`kit_id`=`kit`.`id`)  LEFT OUTER JOIN `tbl_celltype` `celltype` ON (`kit`.`celltype_id`=`celltype`.`id`)  LEFT OUTER JOIN `tbl_electrode_kit` `anodes_anode` ON (`kit`.`id`=`anodes_anode`.`kit_id`) LEFT OUTER JOIN `tbl_electrode` `anode` ON (`anode`.`id`=`anodes_anode`.`electrode_id`)  LEFT OUTER JOIN `tbl_electrode_kit` `cathodes_cathode` ON (`kit`.`id`=`cathodes_cathode`.`kit_id`) LEFT OUTER JOIN `tbl_electrode` `cathode` ON (`cathode`.`id`=`cathodes_cathode`.`electrode_id`)  LEFT OUTER JOIN `tbl_user` `stack` ON (`t`.`stacker_id`=`stack`.`id`)  LEFT OUTER JOIN `tbl_user_role` `roles_roles` ON (`stack`.`id`=`roles_roles`.`user_id`) LEFT OUTER JOIN `tbl_role` `roles` ON (`roles`.`id`=`roles_roles`.`role_id`)  LEFT OUTER JOIN `tbl_user` `fill` ON (`t`.`filler_id`=`fill`.`id`)  LEFT OUTER JOIN `tbl_user` `insp` ON (`t`.`inspector_id`=`insp`.`id`)  LEFT OUTER JOIN `tbl_user` `laser` ON (`t`.`laserwelder_id`=`laser`.`id`)  LEFT OUTER JOIN `tbl_user` `port` ON (`t`.`portwelder_id`=`port`.`id`)  LEFT OUTER JOIN `tbl_ref_num` `ref` ON (`t`.`ref_num_id`=`ref`.`id`)  LEFT OUTER JOIN `tbl_test_assignment` `test` ON (`test`.`cell_id`=`t`.`id`)  WHERE (anode.is_anode=1) AND (cathode.is_anode=0) GROUP BY t.id ORDER BY anode.lot_num DESC, cathode.lot_num DESC, name LIMIT 16' in C:\wamp\www\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(803): CDbCommand->queryAll()
+#2 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(437): CJoinElement->runQuery(Object(CJoinQuery))
+#3 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1356): CActiveFinder->query(Object(CDbCriteria), true)
+#5 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#6 C:\wamp\www\yii\framework\web\CActiveDataProvider.php(199): CActiveRecord->findAll(Object(CDbCriteria))
+#7 C:\wamp\www\ytpdb\protected\components\KeenActiveDataProvider.php(139): CActiveDataProvider->fetchData()
+#8 C:\wamp\www\yii\framework\web\CDataProvider.php(168): KeenActiveDataProvider->fetchData()
+#9 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(111): CDataProvider->getData()
+#10 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(339): CBaseListView->init()
+#11 C:\wamp\www\yii\framework\web\CBaseController.php(147): CGridView->init()
+#12 C:\wamp\www\yii\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#13 C:\wamp\www\ytpdb\protected\views\cell\index.php(170): CBaseController->widget('zii.widgets.gri...', Array)
+#14 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#15 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#16 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#17 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('index', Array, true)
+#18 C:\wamp\www\ytpdb\protected\controllers\CellController.php(160): CController->render('index', Array)
+#19 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionIndex()
+#20 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#21 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#22 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#23 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#24 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#25 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#26 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#27 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#28 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('index')
+#29 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/index')
+#30 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#31 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#32 {main}
+REQUEST_URI=/ytpdb/cell/index
+HTTP_REFERER=http://localhost/ytpdb/kit/multicreate
+---
+2013/12/03 15:31:28 [error] [exception.CException] exception 'CException' with message 'Property "Cell.anode_search" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('anode_search')
+#1 C:\wamp\www\yii\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('anode_search')
+#2 C:\wamp\www\yii\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(Cell), 'anode_search')
+#3 C:\wamp\www\yii\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(Cell), 'anode_search', Array)
+#4 C:\wamp\www\yii\framework\zii\widgets\grid\CDataColumn.php(103): CHtml::activeTextField(Object(Cell), 'anode_search', Array)
+#5 C:\wamp\www\yii\framework\zii\widgets\grid\CGridColumn.php(116): CDataColumn->renderFilterCellContent()
+#6 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(532): CGridColumn->renderFilterCell()
+#7 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(510): CGridView->renderFilter()
+#8 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(480): CGridView->renderTableHeader()
+#9 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#10 [internal function]: CBaseListView->renderSection(Array)
+#11 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback('/{(\w+)}/', Array, '{summary}?{item...')
+#12 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(135): CBaseListView->renderContent()
+#13 C:\wamp\www\yii\framework\web\CBaseController.php(173): CBaseListView->run()
+#14 C:\wamp\www\ytpdb\protected\views\cell\index.php(170): CBaseController->widget('zii.widgets.gri...', Array)
+#15 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#16 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#17 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#18 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('index', Array, true)
+#19 C:\wamp\www\ytpdb\protected\controllers\CellController.php(160): CController->render('index', Array)
+#20 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionIndex()
+#21 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#22 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#23 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#24 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#25 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#26 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#27 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#28 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#29 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('index')
+#30 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/index')
+#31 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#32 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#33 {main}
+REQUEST_URI=/ytpdb/cell/index?Columns%5B%5D=1&Columns%5B%5D=2&Columns%5B%5D=5&Columns%5B%5D=17&ajax=cell-grid
+HTTP_REFERER=http://localhost/ytpdb/cell/index
+---
+2013/12/03 15:34:22 [error] [exception.CDbException] exception 'CDbException' with message 'Active record "Electrode" is trying to select an invalid column "number". Note, the column must exist in the table or be an expression with alias.' in C:\wamp\www\yii\framework\db\ar\CActiveFinder.php:960
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(1292): CJoinElement->getColumnSelect('id, number')
+#1 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(790): CJoinQuery->join(Object(CJoinElement))
+#2 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(791): CJoinElement->buildQuery(Object(CJoinQuery))
+#3 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(728): CJoinElement->buildQuery(Object(CJoinQuery))
+#4 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(151): CJoinElement->count(Object(CDbCriteria))
+#5 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1605): CActiveFinder->count(Object(CDbCriteria))
+#6 C:\wamp\www\yii\framework\web\CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#7 C:\wamp\www\yii\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#8 C:\wamp\www\yii\framework\web\CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#9 C:\wamp\www\ytpdb\protected\components\KeenActiveDataProvider.php(139): CActiveDataProvider->fetchData()
+#10 C:\wamp\www\yii\framework\web\CDataProvider.php(168): KeenActiveDataProvider->fetchData()
+#11 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(111): CDataProvider->getData()
+#12 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(339): CBaseListView->init()
+#13 C:\wamp\www\yii\framework\web\CBaseController.php(147): CGridView->init()
+#14 C:\wamp\www\yii\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#15 C:\wamp\www\ytpdb\protected\views\cell\index.php(170): CBaseController->widget('zii.widgets.gri...', Array)
+#16 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#17 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#18 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#19 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('index', Array, true)
+#20 C:\wamp\www\ytpdb\protected\controllers\CellController.php(160): CController->render('index', Array)
+#21 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionIndex()
+#22 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#23 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#24 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#25 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#26 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#27 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#28 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#29 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#30 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('index')
+#31 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/index')
+#32 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#33 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#34 {main}
+REQUEST_URI=/ytpdb/cell/index
+HTTP_REFERER=http://localhost/ytpdb/kit/multicreate
+---
+2013/12/03 15:44:13 [error] [exception.CDbException] exception 'CDbException' with message 'Relation "anodeIds" is not defined in active record class "Kit".' in C:\wamp\www\yii\framework\db\ar\CActiveFinder.php:226
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(296): CActiveFinder->buildJoinTree(Object(CJoinElement), 'anodeIds')
+#1 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(287): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#2 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(298): CActiveFinder->buildJoinTree(Object(CJoinElement), 'kit', Array)
+#3 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(48): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#4 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(909): CActiveFinder->__construct(Object(Cell), Array)
+#5 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1604): CActiveRecord->getActiveFinder(Array)
+#6 C:\wamp\www\yii\framework\web\CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#7 C:\wamp\www\yii\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#8 C:\wamp\www\yii\framework\web\CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#9 C:\wamp\www\ytpdb\protected\components\KeenActiveDataProvider.php(139): CActiveDataProvider->fetchData()
+#10 C:\wamp\www\yii\framework\web\CDataProvider.php(168): KeenActiveDataProvider->fetchData()
+#11 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(111): CDataProvider->getData()
+#12 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(339): CBaseListView->init()
+#13 C:\wamp\www\yii\framework\web\CBaseController.php(147): CGridView->init()
+#14 C:\wamp\www\yii\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#15 C:\wamp\www\ytpdb\protected\views\cell\index.php(169): CBaseController->widget('zii.widgets.gri...', Array)
+#16 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#17 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#18 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#19 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('index', Array, true)
+#20 C:\wamp\www\ytpdb\protected\controllers\CellController.php(160): CController->render('index', Array)
+#21 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionIndex()
+#22 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#23 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#24 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#25 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#26 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#27 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#28 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#29 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#30 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('index')
+#31 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/index')
+#32 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#33 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#34 {main}
+REQUEST_URI=/ytpdb/cell/index
+HTTP_REFERER=http://localhost/ytpdb/kit/multicreate
+---
+2013/12/03 15:54:13 [error] [php] Use of undefined constant kit - assumed 'kit' (C:\wamp\www\ytpdb\protected\models\Cell.php:269)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CBaseController.php(95): CellController->renderInternal()
+#1 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#2 C:\wamp\www\yii\framework\web\CController.php(782): CellController->renderPartial()
+#3 C:\wamp\www\ytpdb\protected\controllers\CellController.php(160): CellController->render()
+#4 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionIndex()
+#5 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#6 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#7 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#9 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#11 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#15 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/cell/index
+in C:\wamp\www\ytpdb\protected\models\Cell.php (269)
+in C:\wamp\www\ytpdb\protected\views\cell\index.php (72)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (160)
+2013/12/03 15:57:05 [warning] [application] Failed to set unsafe attribute "laserweld_date" of "Cell".
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (154)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 16:04:55 [error] [php] Undefined variable: printColumns (C:\wamp\www\ytpdb\protected\views\cell\index.php:65)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#1 C:\wamp\www\yii\framework\web\CController.php(782): CellController->renderPartial()
+#2 C:\wamp\www\ytpdb\protected\controllers\CellController.php(160): CellController->render()
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionIndex()
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/cell/index
+in C:\wamp\www\ytpdb\protected\views\cell\index.php (65)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (160)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/03 16:07:00 [error] [php] Undefined variable: printColumns (C:\wamp\www\ytpdb\protected\views\cell\_columnprinting.php:3)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#1 C:\wamp\www\ytpdb\protected\views\cell\index.php(65): CellController->renderPartial()
+#2 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#3 C:\wamp\www\yii\framework\web\CBaseController.php(95): CellController->renderInternal()
+#4 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#5 C:\wamp\www\yii\framework\web\CController.php(782): CellController->renderPartial()
+#6 C:\wamp\www\ytpdb\protected\controllers\CellController.php(160): CellController->render()
+#7 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionIndex()
+#8 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#10 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#12 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#13 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#14 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#15 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#16 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#17 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#18 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#19 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/cell/index
+in C:\wamp\www\ytpdb\protected\views\cell\_columnprinting.php (3)
+in C:\wamp\www\ytpdb\protected\views\cell\index.php (65)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (160)
+2013/12/03 16:07:29 [error] [php] Undefined variable: printColumns (C:\wamp\www\ytpdb\protected\views\cell\_columnprinting.php:3)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#1 C:\wamp\www\ytpdb\protected\views\cell\index.php(65): CellController->renderPartial()
+#2 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#3 C:\wamp\www\yii\framework\web\CBaseController.php(95): CellController->renderInternal()
+#4 C:\wamp\www\yii\framework\web\CController.php(869): CellController->renderFile()
+#5 C:\wamp\www\yii\framework\web\CController.php(782): CellController->renderPartial()
+#6 C:\wamp\www\ytpdb\protected\controllers\CellController.php(160): CellController->render()
+#7 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): CellController->actionIndex()
+#8 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CellController->runAction()
+#10 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#12 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CellController->filterAccessControl()
+#13 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#14 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#15 C:\wamp\www\yii\framework\web\CController.php(265): CellController->runActionWithFilters()
+#16 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CellController->run()
+#17 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#18 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#19 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/cell/index
+in C:\wamp\www\ytpdb\protected\views\cell\_columnprinting.php (3)
+in C:\wamp\www\ytpdb\protected\views\cell\index.php (65)
+in C:\wamp\www\ytpdb\protected\controllers\CellController.php (160)

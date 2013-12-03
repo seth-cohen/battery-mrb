@@ -143,6 +143,12 @@ class CellController extends Controller
 		$model=new Cell('search');
 		$model->unsetAttributes();  // clear any default values
 		
+		$visibleColumns = array(1,2,5);
+		if(isset($_GET['Columns']))
+		{
+			$visibleColumns = $_GET['Columns'];
+		}
+		
 		if(isset($_GET['Cell']))
 		{
 			$model->attributes=$_GET['Cell'];
@@ -150,6 +156,7 @@ class CellController extends Controller
 				
 		$this->render('index',array(
 			'model'=>$model,
+			'visibleColumns'=>$visibleColumns,
 		));
 	}
 

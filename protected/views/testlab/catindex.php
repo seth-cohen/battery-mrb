@@ -106,20 +106,3 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
     	});
 	}
 </script>
-
-<script type="text/javascript">
-$(document).ready(function(){
-
-	$('#csv-download').attr('href','');
-	
-	$('#csv-download').bind('click', function() {	
-		var href = '<?php echo $this->createUrl('downloadlist'); ?>';
-		href += '?';
-		href += $('#cell-search-form :input[name!="r"]').serialize();
-		href += '&';
-		href +=	$('.filters :input').serialize();
-		
-		$('#csv-download').attr('href',href);	
-	});
-});
-</script>

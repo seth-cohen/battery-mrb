@@ -136,8 +136,8 @@ function reloadGrid(data) {
 <script type="text/javascript">
 
 jQuery(function($) {
-jQuery('.ui-autocomplete-input').live('keydown', function(event) {
-	$(this).autocomplete({
+	jQuery('.ui-autocomplete-input').on('keydown', function(event) {
+		$(this).autocomplete({
 			'select': function(event, ui){
 				var id = event.target.id.toString().replace("names","ids");
 				$("#"+id).attr("value", ui.item.id);
@@ -145,27 +145,28 @@ jQuery('.ui-autocomplete-input').live('keydown', function(event) {
 			'source':'/ytpdb/user/ajaxUserSearch'
 		});
 	});
-});
 
-jQuery('.hasDatePicker').live('focus', function(event) {
-	$(this).datepicker({'showAnim':'slideDown','changeMonth':true,'changeYear':true,'dateFormat':'yy-mm-dd'});
-});
+	jQuery('#submit-button').on('click', function(event) {
+		var noneChecked = true;
+		$('.errorSummary').remove();
+		
+		$('input[type=checkbox]').each(function () {
+	        if (this.checked) {
+	            noneChecked = false; 
+	        }
+		});
 
-jQuery('#submit-button').bind('click', function(event) {
-	var noneChecked = true;
-	$('.errorSummary').remove();
-	
-	$('input[type=checkbox]').each(function () {
-        if (this.checked) {
-            noneChecked = false; 
-        }
+		if(noneChecked)
+		{
+			alert('You must select at least one cell to stack');
+		}
 	});
-
-	if(noneChecked)
-	{
-		alert('You must select at least one cell to stack');
-	}
+	
+	jQuery('body').on('focus', '.hasDatePicker', function(event) {
+		$(this).datepicker({'showAnim':'slideDown','changeMonth':true,'changeYear':true,'dateFormat':'yy-mm-dd'});
+	});
 });
+
 
 function refSelected(sel)
 {

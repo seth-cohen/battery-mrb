@@ -284,7 +284,8 @@ div.search-form
 	color: #EFEFEF;
 }
 
-#role-checkboxlist
+#role-checkboxlist,
+#column-checkboxlist
 {
 	overflow:auto;
 	clear:both;
@@ -292,6 +293,12 @@ div.search-form
 #role-checkboxlist div
 {
 	width: 235px;
+	float: left;
+}
+
+#column-checkboxlist div
+{
+	width: 138px;
 	float: left;
 }
 

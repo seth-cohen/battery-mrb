@@ -59,11 +59,13 @@ class Kit extends CActiveRecord
 			array('serial_num, ref_num_id, kitting_date, kitter_id, celltype_id', 'required'),
 			array('anodeIds, cathodeIds', 'checkLotNumbers'),
 			array('serial_num, eap_num', 'length', 'max'=>50),
-			array('serial_num, celltype_id', 'checkUniqueInType'),
+			array('serial_num', 'checkUniqueInType'),
 			array('kitter_id, celltype_id, ref_num_id', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, eap_num, serial_num, ref_num_id, kitter_id, kitting_date, celltype_id, refnum_search, kitter_search, celltype_search, serial_search, anode_search, cathode_search', 'safe', 'on'=>'search'),
+			array('id, eap_num, serial_num, ref_num_id, kitter_id, kitting_date, celltype_id, is_stacked
+				refnum_search, kitter_search, celltype_search, serial_search, anode_search, cathode_search', 
+				'safe', 'on'=>'search'),
 		);
 	}
 
@@ -330,6 +332,7 @@ class Kit extends CActiveRecord
 		sort($result);
 		return implode(', ', $result);
 	}
+	
 	/**
 	 * 
 	 */
@@ -400,5 +403,57 @@ class Kit extends CActiveRecord
 				));
 			}
 		}
+	}
+
+	/**
+	 * Saves all of the models only if ALL models validate
+	 * returns associative array if successful (with details on saved model)
+	 * returns error summary if any of them fail
+	 * @param Kit[] $kitModels 
+	 */
+	public static function multiSaveKits($kitModels)
+	{
+		$error = 0;
+		$models = array();
+
+		/* oops, we were passed bad data */
+		if(empty($kitModels))
+			return;
+			
+		foreach($kitModels as $kit)
+		{
+			$model = $kit;
+				
+			if(!$model->validate())
+			{
+				$error = 1;
+			}
+			$models[] = $model;	
+		}
+		
+		/* all models validated save them all */
+		if ($error==0)
+		{
+			/* create array to return with JSON */
+			$result = array();
+			foreach($models as $model)
+			{
+				if($model->save())
+				{
+					$model->saveKitElectrodes(array_merge($model->anodeIds, $model->cathodeIds));
+					
+					$result[] = array(
+						'serial'=>$model->getFormattedSerial(), 
+						'kitter'=>User::getFullNameProper($model->kitter_id),
+					);
+				}
+			}
+			return json_encode($result);
+		}
+		else /* a model failed, don't save any */
+		{
+			return CHtml::errorSummary($models); 	
+		}			
+		return null;
 	}
 }

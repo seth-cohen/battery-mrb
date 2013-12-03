@@ -27,6 +27,7 @@
 							CHtml::listData(Celltype::model()->findAll(), 'id','name'), 
 							array(
 								'prompt'=>' -Select Cell Type- ',
+								'onchange'=>'typeSelected(this)',
 								'style'=>'width:152px'
 							)); ?>
 			<?php echo $form->error($model,'celltype_id'); ?>
@@ -87,6 +88,7 @@
 		<div class="row">
 			<?php echo $form->labelEx($model,'serial_num'); ?>
 			<?php echo $form->textField($model,'serial_num',array('size'=>50,'maxlength'=>50, 'style'=>'width:150px')); ?>
+			<span style="padding-left:10px;" id="last-serial"></span>
 			<?php echo $form->error($model,'serial_num'); ?>
 		</div>
 		<div class="row">
@@ -146,5 +148,26 @@
 		var ref = $('option:selected', $(sel)).text();
 		$("#Kit_eap_num").attr("value","EAP "+ ref + " ADD ");
 		$("#Kit_eap_num").focus();
+	}
+
+	function typeSelected(sel)
+	{
+		var celltype = $('option:selected', $(sel)).text();
+		var celltype_id = $('option:selected', $(sel)).val();
+
+		$.ajax({
+			type:'get',
+			url: '<?php echo $this->createUrl('kit/lastserial'); ?>',
+			data:
+			{
+				celltype_id: celltype_id.toString(),
+			},
+			success: function(data){
+				$('#last-serial').text(
+						"Highest: " +
+						celltype + "-" + data
+				 );
+			},
+		});
 	}
 </script>

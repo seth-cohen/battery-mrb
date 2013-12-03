@@ -157,7 +157,7 @@ function reloadGrid(data) {
 <script type="text/javascript">
 
 jQuery(function($) {
-	jQuery('.ui-autocomplete-input').live('keydown', function(event) {
+	jQuery('.ui-autocomplete-input').on('keydown', function(event) {
 		$(this).autocomplete({
 			'select': function(event, ui){
 				
@@ -169,10 +169,27 @@ jQuery(function($) {
 			'source':'/ytpdb/user/ajaxUserSearch'
 		});
 	});
-});
 
-jQuery('.hasDatePicker').live('focus', function(event) {
-	$(this).datepicker({'showAnim':'slideDown','changeMonth':true,'changeYear':true,'dateFormat':'yy-mm-dd'});
+	jQuery('#submit-button').on('click', function(event) {
+		var noneChecked = true;
+		$('.errorSummary').remove();
+		
+		$('input[type=checkbox]').each(function () {
+	        if (this.checked) {
+	            noneChecked = false; 
+	        }
+		});
+
+		if(noneChecked)
+		{
+			alert('You must select at least one cell to put on formation');
+			return false;
+		}
+	});
+
+	jQuery('body').on('focus', '.hasDatePicker', function(event) {
+		$(this).datepicker({'showAnim':'slideDown','changeMonth':true,'changeYear':true,'dateFormat':'yy-mm-dd'});
+	});
 });
 
 function cycSelected(sel)
@@ -196,22 +213,4 @@ function cycSelected(sel)
 	});
 }
 
-jQuery('#submit-button').bind('click', function(event) {
-	var noneChecked = true;
-	$('.errorSummary').remove();
-	
-	$('input[type=checkbox]').each(function () {
-        if (this.checked) {
-            noneChecked = false; 
-        }
-	});
-
-	if(noneChecked)
-	{
-		alert('You must select at least one cell to put on formation');
-	}
-});
-
 </script>
-<ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" id="ui-id-1" tabindex="0" style="z-index: 1; display: none;"></ul>
-<div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
