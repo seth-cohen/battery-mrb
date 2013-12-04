@@ -139,7 +139,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		),
 		array(
 			'name'=>'portwelder_search',
-			'value'=>'$data->filler->getFullName()',
+			'value'=>'$data->portwelder->getFullName()',
 			'visible'=>in_array(13,$visibleColumns),
 		),
 		array(
