@@ -55,22 +55,26 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 )); ?>
 </div><!-- search-form -->
 
-<div id="column-wrapper" class="border" style="padding:5px;">
-<em><b>Visible Columns</b></em>
+<div style="float:right;">
+<?php echo CHtml::button('Column Selector', 
+			array(
+				'title'=>'Show Column Selectors',
+				'onClick'=>'js:toggleColumns();',
+				'style'=>'clear:both;',
+			)
+); ?>
+</div><!-- column button selector -->
+<div style="clear:both;"></div>
+
+<div class="column-wrapper border" style="padding:5px; display:none;">
+<em><b>Visible Columns</b> (only 10 can be displayed)</em>
 <?php  echo $this->renderPartial('_columnvisibility', array('visibleColumns'=>$visibleColumns)); ?>
 </div>
 
-<div id="column-wrapper" class="border" style="padding:5px;">
-<em><b>CSV Columns</b></em>
+<div class="column-wrapper border" style="padding:5px; display:none">
+<em><b>CSV Columns</b> (all columns can be saved to CSV)</em>
 <?php  echo $this->renderPartial('_columnprinting', array('printColumns'=>$visibleColumns)); ?>
 </div>
-
-<?php echo CHtml::button('Hide Column', 
-			array(
-				'title'=>'Hide First Column',
-				'onClick'=>'js:refreshColumns();',
-			)
-); ?>
 
 <div class="shadow border" >
 <?php $this->widget('zii.widgets.grid.CGridView', array(
@@ -241,11 +245,8 @@ $(document).ready(function(){
 	});
 });
 
-function toggleColumn() {
-    grid = $('#cell-grid');
-    $('tr', grid).each(function() {
-        $('td:eq(0), th:eq(0)',this).toggle();
-    });
+function toggleColumns() {
+    $('.column-wrapper').toggle();
 }
 
 </script>
