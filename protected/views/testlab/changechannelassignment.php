@@ -47,7 +47,9 @@ Yii::app()->clientScript->registerCssFile(
 	'afterAjaxUpdate'=>'function(id,data){
 		$(".cycler-dropdown").each(function(index){
     			cycSelected(this);
-    		})
+    		});
+    	$("#channelassignment-grid .filters").children(":nth-child(2)").text("Mark Bad");
+    	
     }',
 	'columns'=>array(
 		array(
@@ -169,7 +171,7 @@ function reloadGrid(data) {
 <script>
 jQuery(function($) {
 	$('#channelassignment-grid .filters').attr('align','center');
-	$('#channelassignment-grid .filters').children(':nth-child(1)').text('Change');
+	/*$('#channelassignment-grid .filters').children(':nth-child(1)').text('Change');*/
 	$('#channelassignment-grid .filters').children(':nth-child(2)').text('Mark Bad');
 
 	$('.cycler-dropdown').each(function(index){

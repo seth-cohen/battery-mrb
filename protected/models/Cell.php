@@ -21,8 +21,11 @@
  * @property string $portwelder_id
  * @property string $portweld_date
  * @property string $location
+ * @property integer $data_accepted
+ * @property string $battery_id
  *
  * The followings are the available model relations:
+ * @property Battery $battery
  * @property Kit $kit
  * @property RefNum $refNum
  * @property User $stacker
@@ -31,6 +34,7 @@
  * @property User $portwelder
  * @property User $laserwelder
  * @property TestAssignment[] $testAssignments
+ * 
  */
 class Cell extends CActiveRecord
 {
@@ -116,6 +120,7 @@ class Cell extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'battery' => array(self::BELONGS_TO, 'Battery', 'battery_id'),
 			'kit' => array(self::BELONGS_TO, 'Kit', 'kit_id'),
 			'refNum' => array(self::BELONGS_TO, 'RefNum', 'ref_num_id'),
 			'stacker' => array(self::BELONGS_TO, 'User', 'stacker_id'),
@@ -150,6 +155,7 @@ class Cell extends CActiveRecord
 			'portwelder_id' => 'Fill Port Welded By',
 			'portweld_date' => 'Fill Port Weld Date',
 			'location' => 'Location',
+			'data_accepted' => 'Data Accepted',
 			
 			'refnum_search' => "Reference No.",
 			'serial_search' => 'Serial No.',
@@ -162,6 +168,7 @@ class Cell extends CActiveRecord
 			'activetest_search' => 'Active Test',
 			'anode_search' => 'Anode Lots',
 			'cathode_search' => 'Cathode Lots',
+			
 			
 		);
 	}
