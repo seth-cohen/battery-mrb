@@ -12,25 +12,28 @@
 	// controller action is handling ajax validation correctly.
 	// There is a call to performAjaxValidation() commented in generated controller code.
 	// See class documentation of CActiveForm for details on this.
-	'enableAjaxValidation'=>false,
+	'enableAjaxValidation'=>true,
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
+<div class="left-form">
 	<div class="row">
 		<?php echo $form->labelEx($model,'batterytype_id'); ?>
 		<?php echo $form->textField($model,'batterytype_id',array('size'=>10,'maxlength'=>10)); ?>
 		<?php echo $form->error($model,'batterytype_id'); ?>
 	</div>
-
+</div>
+<div class="right-form">
 	<div class="row">
 		<?php echo $form->labelEx($model,'ref_num_id'); ?>
 		<?php echo $form->textField($model,'ref_num_id',array('size'=>10,'maxlength'=>10)); ?>
 		<?php echo $form->error($model,'ref_num_id'); ?>
 	</div>
-
+</div>
+<div class="clear"></div>
 	<div class="row">
 		<?php echo $form->labelEx($model,'eap_num'); ?>
 		<?php echo $form->textField($model,'eap_num',array('size'=>50,'maxlength'=>50)); ?>

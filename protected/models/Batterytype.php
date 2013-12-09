@@ -31,9 +31,14 @@ class Batterytype extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name', 'required'),
+			array('name, num_cells, part_num, celltype_id', 'required'),
 			array('part_num, name', 'length', 'max'=>50),
 			array('num_cells, celltype_id', 'length', 'max'=>10),
+			array('num_cells', 'numerical', 
+				'integerOnly'=>true,
+				'min'=>1,
+				'tooSmall'=>'Battery must use at least one cell',
+			),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, part_num, name, num_cells, celltype_id', 'safe', 'on'=>'search'),
@@ -61,8 +66,8 @@ class Batterytype extends CActiveRecord
 			'id' => 'ID',
 			'part_num' => 'Part Num',
 			'name' => 'Name',
-			'num_cells' => 'Num Cells',
-			'celltype_id' => 'Celltype',
+			'num_cells' => 'No. of Cells',
+			'celltype_id' => 'Cell Type',
 		);
 	}
 

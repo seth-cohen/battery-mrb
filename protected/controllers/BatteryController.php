@@ -32,8 +32,9 @@ class BatteryController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				'users'=>array('@'),
+				'actions'=>array('create','update', 'cellselection'),
+				'roles'=>array('engineering'),
+				//'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
@@ -65,7 +66,7 @@ class BatteryController extends Controller
 		$model=new Battery;
 
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		$this->performAjaxValidation($model);
 
 		if(isset($_POST['Battery']))
 		{
@@ -164,10 +165,42 @@ class BatteryController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='battery-form')
+		if(isset($_POST['ajax']))
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+	
+	public function actionCellSelection()
+	{
+		$batteryModel = new Battery;
+		$batterytypeModel = new Batterytype;
+
+		// Uncomment the following line if AJAX validation is needed
+		if(isset($_POST['ajax']) && $_POST['ajax']==='battery-form') 
+			$this->performAjaxValidation($batteryModel);
+			
+		if(isset($_POST['ajax']) && $_POST['ajax']==='batterytype-form') 
+			$this->performAjaxValidation($batterytypeModel);
+		
+		if(isset($_POST['Battery']))
+		{
+			$batteryModel->attributes=$_POST['Battery'];
+			if($batteryModel->save())
+				$this->redirect(array('view','id'=>$batteryModel->id));
+		}
+
+		if(isset($_POST['Batterytype']))
+		{
+			$batterytypeModel->attributes=$_POST['Batterytype'];
+			$batterytypeModel->save();
+		}
+		
+		$this->render('cellselection',array(
+			'batteryModel'=>$batteryModel,
+			'batterytypeModel'=>$batterytypeModel,
+		));
+		
 	}
 }

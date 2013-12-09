@@ -38,7 +38,7 @@ class Battery extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('serial_num', 'required'),
+			array('serial_num, batterytype_id', 'required'),
 			array('batterytype_id, ref_num_id, assembler_id', 'length', 'max'=>10),
 			array('eap_num, serial_num, location', 'length', 'max'=>50),
 			array('assembly_date, ship_date', 'safe'),
@@ -70,10 +70,10 @@ class Battery extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'batterytype_id' => 'Batterytype',
-			'ref_num_id' => 'Ref Num',
-			'eap_num' => 'Eap Num',
-			'serial_num' => 'Serial Num',
+			'batterytype_id' => 'Battery Type',
+			'ref_num_id' => 'Ref No.',
+			'eap_num' => 'Eap No.',
+			'serial_num' => 'Serial No.',
 			'assembler_id' => 'Assembler',
 			'assembly_date' => 'Assembly Date',
 			'ship_date' => 'Ship Date',

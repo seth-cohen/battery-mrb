@@ -194,8 +194,17 @@ input[type=checkbox] + label
     display:inline !important; 
 }
 
+.left-form
+{
+	float:left;
+	width:260px;
+} 
 
-
+.right-form
+{
+	float:left;
+	width:260px;
+} 
 
 
 
