@@ -5,7 +5,7 @@
 ?>
 
 <div class="form">
-
+<?php echo CHtml::link('Hide','#',array('id'=>'batterytype-hide-link', 'style'=>'float:right; padding-right:20px;')) ?>
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'batterytype-form',
 	// Please note: When you enable ajax validation, make sure the corresponding
@@ -14,7 +14,7 @@
 	// See class documentation of CActiveForm for details on this.
 	'enableAjaxValidation'=>true,
 )); ?>
-
+	<h2 style="text-align:center">Register New Battery Type</h2> 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($batterytypeModel); ?>
@@ -65,3 +65,10 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+
+<script type="text/javascript">
+	$('#batterytype-hide-link').on('click', function(event) {
+		$('#batterytype-wrapper').hide();
+	});
+</script>
+	

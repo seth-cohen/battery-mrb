@@ -146,8 +146,7 @@
 	function refSelected(sel)
 	{
 		var ref = $('option:selected', $(sel)).text();
-		$("#Kit_eap_num").attr("value","EAP "+ ref + " ADD ");
-		$("#Kit_eap_num").focus();
+		$("#Kit_eap_num").val("EAP "+ ref + " ADD ").focus();
 	}
 
 	function typeSelected(sel)
