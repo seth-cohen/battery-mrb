@@ -4,12 +4,13 @@
 
 $this->breadcrumbs=array(
 	'Batteries'=>array('index'),
-	'Manage',
+	'Admin',
 );
 
 $this->menu=array(
-	array('label'=>'List Battery', 'url'=>array('index')),
-	array('label'=>'Create Battery', 'url'=>array('create')),
+	array('label'=>'Battery Cell Selections', 'url'=>array('cellselection')),
+	array('label'=>'View All Batteries', 'url'=>array('index')),
+	array('label'=>'Battery Admin', 'url'=>array('admin')),
 );
 
 Yii::app()->clientScript->registerScript('search', "

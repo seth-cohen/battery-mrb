@@ -110,4 +110,14 @@ class Batterytype extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+	
+	public function getCellCount()
+	{
+		$cellArray = array();
+
+		for($x=1; $x<=$this->num_cells; $x++){
+			$cellArray[] = array('id'=>$x, 'value'=>$x);
+		}
+		return $cellArray;
+	}
 }

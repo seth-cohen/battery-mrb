@@ -63,11 +63,16 @@ $this->pageTitle=Yii::app()->name;
 	</div>
 	
 	<div class="link-list" id="quality-links" style="padding:0 35% 5px 35%;">
-	<h3 style="text-align:center">Quality</h3>
+	<h3 style="text-align:center">Engineering/Quality</h3>
 		<b>NCRs</b>
 		<ul>
 			<li><?php echo CHtml::link('Put Cells on NCR', array('quality/ncr'));?></li>
 			<li><?php echo CHtml::link('Dispo Cell NCRs', array('testlab/cellcat'));?></li>
+		</ul>
+		<b>Batteries</b>
+		<ul>
+			<li><?php echo CHtml::link('Cell Selection', array('battery/cellselection'));?></li>
+			<li><?php echo CHtml::link('View All Batteries', array('battery/index'));?></li>
 		</ul>
 	</div>
 	<div style="clear:both"></div>

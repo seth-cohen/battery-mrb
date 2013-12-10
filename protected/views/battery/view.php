@@ -8,11 +8,10 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Battery', 'url'=>array('index')),
-	array('label'=>'Create Battery', 'url'=>array('create')),
-	array('label'=>'Update Battery', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Battery', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Battery', 'url'=>array('admin')),
+	array('label'=>'Edit This Battery', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Battery Cell Selections', 'url'=>array('cellselection')),
+	array('label'=>'View All Batteries', 'url'=>array('index')),
+	array('label'=>'Battery Admin', 'url'=>array('admin')),
 );
 ?>
 

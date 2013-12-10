@@ -3,12 +3,13 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Batteries',
+	'All Batteries',
 );
 
 $this->menu=array(
-	array('label'=>'Create Battery', 'url'=>array('create')),
-	array('label'=>'Manage Battery', 'url'=>array('admin')),
+	array('label'=>'Battery Cell Selections', 'url'=>array('cellselection')),
+	array('label'=>'View All Batteries', 'url'=>array('index')),
+	array('label'=>'Battery Admin', 'url'=>array('admin')),
 );
 ?>
 

@@ -5,13 +5,17 @@
 
 $this->breadcrumbs=array(
 	'Batteries'=>array('index'),
-	'Create',
+	'Cell Selection',
 );
 
 $this->menu=array(
-	array('label'=>'List Battery', 'url'=>array('index')),
-	array('label'=>'Manage Battery', 'url'=>array('admin')),
+	array('label'=>'Battery Cell Selections', 'url'=>array('cellselection')),
+	array('label'=>'View All Batteries', 'url'=>array('index')),
+	array('label'=>'Battery Admin', 'url'=>array('admin')),
 );
+
+/*needed because can't ajax load the css file for the gridview in the selectionform */
+Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/styles.css')
 ?>
 
 <h1>Battery Cell Selections</h1>
@@ -91,6 +95,8 @@ $this->menu=array(
 <?php $this->endWidget(); ?>
 </div>
 
+<div id="selection-container"></div>
+
 <script type="text/javascript">
 $(document).ready(function($) {
 
@@ -117,15 +123,14 @@ function typeSelected(sel)
 	var type_id = $('option:selected', $(sel)).val();
 	$.ajax({
 		type:'get',
-		url: '<?php echo $this->createUrl('kit/lastserial'); ?>',
+		url: '<?php echo $this->createUrl('battery/ajaxtypeselected'); ?>',
 		data:
 		{
 			type_id: type_id.toString(),
 		},
 		success: function(data){
-			$('#last-serial').text(
-					"Highest: " +
-					celltype + "-" + data
+			$('#selection-container').html(
+					data
 			 );
 		},
 	});

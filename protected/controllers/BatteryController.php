@@ -32,7 +32,10 @@ class BatteryController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update', 'cellselection'),
+				'actions'=>array(
+					'create','update', 
+					'cellselection', 'ajaxtypeselected',
+				),
 				'roles'=>array('engineering'),
 				//'users'=>array('@'),
 			),
@@ -201,6 +204,42 @@ class BatteryController extends Controller
 			'batteryModel'=>$batteryModel,
 			'batterytypeModel'=>$batterytypeModel,
 		));
+	}
+	
+	public function actionAjaxTypeSelected()
+	{
+		$id=null;
+		$pageSize = 8;
 		
+		if(isset($_GET['type_id']))
+		{
+			$id = $_GET['type_id'];
+		}
+		else
+		{	// we shouldn't be here.
+			Yii::app()->end();
+		}
+		
+		$batterytypeModel = Batterytype::model()->findByPk($id);
+		
+		if ($batterytypeModel==null)
+			Yii::app()->end();
+			
+		$cellDataProviders = array();
+		for($i=0; $i<ceil($batterytypeModel->num_cells/$pageSize); $i++)
+		{
+			$cellDataProviders[] = new CArrayDataProvider($batterytypeModel->getCellCount(), array(
+			    'pagination'=>array(
+			        'pageSize'=>$pageSize,
+					'currentPage'=>$i,
+			    )
+			 ));
+		}
+		$this->renderPartial('_selectionform',array(
+			'batterytypeModel'=>$batterytypeModel,
+			'cellDataProviders'=>$cellDataProviders,
+			false,
+			true,
+		));
 	}
 }
