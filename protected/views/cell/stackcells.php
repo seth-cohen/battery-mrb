@@ -17,23 +17,26 @@ $this->menu=array(
 	array('label'=>'Fillport Weld Cells (multi)', 'url'=>array('multitipoffcells')),
 	array('label'=>'View All Cells', 'url'=>array('index')),
 );
-?>
 
-<h1>Stack Cells</h1>
-<p>*Only kits that have not yet been stacked will be visible in this list.</p>
-<?php
-/* ionclude JQuery scripts to allow for autocomplte */
+/* include JQuery scripts to allow for autocomplte */
 Yii::app()->clientScript->registerCoreScript('jquery.ui'); 
 Yii::app()->clientScript->registerCssFile(
         Yii::app()->clientScript->getCoreScriptUrl().
         '/jui/css/base/jquery-ui.css'
 );
 ?>
+
+<h1>Stack Cells</h1>
+<p>*Only kits that have not yet been stacked will be visible in this list.</p>
+
+
 <?php $form=$this->beginWidget('CActiveForm', array(
     'enableAjaxValidation'=>true,
 	'enableClientValidation'=>true,
 	'id'=>'stacking-form',
 )); ?>
+
+<?php echo CHtml::checkBox('singleUser', true)?><span style="margin-left:5px">Assign to Single User</span>
 
 <div class="shadow border" >
 <?php $this->widget('zii.widgets.grid.CGridView', array(
@@ -136,11 +139,17 @@ function reloadGrid(data) {
 <script type="text/javascript">
 
 jQuery(function($) {
-	jQuery('.ui-autocomplete-input').on('keydown', function(event) {
+	jQuery(document).on('keydown', '.autocomplete-user-input', function(event) {
 		$(this).autocomplete({
 			'select': function(event, ui){
-				var id = event.target.id.toString().replace("names","ids");
-				$("#"+id).attr("value", ui.item.id);
+				//if single user checkbox set all inputs to selected user
+				if ($('#singleUser').prop('checked')){
+					$('.user-id-input').attr("value", ui.item.id);
+					$('.autocomplete-user-input').val(ui.item.value);
+				}else{
+					var id = event.target.id.toString().replace("names","ids");
+					$("#"+id).attr("value", ui.item.id);
+				}
 			},
 			'source':'/ytpdb/user/ajaxUserSearch'
 		});

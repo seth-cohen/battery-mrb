@@ -588,12 +588,12 @@ class CellController extends Controller
 		
 		$returnString = CHtml::textField("user_names[$data->id]",$userName,array(
 				"style"=>"width:150px;",
-				"class"=>"ui-autocomplete-input",
+				"class"=>"autocomplete-user-input",
 				"autocomplete"=>"off",
 				"disabled"=>$disabled,
 			));
 			
-		$returnString.= CHtml::hiddenField("user_ids[$data->id]",$userId);
+		$returnString.= CHtml::hiddenField("user_ids[$data->id]",$userId, array("class"=>"user-id-input"));
 	
 		return $returnString;
 	}

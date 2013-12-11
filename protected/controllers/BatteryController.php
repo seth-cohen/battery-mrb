@@ -34,7 +34,7 @@ class BatteryController extends Controller
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array(
 					'create','update', 
-					'cellselection', 'ajaxtypeselected',
+					'cellselection', 'ajaxtypeselected', 'ajaxavailablecells'
 				),
 				'roles'=>array('engineering'),
 				//'users'=>array('@'),
@@ -241,5 +241,46 @@ class BatteryController extends Controller
 			false,
 			true,
 		));
+	}
+	
+	/**
+	 * 
+	 * Returns options for dropdown box of all available cells that have been
+	 * approved by QA of the cell type needed for the battery type_id selected
+	 */
+	public function actionAjaxAvailableCells()
+	{
+		if(!isset($_GET['type_id']))
+		{
+			Yii::app()->end();
+		}
+		
+		$id = $_GET['type_id'];
+		$batterytype = Batterytype::model()->findByPk($id,array('select'=>'celltype_id'));
+		
+		$criteria=new CDbCriteria;
+		$criteria->with = array(
+			'kit'=>array(
+				'select'=>array('id','serial_num', 'celltype_id'),
+				'alias'=>'kit',
+			),
+			'kit.celltype'=>array('alias'=>'celltype'),
+		);
+		$criteria->addcondition('kit.celltype_id=:ct_id');
+		$criteria->params = array(':ct_id'=>$batterytype->celltype_id);
+		//$criteria->addcondition('data_accepted=1');
+		
+		if(isset($_GET['values'])){
+			$selectedCells = $_GET['values'];
+			$criteria->addNotInCondition('t.id', $selectedCells);
+		}
+		
+		$cells = Cell::model()->findAll($criteria);
+		
+		echo CHtml::tag('option', array('value'=>''), '-N/A-', true);
+		foreach($cells as $cell)
+		{
+			echo CHtml::tag('option', array('value'=>$cell->id), CHtml::encode($cell->kit->getFormattedSerial()), true);
+		}
 	}
 }

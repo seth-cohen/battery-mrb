@@ -15,7 +15,10 @@ $this->menu=array(
 );
 
 /*needed because can't ajax load the css file for the gridview in the selectionform */
-Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/styles.css')
+Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/styles.css');
+Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/jquery.easing.1.3.js');
+Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/jquery.easing.compatibility.js');
+Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/cellselection.js');
 ?>
 
 <h1>Battery Cell Selections</h1>
@@ -70,7 +73,11 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/styles.
 								CHtml::listData(Batterytype::model()->findAll(), 'id','name'), 
 								array(
 									'prompt'=>' -Select Battery Type- ',
-									'onchange'=>'typeSelected(this)',
+									'onchange'=>'typeSelected(this,"'
+											.$this->createUrl('battery/ajaxtypeselected')
+											.'","'
+											.$this->createUrl('battery/ajaxavailablecells')
+											.'")',
 									'style'=>'width:152px'
 								)); ?>
 	        <?php echo $form->error($batteryModel,'batterytype_id'); ?>
@@ -98,112 +105,12 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/styles.
 		<?php echo CHtml::submitButton($batteryModel->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>
 
-	<div id="cell-selection-form"></div>
+	<div id="cell-selection-form" style="margin-top: 12px;"></div>
 <?php $this->endWidget(); ?>
 </div>
 
-<div id="selection-container" style="overflow-x:hidden; position:relative;"></div>
+<div id="selection-container" style="overflow-x:hidden; position:relative;margin-top: 12px;"></div>
 
 <script type="text/javascript">
-var currentPage = 0;
 
-$(document).ready(function($) {
-
-	// show the battery type form if there were errors in creating new model
-	if (!($('#batterytype-form_es_').css('display') == 'none') )
-	{
-		$('#batterytype-wrapper').show();
-	}
-
-	
-	$('#batterytype-link').on('click', function(event) {
-		$('#batterytype-wrapper').show();
-	});
-
-	$(document).on('click', '#next-module-link', function(event){
-		if (!$('#cellselection-wrapper-'+(currentPage+1)).length){
-			//do nothing
-		} else {
-			if (!$('#cellselection-wrapper-'+(currentPage+2)).length){
-				//do nothing
-				$('#next-module-link').hide();
-			}
-			if(currentPage == 0)
-				$('#previous-module-link').show();
-			
-			//animate current grid left
-			var $element = $('#cellselection-wrapper-'+currentPage);
-			var right = $element.parent().width()+20;
-			$element.animate({
-				right: right,
-			});
-			currentPage += 1;
-			
-			//animate next grid left to center
-			var right = $element.parent().width()/2-$element.width()/2;
-			$element = $('#cellselection-wrapper-'+currentPage);
-			$element.animate({
-				right: right,
-			});
-		}
-	});
-
-	$(document).on('click', '#previous-module-link', function(event){
-		if (!$('#cellselection-wrapper-'+(currentPage-1)).length){
-			//do nothing
-			$('#previous-module-link').hide();
-		} else {
-			if (!$('#cellselection-wrapper-'+(currentPage-2)).length){
-				//do nothing
-				$('#previous-module-link').hide();
-			}
-			if(!$('#cellselection-wrapper-'+(currentPage+1)).length)
-				$('#next-module-link').show();
-			
-			//animate current grid left
-			var $element = $('#cellselection-wrapper-'+currentPage);
-			var right = -$element.parent().width()-20;
-			$element.animate({
-				right: right,
-				position: "absolute",
-			});
-			currentPage -= 1;
-			
-			//animate next grid left to center
-			var right = $element.parent().width()/2-$element.width()/2;
-			$element = $('#cellselection-wrapper-'+currentPage);
-			$element.animate({
-				right: right,
-			});
-		}
-	});
-});
-
-function refSelected(sel)
-{
-	var ref = $('option:selected', $(sel)).text();
-	$("#Battery_eap_num").val("EAP "+ ref + " ADD ").focus();
-}
-
-function typeSelected(sel)
-{
-	var type_id = $('option:selected', $(sel)).val();
-	$.ajax({
-		type:'get',
-		url: '<?php echo $this->createUrl('battery/ajaxtypeselected'); ?>',
-		data:
-		{
-			type_id: type_id.toString(),
-		},
-		success: function(data){
-			currentPage = 0;
-			$('#selection-container').html(data).css('height','600px');
-			$('#previous-module-link').hide();
-			if (!$('#cellselection-wrapper-'+(currentPage+1)).length){
-				//do nothing
-				$('#next-module-link').hide();
-			}
-		},
-	});
-}
 </script>

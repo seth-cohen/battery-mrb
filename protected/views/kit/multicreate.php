@@ -30,6 +30,7 @@ Yii::app()->clientScript->registerCssFile(
 	'enableClientValidation'=>true,
 	'id'=>'kit-form',
 )); ?>
+
 <div class="form" style="margin-bottom:15px;">
 <p class ="note">
 *Create multiple kits for a single cell type that use exactly the same electrode lots. <br/>
@@ -103,6 +104,8 @@ out.
 </tr></table>
 </div>
 
+<?php echo CHtml::checkBox('singleUser', true)?><span style="margin-left:5px">Assign to Single User</span>
+
 <div class="shadow border" >
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'kitting-grid',
@@ -172,7 +175,7 @@ function reloadGrid(data) {
     		   alertString += kit.serial + ' by ' + kit.kitter + '\n';
     	   });
     	   alert(alertString);
-    	   $.fn.yiiGridView.update('#kit-grid');
+    	   location.reload();
     	}
     	catch(e)
     	{
@@ -189,14 +192,17 @@ function reloadGrid(data) {
 <script type="text/javascript">
 
 $(document).ready(function($) {
-	jQuery('.ui-autocomplete-input').on('keydown', function(event) {
+	jQuery(document).on('keydown', '.autocomplete-user-input', function(event) {
 		$(this).autocomplete({
 			'select': function(event, ui){
-				
-				var id = event.target.id.toString().replace("names","ids");
-				$('.user-id-input').attr("value", ui.item.id);
-				$('.ui-autocomplete-input').val(ui.item.value);
-				$('.ui-autocomplete-input').val(ui.item.value);
+				//if single user checkbox set all inputs to selected user
+				if ($('#singleUser').prop('checked')){
+					$('.user-id-input').attr("value", ui.item.id);
+					$('.autocomplete-user-input').val(ui.item.value);
+				}else{
+					var id = event.target.id.toString().replace("names","ids");
+					$("#"+id).attr("value", ui.item.id);
+				}
 			},
 			'source':'/ytpdb/user/ajaxUserSearch'
 		});

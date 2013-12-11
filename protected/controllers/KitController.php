@@ -355,7 +355,7 @@ class KitController extends Controller
 		
 		$returnString = CHtml::textField('user_names['.$data["id"].']',$userName,array(
 				"style"=>"width:110px;",
-				"class"=>"ui-autocomplete-input",
+				"class"=>"autocomplete-user-input",
 				"autocomplete"=>"off",
 				"disabled"=>$disabled,
 			));

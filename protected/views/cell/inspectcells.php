@@ -36,6 +36,8 @@ Yii::app()->clientScript->registerCssFile(
 	'id'=>'inspecting-form',
 )); ?>
 
+<?php echo CHtml::checkBox('singleUser', true)?><span style="margin-left:5px">Assign to Single User</span>
+
 <div class="shadow border" >
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'inspecting-grid',
@@ -116,11 +118,17 @@ function reloadGrid(data) {
 <script type="text/javascript">
 
 jQuery(function($) {
-	jQuery('.ui-autocomplete-input').live('keydown', function(event) {
+	jQuery(document).on('keydown', '.autocomplete-user-input', function(event) {
 		$(this).autocomplete({
 			'select': function(event, ui){
-				var id = event.target.id.toString().replace("names","ids");
-				$("#"+id).attr("value", ui.item.id);
+				//if single user checkbox set all inputs to selected user
+				if ($('#singleUser').prop('checked')){
+					$('.user-id-input').attr("value", ui.item.id);
+					$('.autocomplete-user-input').val(ui.item.value);
+				}else{
+					var id = event.target.id.toString().replace("names","ids");
+					$("#"+id).attr("value", ui.item.id);
+				}
 			},
 			'source':'/ytpdb/user/ajaxUserSearch'
 		});

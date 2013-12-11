@@ -33899,8 +33899,30 @@ Stack trace:
 REQUEST_URI=/ytpdb/battery/cellselection
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (181)
 in C:\wamp\www\ytpdb\index.php (13)
+<<<<<<< local
+2013/12/10 11:11:55 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php:182
+=======
 2013/12/09 19:47:55 [error] [php] Undefined variable: batterytModel (C:\wamp\www\ytpdb\protected\views\battery\cellselection.php:44)
+>>>>>>> other
 Stack trace:
+<<<<<<< local
+#0 C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(WebUser), 'You are not aut...')
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxtypeselecte...')
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('battery/ajaxtyp...')
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/ytpdb/battery/ajaxtypeselected?type_id=1
+HTTP_REFERER=http://localhost/ytpdb/battery/cellselection
+---
+2013/12/10 13:11:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "css".' in C:\wamp\www\yii\framework\web\CController.php:483
+=======
 #0 C:\wamp\www\yii\framework\web\CController.php(869): BatteryController->renderFile()
 #1 C:\wamp\www\yii\framework\web\CController.php(782): BatteryController->renderPartial()
 #2 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(203): BatteryController->render()
@@ -33922,11 +33944,41 @@ in C:\wamp\www\ytpdb\protected\views\battery\cellselection.php (44)
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (203)
 in C:\wamp\www\ytpdb\index.php (13)
 2013/12/09 19:48:42 [error] [exception.CException] exception 'CException' with message 'BatteryController contains improperly nested widget tags in its view "C:\wamp\www\ytpdb\protected\views\battery\cellselection.php". A CActiveForm widget does not have an endWidget() call.' in C:\wamp\www\yii\framework\web\CBaseController.php:101
+>>>>>>> other
 Stack trace:
+<<<<<<< local
+#0 C:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('css')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('css')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('battery/css/lef...')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ytpdb/battery/css/left.png
+HTTP_REFERER=http://localhost/ytpdb/battery/cellselection
+---
+2013/12/10 13:11:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "css".' in C:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('css')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('css')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('battery/css/rig...')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ytpdb/battery/css/right.png
+HTTP_REFERER=http://localhost/ytpdb/battery/cellselection
+---
+2013/12/10 13:32:10 [error] [exception.CException] exception 'CException' with message 'Batterytype and its behaviors do not have a method or closure named "getUserRoles".' in C:\wamp\www\yii\framework\base\CComponent.php:266
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(227): CComponent->__call('getUserRoles', Array)
+#1 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(223): CActiveRecord->__call('getUserRoles', Array)
+#2 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(223): Batterytype->getUserRoles()
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionAjaxTypeSelected()
+=======
 #0 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
 #1 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('cellselection', Array, true)
 #2 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(203): CController->render('cellselection', Array)
 #3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionCellSelection()
+>>>>>>> other
 #4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
 #5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
 #6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
@@ -33935,11 +33987,19 @@ Stack trace:
 #9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
 #10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
 #11 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+<<<<<<< local
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxtypeselecte...')
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('battery/ajaxtyp...')
+=======
 #12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('cellselection')
 #13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('battery/cellsel...')
+>>>>>>> other
 #14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
 #15 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
 #16 {main}
+<<<<<<< local
+REQUEST_URI=/ytpdb/battery/ajaxtypeselected?type_id=1
+=======
 REQUEST_URI=/ytpdb/battery/cellselection
 ---
 2013/12/09 19:54:09 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
@@ -34038,16 +34098,141 @@ Stack trace:
 #11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
 #12 {main}
 REQUEST_URI=/ytpdb/kit/lastserial?type_id=3
+>>>>>>> other
 HTTP_REFERER=http://localhost/ytpdb/battery/cellselection
 ---
+<<<<<<< local
+2013/12/10 13:32:35 [error] [php] Undefined index: role (C:\wamp\www\yii\framework\base\CComponent.php(612) : eval()'d code:1)
+Stack trace:
+#0 C:\wamp\www\yii\framework\zii\widgets\grid\CGridColumn.php(151): CDataColumn->renderDataCellContent()
+#1 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(616): CDataColumn->renderDataCell()
+#2 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(572): CGridView->renderTableRow()
+#3 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(482): CGridView->renderTableBody()
+#4 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#5 unknown(0): CGridView->renderSection()
+#6 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback()
+#7 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(135): CGridView->renderContent()
+#8 C:\wamp\www\yii\framework\web\CBaseController.php(173): CGridView->run()
+#9 C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php(41): BatteryController->widget()
+#10 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#11 C:\wamp\www\yii\framework\web\CBaseController.php(95): BatteryController->renderInternal()
+#12 C:\wamp\www\yii\framework\web\CController.php(869): BatteryController->renderFile()
+#13 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(228): BatteryController->renderPartial()
+#14 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionAjaxTypeSelected()
+#15 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#16 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): BatteryController->runAction()
+#17 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#18 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#19 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): BatteryController->filterAccessControl()
+#20 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#21 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#22 C:\wamp\www\yii\framework\web\CController.php(265): BatteryController->runActionWithFilters()
+#23 C:\wamp\www\yii\framework\web\CWebApplication.php(282): BatteryController->run()
+#24 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#25 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#26 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/battery/ajaxtypeselected?type_id=1
+in C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php (41)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (228)
+=======
 2013/12/10 18:42:35 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+>>>>>>> other
 in C:\wamp\www\ytpdb\index.php (13)
+<<<<<<< local
+2013/12/10 13:48:39 [error] [exception.CException] exception 'CException' with message 'Property "CGridView.pagination" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:173
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CWidgetFactory.php(161): CComponent->__set('pagination', false)
+#1 C:\wamp\www\yii\framework\web\CBaseController.php(146): CWidgetFactory->createWidget(Object(BatteryController), 'zii.widgets.gri...', Array)
+#2 C:\wamp\www\yii\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#3 C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php(34): CBaseController->widget('zii.widgets.gri...', Array)
+#4 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#5 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#6 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#7 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(238): CController->renderPartial('_selectionform', Array)
+#8 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionAjaxTypeSelected()
+#9 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#11 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#13 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#14 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#15 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#16 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxtypeselecte...')
+#18 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('battery/ajaxtyp...')
+#19 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/ytpdb/battery/ajaxtypeselected?type_id=4
+HTTP_REFERER=http://localhost/ytpdb/battery/cellselection
+---
+2013/12/10 14:35:40 [error] [php] Trying to get property of non-object (C:\wamp\www\yii\framework\base\CComponent.php(612) : eval()'d code:1)
+Stack trace:
+#0 C:\wamp\www\yii\framework\zii\widgets\grid\CGridColumn.php(151): CDataColumn->renderDataCellContent()
+#1 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(616): CDataColumn->renderDataCell()
+#2 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(572): CGridView->renderTableRow()
+#3 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(482): CGridView->renderTableBody()
+#4 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#5 unknown(0): CGridView->renderSection()
+#6 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback()
+#7 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(135): CGridView->renderContent()
+#8 C:\wamp\www\yii\framework\web\CBaseController.php(173): CGridView->run()
+#9 C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php(45): BatteryController->widget()
+#10 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#11 C:\wamp\www\yii\framework\web\CBaseController.php(95): BatteryController->renderInternal()
+#12 C:\wamp\www\yii\framework\web\CController.php(869): BatteryController->renderFile()
+#13 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(238): BatteryController->renderPartial()
+#14 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionAjaxTypeSelected()
+#15 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#16 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): BatteryController->runAction()
+#17 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#18 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#19 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): BatteryController->filterAccessControl()
+#20 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#21 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#22 C:\wamp\www\yii\framework\web\CController.php(265): BatteryController->runActionWithFilters()
+#23 C:\wamp\www\yii\framework\web\CWebApplication.php(282): BatteryController->run()
+#24 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#25 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#26 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/battery/ajaxtypeselected?type_id=1
+in C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php (45)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (238)
+=======
 2013/12/10 18:42:40 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+>>>>>>> other
 in C:\wamp\www\ytpdb\index.php (13)
+<<<<<<< local
+2013/12/10 14:47:09 [error] [exception.CException] exception 'CException' with message 'Property "CPagination.offset" is read only.' in C:\wamp\www\yii\framework\base\CComponent.php:170
+Stack trace:
+#0 C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php(23): CComponent->__set('offset', 8)
+#1 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#2 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#3 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#4 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(238): CController->renderPartial('_selectionform', Array)
+#5 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionAjaxTypeSelected()
+#6 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#7 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#8 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#9 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#11 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#12 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#13 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxtypeselecte...')
+#15 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('battery/ajaxtyp...')
+#16 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#17 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#18 {main}
+REQUEST_URI=/ytpdb/battery/ajaxtypeselected?type_id=4
+HTTP_REFERER=http://localhost/ytpdb/battery/cellselection
+---
+2013/12/10 14:56:21 [error] [php] Undefined variable: numPages (C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php:17)
+=======
 2013/12/10 19:13:06 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
@@ -34077,8 +34262,28 @@ in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
 in C:\wamp\www\ytpdb\index.php (13)
 2013/12/10 19:46:50 [error] [php] Undefined variable: numPages (C:\wamp\www\ytpdb\protected\views\battery\cellselection.php:109)
+>>>>>>> other
 Stack trace:
 #0 C:\wamp\www\yii\framework\web\CController.php(869): BatteryController->renderFile()
+<<<<<<< local
+#1 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(236): BatteryController->renderPartial()
+#2 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionAjaxTypeSelected()
+#3 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): BatteryController->runAction()
+#5 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#7 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): BatteryController->filterAccessControl()
+#8 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#9 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\wamp\www\yii\framework\web\CController.php(265): BatteryController->runActionWithFilters()
+#11 C:\wamp\www\yii\framework\web\CWebApplication.php(282): BatteryController->run()
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#13 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/battery/ajaxtypeselected?type_id=3
+in C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php (17)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (236)
+=======
 #1 C:\wamp\www\yii\framework\web\CController.php(782): BatteryController->renderPartial()
 #2 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(206): BatteryController->render()
 #3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionCellSelection()
@@ -34097,39 +34302,357 @@ Stack trace:
 REQUEST_URI=/ytpdb/battery/cellselection
 in C:\wamp\www\ytpdb\protected\views\battery\cellselection.php (109)
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (206)
+>>>>>>> other
 in C:\wamp\www\ytpdb\index.php (13)
+<<<<<<< local
+2013/12/10 14:56:23 [error] [php] Undefined variable: numPages (C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php:17)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): BatteryController->renderFile()
+#1 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(236): BatteryController->renderPartial()
+#2 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionAjaxTypeSelected()
+#3 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): BatteryController->runAction()
+#5 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#7 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): BatteryController->filterAccessControl()
+#8 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#9 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\wamp\www\yii\framework\web\CController.php(265): BatteryController->runActionWithFilters()
+#11 C:\wamp\www\yii\framework\web\CWebApplication.php(282): BatteryController->run()
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#13 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/battery/ajaxtypeselected?type_id=4
+in C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php (17)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (236)
+=======
 2013/12/10 19:48:43 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+>>>>>>> other
 in C:\wamp\www\ytpdb\index.php (13)
+<<<<<<< local
+2013/12/10 14:56:50 [error] [php] Undefined variable: x (C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php:17)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): BatteryController->renderFile()
+#1 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(236): BatteryController->renderPartial()
+#2 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionAjaxTypeSelected()
+#3 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): BatteryController->runAction()
+#5 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#7 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): BatteryController->filterAccessControl()
+#8 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#9 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\wamp\www\yii\framework\web\CController.php(265): BatteryController->runActionWithFilters()
+#11 C:\wamp\www\yii\framework\web\CWebApplication.php(282): BatteryController->run()
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#13 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/battery/ajaxtypeselected?type_id=4
+in C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php (17)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (236)
+=======
 2013/12/10 19:49:12 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+>>>>>>> other
 in C:\wamp\www\ytpdb\index.php (13)
+<<<<<<< local
+2013/12/10 14:56:52 [error] [php] Undefined variable: x (C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php:17)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): BatteryController->renderFile()
+#1 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(236): BatteryController->renderPartial()
+#2 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionAjaxTypeSelected()
+#3 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): BatteryController->runAction()
+#5 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#7 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): BatteryController->filterAccessControl()
+#8 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#9 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\wamp\www\yii\framework\web\CController.php(265): BatteryController->runActionWithFilters()
+#11 C:\wamp\www\yii\framework\web\CWebApplication.php(282): BatteryController->run()
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#13 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/battery/ajaxtypeselected?type_id=1
+in C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php (17)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (236)
+=======
 2013/12/10 19:49:14 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+>>>>>>> other
 in C:\wamp\www\ytpdb\index.php (13)
+<<<<<<< local
+2013/12/10 15:00:42 [error] [exception.CException] exception 'CException' with message 'Property "CGridView.templage" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:173
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CWidgetFactory.php(161): CComponent->__set('templage', '{items}{summary...')
+#1 C:\wamp\www\yii\framework\web\CBaseController.php(146): CWidgetFactory->createWidget(Object(BatteryController), 'zii.widgets.gri...', Array)
+#2 C:\wamp\www\yii\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#3 C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php(47): CBaseController->widget('zii.widgets.gri...', Array)
+#4 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#5 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#6 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#7 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(238): CController->renderPartial('_selectionform', Array)
+#8 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionAjaxTypeSelected()
+#9 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#11 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#12 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#13 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#14 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#15 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#16 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxtypeselecte...')
+#18 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('battery/ajaxtyp...')
+#19 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/ytpdb/battery/ajaxtypeselected?type_id=4
+HTTP_REFERER=http://localhost/ytpdb/battery/cellselection
+---
+2013/12/10 15:28:27 [error] [exception.CException] exception 'CException' with message 'CPagination and its behaviors do not have a method or closure named "pageCount".' in C:\wamp\www\yii\framework\base\CComponent.php:266
+Stack trace:
+#0 C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php(7): CComponent->__call('pageCount', Array)
+#1 C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php(7): CPagination->pageCount()
+#2 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#3 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#4 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#5 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(238): CController->renderPartial('_selectionform', Array)
+#6 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionAjaxTypeSelected()
+#7 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#8 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#10 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#14 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxtypeselecte...')
+#16 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('battery/ajaxtyp...')
+#17 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#18 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#19 {main}
+REQUEST_URI=/ytpdb/battery/ajaxtypeselected?type_id=4
+HTTP_REFERER=http://localhost/ytpdb/battery/cellselection
+---
+2013/12/10 15:45:36 [error] [exception.CException] exception 'CException' with message 'CLinkPager and its behaviors do not have a method or closure named "getOffset".' in C:\wamp\www\yii\framework\base\CComponent.php:266
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CArrayDataProvider.php(95): CComponent->__call('getOffset', Array)
+#1 C:\wamp\www\yii\framework\web\CArrayDataProvider.php(95): CLinkPager->getOffset()
+#2 C:\wamp\www\yii\framework\web\CDataProvider.php(168): CArrayDataProvider->fetchData()
+#3 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(111): CDataProvider->getData()
+#4 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(339): CBaseListView->init()
+#5 C:\wamp\www\yii\framework\web\CBaseController.php(147): CGridView->init()
+#6 C:\wamp\www\yii\framework\web\CBaseController.php(172): CBaseController->createWidget('zii.widgets.gri...', Array)
+#7 C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php(54): CBaseController->widget('zii.widgets.gri...', Array)
+#8 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#9 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#10 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#11 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(239): CController->renderPartial('_selectionform', Array)
+#12 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionAjaxTypeSelected()
+#13 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#14 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#15 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#16 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#17 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#18 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#19 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#20 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#21 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxtypeselecte...')
+#22 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('battery/ajaxtyp...')
+#23 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#24 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#25 {main}
+REQUEST_URI=/ytpdb/battery/ajaxtypeselected?type_id=4
+HTTP_REFERER=http://localhost/ytpdb/battery/cellselection
+---
+2013/12/10 15:50:28 [error] [php] Undefined variable: x (C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php:24)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): BatteryController->renderFile()
+#1 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(239): BatteryController->renderPartial()
+#2 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionAjaxTypeSelected()
+#3 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): BatteryController->runAction()
+#5 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#7 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): BatteryController->filterAccessControl()
+#8 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#9 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\wamp\www\yii\framework\web\CController.php(265): BatteryController->runActionWithFilters()
+#11 C:\wamp\www\yii\framework\web\CWebApplication.php(282): BatteryController->run()
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#13 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/battery/ajaxtypeselected?type_id=3
+in C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php (24)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (239)
+=======
 2013/12/10 19:50:05 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+>>>>>>> other
 in C:\wamp\www\ytpdb\index.php (13)
+<<<<<<< local
+2013/12/10 15:50:29 [error] [php] Undefined variable: x (C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php:24)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): BatteryController->renderFile()
+#1 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(239): BatteryController->renderPartial()
+#2 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionAjaxTypeSelected()
+#3 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): BatteryController->runAction()
+#5 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#7 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): BatteryController->filterAccessControl()
+#8 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#9 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\wamp\www\yii\framework\web\CController.php(265): BatteryController->runActionWithFilters()
+#11 C:\wamp\www\yii\framework\web\CWebApplication.php(282): BatteryController->run()
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#13 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/battery/ajaxtypeselected?type_id=1
+in C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php (24)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (239)
+=======
 2013/12/10 19:50:52 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+>>>>>>> other
 in C:\wamp\www\ytpdb\index.php (13)
+<<<<<<< local
+2013/12/10 15:59:13 [error] [php] Trying to get property of non-object (C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php:8)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): BatteryController->renderFile()
+#1 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(239): BatteryController->renderPartial()
+#2 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionAjaxTypeSelected()
+#3 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): BatteryController->runAction()
+#5 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#7 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): BatteryController->filterAccessControl()
+#8 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#9 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\wamp\www\yii\framework\web\CController.php(265): BatteryController->runActionWithFilters()
+#11 C:\wamp\www\yii\framework\web\CWebApplication.php(282): BatteryController->run()
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#13 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/battery/ajaxtypeselected?type_id=4
+in C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php (8)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (239)
+=======
 2013/12/10 19:56:22 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+>>>>>>> other
 in C:\wamp\www\ytpdb\index.php (13)
+<<<<<<< local
+2013/12/10 16:09:20 [error] [php] Undefined variable: numPages (C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php:17)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): BatteryController->renderFile()
+#1 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(243): BatteryController->renderPartial()
+#2 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionAjaxTypeSelected()
+#3 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): BatteryController->runAction()
+#5 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#7 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): BatteryController->filterAccessControl()
+#8 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#9 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\wamp\www\yii\framework\web\CController.php(265): BatteryController->runActionWithFilters()
+#11 C:\wamp\www\yii\framework\web\CWebApplication.php(282): BatteryController->run()
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#13 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/battery/ajaxtypeselected?type_id=4
+in C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php (17)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (243)
+=======
 2013/12/10 19:56:48 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+>>>>>>> other
 in C:\wamp\www\ytpdb\index.php (13)
+<<<<<<< local
+2013/12/10 16:13:45 [error] [php] Undefined variable: x (C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php:20)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): BatteryController->renderFile()
+#1 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(243): BatteryController->renderPartial()
+#2 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionAjaxTypeSelected()
+#3 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): BatteryController->runAction()
+#5 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#7 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): BatteryController->filterAccessControl()
+#8 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#9 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\wamp\www\yii\framework\web\CController.php(265): BatteryController->runActionWithFilters()
+#11 C:\wamp\www\yii\framework\web\CWebApplication.php(282): BatteryController->run()
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#13 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/battery/ajaxtypeselected?type_id=4
+in C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php (20)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (243)
+=======
 2013/12/10 19:57:14 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+>>>>>>> other
 in C:\wamp\www\ytpdb\index.php (13)
+<<<<<<< local
+2013/12/10 16:17:39 [error] [exception.CException] exception 'CException' with message 'Property "CArrayDataProvider.pager" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php(19): CComponent->__get('pager')
+#1 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#2 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#3 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#4 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(243): CController->renderPartial('_selectionform', Array)
+#5 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionAjaxTypeSelected()
+#6 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#7 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#8 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#9 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#11 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#12 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#13 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxtypeselecte...')
+#15 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('battery/ajaxtyp...')
+#16 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#17 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#18 {main}
+REQUEST_URI=/ytpdb/battery/ajaxtypeselected?type_id=3
+HTTP_REFERER=http://localhost/ytpdb/battery/cellselection
+---
+2013/12/10 16:17:43 [error] [exception.CException] exception 'CException' with message 'Property "CArrayDataProvider.pager" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php(19): CComponent->__get('pager')
+#1 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\ytp...')
+#2 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\ytp...', Array, true)
+#3 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#4 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(243): CController->renderPartial('_selectionform', Array)
+#5 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionAjaxTypeSelected()
+#6 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#7 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#8 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#9 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#11 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#12 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#13 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#14 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxtypeselecte...')
+#15 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('battery/ajaxtyp...')
+#16 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#17 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#18 {main}
+REQUEST_URI=/ytpdb/battery/ajaxtypeselected?type_id=4
+HTTP_REFERER=http://localhost/ytpdb/battery/cellselection
+---
+=======
 2013/12/10 19:58:03 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
@@ -34471,6 +34994,721 @@ in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
 in C:\wamp\www\ytpdb\index.php (13)
 2013/12/10 21:08:44 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+>>>>>>> other
+2013/12/11 09:53:52 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 09:54:28 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 09:57:37 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 09:58:00 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 09:58:23 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 09:58:25 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 09:58:30 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 09:59:29 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 09:59:46 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 10:00:33 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 10:01:39 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 10:08:04 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 10:11:48 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 10:12:44 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 10:13:19 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 10:13:37 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 10:15:51 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 10:17:52 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 10:18:47 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 10:21:30 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 10:22:43 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 10:23:01 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 10:23:12 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 10:23:25 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 10:23:41 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 10:24:11 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 10:24:28 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 10:24:45 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 10:29:02 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 10:29:28 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 10:29:50 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 10:29:59 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 10:39:46 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 10:40:07 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 11:28:18 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 11:28:21 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 11:29:24 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 11:29:26 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 11:29:29 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 11:29:32 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 11:29:40 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 11:29:57 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 11:30:30 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 11:31:32 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 11:31:52 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 11:32:36 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 11:33:39 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 11:33:43 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 11:33:46 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 11:49:08 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 11:55:44 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 11:56:14 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 11:56:46 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 12:56:49 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 13:36:17 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 13:36:17 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(WebUser), 'You are not aut...')
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxavailablece...')
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('battery/ajaxava...')
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/ytpdb/battery/ajaxavailablecells?type_id=4
+HTTP_REFERER=http://localhost/ytpdb/battery/cellselection
+---
+2013/12/11 13:36:23 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(WebUser), 'You are not aut...')
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxavailablece...')
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('battery/ajaxava...')
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/ytpdb/battery/ajaxavailablecells?type_id=
+HTTP_REFERER=http://localhost/ytpdb/battery/cellselection
+---
+2013/12/11 13:36:24 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 13:36:28 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 13:36:28 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(WebUser), 'You are not aut...')
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxavailablece...')
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('battery/ajaxava...')
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/ytpdb/battery/ajaxavailablecells?type_id=4
+HTTP_REFERER=http://localhost/ytpdb/battery/cellselection
+---
+2013/12/11 13:36:57 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 13:38:58 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 13:59:15 [error] [exception.CDbException] exception 'CDbException' with message 'Table "tbl_cell" does not have a column named "kit.celltype_id".' in C:\wamp\www\yii\framework\db\schema\CDbCommandBuilder.php:694
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1535): CDbCommandBuilder->createColumnCriteria(Object(CMysqlTableSchema), Array, '', Array, '`t`.')
+#1 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(268): CActiveRecord->findAllByAttributes(Array)
+#2 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionAjaxAvailableCells()
+#3 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxavailablece...')
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('battery/ajaxava...')
+#13 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/ytpdb/battery/ajaxavailablecells?type_id=4
+HTTP_REFERER=http://localhost/ytpdb/battery/cellselection
+---
+2013/12/11 13:59:15 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:09:40 [error] [exception.CException] exception 'CException' with message 'Property "Kit.getFormattedSerial" is not defined.' in C:\wamp\www\yii\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(145): CComponent->__get('getFormattedSer...')
+#1 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(276): CActiveRecord->__get('getFormattedSer...')
+#2 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionAjaxAvailableCells()
+#3 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxavailablece...')
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('battery/ajaxava...')
+#13 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/ytpdb/battery/ajaxavailablecells?type_id=4
+HTTP_REFERER=http://localhost/ytpdb/battery/cellselection
+---
+2013/12/11 14:09:40 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:09:58 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:10:04 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:10:53 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:10:56 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:11:00 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:12:16 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:14:00 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:14:39 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:14:42 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:14:44 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:15:36 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:21:53 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:23:50 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:24:07 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:24:43 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:25:21 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:25:36 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:26:10 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:31:08 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:34:10 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:35:31 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:36:04 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:41:31 [error] [php] Use of undefined constant id - assumed 'id' (C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php:42)
+Stack trace:
+#0 C:\wamp\www\yii\framework\zii\widgets\grid\CDataColumn.php(137): CDataColumn->evaluateExpression()
+#1 C:\wamp\www\yii\framework\zii\widgets\grid\CGridColumn.php(151): CDataColumn->renderDataCellContent()
+#2 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(616): CDataColumn->renderDataCell()
+#3 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(572): CGridView->renderTableRow()
+#4 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(482): CGridView->renderTableBody()
+#5 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#6 unknown(0): CGridView->renderSection()
+#7 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback()
+#8 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(135): CGridView->renderContent()
+#9 C:\wamp\www\yii\framework\web\CBaseController.php(173): CGridView->run()
+#10 C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php(55): BatteryController->widget()
+#11 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#12 C:\wamp\www\yii\framework\web\CBaseController.php(95): BatteryController->renderInternal()
+#13 C:\wamp\www\yii\framework\web\CController.php(869): BatteryController->renderFile()
+#14 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(243): BatteryController->renderPartial()
+#15 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionAjaxTypeSelected()
+#16 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#17 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): BatteryController->runAction()
+#18 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#19 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#20 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): BatteryController->filterAccessControl()
+#21 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#22 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#23 C:\wamp\www\yii\framework\web\CController.php(265): BatteryController->runActionWithFilters()
+#24 C:\wamp\www\yii\framework\web\CWebApplication.php(282): BatteryController->run()
+#25 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#26 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#27 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/battery/ajaxtypeselected?type_id=4
+in C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php (42)
+in C:\wamp\www\ytpdb\protected\views\battery\_selectionform.php (55)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (243)
+2013/12/11 14:41:31 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:41:58 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:43:06 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:43:48 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:49:09 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:51:25 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:58:09 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 14:58:29 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 15:00:29 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 15:04:54 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 15:04:56 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 15:08:22 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 15:08:24 [error] [php] Use of undefined constant id - assumed 'id' (C:\wamp\www\ytpdb\protected\controllers\BatteryController.php:274)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): BatteryController->runAction()
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): BatteryController->filterAccessControl()
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): BatteryController->runActionWithFilters()
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): BatteryController->run()
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/battery/ajaxavailablecells?type_id=4&values%5B%5D=9
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (274)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 15:08:26 [error] [php] Use of undefined constant id - assumed 'id' (C:\wamp\www\ytpdb\protected\controllers\BatteryController.php:274)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): BatteryController->runAction()
+#1 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#2 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#3 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): BatteryController->filterAccessControl()
+#4 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#5 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\wamp\www\yii\framework\web\CController.php(265): BatteryController->runActionWithFilters()
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(282): BatteryController->run()
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/battery/ajaxavailablecells?type_id=4&values%5B%5D=9&values%5B%5D=19
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (274)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 15:08:56 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 15:08:57 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens. The SQL statement executed was: SELECT `t`.`id` AS `t0_c0`, `t`.`kit_id` AS `t0_c1`, `t`.`ref_num_id` AS `t0_c2`, `t`.`eap_num` AS `t0_c3`, `t`.`stacker_id` AS `t0_c4`, `t`.`stack_date` AS `t0_c5`, `t`.`dry_wt` AS `t0_c6`, `t`.`wet_wt` AS `t0_c7`, `t`.`filler_id` AS `t0_c8`, `t`.`fill_date` AS `t0_c9`, `t`.`inspector_id` AS `t0_c10`, `t`.`inspection_date` AS `t0_c11`, `t`.`location` AS `t0_c12`, `t`.`portwelder_id` AS `t0_c13`, `t`.`portweld_date` AS `t0_c14`, `t`.`laserwelder_id` AS `t0_c15`, `t`.`laserweld_date` AS `t0_c16`, `t`.`data_accepted` AS `t0_c17`, `t`.`battery_id` AS `t0_c18`, `kit`.`id` AS `t1_c0`, `kit`.`serial_num` AS `t1_c1`, `kit`.`celltype_id` AS `t1_c6`, `celltype`.`id` AS `t2_c0`, `celltype`.`name` AS `t2_c1` FROM `tbl_cell` `t`  LEFT OUTER JOIN `tbl_kit` `kit` ON (`t`.`kit_id`=`kit`.`id`)  LEFT OUTER JOIN `tbl_celltype` `celltype` ON (`kit`.`celltype_id`=`celltype`.`id`)  WHERE ((kit.celltype_id=:ct_id) AND (id!=:ycp0)).
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (279)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 15:08:57 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens. The SQL statement executed was: SELECT `t`.`id` AS `t0_c0`, `t`.`kit_id` AS `t0_c1`, `t`.`ref_num_id` AS `t0_c2`, `t`.`eap_num` AS `t0_c3`, `t`.`stacker_id` AS `t0_c4`, `t`.`stack_date` AS `t0_c5`, `t`.`dry_wt` AS `t0_c6`, `t`.`wet_wt` AS `t0_c7`, `t`.`filler_id` AS `t0_c8`, `t`.`fill_date` AS `t0_c9`, `t`.`inspector_id` AS `t0_c10`, `t`.`inspection_date` AS `t0_c11`, `t`.`location` AS `t0_c12`, `t`.`portwelder_id` AS `t0_c13`, `t`.`portweld_date` AS `t0_c14`, `t`.`laserwelder_id` AS `t0_c15`, `t`.`laserweld_date` AS `t0_c16`, `t`.`data_accepted` AS `t0_c17`, `t`.`battery_id` AS `t0_c18`, `kit`.`id` AS `t1_c0`, `kit`.`serial_num` AS `t1_c1`, `kit`.`celltype_id` AS `t1_c6`, `celltype`.`id` AS `t2_c0`, `celltype`.`name` AS `t2_c1` FROM `tbl_cell` `t`  LEFT OUTER JOIN `tbl_kit` `kit` ON (`t`.`kit_id`=`kit`.`id`)  LEFT OUTER JOIN `tbl_celltype` `celltype` ON (`kit`.`celltype_id`=`celltype`.`id`)  WHERE ((kit.celltype_id=:ct_id) AND (id!=:ycp0))' in C:\wamp\www\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(803): CDbCommand->queryAll()
+#2 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(437): CJoinElement->runQuery(Object(CJoinQuery))
+#3 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1356): CActiveFinder->query(Object(CDbCriteria), true)
+#5 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#6 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(279): CActiveRecord->findAll(Object(CDbCriteria))
+#7 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionAjaxAvailableCells()
+#8 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#12 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#13 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#15 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxavailablece...')
+#17 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('battery/ajaxava...')
+#18 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#19 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/ytpdb/battery/ajaxavailablecells?type_id=4&values%5B%5D=9
+HTTP_REFERER=http://localhost/ytpdb/battery/cellselection
+---
+2013/12/11 15:09:27 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens. The SQL statement executed was: SELECT `t`.`id` AS `t0_c0`, `t`.`kit_id` AS `t0_c1`, `t`.`ref_num_id` AS `t0_c2`, `t`.`eap_num` AS `t0_c3`, `t`.`stacker_id` AS `t0_c4`, `t`.`stack_date` AS `t0_c5`, `t`.`dry_wt` AS `t0_c6`, `t`.`wet_wt` AS `t0_c7`, `t`.`filler_id` AS `t0_c8`, `t`.`fill_date` AS `t0_c9`, `t`.`inspector_id` AS `t0_c10`, `t`.`inspection_date` AS `t0_c11`, `t`.`location` AS `t0_c12`, `t`.`portwelder_id` AS `t0_c13`, `t`.`portweld_date` AS `t0_c14`, `t`.`laserwelder_id` AS `t0_c15`, `t`.`laserweld_date` AS `t0_c16`, `t`.`data_accepted` AS `t0_c17`, `t`.`battery_id` AS `t0_c18`, `kit`.`id` AS `t1_c0`, `kit`.`serial_num` AS `t1_c1`, `kit`.`celltype_id` AS `t1_c6`, `celltype`.`id` AS `t2_c0`, `celltype`.`name` AS `t2_c1` FROM `tbl_cell` `t`  LEFT OUTER JOIN `tbl_kit` `kit` ON (`t`.`kit_id`=`kit`.`id`)  LEFT OUTER JOIN `tbl_celltype` `celltype` ON (`kit`.`celltype_id`=`celltype`.`id`)  WHERE ((kit.celltype_id=:ct_id) AND (id NOT IN (:ycp0, :ycp1))).
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (279)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 15:09:27 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens. The SQL statement executed was: SELECT `t`.`id` AS `t0_c0`, `t`.`kit_id` AS `t0_c1`, `t`.`ref_num_id` AS `t0_c2`, `t`.`eap_num` AS `t0_c3`, `t`.`stacker_id` AS `t0_c4`, `t`.`stack_date` AS `t0_c5`, `t`.`dry_wt` AS `t0_c6`, `t`.`wet_wt` AS `t0_c7`, `t`.`filler_id` AS `t0_c8`, `t`.`fill_date` AS `t0_c9`, `t`.`inspector_id` AS `t0_c10`, `t`.`inspection_date` AS `t0_c11`, `t`.`location` AS `t0_c12`, `t`.`portwelder_id` AS `t0_c13`, `t`.`portweld_date` AS `t0_c14`, `t`.`laserwelder_id` AS `t0_c15`, `t`.`laserweld_date` AS `t0_c16`, `t`.`data_accepted` AS `t0_c17`, `t`.`battery_id` AS `t0_c18`, `kit`.`id` AS `t1_c0`, `kit`.`serial_num` AS `t1_c1`, `kit`.`celltype_id` AS `t1_c6`, `celltype`.`id` AS `t2_c0`, `celltype`.`name` AS `t2_c1` FROM `tbl_cell` `t`  LEFT OUTER JOIN `tbl_kit` `kit` ON (`t`.`kit_id`=`kit`.`id`)  LEFT OUTER JOIN `tbl_celltype` `celltype` ON (`kit`.`celltype_id`=`celltype`.`id`)  WHERE ((kit.celltype_id=:ct_id) AND (id NOT IN (:ycp0, :ycp1)))' in C:\wamp\www\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(803): CDbCommand->queryAll()
+#2 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(437): CJoinElement->runQuery(Object(CJoinQuery))
+#3 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1356): CActiveFinder->query(Object(CDbCriteria), true)
+#5 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#6 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(279): CActiveRecord->findAll(Object(CDbCriteria))
+#7 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionAjaxAvailableCells()
+#8 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#12 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#13 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#15 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxavailablece...')
+#17 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('battery/ajaxava...')
+#18 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#19 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/ytpdb/battery/ajaxavailablecells?type_id=4&values%5B%5D=9&values%5B%5D=19
+HTTP_REFERER=http://localhost/ytpdb/battery/cellselection
+---
+2013/12/11 15:10:54 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 15:10:56 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'id' in where clause is ambiguous. The SQL statement executed was: SELECT `t`.`id` AS `t0_c0`, `t`.`kit_id` AS `t0_c1`, `t`.`ref_num_id` AS `t0_c2`, `t`.`eap_num` AS `t0_c3`, `t`.`stacker_id` AS `t0_c4`, `t`.`stack_date` AS `t0_c5`, `t`.`dry_wt` AS `t0_c6`, `t`.`wet_wt` AS `t0_c7`, `t`.`filler_id` AS `t0_c8`, `t`.`fill_date` AS `t0_c9`, `t`.`inspector_id` AS `t0_c10`, `t`.`inspection_date` AS `t0_c11`, `t`.`location` AS `t0_c12`, `t`.`portwelder_id` AS `t0_c13`, `t`.`portweld_date` AS `t0_c14`, `t`.`laserwelder_id` AS `t0_c15`, `t`.`laserweld_date` AS `t0_c16`, `t`.`data_accepted` AS `t0_c17`, `t`.`battery_id` AS `t0_c18`, `kit`.`id` AS `t1_c0`, `kit`.`serial_num` AS `t1_c1`, `kit`.`celltype_id` AS `t1_c6`, `celltype`.`id` AS `t2_c0`, `celltype`.`name` AS `t2_c1` FROM `tbl_cell` `t`  LEFT OUTER JOIN `tbl_kit` `kit` ON (`t`.`kit_id`=`kit`.`id`)  LEFT OUTER JOIN `tbl_celltype` `celltype` ON (`kit`.`celltype_id`=`celltype`.`id`)  WHERE ((kit.celltype_id=:ct_id) AND (id!=:ycp0)).
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (278)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 15:10:56 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'id' in where clause is ambiguous. The SQL statement executed was: SELECT `t`.`id` AS `t0_c0`, `t`.`kit_id` AS `t0_c1`, `t`.`ref_num_id` AS `t0_c2`, `t`.`eap_num` AS `t0_c3`, `t`.`stacker_id` AS `t0_c4`, `t`.`stack_date` AS `t0_c5`, `t`.`dry_wt` AS `t0_c6`, `t`.`wet_wt` AS `t0_c7`, `t`.`filler_id` AS `t0_c8`, `t`.`fill_date` AS `t0_c9`, `t`.`inspector_id` AS `t0_c10`, `t`.`inspection_date` AS `t0_c11`, `t`.`location` AS `t0_c12`, `t`.`portwelder_id` AS `t0_c13`, `t`.`portweld_date` AS `t0_c14`, `t`.`laserwelder_id` AS `t0_c15`, `t`.`laserweld_date` AS `t0_c16`, `t`.`data_accepted` AS `t0_c17`, `t`.`battery_id` AS `t0_c18`, `kit`.`id` AS `t1_c0`, `kit`.`serial_num` AS `t1_c1`, `kit`.`celltype_id` AS `t1_c6`, `celltype`.`id` AS `t2_c0`, `celltype`.`name` AS `t2_c1` FROM `tbl_cell` `t`  LEFT OUTER JOIN `tbl_kit` `kit` ON (`t`.`kit_id`=`kit`.`id`)  LEFT OUTER JOIN `tbl_celltype` `celltype` ON (`kit`.`celltype_id`=`celltype`.`id`)  WHERE ((kit.celltype_id=:ct_id) AND (id!=:ycp0))' in C:\wamp\www\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(803): CDbCommand->queryAll()
+#2 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(437): CJoinElement->runQuery(Object(CJoinQuery))
+#3 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1356): CActiveFinder->query(Object(CDbCriteria), true)
+#5 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#6 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(278): CActiveRecord->findAll(Object(CDbCriteria))
+#7 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionAjaxAvailableCells()
+#8 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#12 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#13 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#15 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxavailablece...')
+#17 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('battery/ajaxava...')
+#18 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#19 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/ytpdb/battery/ajaxavailablecells?type_id=4&values%5B%5D=9
+HTTP_REFERER=http://localhost/ytpdb/battery/cellselection
+---
+2013/12/11 15:10:57 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'id' in where clause is ambiguous. The SQL statement executed was: SELECT `t`.`id` AS `t0_c0`, `t`.`kit_id` AS `t0_c1`, `t`.`ref_num_id` AS `t0_c2`, `t`.`eap_num` AS `t0_c3`, `t`.`stacker_id` AS `t0_c4`, `t`.`stack_date` AS `t0_c5`, `t`.`dry_wt` AS `t0_c6`, `t`.`wet_wt` AS `t0_c7`, `t`.`filler_id` AS `t0_c8`, `t`.`fill_date` AS `t0_c9`, `t`.`inspector_id` AS `t0_c10`, `t`.`inspection_date` AS `t0_c11`, `t`.`location` AS `t0_c12`, `t`.`portwelder_id` AS `t0_c13`, `t`.`portweld_date` AS `t0_c14`, `t`.`laserwelder_id` AS `t0_c15`, `t`.`laserweld_date` AS `t0_c16`, `t`.`data_accepted` AS `t0_c17`, `t`.`battery_id` AS `t0_c18`, `kit`.`id` AS `t1_c0`, `kit`.`serial_num` AS `t1_c1`, `kit`.`celltype_id` AS `t1_c6`, `celltype`.`id` AS `t2_c0`, `celltype`.`name` AS `t2_c1` FROM `tbl_cell` `t`  LEFT OUTER JOIN `tbl_kit` `kit` ON (`t`.`kit_id`=`kit`.`id`)  LEFT OUTER JOIN `tbl_celltype` `celltype` ON (`kit`.`celltype_id`=`celltype`.`id`)  WHERE ((kit.celltype_id=:ct_id) AND (id NOT IN (:ycp0, :ycp1))).
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (278)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 15:10:57 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'id' in where clause is ambiguous. The SQL statement executed was: SELECT `t`.`id` AS `t0_c0`, `t`.`kit_id` AS `t0_c1`, `t`.`ref_num_id` AS `t0_c2`, `t`.`eap_num` AS `t0_c3`, `t`.`stacker_id` AS `t0_c4`, `t`.`stack_date` AS `t0_c5`, `t`.`dry_wt` AS `t0_c6`, `t`.`wet_wt` AS `t0_c7`, `t`.`filler_id` AS `t0_c8`, `t`.`fill_date` AS `t0_c9`, `t`.`inspector_id` AS `t0_c10`, `t`.`inspection_date` AS `t0_c11`, `t`.`location` AS `t0_c12`, `t`.`portwelder_id` AS `t0_c13`, `t`.`portweld_date` AS `t0_c14`, `t`.`laserwelder_id` AS `t0_c15`, `t`.`laserweld_date` AS `t0_c16`, `t`.`data_accepted` AS `t0_c17`, `t`.`battery_id` AS `t0_c18`, `kit`.`id` AS `t1_c0`, `kit`.`serial_num` AS `t1_c1`, `kit`.`celltype_id` AS `t1_c6`, `celltype`.`id` AS `t2_c0`, `celltype`.`name` AS `t2_c1` FROM `tbl_cell` `t`  LEFT OUTER JOIN `tbl_kit` `kit` ON (`t`.`kit_id`=`kit`.`id`)  LEFT OUTER JOIN `tbl_celltype` `celltype` ON (`kit`.`celltype_id`=`celltype`.`id`)  WHERE ((kit.celltype_id=:ct_id) AND (id NOT IN (:ycp0, :ycp1)))' in C:\wamp\www\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(803): CDbCommand->queryAll()
+#2 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(437): CJoinElement->runQuery(Object(CJoinQuery))
+#3 C:\wamp\www\yii\framework\db\ar\CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1356): CActiveFinder->query(Object(CDbCriteria), true)
+#5 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#6 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(278): CActiveRecord->findAll(Object(CDbCriteria))
+#7 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionAjaxAvailableCells()
+#8 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#12 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#13 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#15 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxavailablece...')
+#17 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('battery/ajaxava...')
+#18 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#19 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/ytpdb/battery/ajaxavailablecells?type_id=4&values%5B%5D=9&values%5B%5D=19
+HTTP_REFERER=http://localhost/ytpdb/battery/cellselection
+---
+2013/12/11 15:11:18 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 15:34:29 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 15:34:33 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 15:34:36 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 15:34:39 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 15:34:41 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 15:34:42 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 15:34:42 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 15:34:42 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 15:34:52 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 15:34:53 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (77)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 16:33:10 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/11 16:35:21 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
 in C:\wamp\www\ytpdb\index.php (13)
