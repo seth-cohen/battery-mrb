@@ -41,51 +41,58 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/styles.
 
 	<?php echo $form->errorSummary($batteryModel); ?>
 	
-<div class="left-form">
-	<div class="row">
-        <?php echo $form->labelEx($batteryModel,'ref_num_id'); ?>
-        <?php echo $form->dropDownList($batteryModel, 'ref_num_id', 
-							CHtml::listData(RefNum::model()->findAll(), 'id','number'), 
-							array(
-								'prompt'=>' -Select Reference No.- ',
-								'onchange'=>'refSelected(this)',
-								'style'=>'width:152px'
-							)); ?>
-        <?php echo $form->error($batteryModel,'ref_num_id'); ?>
-    </div>
-</div>
-<div class="right-form">
-	<div class="row">
-		<?php echo $form->labelEx($batteryModel,'eap_num'); ?>
-		<?php echo $form->textField($batteryModel,'eap_num',array('size'=>20,'maxlength'=>50)); ?>
-		<?php echo $form->error($batteryModel,'eap_num'); ?>
+	<div class="left-form">
+		<div class="row">
+	        <?php echo $form->labelEx($batteryModel,'ref_num_id'); ?>
+	        <?php echo $form->dropDownList($batteryModel, 'ref_num_id', 
+								CHtml::listData(RefNum::model()->findAll(), 'id','number'), 
+								array(
+									'prompt'=>' -Select Reference No.- ',
+									'onchange'=>'refSelected(this)',
+									'style'=>'width:152px'
+								)); ?>
+	        <?php echo $form->error($batteryModel,'ref_num_id'); ?>
+	    </div>
 	</div>
-</div>
+	<div class="right-form">
+		<div class="row">
+			<?php echo $form->labelEx($batteryModel,'eap_num'); ?>
+			<?php echo $form->textField($batteryModel,'eap_num',array('size'=>20,'maxlength'=>50)); ?>
+			<?php echo $form->error($batteryModel,'eap_num'); ?>
+		</div>
+	</div>
+	
+	<div class="clear"></div>
+	<div class="left-form">
+		<div class="row">
+	        <?php echo $form->labelEx($batteryModel,'batterytype_id'); ?>
+	        <?php echo $form->dropDownList($batteryModel, 'batterytype_id', 
+								CHtml::listData(Batterytype::model()->findAll(), 'id','name'), 
+								array(
+									'prompt'=>' -Select Battery Type- ',
+									'onchange'=>'typeSelected(this)',
+									'style'=>'width:152px'
+								)); ?>
+	        <?php echo $form->error($batteryModel,'batterytype_id'); ?>
+	    </div>
+	</div>
 
-<div class="clear"></div>
-<div class="left-form">
-	<div class="row">
-        <?php echo $form->labelEx($batteryModel,'batterytype_id'); ?>
-        <?php echo $form->dropDownList($batteryModel, 'batterytype_id', 
-							CHtml::listData(Batterytype::model()->findAll(), 'id','name'), 
-							array(
-								'prompt'=>' -Select Battery Type- ',
-								'onchange'=>'typeSelected(this)',
-								'style'=>'width:152px'
-							)); ?>
-        <?php echo $form->error($batteryModel,'batterytype_id'); ?>
-    </div>
-</div>
-
-<div class="right-form">
-	<div class="row">
-        <?php echo $form->labelEx($batteryModel,'serial_num'); ?>
-        <?php echo $form->textField($batteryModel,'serial_num',array('size'=>20,'maxlength'=>50)); ?>
-        <?php echo $form->error($batteryModel,'serial_num'); ?>
-    </div>
-</div>
+	<div class="right-form">
+		<div class="row">
+	        <?php echo $form->labelEx($batteryModel,'serial_num'); ?>
+	        <?php echo $form->textField($batteryModel,'serial_num',array('size'=>20,'maxlength'=>50)); ?>
+	        <?php echo $form->error($batteryModel,'serial_num'); ?>
+	    </div>
+	</div>
+	    
+	<div class="clear"></div>
     
-<div class="clear"></div>
+    <div class="row">
+        <?php echo $form->labelEx($batteryModel,'refnum_search'); ?> 
+        <?php echo $form->textField($batteryModel,'refnum_search',array('size'=>64,'maxlength'=>75)); ?>
+        <span style="padding-left:10px"; ><em><b>NOTE:</b></em> Comma or Space delimited</span>
+        <?php echo $form->error($batteryModel,'refnum_search'); ?>
+    </div>
     
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($batteryModel->isNewRecord ? 'Create' : 'Save'); ?>
@@ -95,9 +102,11 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/styles.
 <?php $this->endWidget(); ?>
 </div>
 
-<div id="selection-container"></div>
+<div id="selection-container" style="overflow-x:hidden; position:relative;"></div>
 
 <script type="text/javascript">
+var currentPage = 0;
+
 $(document).ready(function($) {
 
 	// show the battery type form if there were errors in creating new model
@@ -109,6 +118,64 @@ $(document).ready(function($) {
 	
 	$('#batterytype-link').on('click', function(event) {
 		$('#batterytype-wrapper').show();
+	});
+
+	$(document).on('click', '#next-module-link', function(event){
+		if (!$('#cellselection-wrapper-'+(currentPage+1)).length){
+			//do nothing
+		} else {
+			if (!$('#cellselection-wrapper-'+(currentPage+2)).length){
+				//do nothing
+				$('#next-module-link').hide();
+			}
+			if(currentPage == 0)
+				$('#previous-module-link').show();
+			
+			//animate current grid left
+			var $element = $('#cellselection-wrapper-'+currentPage);
+			var right = $element.parent().width()+20;
+			$element.animate({
+				right: right,
+			});
+			currentPage += 1;
+			
+			//animate next grid left to center
+			var right = $element.parent().width()/2-$element.width()/2;
+			$element = $('#cellselection-wrapper-'+currentPage);
+			$element.animate({
+				right: right,
+			});
+		}
+	});
+
+	$(document).on('click', '#previous-module-link', function(event){
+		if (!$('#cellselection-wrapper-'+(currentPage-1)).length){
+			//do nothing
+			$('#previous-module-link').hide();
+		} else {
+			if (!$('#cellselection-wrapper-'+(currentPage-2)).length){
+				//do nothing
+				$('#previous-module-link').hide();
+			}
+			if(!$('#cellselection-wrapper-'+(currentPage+1)).length)
+				$('#next-module-link').show();
+			
+			//animate current grid left
+			var $element = $('#cellselection-wrapper-'+currentPage);
+			var right = -$element.parent().width()-20;
+			$element.animate({
+				right: right,
+				position: "absolute",
+			});
+			currentPage -= 1;
+			
+			//animate next grid left to center
+			var right = $element.parent().width()/2-$element.width()/2;
+			$element = $('#cellselection-wrapper-'+currentPage);
+			$element.animate({
+				right: right,
+			});
+		}
 	});
 });
 
@@ -129,9 +196,13 @@ function typeSelected(sel)
 			type_id: type_id.toString(),
 		},
 		success: function(data){
-			$('#selection-container').html(
-					data
-			 );
+			currentPage = 0;
+			$('#selection-container').html(data).css('height','600px');
+			$('#previous-module-link').hide();
+			if (!$('#cellselection-wrapper-'+(currentPage+1)).length){
+				//do nothing
+				$('#next-module-link').hide();
+			}
 		},
 	});
 }

@@ -6,11 +6,11 @@
 ?>
 
 <?php 
-$imageUrl = CHtml::image(Yii::app()->baseUrl.'/css/left.png', 'Previous', array('style'=>'float:left;padding-left:50px;'));
-echo CHtml::link($imageUrl,'#',array('id'=>'batterytype-link' )); 
+$imageUrl = CHtml::image(Yii::app()->baseUrl.'/css/left.png', 'Previous', array('style'=>'float:left;margin-left:50px;top:130px;position:relative;'));
+echo CHtml::link($imageUrl,'#',array('id'=>'previous-module-link' )); 
 
-$imageUrl = CHtml::image(Yii::app()->baseUrl.'/css/right.png', 'Next', array('style'=>'float:right;padding-right:50px;'));
-echo CHtml::link($imageUrl,'#',array('id'=>'batterytype-link')) 
+$imageUrl = CHtml::image(Yii::app()->baseUrl.'/css/right.png', 'Next', array('style'=>'float:right;margin-right:50px;top:130px;position:relative;'));
+echo CHtml::link($imageUrl,'#',array('id'=>'next-module-link')) 
 ?>
 
 <?php 
@@ -18,7 +18,8 @@ $x = 0;
 foreach($cellDataProviders as $cellDataProvider): 
 	$cellDataProvider->pagination->currentPage = $x;
 ?>
-<div class="shadow border" id="cellselection-wrapper-<?=$x?>" style="width:300px;margin:10px auto;<?=$x>0?'display:none':'';?>">
+<div class="shadow border" id="cellselection-wrapper-<?=$x?>" 
+	style="width:300px;margin:10px auto;position:absolute;<?=$x>0?'top:0px;right:-350px;':'right:204px;';?>">
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>"cellselection-grid-$x",
@@ -51,4 +52,5 @@ foreach($cellDataProviders as $cellDataProvider):
 )); 
 ?>
 </div>
+<div class="clear"></div>
 <?php $x+=1; endforeach; ?>

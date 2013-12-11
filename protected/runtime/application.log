@@ -33899,3 +33899,578 @@ Stack trace:
 REQUEST_URI=/ytpdb/battery/cellselection
 in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (181)
 in C:\wamp\www\ytpdb\index.php (13)
+2013/12/09 19:47:55 [error] [php] Undefined variable: batterytModel (C:\wamp\www\ytpdb\protected\views\battery\cellselection.php:44)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): BatteryController->renderFile()
+#1 C:\wamp\www\yii\framework\web\CController.php(782): BatteryController->renderPartial()
+#2 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(203): BatteryController->render()
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionCellSelection()
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): BatteryController->runAction()
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): BatteryController->filterAccessControl()
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): BatteryController->runActionWithFilters()
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): BatteryController->run()
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/battery/cellselection
+in C:\wamp\www\ytpdb\protected\views\battery\cellselection.php (44)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (203)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/09 19:48:42 [error] [exception.CException] exception 'CException' with message 'BatteryController contains improperly nested widget tags in its view "C:\wamp\www\ytpdb\protected\views\battery\cellselection.php". A CActiveForm widget does not have an endWidget() call.' in C:\wamp\www\yii\framework\web\CBaseController.php:101
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\ytp...', Array, true)
+#1 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('cellselection', Array, true)
+#2 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(203): CController->render('cellselection', Array)
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionCellSelection()
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('cellselection')
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('battery/cellsel...')
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/ytpdb/battery/cellselection
+---
+2013/12/09 19:54:09 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/09 19:57:02 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/09 19:57:29 [error] [php] Undefined variable: model (C:\wamp\www\ytpdb\protected\views\battery\cellselection.php:56)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): BatteryController->renderFile()
+#1 C:\wamp\www\yii\framework\web\CController.php(782): BatteryController->renderPartial()
+#2 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(203): BatteryController->render()
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionCellSelection()
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): BatteryController->runAction()
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): BatteryController->filterAccessControl()
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): BatteryController->runActionWithFilters()
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): BatteryController->run()
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/battery/cellselection
+in C:\wamp\www\ytpdb\protected\views\battery\cellselection.php (56)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (203)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/09 19:58:19 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/09 19:58:44 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/09 19:59:15 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/09 19:59:20 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/09 19:59:40 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/09 19:59:51 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/09 20:00:22 [warning] [application] Failed to set unsafe attribute "kitter_search" of "Kit".
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (307)
+in C:\wamp\www\ytpdb\protected\controllers\KitController.php (73)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/09 20:00:36 [error] [php] Undefined variable: model (C:\wamp\www\ytpdb\protected\views\battery\cellselection.php:56)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): BatteryController->renderFile()
+#1 C:\wamp\www\yii\framework\web\CController.php(782): BatteryController->renderPartial()
+#2 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(203): BatteryController->render()
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionCellSelection()
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): BatteryController->runAction()
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): BatteryController->filterAccessControl()
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): BatteryController->runActionWithFilters()
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): BatteryController->run()
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/battery/cellselection
+in C:\wamp\www\ytpdb\protected\views\battery\cellselection.php (56)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (203)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/09 20:55:58 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\wamp\www\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('lastserial')
+#9 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('kit/lastserial')
+#10 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#11 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#12 {main}
+REQUEST_URI=/ytpdb/kit/lastserial?type_id=3
+HTTP_REFERER=http://localhost/ytpdb/battery/cellselection
+---
+2013/12/10 18:42:35 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 18:42:40 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 19:13:06 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 19:13:41 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 19:15:45 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 19:15:58 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 19:17:46 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 19:17:57 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 19:40:06 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 19:46:50 [error] [php] Undefined variable: numPages (C:\wamp\www\ytpdb\protected\views\battery\cellselection.php:109)
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(869): BatteryController->renderFile()
+#1 C:\wamp\www\yii\framework\web\CController.php(782): BatteryController->renderPartial()
+#2 C:\wamp\www\ytpdb\protected\controllers\BatteryController.php(206): BatteryController->render()
+#3 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): BatteryController->actionCellSelection()
+#4 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): BatteryController->runAction()
+#6 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#8 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): BatteryController->filterAccessControl()
+#9 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#10 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\wamp\www\yii\framework\web\CController.php(265): BatteryController->runActionWithFilters()
+#12 C:\wamp\www\yii\framework\web\CWebApplication.php(282): BatteryController->run()
+#13 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#14 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/battery/cellselection
+in C:\wamp\www\ytpdb\protected\views\battery\cellselection.php (109)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (206)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 19:48:43 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 19:49:12 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 19:49:14 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 19:50:05 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 19:50:52 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 19:56:22 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 19:56:48 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 19:57:14 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 19:58:03 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 19:58:59 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:00:15 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:00:40 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:02:27 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:03:07 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:03:50 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:04:03 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:10:13 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:10:36 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:11:09 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:12:15 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:14:04 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:14:37 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:16:47 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:19:00 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:19:31 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:20:33 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:21:55 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:22:12 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:24:21 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:25:06 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:26:28 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:27:04 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:29:16 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:29:18 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:29:44 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:29:46 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:29:51 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:30:08 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:30:35 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:31:20 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:32:43 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:33:17 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:34:25 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:35:13 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:35:33 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:36:07 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:36:28 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:36:50 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:36:52 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:37:01 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:38:22 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:38:42 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:39:00 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:39:02 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:39:14 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:40:54 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:40:56 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:41:55 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:42:18 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:42:20 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:42:24 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:42:26 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:42:47 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:42:57 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:43:51 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:43:53 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:43:57 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:44:13 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:44:53 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:44:54 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:46:48 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:48:10 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:48:42 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:50:05 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:51:10 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:52:00 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:52:51 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:55:10 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:55:16 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:55:18 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:55:24 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:55:49 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:55:50 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:57:10 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:57:29 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:57:30 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 20:57:37 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 21:00:46 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 21:02:44 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 21:06:59 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 21:08:12 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 21:08:28 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 21:08:42 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/10 21:08:44 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (173)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (185)
+in C:\wamp\www\ytpdb\index.php (13)

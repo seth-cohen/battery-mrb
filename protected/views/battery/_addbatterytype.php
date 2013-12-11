@@ -4,7 +4,7 @@
 /* @var $form CActiveForm */
 ?>
 
-<div class="form">
+<div class="form border" style="padding:15px; background-color:white;">
 <?php echo CHtml::link('Hide','#',array('id'=>'batterytype-hide-link', 'style'=>'float:right; padding-right:20px;')) ?>
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'batterytype-form',

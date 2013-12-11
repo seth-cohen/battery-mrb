@@ -22,6 +22,8 @@
  */
 class Battery extends CActiveRecord
 {
+	
+	public $refnum_search;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -44,7 +46,10 @@ class Battery extends CActiveRecord
 			array('assembly_date, ship_date', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, batterytype_id, ref_num_id, eap_num, serial_num, assembler_id, assembly_date, ship_date, location', 'safe', 'on'=>'search'),
+			array('id, batterytype_id, ref_num_id, eap_num, serial_num, assembler_id, 
+					assembly_date, ship_date, location, refnum_search' , 
+					'safe', 'on'=>'search'
+			),
 		);
 	}
 
@@ -78,6 +83,8 @@ class Battery extends CActiveRecord
 			'assembly_date' => 'Assembly Date',
 			'ship_date' => 'Ship Date',
 			'location' => 'Location',
+		
+			'refnum_search' => 'Reference No. Filter',
 		);
 	}
 
