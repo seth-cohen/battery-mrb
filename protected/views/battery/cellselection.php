@@ -2,6 +2,7 @@
 /* @var $this BatteryController */
 /* @var $batteryModel Battery */
 /* @var $batterytypeModel Batterytype */
+/* @var $sparesDataProvider  CArrayDataProvider */
 
 $this->breadcrumbs=array(
 	'Batteries'=>array('index'),
@@ -30,7 +31,6 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/cells
 	<?php $this->renderPartial('_addbatterytype', array('batterytypeModel'=>$batterytypeModel)); ?>
 </div>
 
-<div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'battery-form',
@@ -40,6 +40,8 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/cells
 	// See class documentation of CActiveForm for details on this.
 	'enableAjaxValidation'=>true,
 )); ?>
+
+<div class="form">
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($batteryModel); ?>
@@ -101,15 +103,53 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/cells
         <?php echo $form->error($batteryModel,'refnum_search'); ?>
     </div>
     
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($batteryModel->isNewRecord ? 'Create' : 'Save'); ?>
-	</div>
-
-	<div id="cell-selection-form" style="margin-top: 12px;"></div>
-<?php $this->endWidget(); ?>
-</div>
+    <?php echo CHtml::ajaxSubmitButton('Filter',array('battery/cellselection'), array(),array("style"=>"display:none;")); ?>
+	<?php echo CHtml::ajaxSubmitButton('Submit',array('battery/ajaxselection'), array('success'=>'checkSelection'), array("id"=>"submit-button")); ?>
+    
+</div><!-- Form div -->
 
 <div id="selection-container" style="overflow-x:hidden; position:relative;margin-top: 12px;"></div>
+
+
+<div class="shadow border" id="cellspares-wrapper" style="display:none;"> 
+<div style="text-align:center; width:100%; font-size:1.2em;">SPARES</div>
+<?php $this->widget('zii.widgets.grid.CGridView', array(
+	'id'=>"cellspares-grid",
+	'template'=>'{items}',
+	'dataProvider'=>$sparesDataProvider,
+	'columns'=>array(
+		array(
+			'name'=>'Cell No.',
+			'value'=>'$data["id"]',
+		),
+		array(
+			'header'=>'Cell Serial',
+			'type'=>'raw',
+			'value'=>function($data, $row) {
+				return	CHtml::dropDownList('Battery[Spares][serials]['.$data['id'].']', '', array(),array(
+						'prompt'=>'-N/A-',
+						'class'=>'cell-dropdown',
+						'onchange'=>'cellSelected(this)',
+						'style'=>'width:150px',
+				));
+			},
+		),
+		array(
+			'header'=>'For Module',
+			'type'=>'raw',
+			'value'=>function($data, $row) {
+				return	CHtml::textField('Battery[Spares][modules]['.$data['id'].']', '');
+			},
+		),
+	),
+	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
+	'pager' => array(
+		'cssFile' => false,
+	)
+)); 
+?>
+</div>
+<?php $this->endWidget(); ?>
 
 <script type="text/javascript">
 

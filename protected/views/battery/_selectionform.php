@@ -6,7 +6,7 @@
 $controller = $this;
 ?>
 
-<h2 style="text-align:center;"><?php echo $batterytypeModel->name; ?></h2> 
+<h2 style="text-align:center;"><?php echo $batterytypeModel->name; ?></h2>
 
 <?php 
 $imageUrl = CHtml::image(Yii::app()->baseUrl.'/css/left.png', 'Previous', array('style'=>'float:left;margin-left:50px;top:130px;position:relative;'));
@@ -33,19 +33,13 @@ foreach($cellDataProviders as $cellDataProvider):
 			'value'=>'$data["id"]',
 		),
 		array(
-			'name'=>'Value',
-			'value'=>'$data["value"]',
-		),
-		array(
 			'header'=>'Cell Serial',
 			'type'=>'raw',
 			'value'=>function($data, $row) use ($controller) {
 				return	CHtml::dropDownList('Battery[Cells]['.$data['id'].']', '', array(),array(
 						'prompt'=>'-N/A-',
 						'class'=>'cell-dropdown',
-						'onchange'=>'cellSelected(this,"'
-								.$controller->createUrl('battery/ajaxavailablecells')
-								.'")',
+						'onchange'=>'cellSelected(this)',
 						'style'=>'width:150px',
 				));
 			},
@@ -60,3 +54,5 @@ foreach($cellDataProviders as $cellDataProvider):
 </div>
 <div class="clear"></div>
 <?php $x+=1; endforeach; ?>
+
+

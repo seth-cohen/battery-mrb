@@ -1,5 +1,29 @@
 var currentPage = 0;
 
+function checkSelection(data){
+	if(data=='hide')
+	{
+		$('.errorSummary').remove();
+	}
+	else
+	{
+		try
+		{
+		   var cells = $.parseJSON(data);
+		   var alertString = cells.length+' cells were put on CAT. Serial numbers: \n';
+		   cells.forEach(function(cell) {
+			   alertString += cell.serial + ' on ' + cell.cycler + '-' + cell.channel + '\n';
+		   });
+		   alert(alertString);
+		}
+		catch(e)
+		{
+			$('#battery-form').prepend(data);
+			console.log(e.message);
+		}
+	}
+}
+
 $(document).ready(function($) {
 	
 	// show the battery type form if there were errors in creating new model
@@ -11,6 +35,14 @@ $(document).ready(function($) {
 	
 	$('#batterytype-link').on('click', function(event) {
 		$('#batterytype-wrapper').show();
+	});
+	
+	$(document).on('focus', '.cell-dropdown', function(event){
+		/* store value and text for use later */
+		var el = $(this);
+		el.data('prevValue', this.value);
+		el.data('prevText', this.options[this.selectedIndex].text);
+		console.log(el.data('prevValue')+'-'+el.data('prevText'));
 	});
 
 	$(document).on('click', '#next-module-link', function(event){
@@ -81,6 +113,15 @@ $(document).ready(function($) {
 		}
 		return false;
 	});
+	
+	jQuery('#submit-button').on('click', function(event) {
+		$('.errorSummary').remove();
+		/* make sure that enough cells were selected */
+		var allSelected = true;
+		$('.cell-dropdown').each(function(index){
+			alert(this.value);
+		});
+	});
 });
 
 function refSelected(sel)
@@ -101,11 +142,12 @@ function typeSelected(sel, urlFormContent, urlCellsAvailable)
 		},
 		success: function(data){
 			currentPage = 0;
-			$('#selection-container').html(data).css('height','600px');
+			$('#selection-container').html(data).css('height','400px');
 			$('#previous-module-link').hide();
 			if (!$('#cellselection-wrapper-'+(currentPage+1)).length){
 				//do nothing
 				$('#next-module-link').hide();
+				$('#cellspares-wrapper').show();
 			}
 
 			// populate the cell serial dropdown
@@ -124,8 +166,9 @@ function typeSelected(sel, urlFormContent, urlCellsAvailable)
 	});
 }
 
-function cellSelected(sel, urlAjaxCellSelected)
+function cellSelected(sel)
 {
+/*	
 	var values = [];
 	var type_id = $('option:selected', '#Battery_batterytype_id').val();
 	
@@ -154,5 +197,23 @@ function cellSelected(sel, urlAjaxCellSelected)
 			});
 		},
 	});
-	
+*/
+	/* remove the selected value from the other dropdowns */
+	console.log('change-' + sel.value);
+	var el = $(sel);
+	var selectedValue = $('option:selected', el).val();
+	if(selectedValue!=''){
+		$('.cell-dropdown').not(el).each(function(index){
+			$('option[value="'+selectedValue+'"]', this).remove();
+		});	
+		console.log('in if');
+	} 
+	if (el.data('prevValue')){
+		/* add previous value back to selects */
+		$('.cell-dropdown').not(el).each(function(index){
+			$(this).append($('<option>', {value : el.data('prevValue')})
+				.text(el.data('prevText')));
+		});	
+		console.log('in elseif');
+	}
 }

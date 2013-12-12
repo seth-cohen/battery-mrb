@@ -111,13 +111,23 @@ class Batterytype extends CActiveRecord
 		return parent::model($className);
 	}
 	
-	public function getCellCount()
+	public function getCellInputArray()
 	{
 		$cellArray = array();
 
 		for($x=1; $x<=$this->num_cells; $x++){
-			$cellArray[] = array('id'=>$x, 'value'=>$x);
+			$cellArray[] = array('id'=>$x);
 		}
 		return $cellArray;
+	}
+	
+	public function getSparesInputArray()
+	{
+		$sparesArray = array();
+
+		for($x=1; $x<=10; $x++){
+			$sparesArray[] = array('id'=>$x);
+		}
+		return $sparesArray;
 	}
 }

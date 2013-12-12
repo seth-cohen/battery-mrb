@@ -34,7 +34,8 @@ class BatteryController extends Controller
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array(
 					'create','update', 
-					'cellselection', 'ajaxtypeselected', 'ajaxavailablecells'
+					'cellselection', 'ajaxselection',
+					'ajaxtypeselected', 'ajaxavailablecells'
 				),
 				'roles'=>array('engineering'),
 				//'users'=>array('@'),
@@ -200,9 +201,16 @@ class BatteryController extends Controller
 			$batterytypeModel->save();
 		}
 		
+		$sparesDataProvider = new CArrayDataProvider($batterytypeModel->getSparesInputArray(), array(
+		    'pagination'=>array(
+		        'pageSize'=>10,
+		    )
+		 ));
+		
 		$this->render('cellselection',array(
 			'batteryModel'=>$batteryModel,
 			'batterytypeModel'=>$batterytypeModel,
+			'sparesDataProvider'=>$sparesDataProvider,
 		));
 	}
 	
@@ -228,19 +236,21 @@ class BatteryController extends Controller
 		$cellDataProviders = array();
 		for($i=0; $i<ceil($batterytypeModel->num_cells/$pageSize); $i++)
 		{
-			$cellDataProviders[] = new CArrayDataProvider($batterytypeModel->getCellCount(), array(
+			$cellDataProviders[] = new CArrayDataProvider($batterytypeModel->getCellInputArray(), array(
 			    'pagination'=>array(
 			        'pageSize'=>$pageSize,
 					'currentPage'=>$i,
 			    )
 			 ));
 		}
+		
 		$this->renderPartial('_selectionform',array(
-			'batterytypeModel'=>$batterytypeModel,
-			'cellDataProviders'=>$cellDataProviders,
+				'batterytypeModel'=>$batterytypeModel,
+				'cellDataProviders'=>$cellDataProviders,
+			),
 			false,
-			true,
-		));
+			true
+		);
 	}
 	
 	/**
@@ -270,10 +280,10 @@ class BatteryController extends Controller
 		$criteria->params = array(':ct_id'=>$batterytype->celltype_id);
 		//$criteria->addcondition('data_accepted=1');
 		
-		if(isset($_GET['values'])){
-			$selectedCells = $_GET['values'];
-			$criteria->addNotInCondition('t.id', $selectedCells);
-		}
+//		if(isset($_GET['values'])){
+//			$selectedCells = $_GET['values'];
+//			$criteria->addNotInCondition('t.id', $selectedCells);
+//		}   <-- not needed moved this to jQuery function
 		
 		$cells = Cell::model()->findAll($criteria);
 		
@@ -282,5 +292,28 @@ class BatteryController extends Controller
 		{
 			echo CHtml::tag('option', array('value'=>$cell->id), CHtml::encode($cell->kit->getFormattedSerial()), true);
 		}
+	}
+	
+	/**
+	 * 
+	 * Returns options for dropdown box of all available cells that have been
+	 * approved by QA of the cell type needed for the battery type_id selected
+	 */
+	public function actionAjaxSelection()
+	{
+		$model=new Battery;
+
+		if(isset($_POST['Battery']))
+		{
+			$model->attributes=$_POST['Battery'];
+			
+			if(!isset($_POST['Battery']['Cells']) ||
+				(count(array_unique($_POST['Battery']['Cells'])) != $model->batterytype->num_cells))
+			{
+				$model->addError('selection_error', 'Not enough cells selected');
+				echo CHtml::errorSummary($model);
+			}
+		}
+		
 	}
 }
