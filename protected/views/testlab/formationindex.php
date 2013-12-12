@@ -62,6 +62,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 			'name'=>'cycler_search',
 			'value'=>'$data->channel->cycler->name." {".$data->channel->number."}"',
 		),
+		'test_start',
 		array(
 			'class'=>'CButtonColumn',
 			'template'=>'{view} {update}',

@@ -150,6 +150,7 @@ class TestAssignment extends CActiveRecord
 		$criteria->addSearchCondition('concat(cyc.name,"-",chan.number)',$this->cycler_search, true);
 		
 		return new KeenActiveDataProvider($this, array(
+			'pagination'=>array('pageSize' => 16),
 			'withKeenLoading'=>array(
 				'cell',
 				'chamber',

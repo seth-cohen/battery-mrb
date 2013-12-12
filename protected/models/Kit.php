@@ -76,7 +76,7 @@ class Kit extends CActiveRecord
 	    {
 	        if($this->hasSerialChanged())
 	        {
-	        	$this->addError( $attribute, "Serial No. already used for this cell type!" );
+	        	$this->addError( $attribute, "Serial No. $this->serial_num already used for this cell type!" );
 	        }	    
 	    }
 	}
