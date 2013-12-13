@@ -41,17 +41,29 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 )); ?>
 </div><!-- search-form -->
 
+<div class="border shadow">
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'battery-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'id',
-		'batterytype_id',
-		'ref_num_id',
+		array(
+			'name'=>'batterytype_search',
+			'value'=>'$data->batterytype->name',
+		),
+		array(
+			'name'=>'refnum_search',
+			'value'=>'$data->refNum->number',
+		),
+		array(
+			'name'=>'serial_num',
+			'value'=>'"SN: ".$data->serial_num',
+		),
 		'eap_num',
-		'serial_num',
-		'assembler_id',
+		array(
+			'name'=>'assembler_search',
+			'value'=>'$data->assembler->getFullName()',
+		),
 		/*
 		'assembly_date',
 		'ship_date',
@@ -61,4 +73,39 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 			'class'=>'CButtonColumn',
 		),
 	),
+	'selectionChanged'=>'batterySelected',
+	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
+	'pager'=>array(
+		'cssFile' => false,
+	),
 )); ?>
+</div>
+
+<div id="battery-details" class="shadow border" style="display:none"></div>
+
+<script type="text/javascript">
+	function batterySelected(target_id){
+		var battery_id;
+		battery_id = $.fn.yiiGridView.getSelection(target_id);		
+
+		$.ajax({
+			type:'get',
+    		url: '<?php echo $this->createUrl('battery/ajaxgetbatterycells'); ?>',
+    		data:
+    		{
+    			id: battery_id.toString(),
+    		},
+    		success: function(data){
+        		if(data == 'hide')
+        		{
+        			$('#battery-details').hide();
+        		}
+        		else
+        		{
+        			$('#battery-details').show();
+            		$('#battery-details').html(data);
+        		}
+    		},
+    	});
+	}
+</script>

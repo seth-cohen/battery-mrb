@@ -35,14 +35,15 @@ class BatteryController extends Controller
 				'actions'=>array(
 					'create','update', 
 					'cellselection', 'ajaxselection',
-					'ajaxtypeselected', 'ajaxavailablecells'
+					'ajaxtypeselected', 'ajaxavailablecells',
+					'ajaxgetbatterycells',
 				),
 				'roles'=>array('engineering'),
 				//'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'roles'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -279,6 +280,7 @@ class BatteryController extends Controller
 		$criteria->addcondition('kit.celltype_id=:ct_id');
 		$criteria->params = array(':ct_id'=>$batterytype->celltype_id);
 		//$criteria->addcondition('data_accepted=1');
+		$criteria->addcondition('battery_id IS NULL');
 		
 //		if(isset($_GET['values'])){
 //			$selectedCells = $_GET['values'];
@@ -301,19 +303,75 @@ class BatteryController extends Controller
 	 */
 	public function actionAjaxSelection()
 	{
-		$model=new Battery;
-
+		$batteryModel=new Battery;
+		$cells = array();
+		$spares = array();
+		
 		if(isset($_POST['Battery']))
 		{
-			$model->attributes=$_POST['Battery'];
-			
+			/* make sure that cells were selected for the battery */	
 			if(!isset($_POST['Battery']['Cells']) ||
-				(count(array_unique($_POST['Battery']['Cells'])) != $model->batterytype->num_cells))
+				(count(array_unique($_POST['Battery']['Cells'])) != $_POST['num_cells']))
 			{
-				$model->addError('selection_error', 'Not enough cells selected');
-				echo CHtml::errorSummary($model);
+				$batteryModel->addError('selection_error', 'Not enough cells selected');
+				echo CHtml::errorSummary($batteryModel);
+				Yii::app()->end();
+			}
+			else 
+			{
+				$cells = $_POST['Battery']['Cells'];
+			}
+			if(isset($_POST['Battery']['Spares']))
+			{
+				$spares = $_POST['Battery']['Spares'];
+			}
+			
+			$batteryModel->attributes=$_POST['Battery'];
+			
+			$result = Battery::batteryCellSelection($batteryModel, $cells, $spares);
+			
+			if (!json_decode($result))
+			{ /* the save failed otherwise result would be json_encoded*/
+				echo $result;
+			} 
+			else 
+			{ /* success so show count and serial numbers */
+				echo $result;
 			}
 		}
-		
+	}
+	
+	/**
+	 * Performs the AJAX update of the battery-detail view on the index page.
+	 * @param integer $id of the battery to get the cells for
+	 */
+	public function actionAjaxGetBatteryCells($id=null)
+	{	
+		/* load cell detail information */
+		if($id == null)
+		{
+			echo 'hide';
+		}
+		else
+		{
+			$model = $this->loadModel($id);
+			
+			$cellDataProvider= new CArrayDataProvider($model->getBatteryCells(), array(
+			    'pagination'=>array(
+			        'pageSize'=>16,
+			    ),
+			    'sort'=>array(
+			    	'defaultOrder'=>'position',
+			    ),
+			 ));
+			
+			$this->renderPartial('_batterycells', array(
+					'model'=>$model,
+					'cellDataProvider'=>$cellDataProvider,
+				), 
+				false, 
+				false
+			);
+		}
 	}
 }

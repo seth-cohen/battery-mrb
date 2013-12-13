@@ -80,8 +80,9 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/cells
 											.'","'
 											.$this->createUrl('battery/ajaxavailablecells')
 											.'")',
-									'style'=>'width:152px'
-								)); ?>
+									'style'=>'width:152px',
+									'options'=>Batterytype::getIdPartNums(),
+								)); ?> <span id='part-num' style='margin-left:5px;'></span>
 	        <?php echo $form->error($batteryModel,'batterytype_id'); ?>
 	    </div>
 	</div>
@@ -111,7 +112,7 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/cells
 <div id="selection-container" style="overflow-x:hidden; position:relative;margin-top: 12px;"></div>
 
 
-<div class="shadow border" id="cellspares-wrapper" style="display:none;"> 
+<div class="shadow border" id="cellspares-wrapper" style="display:none; margin:auto; width:70%;"> 
 <div style="text-align:center; width:100%; font-size:1.2em;">SPARES</div>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>"cellspares-grid",
@@ -126,7 +127,7 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/cells
 			'header'=>'Cell Serial',
 			'type'=>'raw',
 			'value'=>function($data, $row) {
-				return	CHtml::dropDownList('Battery[Spares][serials]['.$data['id'].']', '', array(),array(
+				return	CHtml::dropDownList('Battery[Spares]['.$data['id'].'][id]', '', array(),array(
 						'prompt'=>'-N/A-',
 						'class'=>'cell-dropdown spares',
 						'onchange'=>'cellSelected(this)',
@@ -138,7 +139,9 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/cells
 			'header'=>'For Module',
 			'type'=>'raw',
 			'value'=>function($data, $row) {
-				return	CHtml::textField('Battery[Spares][modules]['.$data['id'].']', '');
+				return	CHtml::textField('Battery[Spares]['.$data['id'].'][module]', '', array(
+						'style'=>'width:75px;',
+				));
 			},
 		),
 	),
@@ -152,5 +155,5 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/cells
 <?php $this->endWidget(); ?>
 
 <script type="text/javascript">
-
+	urlSuccess = ' <?php echo $this->createUrl('battery/index') ?> ';
 </script>

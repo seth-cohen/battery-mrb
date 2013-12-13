@@ -24,6 +24,12 @@ class Battery extends CActiveRecord
 {
 	
 	public $refnum_search;
+	public $batterytype_search;
+	public $assembler_search;
+	
+	public $previousSerialNum = null;
+	public $previousBatteryType = null;
+	
 	/**
 	 * @return string the associated database table name
 	 */
@@ -40,19 +46,34 @@ class Battery extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('serial_num, batterytype_id', 'required'),
+			array('serial_num, batterytype_id, location', 'required'),
+			array('serial_num', 'checkUniqueInType'),
+			
 			array('batterytype_id, ref_num_id, assembler_id', 'length', 'max'=>10),
 			array('eap_num, serial_num, location', 'length', 'max'=>50),
 			array('assembly_date, ship_date', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, batterytype_id, ref_num_id, eap_num, serial_num, assembler_id, 
-					assembly_date, ship_date, location, refnum_search' , 
+					assembly_date, ship_date, location, refnum_search,
+					batterytype_search, assembler_search' , 
 					'safe', 'on'=>'search'
 			),
 		);
 	}
 
+	public function checkUniqueInType($attribute,$params) 
+	{
+	    if(Battery::model()->count('batterytype_id=:batterytype_id AND serial_num=:serial_num',
+	        array(':batterytype_id'=>$this->batterytype_id,':serial_num'=>$this->serial_num)) > 0) 
+	    {
+	        if($this->hasSerialChanged())
+	        {
+	        	$this->addError( $attribute, "Serial No. $this->serial_num already used for this battery type!" );
+	        }	    
+	    }
+	}
+	
 	/**
 	 * @return array relational rules.
 	 */
@@ -84,7 +105,9 @@ class Battery extends CActiveRecord
 			'ship_date' => 'Ship Date',
 			'location' => 'Location',
 		
-			'refnum_search' => 'Reference No. Filter',
+			'refnum_search' => 'Ref No.',
+			'batterytype_search' =>'Battery Type' ,
+			'assembler_search' =>'Assembler',
 		);
 	}
 
@@ -106,6 +129,14 @@ class Battery extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
+		$criteria->with = array(
+						'refNum'=>array('alias'=>'ref'),
+						'batterytype'=>array('alias'=>'type'),
+						'assembler'=>array('alias'=>'ass'), 
+		); // needed for alias of search parameter tables
+		
+		$criteria->together = true;
+		
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('batterytype_id',$this->batterytype_id,true);
 		$criteria->compare('ref_num_id',$this->ref_num_id,true);
@@ -115,9 +146,50 @@ class Battery extends CActiveRecord
 		$criteria->compare('assembly_date',$this->assembly_date,true);
 		$criteria->compare('ship_date',$this->ship_date,true);
 		$criteria->compare('location',$this->location,true);
+		
+		$criteria->compare('type.name',$this->batterytype_search, true);
+		
+		/* for concatenated user name search */
+		$criteria->addSearchCondition('concat(ass.first_name, " ", ass.last_name)', $this->assembler_search);
 
-		return new CActiveDataProvider($this, array(
+		if($this->refnum_search)
+		{
+			$references = explode(',', str_replace(' ', ',', $this->refnum_search));
+			
+			$refCriteria = new CDbCriteria();
+			foreach ($references as $reference)
+			{
+				if(!empty($reference))
+				{
+					$refCriteria->compare('ref.number', $reference, true, 'OR');
+				}
+			}
+			$criteria->mergeWith($refCriteria);
+		}
+		
+		return new KeenActiveDataProvider($this, array(
+			'withKeenLoading' => array(
+				array('refNum'),
+			),
+			'pagination'=>array('pageSize' => 16),
 			'criteria'=>$criteria,
+			'sort'=>array(
+				'attributes'=>array(
+					'refnum_search'=>array(
+						'asc'=>'ref.number',
+						'desc'=>'ref.number DESC',
+					),
+					'batterytype_search'=>array(
+						'asc'=>'type.name',
+						'desc'=>'type.name DESC',
+					),
+					'assembler_search'=>array(
+						'asc'=>'CONCAT(ass.first_name, " ", ass.last_name)',
+						'desc'=>'CONCAT(ass.first_name, " ", ass.last_name) DESC',
+					),
+					'*',		// all others treated normally
+				),
+			),
 		));
 	}
 
@@ -131,4 +203,120 @@ class Battery extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+	
+	/**
+	 * 
+	 */
+	public function afterFind()
+	{
+		$this->previousSerialNum = $this->serial_num;
+		$this->previousBatteryType = $this->batterytype_id;;
+		
+		return parent::afterFind();
+		
+	}
+	
+	public function hasSerialChanged()
+	{
+		if($this->previousBatteryType == null || $this->previousSerialNum == null)
+		{	/* this is a new record and serial number must be validated */
+			return true;
+		}
+		else
+		{ 	/* if either have changed must validate */
+			return ($this->previousCellType !== $this->celltype_id || $this->previousSerialNum !== $this->serial_num);
+			
+		}
+	}
+	
+	/**
+	 * 
+	 * Return an associative array for an arraydataprovider that contains the cell id and serial number
+	 */
+	public function getBatteryCells()
+	{
+		$result = array();
+		
+		foreach($this->cells as $cell)
+		{
+			 $result[] = array(
+			 	'id' =>$cell->id,
+			 	'position'=>$cell->battery_position,
+			 	'serial' => $cell->kit->getFormattedSerial(),
+			);
+		}
+		
+		return $result;
+	}
+	
+	/**
+	 * 
+	 * Creates new battery and associates designated cells from the cell selection...
+	 * to default states 
+	 * 
+	 * @param Battery $batteryModel
+	 * @param Array $cells
+	 * @param Array $spares
+	 */
+	public static function batteryCellSelection($batteryModel, $cells=array(), $spares=array())
+	{
+		if(empty($batteryModel) || empty($cells))
+			return;
+		
+		$batteryModel->location = '[EAP] Cell Selection';
+		$result = array();
+		
+		if($batteryModel->save())
+		{
+			$battery_id = $batteryModel->id;
+			
+			/* assign the cells to the battery and set the location to be on EAP */
+			if(!empty($cells))
+			{
+				foreach($cells as $position=>$cell)
+				{
+					$cellModel = Cell::model()->findByPk($cell);
+					$cellModel->battery_id = $battery_id;
+					$cellModel->location = '[EAP] '.$batteryModel->batterytype->name
+												.'- SN: '.$batteryModel->serial_num;
+					$cellModel->battery_position = $position;
+					
+					$cellModel->save();
+				}
+			}
+			/* assign the spares to the battery and set the location to be on EAP-spare */
+			$spareCount = 0;
+			if(!empty($spares))
+			{
+				foreach($spares as $position=>$spare)
+				{
+					if($spare['id'])
+					{
+						$spareCount += 1;
+						$cellModel = Cell::model()->findByPk($spare['id']);
+						$cellModel->battery_id = $battery_id;
+						$cellModel->location = '[EAP-Spare] '.$batteryModel->batterytype->name
+													.'- SN: '.$batteryModel->serial_num;
+						$cellModel->battery_position = $position+1000;
+						
+						$cellModel->save();
+					}
+				}
+			}
+			$result = array(
+				'batterytype' => $batteryModel->batterytype->name,
+				'serial_num' => $batteryModel->serial_num,
+				'num_spares' => $spareCount,
+			);
+			return json_encode($result);
+		}
+		else
+		{
+			return CHtml::errorSummary($batteryModel);
+		}
+		
+		return null;
+		
+	}
+	
 }

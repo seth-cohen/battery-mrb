@@ -130,4 +130,21 @@ class Batterytype extends CActiveRecord
 		}
 		return $sparesArray;
 	}
+	
+	public static function getIdPartNums()
+	{
+		$partNums = array();
+
+		$types = Batterytype::model()->findAll();
+		
+		if($types != null)
+		{
+			foreach($types as $type)
+			{
+				$partNums[$type->id] = array('data-partnum'=>$type->part_num);
+			}
+		}
+			
+		return $partNums;
+	}
 }

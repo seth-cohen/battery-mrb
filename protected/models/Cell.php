@@ -23,6 +23,7 @@
  * @property string $location
  * @property integer $data_accepted
  * @property string $battery_id
+ * @property string $battery_position
  *
  * The followings are the available model relations:
  * @property Battery $battery

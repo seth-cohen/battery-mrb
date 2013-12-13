@@ -610,6 +610,22 @@ class CellController extends Controller
 		if(isset($_GET['Cell']))
 			$model->attributes=$_GET['Cell'];
 			
+		$this->widget('application.extensions.EExcelView', array( 
+            'dataProvider'=> $model->search(), 
+            'grid_mode'=>'export', 
+            'exportType'=>'Excel2007', 
+            'filename'=>'report', 
+		));
+	}
+
+	public function actionDownloadListOG()
+	{
+		$model=new Cell('search');
+		$model->unsetAttributes();  // clear any default values
+		
+		if(isset($_GET['Cell']))
+			$model->attributes=$_GET['Cell'];
+			
 		$data = array();
 		$dataProvider = $model->search();
 		$dataProvider->setPagination(false);

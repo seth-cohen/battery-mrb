@@ -8,6 +8,8 @@ $controller = $this;
 
 <h2 style="text-align:center;"><?php echo $batterytypeModel->name; ?></h2>
 
+<?php echo CHtml::hiddenField("num_cells",$batterytypeModel->num_cells); ?>
+
 <?php 
 $imageUrl = CHtml::image(Yii::app()->baseUrl.'/css/left.png', 'Previous', array('style'=>'float:left;margin-left:50px;top:130px;position:relative;'));
 echo CHtml::link($imageUrl,'#',array('id'=>'previous-module-link' )); 

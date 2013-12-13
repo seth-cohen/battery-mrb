@@ -1,5 +1,6 @@
 var currentPage = 0;
 var numCells = 99999;
+var urlSuccess = '';
 
 function checkSelection(data){
 	if(data=='hide')
@@ -10,12 +11,14 @@ function checkSelection(data){
 	{
 		try
 		{
-		   var cells = $.parseJSON(data);
-		   var alertString = cells.length+' cells were put on CAT. Serial numbers: \n';
-		   cells.forEach(function(cell) {
-			   alertString += cell.serial + ' on ' + cell.cycler + '-' + cell.channel + '\n';
-		   });
-		   alert(alertString);
+		   var batteryResult = $.parseJSON(data);
+		   var alertString = 'You selected cells for ' + batteryResult.batterytype + ' SN: ' + batteryResult.serial_num;
+		   alertString += '\n' + batteryResult.num_spares + ' spares were selected.\n\nWould you like to select another battery?';
+		   if(confirm(alertString)==false){
+				window.location  = urlSuccess;
+			} else {
+				 window.location.reload();
+			}
 		}
 		catch(e)
 		{
@@ -38,14 +41,16 @@ $(document).ready(function($) {
 		$('#batterytype-wrapper').show();
 	});
 	
+/*	
 	$(document).on('focus', '.cell-dropdown', function(event){
-		/* store value and text for use later */
+		// store value and text for use later 
 		var el = $(this);
 		el.data('prevValue', this.value);
 		el.data('prevText', this.options[this.selectedIndex].text);
 		console.log(el.data('prevValue')+'-'+el.data('prevText'));
 	});
-
+*/
+	
 	$(document).on('click', '#next-module-link', function(event){
 		if (!$('#cellselection-wrapper-'+(currentPage+1)).length){
 			//do nothing
@@ -119,15 +124,29 @@ $(document).ready(function($) {
 		$('.errorSummary').remove();
 		/* make sure that enough cells were selected */
 		var allSelected = true;
+		var sparesSelected = false;
+		
 		$('.cell-dropdown.cells ').each(function(index){
 			if( !(this.value > 0) ){
 				allSelected = false;
+			}
+		});
+		$('.cell-dropdown.spares ').each(function(index){
+			if( (this.value > 0) ){
+				sparesSelected = true;
 			}
 		});
 		if (allSelected == false){
 			alert('You have not selected enough cells');
 			return false;
 		}
+		if (sparesSelected == false){
+			var confirmString = 'You have not selected any spare cells.  Do you still want to continue?';
+			if (confirm(confirmString)==false){
+				return false;
+			}
+		}
+		
 	});
 });
 
@@ -140,6 +159,10 @@ function refSelected(sel)
 function typeSelected(sel, urlFormContent, urlCellsAvailable)
 {
 	var type_id = $('option:selected', $(sel)).val();
+	var partNum = $('option:selected', $(sel)).data('partnum');
+	
+	$('#part-num').text('('+partNum+')');
+	
 	$.ajax({
 		type:'get',
 		url: urlFormContent,
@@ -207,14 +230,12 @@ function cellSelected(sel)
 	});
 */
 	/* remove the selected value from the other dropdowns */
-	console.log('change-' + sel.value);
 	var el = $(sel);
 	var selectedValue = $('option:selected', el).val();
 	if(selectedValue!=''){
 		$('.cell-dropdown').not(el).each(function(index){
 			$('option[value="'+selectedValue+'"]', this).remove();
 		});	
-		console.log('in if');
 	} 
 	if (el.data('prevValue')){
 		/* add previous value back to selects */
@@ -222,6 +243,7 @@ function cellSelected(sel)
 			$(this).append($('<option>', {value : el.data('prevValue')})
 				.text(el.data('prevText')));
 		});	
-		console.log('in elseif');
 	}
+	el.data('prevValue', sel.value);
+	el.data('prevText', sel.options[sel.selectedIndex].text);
 }
