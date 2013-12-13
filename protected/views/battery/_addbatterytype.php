@@ -69,6 +69,7 @@
 <script type="text/javascript">
 	$('#batterytype-hide-link').on('click', function(event) {
 		$('#batterytype-wrapper').hide();
+		return false;
 	});
 </script>
 	

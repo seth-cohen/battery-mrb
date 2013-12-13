@@ -128,7 +128,7 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/cells
 			'value'=>function($data, $row) {
 				return	CHtml::dropDownList('Battery[Spares][serials]['.$data['id'].']', '', array(),array(
 						'prompt'=>'-N/A-',
-						'class'=>'cell-dropdown',
+						'class'=>'cell-dropdown spares',
 						'onchange'=>'cellSelected(this)',
 						'style'=>'width:150px',
 				));

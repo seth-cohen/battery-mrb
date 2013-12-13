@@ -26,6 +26,7 @@ foreach($cellDataProviders as $cellDataProvider):
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>"cellselection-grid-$x",
 	'template'=>'{summary}{items}',
+	'summaryText'=>'Choose Cells {start}-{end} of the {count} total',
 	'dataProvider'=>$cellDataProvider,
 	'columns'=>array(
 		array(
@@ -38,7 +39,7 @@ foreach($cellDataProviders as $cellDataProvider):
 			'value'=>function($data, $row) use ($controller) {
 				return	CHtml::dropDownList('Battery[Cells]['.$data['id'].']', '', array(),array(
 						'prompt'=>'-N/A-',
-						'class'=>'cell-dropdown',
+						'class'=>'cell-dropdown cells',
 						'onchange'=>'cellSelected(this)',
 						'style'=>'width:150px',
 				));

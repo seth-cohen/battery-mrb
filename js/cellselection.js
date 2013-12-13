@@ -1,4 +1,5 @@
 var currentPage = 0;
+var numCells = 99999;
 
 function checkSelection(data){
 	if(data=='hide')
@@ -118,9 +119,15 @@ $(document).ready(function($) {
 		$('.errorSummary').remove();
 		/* make sure that enough cells were selected */
 		var allSelected = true;
-		$('.cell-dropdown').each(function(index){
-			alert(this.value);
+		$('.cell-dropdown.cells ').each(function(index){
+			if( !(this.value > 0) ){
+				allSelected = false;
+			}
 		});
+		if (allSelected == false){
+			alert('You have not selected enough cells');
+			return false;
+		}
 	});
 });
 
@@ -143,11 +150,12 @@ function typeSelected(sel, urlFormContent, urlCellsAvailable)
 		success: function(data){
 			currentPage = 0;
 			$('#selection-container').html(data).css('height','400px');
+			
+			$('#cellspares-wrapper').show();
 			$('#previous-module-link').hide();
 			if (!$('#cellselection-wrapper-'+(currentPage+1)).length){
 				//do nothing
 				$('#next-module-link').hide();
-				$('#cellspares-wrapper').show();
 			}
 
 			// populate the cell serial dropdown
