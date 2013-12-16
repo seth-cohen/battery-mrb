@@ -29,6 +29,8 @@ Yii::app()->clientScript->registerCssFile(
 ?>
 
 <h1>Change Channel Assignment</h1>
+<p>*All active test assignments will be visible. If the channel is bad also check the "Mark Bad" check box for that row
+	and the channel will be set to out of commission. Once channel is repaired it can be set in the channels index. </p>
 
 <?php $form=$this->beginWidget('CActiveForm', array(
     'enableAjaxValidation'=>true,
@@ -36,8 +38,7 @@ Yii::app()->clientScript->registerCssFile(
 	'id'=>'channelassignment-form',
 )); ?>
 
-<?php echo $form->errorSummary($model); ?>
-
+<?php echo CHtml::checkBox('singleUser', true)?><span style="margin-left:5px">Assign to Single User</span>
 
 <div class="shadow border" >
 <?php $this->widget('zii.widgets.grid.CGridView', array(
@@ -178,14 +179,17 @@ jQuery(function($) {
 		cycSelected(this);
 	});
 
-	jQuery('.ui-autocomplete-input').on('keydown', function(event) {
+	jQuery(document).on('keydown', '.autocomplete-user-input', function(event) {
 		$(this).autocomplete({
 			'select': function(event, ui){
-				
-				var id = event.target.id.toString().replace("names","ids");
-				$('.user-id-input').attr("value", ui.item.id);
-				$('.ui-autocomplete-input').val(ui.item.value);
-				$('.ui-autocomplete-input').val(ui.item.value);
+				//if single user checkbox set all inputs to selected user
+				if ($('#singleUser').prop('checked')){
+					$('.user-id-input').attr("value", ui.item.id);
+					$('.autocomplete-user-input').val(ui.item.value);
+				}else{
+					var id = event.target.id.toString().replace("names","ids");
+					$("#"+id).attr("value", ui.item.id);
+				}
 			},
 			'source':'/ytpdb/user/ajaxUserSearch'
 		});

@@ -1,5 +1,5 @@
 <?php
-/* @var $this CellController */
+/* @var $this TestlabController */
 /* @var $model Cell */
 
 $this->breadcrumbs=array(
@@ -20,6 +20,8 @@ $this->menu=array(
 <h1>Put Cells on Formation</h1>
 <p>
 *Only cells filled yesterday or today will be listed.
+If the cell you are looking for is currently on test please use the 
+<?php echo CHtml::link('Change Test Assignment', array('changechannelassignment')); ?> action.
 </p>
 <?php
 /* ionclude JQuery scripts to allow for autocomplte */
@@ -40,7 +42,7 @@ Yii::app()->clientScript->registerCssFile(
 	'id'=>'formation-form',
 )); ?>
 
-<?php echo $form->errorSummary($model); ?>
+<?php echo CHtml::checkBox('singleUser', true)?><span style="margin-left:5px">Assign to Single User</span>
 
 <?php 
 $cyclerList = Cycler::forList();
@@ -87,6 +89,7 @@ $chamberList = Chamber::forList();
 			'value'=>'CHtml::dropDownList("channels[$data->id]", "", array(),array(
 						"prompt"=>"-N/A-",
 						"class"=>"channel-dropdown",
+						"onChange"=>"chanSelected(this)",
 			))',
 		),
 		array(
@@ -157,14 +160,17 @@ function reloadGrid(data) {
 <script type="text/javascript">
 
 jQuery(function($) {
-	jQuery('.ui-autocomplete-input').on('keydown', function(event) {
+	jQuery(document).on('keydown', '.autocomplete-user-input', function(event) {
 		$(this).autocomplete({
 			'select': function(event, ui){
-				
-				var id = event.target.id.toString().replace("names","ids");
-				$('.user-id-input').attr("value", ui.item.id);
-				$('.ui-autocomplete-input').val(ui.item.value);
-				$('.ui-autocomplete-input').val(ui.item.value);
+				//if single user checkbox set all inputs to selected user
+				if ($('#singleUser').prop('checked')){
+					$('.user-id-input').attr("value", ui.item.id);
+					$('.autocomplete-user-input').val(ui.item.value);
+				}else{
+					var id = event.target.id.toString().replace("names","ids");
+					$("#"+id).attr("value", ui.item.id);
+				}
 			},
 			'source':'/ytpdb/user/ajaxUserSearch'
 		});
@@ -213,4 +219,24 @@ function cycSelected(sel)
 	});
 }
 
+function chanSelected(sel)
+{
+	/* remove the selected value from the other dropdowns */
+	var el = $(sel);
+	var selectedValue = $('option:selected', el).val();
+	if(selectedValue!=''){
+		$('.channel-dropdown').not(el).each(function(index){
+			$('option[value="'+selectedValue+'"]', this).remove();
+		});	
+	} 
+	if (el.data('prevValue')){
+		/* add previous value back to selects */
+		$('.channel-dropdown').not(el).each(function(index){
+			$(this).append($('<option>', {value : el.data('prevValue')})
+				.text(el.data('prevText')));
+		});	
+	}
+	el.data('prevValue', sel.value);
+	el.data('prevText', sel.options[sel.selectedIndex].text);
+}
 </script>

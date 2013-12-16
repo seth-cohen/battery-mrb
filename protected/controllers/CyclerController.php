@@ -211,7 +211,7 @@ class CyclerController extends Controller
 			'channels'=>array('condition'=>'in_use=0 AND in_commission=1')
 		))->findByPk($id);
 		
-		//echo "<option value=''>-Select Channel-</option>";
+		echo CHtml::tag('option', array('value'=>''), '-N/A-', true);
 		foreach($cycler->channels as $channel)
 		{
 			echo CHtml::tag('option', array('value'=>$channel->id), CHtml::encode($channel->number), true);

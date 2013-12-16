@@ -95,7 +95,7 @@ class Celltype extends CActiveRecord
 		return parent::model($className);
 	}
 	
-/*
+	/*
 	 * REturns one dimensional array to use to populate dropdown list for filtering
 	 * @return 1-D array of id=>name
 	 */

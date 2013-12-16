@@ -81,6 +81,7 @@ class Cell extends CActiveRecord
 			array('laserweld_date, laserwelder_id', 'required', 'on'=>'laser'),
 			array('fill_date, filler_id, wet_wt, dry_wt', 'required', 'on'=>'fill'),
 			array('portweld_date, portwelder_id', 'required', 'on'=>'tipoff'),
+			array('data_accepted', 'required', 'on'=>'accept'),
 			
 			array('eap_num', 'checkEAP'),
 			array('dry_wt, wet_wt', 'numerical'),
@@ -90,7 +91,8 @@ class Cell extends CActiveRecord
 			// @todo Please remove those attributes that should not be searched.
 			array('eap_num, stack_date, dry_wt, wet_wt, fill_date, inspection_date, serial_search, celltype_search, 
 					refnum_search, stacker_search, filler_search, inspector_search, laserwelder_search, portwelder_search,
-					location, not_formed, formed_only, inspector_id, laserwelder_id, portwelder_id, anode_search, cathode_search', 
+					location, not_formed, formed_only, inspector_id, laserwelder_id, portwelder_id, anode_search, cathode_search,
+					battery_id', 
 					'safe', 'on'=>'search'),
 		);
 	}
@@ -280,7 +282,7 @@ class Cell extends CActiveRecord
 		}	
 		
 		/* for concatenated user name search */
-		$criteria->addSearchCondition('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
+		$criteria->compare('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
 		$criteria->addSearchCondition('concat(stack.first_name, " ", stack.last_name)', $this->stacker_search);
 		$criteria->addSearchCondition('concat(fill.first_name, " ", fill.last_name)', $this->filler_search);
 		$criteria->addSearchCondition('concat(insp.first_name, " ", insp.last_name)', $this->inspector_search);
@@ -532,6 +534,158 @@ class Cell extends CActiveRecord
 											GROUP BY t.id)');
 		
 		//$criteria->addcondition('t.location LIKE "[FORM]%"');
+		
+		$criteria->addSearchCondition('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
+		
+		return new KeenActiveDataProvider($this, array(
+			'pagination'=>array('pageSize' => 16),
+			'criteria'=>$criteria,
+			'withKeenLoading' => array(
+				'kit'=>array('select'=>array('celltype','serial_num')),
+				'testAssignments'=>array('alias'=>'test'),
+			),
+			'sort'=>array(
+				'attributes'=>array(
+					'refnum_search'=>array(
+						'asc'=>'ref.number',
+						'desc'=>'ref.number DESC',
+					),
+					'serial_search'=>array(
+						'asc'=>"CONCAT(celltype.name, serial_num)",
+						'desc'=>"CONCAT(celltype.name, serial_num) DESC",
+					),
+					'*',		// all others treated normally
+				),
+			),
+		));
+	}
+	
+	public function searchCATComplete()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->select = 'id, eap_num';
+		$criteria->with = array(
+						'kit'=>array(
+							'select'=>array('id','serial_num'),
+							'with'=>array(
+								'celltype',
+								'anodes'=>array('select'=>'id'), 
+								'cathodes'=>array('select'=>'id'),
+							),
+						), 
+						'refNum'=>array('alias'=>'ref'),
+						'testAssignments'=>array('alias'=>'test', 'select'=>'is_active, id'),
+		); // needed for alias of search parameter tables
+
+		$criteria->together = true;
+		
+		if($this->refnum_search)
+		{
+			$references = explode(',', str_replace(' ', ',', $this->refnum_search));
+			
+			$refCriteria = new CDbCriteria();
+			foreach ($references as $reference)
+			{
+				if(!empty($reference))
+				{
+					$refCriteria->compare('ref.number', $reference, true, 'OR');
+				}
+			}
+			$criteria->mergeWith($refCriteria);
+		}
+		
+		/* all cells that have  CAT testing that is completed*/
+		$criteria->addCondition('EXISTS (SELECT test.id, test.is_active
+											FROM tbl_test_assignment test
+											WHERE t.id = test.cell_id
+											AND test.is_formation = 0
+											AND test.is_active = 0
+											GROUP BY t.id)');
+		
+		/* but are not currently on CAT*/
+		$criteria->addCondition('NOT EXISTS (SELECT test.id, test.is_active
+											FROM tbl_test_assignment test
+											WHERE t.id = test.cell_id
+											AND test.is_active = 1
+											GROUP BY t.id)');
+		
+		//$criteria->addcondition('t.location LIKE "[FORM]%"');
+		
+		$criteria->addSearchCondition('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
+		
+		return new KeenActiveDataProvider($this, array(
+			'pagination'=>array('pageSize' => 16),
+			'criteria'=>$criteria,
+			'withKeenLoading' => array(
+				'kit'=>array('select'=>array('celltype','serial_num')),
+				'testAssignments'=>array('alias'=>'test'),
+			),
+			'sort'=>array(
+				'attributes'=>array(
+					'refnum_search'=>array(
+						'asc'=>'ref.number',
+						'desc'=>'ref.number DESC',
+					),
+					'serial_search'=>array(
+						'asc'=>"CONCAT(celltype.name, serial_num)",
+						'desc'=>"CONCAT(celltype.name, serial_num) DESC",
+					),
+					'*',		// all others treated normally
+				),
+			),
+		));
+	}
+	
+	public function searchForStorage()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->select = 'id, eap_num';
+		$criteria->with = array(
+						'kit'=>array(
+							'select'=>array('id','serial_num'),
+							'with'=>array(
+								'celltype',
+								'anodes'=>array('select'=>'id'), 
+								'cathodes'=>array('select'=>'id'),
+							),
+						), 
+						'refNum'=>array('alias'=>'ref'),
+						'testAssignments'=>array('alias'=>'test', 'select'=>'is_active, id'),
+		); // needed for alias of search parameter tables
+
+		$criteria->together = true;
+		
+		if($this->refnum_search)
+		{
+			$references = explode(',', str_replace(' ', ',', $this->refnum_search));
+			
+			$refCriteria = new CDbCriteria();
+			foreach ($references as $reference)
+			{
+				if(!empty($reference))
+				{
+					$refCriteria->compare('ref.number', $reference, true, 'OR');
+				}
+			}
+			$criteria->mergeWith($refCriteria);
+		}
+		
+		/* cell not selected for a battery yet */
+		$criteria->addCondition('battery_id is null');
+		
+		/* or, if selected the battery hasn't been built yet */
+		$criteria->addCondition('EXISTS (SELECT batt.id, batt.assembler_id
+											FROM tbl_battery batt
+											WHERE t.battery_id = batt.id
+											AND batt.assembler_id = 1
+											GROUP BY t.id)', 'OR');
+		
 		
 		$criteria->addSearchCondition('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
 		
@@ -835,6 +989,59 @@ class Cell extends CActiveRecord
 		return null;
 	}
 	
+	/**
+	 * saves cell records and updates as data accepted
+	 * This function is different than the other mmulti save functions in that the
+	 * parameter passed is not an associative array containing actual Cell objects
+	 * it is an array of cell_ids to be updated.
+	 * 
+	 * @param array $acceptedCells
+	 */
+	public static function acceptData(array $acceptedCells)
+	{
+		$error = 0;
+		$models = array();
+
+		/* oops, we were passed bad data */
+		if(empty($acceptedCells))
+			return;
+			
+		foreach($acceptedCells as $cell_idl)
+		{
+			$model = Cell::model()->findByPk($cell_id);
+			$model->scenario = 'accept';
+					 
+			$model->data_accepted = 1;
+				
+			if(!$model->validate())
+			{
+				$error = 1;
+			}
+			$models[] = $model;	
+		}
+		
+		/* all models validated save them all */
+		if ($error==0)
+		{
+			/* create array to return with JSON */
+			$result = array();
+			foreach($models as $model)
+			{
+				if($model->save())
+				{
+					$result[] = array(
+						'serial'=>$model->kit->getFormattedSerial(), 
+					);
+				}
+			}
+			return json_encode($result);
+		}
+		else /* a model failed, don't save any */
+		{
+			return CHtml::errorSummary($models); 	
+		}			
+		return null;
+	}
 	public static function getColumnList()
 	{
 		$results = array();

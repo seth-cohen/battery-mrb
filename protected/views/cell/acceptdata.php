@@ -1,10 +1,11 @@
 <?php
-/* @var $this TestlabController */
+/* @var $this CellController */
 /* @var $model Cell */
 
 $this->breadcrumbs=array(
-	'Test Lab'=>array('/testlab'),
-	'Cell CAT',
+	'Engineering/QA'=>array('/qaeng'),
+	'Cells'=>array('index'),
+	'Accept Data',
 );
 
 $this->menu=array(
@@ -17,11 +18,9 @@ $this->menu=array(
 );
 ?>
 
-<h1>Put Cells on CAT</h1>
+<h1>Accept CAT Data</h1>
 <p>
-*Only cells that have been put on formation and are not currently on test will be listed. 
-If the cell you are looking for is currently on test please use the 
-<?php echo CHtml::link('Change Test Assignment', array('changechannelassignment')); ?> action.
+*Only cells that have completed CAT will be visible.
 </p>
 <?php
 /* ionclude JQuery scripts to allow for autocomplte */
@@ -35,15 +34,15 @@ Yii::app()->clientScript->registerCssFile(
 <?php $form=$this->beginWidget('CActiveForm', array(
     'enableAjaxValidation'=>true,
 	'enableClientValidation'=>true,
-	'id'=>'cat-form',
+	'id'=>'accept-form',
 )); ?>
 
 <?php echo CHtml::checkBox('singleUser', true)?><span style="margin-left:5px">Assign to Single User</span>
 
 <div class="shadow border" >
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'cat-grid',
-	'dataProvider'=>$model->searchFormed(),
+	'id'=>'accept-grid',
+	'dataProvider'=>$model->searchCATComplete(),
 	'filter'=>$model,
 	'columns'=>array(
 		array(
@@ -52,7 +51,7 @@ Yii::app()->clientScript->registerCssFile(
             'selectableRows' => '50',   
         ),
 		array(
-			'header'=>'Formed Cells',
+			'header'=>'Completed Cells',
 			'name'=>'serial_search',
 			'type'=>'raw',
 			'value'=>'$data->kit->getFormattedSerial()',
@@ -64,34 +63,7 @@ Yii::app()->clientScript->registerCssFile(
 			'htmlOptions'=>array('width'=>'60'),
 		),
 		array(
-			'header'=>'Cycler',
-			'type'=>'raw',
-			'value'=>'CHtml::dropDownList("cyclers[$data->id]", "", Cycler::forList(),array(
-						"prompt"=>"-Cycler-",
-						"class"=>"cycler-dropdown",
-						"onChange"=>"cycSelected(this)",
-						"style"=>"width:100px",
-			))',
-		),
-		array(
-			'header'=>'Channel',
-			'type'=>'raw',
-			'value'=>'CHtml::dropDownList("channels[$data->id]", "", array(),array(
-						"prompt"=>"-N/A-",
-						"class"=>"channel-dropdown",
-						"onChange"=>"chanSelected(this)",
-			))',
-		),
-		array(
-			'header'=>'Chamber',
-			'type'=>'raw',
-			'value'=>'CHtml::dropDownList("chambers[$data->id]", "", Chamber::forList(),array(
-						"prompt"=>"-Chamber-",
-						"style"=>"width:100px",
-			))',
-		),
-		array(
-			'header' => 'Operator',
+			'header' => 'Validator',
 			'type' => 'raw',
 			'value' => array($this, 'getUserInputTextField'),
 //			'value'=>'CHtml::textField("user_name[$data->id]",User::getFullNameProper(Yii::app()->user->id),array(
@@ -101,7 +73,7 @@ Yii::app()->clientScript->registerCssFile(
 //			))',
 		),
 		array(
-			'header' => 'CAT Date',
+			'header' => 'Acceptance Date',
 			'type' => 'raw',
 			'value'=>'CHtml::textField("dates[$data->id]",date("Y-m-d",time()),array("style"=>"width:100px;", "class"=>"hasDatePicker"))',	
 		),
@@ -124,23 +96,23 @@ function reloadGrid(data) {
     	try
     	{
     	   var cells = $.parseJSON(data);
-    	   var alertString = cells.length+' cells were put on CAT. Serial numbers: \n';
+    	   var alertString = cells.length+' cells were Accepted. Serial numbers: \n';
     	   cells.forEach(function(cell) {
-    		   alertString += cell.serial + ' on ' + cell.cycler + '-' + cell.channel + '\n';
+    		   alertString += cell.serial +  '\n';
     	   });
     	   alert(alertString);
-    	   $.fn.yiiGridView.update('cat-grid');
+    	   $.fn.yiiGridView.update('accept-grid');
     	}
     	catch(e)
     	{
-    		$('#cat-form').prepend(data);
+    		$('#accept-form').prepend(data);
     		console.log(e.message);
     	}
     }
 }
 </script>
-<?php echo CHtml::ajaxSubmitButton('Filter',array('testlab/cellcat'), array(),array("style"=>"display:none;")); ?>
-<?php echo CHtml::ajaxSubmitButton('Submit',array('testlab/ajaxcat'), array('success'=>'reloadGrid'), array("id"=>"submit-button")); ?>
+<?php echo CHtml::ajaxSubmitButton('Filter',array('cell/multiacceptcatdata'), array(),array("style"=>"display:none;")); ?>
+<?php echo CHtml::ajaxSubmitButton('Submit',array('testlab/ajaxacceptcatdata'), array('success'=>'reloadGrid'), array("id"=>"submit-button")); ?>
 
 <?php $this->endWidget(); ?>
 
@@ -175,7 +147,7 @@ jQuery(function($) {
 
 		if(noneChecked)
 		{
-			alert('You must select at least one cell to put on CAT');
+			alert('You must select at least one cell to accept CAT data');
 			return false;
 		}
 	});
@@ -184,46 +156,4 @@ jQuery(function($) {
 		$(this).datepicker({'showAnim':'slideDown','changeMonth':true,'changeYear':true,'dateFormat':'yy-mm-dd'});
 	});
 });
-
-function cycSelected(sel)
-{
-	var id = sel.id.toString().replace("cyclers","channels");
-	var cycler_id = $('option:selected', $(sel)).attr("value");
-
-	$.ajax({
-		url: '<?php echo $this->createUrl('/cycler/ajaxchannellist'); ?>',
-		type: 'POST',
-		data: 
-		{
-			id: cycler_id,
-		},
-		success: function(data) {
-			$('.cycler-dropdown').val(cycler_id);
-			
-			$('.channel-dropdown').attr('disabled',false);
-			$('.channel-dropdown').html(data);
-		},
-	});	
-}
-
-function chanSelected(sel)
-{
-	/* remove the selected value from the other dropdowns */
-	var el = $(sel);
-	var selectedValue = $('option:selected', el).val();
-	if(selectedValue!=''){
-		$('.channel-dropdown').not(el).each(function(index){
-			$('option[value="'+selectedValue+'"]', this).remove();
-		});	
-	} 
-	if (el.data('prevValue')){
-		/* add previous value back to selects */
-		$('.channel-dropdown').not(el).each(function(index){
-			$(this).append($('<option>', {value : el.data('prevValue')})
-				.text(el.data('prevText')));
-		});	
-	}
-	el.data('prevValue', sel.value);
-	el.data('prevText', sel.options[sel.selectedIndex].text);
-}
 </script>

@@ -31,6 +31,7 @@ class TestlabController extends Controller
 					'cellcat', 'ajaxcat', 
 					'formationindex', 'catindex',
 					'changechannelassignment', 'ajaxchannelreassignment',
+					'storage'
 				),
 				'roles' => array('testlab'),
 				//'users'=>array('@'),
@@ -367,6 +368,30 @@ class TestlabController extends Controller
 	}
 	
 	/**
+	 * This action will allow the operator to move a cell from testassignment to storage
+	 * this will clear the channel and set the testassignment to inactive
+	 */
+	public function actionStorage()
+	{
+		$model=new Cell('search');
+		$model->unsetAttributes();  // clear any default values
+		
+		/* uses Cell->searchForStorage() to find all cells formed with no battery_id
+		 * or with a battery_id but the battery hasn't been built.
+		 */
+		
+		if(isset($_GET['Cell']))
+		{
+			$model->attributes=$_GET['Cell'];
+		}
+				
+		$this->render('storage',array(
+			'model'=>$model,
+		));
+		
+	} 
+	
+	/**
 	 * generates the text fields for the stacker
 	 */
 	protected function getUserInputTextField($data,$row)
@@ -388,7 +413,7 @@ class TestlabController extends Controller
 		
 		$returnString = CHtml::textField("user_names[$data->id]",$userName,array(
 				"style"=>"width:110px;",
-				"class"=>"ui-autocomplete-input",
+				"class"=>"autocomplete-user-input",
 				"autocomplete"=>"off",
 				"disabled"=>$disabled,
 			));

@@ -17,7 +17,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Put Cells on CAT</h1>
+<h1>Move Cells to Storage</h1>
 <p>
 *Only cells that have been put on formation and are not currently on test will be listed. 
 If the cell you are looking for is currently on test please use the 
@@ -43,7 +43,7 @@ Yii::app()->clientScript->registerCssFile(
 <div class="shadow border" >
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'cat-grid',
-	'dataProvider'=>$model->searchFormed(),
+	'dataProvider'=>$model->searchForStorage(),
 	'filter'=>$model,
 	'columns'=>array(
 		array(

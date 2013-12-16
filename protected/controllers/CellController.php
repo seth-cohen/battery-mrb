@@ -38,6 +38,7 @@ class CellController extends Controller
 								'multilasercells', 'ajaxlasercells',
 								'multifillcells', 'ajaxfillcells', 
 								'multitipoffcells', 'ajaxtipoffcells',			
+								'multiacceptcatdata', 'ajaxacceptcatdata',		
 				),
 				'roles' => array('manufacturing'),
 				//'users'=>array('@'),
@@ -530,6 +531,62 @@ class CellController extends Controller
 			}
 			
 			$result = Cell::tipoffCells($cellsTippedoff);
+			
+			if (!json_decode($result))
+			{ /* the save failed otherwise result would be json_encoded*/
+				echo $result;
+			} 
+			else 
+			{ /* success so show count and serial numbers */
+				echo $result;
+			}
+		}
+	}
+	
+/**
+	 * Allows user to weld the fill port on mulitple cells.
+	 */
+	public function actionMultiAcceptCATData()
+	{
+		$model=new Cell('search');
+		$model->unsetAttributes();  // clear any default values
+		
+		/* only cells that have been filled and not port welded can
+		 * be port welded */
+		//$model->portwelder_id = 1;
+		//$model->filler_id = '>1'; 
+		
+		/* uses cell->searchCompletedCAT() to find cells actively on formation */
+		
+		if(isset($_GET['Cell']))
+		{
+			$model->attributes=$_GET['Cell'];
+		}
+				
+		$this->render('acceptdata',array(
+			'model'=>$model,
+		));
+	}
+	
+	/**
+	 * Ajax action to save the model for fill port welded cells.
+	 */
+	public function actionAjaxAcceptCATData()
+	{
+		
+		if(!isset($_POST['autoId']))
+		{
+			echo 'hide';
+			Yii::app()->end();
+		}
+		
+		$acceptedCells = $_POST['autoId'];
+		$userIds = $_POST['user_ids'];
+		$dates = $_POST['dates'];
+		
+		if(count($acceptedCells)>0)
+		{	
+			$result = Cell::acceptData($acceptedCells);
 			
 			if (!json_decode($result))
 			{ /* the save failed otherwise result would be json_encoded*/

@@ -21,8 +21,7 @@ $this->menu=array(
 
 <h1>Fill Port Weld Cells (Multi)</h1>
 
-<p>*Only cells that have been filled and not yet had the fill port welded will be visible.
-	Regardless of whether or not they have been put on formation yet.</p>
+<p>*Only cells that have been filled without having the fill port welded AND actively on formation will be visible.</p>
 <?php
 /* ionclude JQuery scripts to allow for autocomplte */
 Yii::app()->clientScript->registerCoreScript('jquery.ui'); 
