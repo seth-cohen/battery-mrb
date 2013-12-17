@@ -112,7 +112,7 @@ function reloadGrid(data) {
 }
 </script>
 <?php echo CHtml::ajaxSubmitButton('Filter',array('cell/multiacceptcatdata'), array(),array("style"=>"display:none;")); ?>
-<?php echo CHtml::ajaxSubmitButton('Submit',array('testlab/ajaxacceptcatdata'), array('success'=>'reloadGrid'), array("id"=>"submit-button")); ?>
+<?php echo CHtml::ajaxSubmitButton('Submit',array('cell/ajaxacceptcatdata'), array('success'=>'reloadGrid'), array("id"=>"submit-button")); ?>
 
 <?php $this->endWidget(); ?>
 
@@ -139,7 +139,7 @@ jQuery(function($) {
 		var noneChecked = true;
 		$('.errorSummary').remove();
 		
-		$('input[type=checkbox]').each(function () {
+		$('input[name="autoId[]"]').each(function () {
 	        if (this.checked) {
 	            noneChecked = false; 
 	        }

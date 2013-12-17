@@ -19,9 +19,8 @@ $this->menu=array(
 
 <h1>Move Cells to Storage</h1>
 <p>
-*Only cells that have been put on formation and are not currently on test will be listed. 
-If the cell you are looking for is currently on test please use the 
-<?php echo CHtml::link('Change Test Assignment', array('changechannelassignment')); ?> action.
+*All filled cells that have not been put into a battery already will be available in the list
+below to be put into storage.
 </p>
 <?php
 /* ionclude JQuery scripts to allow for autocomplte */
@@ -64,6 +63,11 @@ Yii::app()->clientScript->registerCssFile(
 			'htmlOptions'=>array('width'=>'60'),
 		),
 		array(
+			'name'=>'location',
+			'header' => 'Current Location',
+			'value' =>'$data->location',
+		),
+		array(
 			'header'=>'Storage Location',
 			'type'=>'raw',
 			'value'=>'CHtml::dropDownList("locations[$data->id]", "", StorageLocation::forList(),array(
@@ -77,11 +81,11 @@ Yii::app()->clientScript->registerCssFile(
 			'type' => 'raw',
 			'value' => array($this, 'getUserInputTextField'),
 		),
-		array(
-			'header' => 'Storage Date',
-			'type' => 'raw',
-			'value'=>'CHtml::textField("dates[$data->id]",date("Y-m-d",time()),array("style"=>"width:100px;", "class"=>"hasDatePicker"))',	
-		),
+//		array(
+//			'header' => 'Storage Date',
+//			'type' => 'raw',
+//			'value'=>'CHtml::textField("dates[$data->id]",date("Y-m-d",time()),array("style"=>"width:100px;", "class"=>"hasDatePicker"))',	
+//		),
 	),
 	'htmlOptions'=>array('width'=>'100%'),
 	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
@@ -101,9 +105,9 @@ function reloadGrid(data) {
     	try
     	{
     	   var cells = $.parseJSON(data);
-    	   var alertString = cells.length+' cells were put on CAT. Serial numbers: \n';
+    	   var alertString = cells.length+' cells were put into Storage: \n';
     	   cells.forEach(function(cell) {
-    		   alertString += cell.serial + ' on ' + cell.cycler + '-' + cell.channel + '\n';
+    		   alertString += cell.serial + ' on ' + cell.location + '\n';
     	   });
     	   alert(alertString);
     	   $.fn.yiiGridView.update('storage-grid');
@@ -144,7 +148,7 @@ jQuery(function($) {
 		var noneChecked = true;
 		$('.errorSummary').remove();
 		
-		$('input[type=checkbox]').each(function () {
+		$('input[name="autoId[]"]').each(function () {
 	        if (this.checked) {
 	            noneChecked = false; 
 	        }

@@ -279,7 +279,7 @@ class BatteryController extends Controller
 		);
 		$criteria->addcondition('kit.celltype_id=:ct_id');
 		$criteria->params = array(':ct_id'=>$batterytype->celltype_id);
-		//$criteria->addcondition('data_accepted=1');
+		$criteria->addcondition('data_accepted=1');
 		$criteria->addcondition('battery_id IS NULL');
 		
 //		if(isset($_GET['values'])){

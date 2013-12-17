@@ -31,7 +31,7 @@ class TestlabController extends Controller
 					'cellcat', 'ajaxcat', 
 					'formationindex', 'catindex',
 					'changechannelassignment', 'ajaxchannelreassignment',
-					'storage'
+					'storage', 'ajaxstorage',
 				),
 				'roles' => array('testlab'),
 				//'users'=>array('@'),
@@ -376,9 +376,10 @@ class TestlabController extends Controller
 		$model=new Cell('search');
 		$model->unsetAttributes();  // clear any default values
 		
-		/* uses Cell->searchForStorage() to find all cells formed with no battery_id
+		/* uses Cell->searchForStorage() to find all cells filled with no battery_id
 		 * or with a battery_id but the battery hasn't been built.
 		 */
+		$model->filler_id = '<>1';
 		
 		if(isset($_GET['Cell']))
 		{
@@ -409,18 +410,15 @@ class TestlabController extends Controller
 		
 		if(count($storageCells)>0)
 		{
-			$cellsStorage = array();
+			$cellStorageLocations= array(); // associative array of cell_id => location string
 			
 			foreach($storageCells as $cell_id)
 			{
-				$tempCell = Cell::model()->findByPk($cell_id);
-				
-				$tempCell->cell_id = $cell_id;
-					
-				$testsChanged[$test_id] = $tempTest;
+				$storageLocation = StorageLocation::model()->findByPk($locations[$cell_id]);
+				$cellStorageLocations[$cell_id] = $storageLocation->name;  					
 			}
 			
-			$result = Cell::channelReassignment($testsChanged, $badTestChannels);  
+			$result = Cell::moveCellsToStorage($cellStorageLocations);  
 			
 			if (!json_decode($result))
 			{ /* the save failed otherwise result would be json_encoded*/

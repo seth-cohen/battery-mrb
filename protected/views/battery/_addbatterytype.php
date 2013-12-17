@@ -43,7 +43,6 @@
 							array(
 								'prompt'=>'-Select Type-',
 								'class'=>'celltype-dropdown',
-								'onChange'=>'typeSelected(this)',
 								'style'=>'width:152px',
 							)); ?>
 		<?php echo $form->error($batterytypeModel,'celltype_id'); ?>

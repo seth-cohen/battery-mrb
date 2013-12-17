@@ -66,6 +66,8 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		array(
 			'class'=>'CButtonColumn',
 			'template'=>'{view} {update}',
+			'viewButtonUrl'=>'Yii::app()->createUrl("cell/view", array("id"=>$data->cell->id))',
+			'updateButtonUrl'=>'Yii::app()->createUrl("cell/update", array("id"=>$data->cell->id))',
 		),
 	),
 	//'htmlOptions'=>array('class'=>'shadow grid-view'),

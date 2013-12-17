@@ -551,12 +551,7 @@ class CellController extends Controller
 		$model=new Cell('search');
 		$model->unsetAttributes();  // clear any default values
 		
-		/* only cells that have been filled and not port welded can
-		 * be port welded */
-		//$model->portwelder_id = 1;
-		//$model->filler_id = '>1'; 
-		
-		/* uses cell->searchCompletedCAT() to find cells actively on formation */
+		/* uses cell->searchCompletedCAT() to find cells that have completed  CAT  */
 		
 		if(isset($_GET['Cell']))
 		{

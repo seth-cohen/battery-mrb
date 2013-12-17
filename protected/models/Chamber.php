@@ -81,6 +81,17 @@ class Chamber extends CActiveRecord
 	}
 
 	/**
+	 * @return array of the query criteria to be used for particular query
+	 */
+	public function defaultscope()
+	{
+		$alias = $this->getTableAlias( false, false );
+        return array(
+			'order'=>$alias.'.name',
+		);
+	}
+	
+	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *
 	 * Typical usecase:

@@ -82,6 +82,7 @@ class Cell extends CActiveRecord
 			array('fill_date, filler_id, wet_wt, dry_wt', 'required', 'on'=>'fill'),
 			array('portweld_date, portwelder_id', 'required', 'on'=>'tipoff'),
 			array('data_accepted', 'required', 'on'=>'accept'),
+			array('location', 'required', 'on'=>'storage'),
 			
 			array('eap_num', 'checkEAP'),
 			array('dry_wt, wet_wt', 'numerical'),
@@ -615,6 +616,7 @@ class Cell extends CActiveRecord
 		//$criteria->addcondition('t.location LIKE "[FORM]%"');
 		
 		$criteria->addSearchCondition('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
+		$criteria->addCondition('data_accepted = 0');
 		
 		return new KeenActiveDataProvider($this, array(
 			'pagination'=>array('pageSize' => 16),
@@ -639,13 +641,17 @@ class Cell extends CActiveRecord
 		));
 	}
 	
+	/**
+	 * Cells that haven't been filled should not need to be put into storage and should not
+	 * be present in this dataprovider.
+	 */
 	public function searchForStorage()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
 
-		$criteria->select = 'id, eap_num';
+		$criteria->select = 'id, eap_num, location';
 		$criteria->with = array(
 						'kit'=>array(
 							'select'=>array('id','serial_num'),
@@ -672,6 +678,9 @@ class Cell extends CActiveRecord
 											GROUP BY t.id)', 'OR');
 				
 		$criteria->addSearchCondition('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
+		
+		$criteria->compare('location',$this->location, true);
+		$criteria->compare('filler_id',$this->filler_id);
 		
 		if($this->refnum_search)
 		{
@@ -962,6 +971,7 @@ class Cell extends CActiveRecord
 						array(
 							'cell_id'=>$model->id,
 							'is_formation'=>1,
+							'is_active'=>1,
 						)
 					);
 					
@@ -1005,7 +1015,7 @@ class Cell extends CActiveRecord
 		if(empty($acceptedCells))
 			return;
 			
-		foreach($acceptedCells as $cell_idl)
+		foreach($acceptedCells as $cell_id)
 		{
 			$model = Cell::model()->findByPk($cell_id);
 			$model->scenario = 'accept';
@@ -1041,6 +1051,81 @@ class Cell extends CActiveRecord
 		}			
 		return null;
 	}
+	
+	/**
+	 * Provides the ability for the user to change cell location to a storage chamber
+	 * It will also set any active testassignments on that cell to inactive/complete.
+	 * -This function is different than the other mmulti save functions in that the
+	 * parameter passed is not an associative array containing actual Cell objects
+	 * it is an associative array of cell_ids and storage location string.
+	 * 
+	 * @param array $storageCells
+	 */
+	public static function moveCellsToStorage(array $cellStorageLocations)
+	{
+		$error = 0;
+		$models = array();
+
+		/* oops, we were passed bad data */
+		if(empty($cellStorageLocations))
+			return;
+			
+		foreach($cellStorageLocations as $cell_id=>$location)
+		{
+			$model = Cell::model()->findByPk($cell_id);
+			$model->scenario = 'location';
+					 
+			$model->location = $location;
+				
+			if(!$model->validate())
+			{
+				$error = 1;
+			}
+			$models[] = $model;	
+		}
+		
+		/* all models validated save them all */
+		if ($error==0)
+		{
+			/* create array to return with JSON */
+			$result = array();
+			foreach($models as $model)
+			{
+				if($model->save())
+				{
+					/* set previous channel assignment to free and TestAssignment to completed */
+					/* get the latest testAssignment to find current channel */
+					$testAssignment = TestAssignment::model()->latest()->findByAttributes(
+						array(
+							'cell_id'=>$model->id,
+							'is_active'=>1,
+						)
+					);
+					
+					if($testAssignment!=null)
+					{
+						$testAssignment->is_active = 0;
+						$testAssignment->save();
+						
+						$testAssignment->channel->in_use = 0;
+						$testAssignment->channel->save();
+					}
+					
+					$result[] = array(
+						'serial'=>$model->kit->getFormattedSerial(), 
+						'location'=> $model->location,
+					);
+				}
+			}
+			return json_encode($result);
+		}
+		else /* a model failed, don't save any */
+		{
+			return CHtml::errorSummary($models); 	
+		}			
+		return null;
+	}
+	
 	public static function getColumnList()
 	{
 		$results = array();

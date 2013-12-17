@@ -167,7 +167,7 @@ jQuery(function($) {
 		var noneChecked = true;
 		$('.errorSummary').remove();
 		
-		$('input[type=checkbox]').each(function () {
+		$('input[name="autoId[]"]').each(function () {
 	        if (this.checked) {
 	            noneChecked = false; 
 	        }
@@ -202,6 +202,8 @@ function cycSelected(sel)
 			
 			$('.channel-dropdown').attr('disabled',false);
 			$('.channel-dropdown').html(data);
+			$('.channel-dropdown').data('prevValue', '');
+			$('.channel-dropdown').data('prevText', '');
 		},
 	});	
 }

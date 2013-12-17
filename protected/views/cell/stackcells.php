@@ -159,7 +159,7 @@ jQuery(function($) {
 		var noneChecked = true;
 		$('.errorSummary').remove();
 		
-		$('input[type=checkbox]').each(function () {
+		$('input[name="autoId[]"]').each(function () {
 	        if (this.checked) {
 	            noneChecked = false; 
 	        }

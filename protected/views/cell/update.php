@@ -7,7 +7,7 @@
 $this->breadcrumbs=array(
 	'Manufacturing'=>array('/manufacturing'),
 	'Cells'=>array('index'),
-	$model->kit->celltype->name.'-'.$model->kit->serial_num=>array('view','id'=>$model->id),
+	$model->kit->getFormattedSerial()=>array('view','id'=>$model->id),
 	'Update',
 );
 
@@ -23,6 +23,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update Cell <?php echo $model->id; ?></h1>
+<h1>Update Cell <?php echo $model->kit->getFormattedSerial(); ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model,'kit'=>$kit, 'celltype'=>$celltype)); ?>

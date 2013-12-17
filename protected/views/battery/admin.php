@@ -62,7 +62,13 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'eap_num',
 		array(
 			'name'=>'assembler_search',
-			'value'=>'$data->assembler->getFullName()',
+			'value'=>function($data, $row){
+				$result = 'Not Yet Assembled';
+				if ($data->assembler_id!=1){
+					$result = $data->assembler->getFullName();
+				}
+				return $result;
+			},
 		),
 		/*
 		'assembly_date',

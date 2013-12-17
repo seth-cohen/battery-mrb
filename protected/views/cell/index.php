@@ -41,7 +41,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Cells</h1>
+<h1>View All Cells</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
