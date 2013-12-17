@@ -35,14 +35,14 @@ Yii::app()->clientScript->registerCssFile(
 <?php $form=$this->beginWidget('CActiveForm', array(
     'enableAjaxValidation'=>true,
 	'enableClientValidation'=>true,
-	'id'=>'cat-form',
+	'id'=>'storage-form',
 )); ?>
 
 <?php echo CHtml::checkBox('singleUser', true)?><span style="margin-left:5px">Assign to Single User</span>
 
 <div class="shadow border" >
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'cat-grid',
+	'id'=>'storage-grid',
 	'dataProvider'=>$model->searchForStorage(),
 	'filter'=>$model,
 	'columns'=>array(
@@ -52,7 +52,7 @@ Yii::app()->clientScript->registerCssFile(
             'selectableRows' => '50',   
         ),
 		array(
-			'header'=>'Formed Cells',
+			'header'=>'Cells',
 			'name'=>'serial_search',
 			'type'=>'raw',
 			'value'=>'$data->kit->getFormattedSerial()',
@@ -64,44 +64,21 @@ Yii::app()->clientScript->registerCssFile(
 			'htmlOptions'=>array('width'=>'60'),
 		),
 		array(
-			'header'=>'Cycler',
+			'header'=>'Storage Location',
 			'type'=>'raw',
-			'value'=>'CHtml::dropDownList("cyclers[$data->id]", "", Cycler::forList(),array(
-						"prompt"=>"-Cycler-",
-						"class"=>"cycler-dropdown",
-						"onChange"=>"cycSelected(this)",
-						"style"=>"width:100px",
-			))',
-		),
-		array(
-			'header'=>'Channel',
-			'type'=>'raw',
-			'value'=>'CHtml::dropDownList("channels[$data->id]", "", array(),array(
-						"prompt"=>"-N/A-",
-						"class"=>"channel-dropdown",
-						"onChange"=>"chanSelected(this)",
-			))',
-		),
-		array(
-			'header'=>'Chamber',
-			'type'=>'raw',
-			'value'=>'CHtml::dropDownList("chambers[$data->id]", "", Chamber::forList(),array(
-						"prompt"=>"-Chamber-",
-						"style"=>"width:100px",
+			'value'=>'CHtml::dropDownList("locations[$data->id]", "", StorageLocation::forList(),array(
+						"prompt"=>"-Location-",
+						"class"=>"storage-dropdown",
+						//"style"=>"width:125px",
 			))',
 		),
 		array(
 			'header' => 'Operator',
 			'type' => 'raw',
 			'value' => array($this, 'getUserInputTextField'),
-//			'value'=>'CHtml::textField("user_name[$data->id]",User::getFullNameProper(Yii::app()->user->id),array(
-//				"style"=>"width:150px;",
-//				"class"=>"ui-autocomplete-input",
-//				"autocomplete"=>"off",'.$disabled.'
-//			))',
 		),
 		array(
-			'header' => 'CAT Date',
+			'header' => 'Storage Date',
 			'type' => 'raw',
 			'value'=>'CHtml::textField("dates[$data->id]",date("Y-m-d",time()),array("style"=>"width:100px;", "class"=>"hasDatePicker"))',	
 		),
@@ -129,18 +106,18 @@ function reloadGrid(data) {
     		   alertString += cell.serial + ' on ' + cell.cycler + '-' + cell.channel + '\n';
     	   });
     	   alert(alertString);
-    	   $.fn.yiiGridView.update('cat-grid');
+    	   $.fn.yiiGridView.update('storage-grid');
     	}
     	catch(e)
     	{
-    		$('#cat-form').prepend(data);
+    		$('#storage-form').prepend(data);
     		console.log(e.message);
     	}
     }
 }
 </script>
-<?php echo CHtml::ajaxSubmitButton('Filter',array('testlab/cellcat'), array(),array("style"=>"display:none;")); ?>
-<?php echo CHtml::ajaxSubmitButton('Submit',array('testlab/ajaxcat'), array('success'=>'reloadGrid'), array("id"=>"submit-button")); ?>
+<?php echo CHtml::ajaxSubmitButton('Filter',array('testlab/storage'), array(),array("style"=>"display:none;")); ?>
+<?php echo CHtml::ajaxSubmitButton('Submit',array('testlab/ajaxstorage'), array('success'=>'reloadGrid'), array("id"=>"submit-button")); ?>
 
 <?php $this->endWidget(); ?>
 
@@ -175,7 +152,7 @@ jQuery(function($) {
 
 		if(noneChecked)
 		{
-			alert('You must select at least one cell to put on CAT');
+			alert('You must select at least one cell to move to storage');
 			return false;
 		}
 	});

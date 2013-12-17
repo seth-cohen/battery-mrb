@@ -661,6 +661,18 @@ class Cell extends CActiveRecord
 
 		$criteria->together = true;
 		
+		/* cell not selected for a battery yet */
+		$criteria->addCondition('battery_id is null');
+		
+		/* or, if selected the battery hasn't been built yet */
+		$criteria->addCondition('EXISTS (SELECT batt.id, batt.assembler_id
+											FROM tbl_battery batt
+											WHERE t.battery_id = batt.id
+											AND batt.assembler_id = 1
+											GROUP BY t.id)', 'OR');
+				
+		$criteria->addSearchCondition('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
+		
 		if($this->refnum_search)
 		{
 			$references = explode(',', str_replace(' ', ',', $this->refnum_search));
@@ -675,19 +687,6 @@ class Cell extends CActiveRecord
 			}
 			$criteria->mergeWith($refCriteria);
 		}
-		
-		/* cell not selected for a battery yet */
-		$criteria->addCondition('battery_id is null');
-		
-		/* or, if selected the battery hasn't been built yet */
-		$criteria->addCondition('EXISTS (SELECT batt.id, batt.assembler_id
-											FROM tbl_battery batt
-											WHERE t.battery_id = batt.id
-											AND batt.assembler_id = 1
-											GROUP BY t.id)', 'OR');
-		
-		
-		$criteria->addSearchCondition('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
 		
 		return new KeenActiveDataProvider($this, array(
 			'pagination'=>array('pageSize' => 16),

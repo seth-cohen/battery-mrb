@@ -40310,3 +40310,164 @@ Stack trace:
 #32 {main}
 REQUEST_URI=/ytpdb/testlab/storage
 ---
+2013/12/16 18:31:26 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (175)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (187)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/16 18:31:26 [warning] [application] Failed to set unsafe attribute "Cells" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (175)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (187)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/16 18:31:26 [warning] [application] Failed to set unsafe attribute "Spares" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (175)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (187)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/16 18:31:38 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (175)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (187)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/16 18:31:38 [warning] [application] Failed to set unsafe attribute "Cells" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (175)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (187)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/16 18:31:38 [warning] [application] Failed to set unsafe attribute "Spares" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (175)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (187)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/16 18:31:53 [warning] [application] Failed to set unsafe attribute "refnum_search" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (175)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (187)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/16 18:31:53 [warning] [application] Failed to set unsafe attribute "Cells" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (175)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (187)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/16 18:31:53 [warning] [application] Failed to set unsafe attribute "Spares" of "Battery".
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (175)
+in C:\wamp\www\ytpdb\protected\controllers\BatteryController.php (187)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/16 18:32:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "multidataaccept".' in C:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('multidataaccept')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('multidataaccept')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/multidataa...')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ytpdb/cell/multidataaccept
+---
+2013/12/16 18:32:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "multiacceptdata".' in C:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('multiacceptdata')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('multiacceptdata')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cell/multiaccep...')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ytpdb/cell/multiacceptdata
+---
+2013/12/16 18:43:41 [error] [php] include(StorageLocation.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory (C:\wamp\www\yii\framework\YiiBase.php:427)
+Stack trace:
+#0 C:\wamp\www\yii\framework\base\CComponent.php(612) : eval()'d code(1): spl_autoload_call()
+#1 C:\wamp\www\yii\framework\base\CComponent.php(612): eval()
+#2 C:\wamp\www\yii\framework\zii\widgets\grid\CDataColumn.php(137): CDataColumn->evaluateExpression()
+#3 C:\wamp\www\yii\framework\zii\widgets\grid\CGridColumn.php(151): CDataColumn->renderDataCellContent()
+#4 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(616): CDataColumn->renderDataCell()
+#5 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(572): CGridView->renderTableRow()
+#6 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(482): CGridView->renderTableBody()
+#7 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#8 unknown(0): CGridView->renderSection()
+#9 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback()
+#10 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(135): CGridView->renderContent()
+#11 C:\wamp\www\yii\framework\web\CBaseController.php(173): CGridView->run()
+#12 C:\wamp\www\ytpdb\protected\views\testlab\storage.php(96): TestlabController->widget()
+#13 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#14 C:\wamp\www\yii\framework\web\CBaseController.php(95): TestlabController->renderInternal()
+#15 C:\wamp\www\yii\framework\web\CController.php(869): TestlabController->renderFile()
+#16 C:\wamp\www\yii\framework\web\CController.php(782): TestlabController->renderPartial()
+#17 C:\wamp\www\ytpdb\protected\controllers\TestlabController.php(390): TestlabController->render()
+#18 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): TestlabController->actionStorage()
+#19 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#20 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): TestlabController->runAction()
+#21 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#22 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#23 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): TestlabController->filterAccessControl()
+#24 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#25 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#26 C:\wamp\www\yii\framework\web\CController.php(265): TestlabController->runActionWithFilters()
+#27 C:\wamp\www\yii\framework\web\CWebApplication.php(282): TestlabController->run()
+#28 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#29 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#30 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/testlab/storage
+in C:\wamp\www\ytpdb\protected\views\testlab\storage.php (96)
+in C:\wamp\www\ytpdb\protected\controllers\TestlabController.php (390)
+in C:\wamp\www\ytpdb\index.php (13)
+2013/12/16 18:45:47 [error] [php] Trying to get property of non-object (C:\wamp\www\ytpdb\protected\models\StorageLocation.php:105)
+Stack trace:
+#0 C:\wamp\www\yii\framework\zii\widgets\grid\CDataColumn.php(137): CDataColumn->evaluateExpression()
+#1 C:\wamp\www\yii\framework\zii\widgets\grid\CGridColumn.php(151): CDataColumn->renderDataCellContent()
+#2 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(616): CDataColumn->renderDataCell()
+#3 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(572): CGridView->renderTableRow()
+#4 C:\wamp\www\yii\framework\zii\widgets\grid\CGridView.php(482): CGridView->renderTableBody()
+#5 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(167): CGridView->renderItems()
+#6 unknown(0): CGridView->renderSection()
+#7 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(150): preg_replace_callback()
+#8 C:\wamp\www\yii\framework\zii\widgets\CBaseListView.php(135): CGridView->renderContent()
+#9 C:\wamp\www\yii\framework\web\CBaseController.php(173): CGridView->run()
+#10 C:\wamp\www\ytpdb\protected\views\testlab\storage.php(96): TestlabController->widget()
+#11 C:\wamp\www\yii\framework\web\CBaseController.php(126): require()
+#12 C:\wamp\www\yii\framework\web\CBaseController.php(95): TestlabController->renderInternal()
+#13 C:\wamp\www\yii\framework\web\CController.php(869): TestlabController->renderFile()
+#14 C:\wamp\www\yii\framework\web\CController.php(782): TestlabController->renderPartial()
+#15 C:\wamp\www\ytpdb\protected\controllers\TestlabController.php(390): TestlabController->render()
+#16 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): TestlabController->actionStorage()
+#17 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#18 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): TestlabController->runAction()
+#19 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#20 C:\wamp\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#21 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): TestlabController->filterAccessControl()
+#22 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#23 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#24 C:\wamp\www\yii\framework\web\CController.php(265): TestlabController->runActionWithFilters()
+#25 C:\wamp\www\yii\framework\web\CWebApplication.php(282): TestlabController->run()
+#26 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#27 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#28 C:\wamp\www\ytpdb\index.php(13): CWebApplication->run()
+REQUEST_URI=/ytpdb/testlab/storage
+in C:\wamp\www\ytpdb\protected\models\StorageLocation.php (105)
+in C:\wamp\www\ytpdb\protected\views\testlab\storage.php (96)
+in C:\wamp\www\ytpdb\protected\controllers\TestlabController.php (390)
+2013/12/16 19:57:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "ajaxstorage".' in C:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('ajaxstorage')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxstorage')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('testlab/ajaxsto...')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ytpdb/testlab/ajaxstorage
+HTTP_REFERER=http://localhost/ytpdb/testlab/storage
+---
+2013/12/16 19:57:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "ajaxstorage".' in C:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('ajaxstorage')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxstorage')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('testlab/ajaxsto...')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ytpdb/testlab/ajaxstorage
+HTTP_REFERER=http://localhost/ytpdb/testlab/storage
+---
+2013/12/16 19:58:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "ajaxstorage".' in C:\wamp\www\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(270): CController->missingAction('ajaxstorage')
+#1 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('ajaxstorage')
+#2 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('testlab/ajaxsto...')
+#3 C:\wamp\www\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#4 C:\wamp\www\ytpdb\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/ytpdb/testlab/ajaxstorage
+HTTP_REFERER=http://localhost/ytpdb/testlab/storage
+---

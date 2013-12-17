@@ -392,6 +392,48 @@ class TestlabController extends Controller
 	} 
 	
 	/**
+	 * This is the ajax action to move a cell to storage
+	 */
+	public function actionAjaxStorage()
+	{
+		
+		if(!isset($_POST['autoId']))
+		{
+			echo 'hide';
+			Yii::app()->end();
+		}
+		
+		$storageCells = $_POST['autoId'];
+		$userIds = $_POST['user_ids'];
+		$locations = $_POST['locations'];
+		
+		if(count($storageCells)>0)
+		{
+			$cellsStorage = array();
+			
+			foreach($storageCells as $cell_id)
+			{
+				$tempCell = Cell::model()->findByPk($cell_id);
+				
+				$tempCell->cell_id = $cell_id;
+					
+				$testsChanged[$test_id] = $tempTest;
+			}
+			
+			$result = Cell::channelReassignment($testsChanged, $badTestChannels);  
+			
+			if (!json_decode($result))
+			{ /* the save failed otherwise result would be json_encoded*/
+				echo $result;
+			} 
+			else 
+			{ /* success so show count and serial numbers */
+				echo $result;
+			}
+		}
+	}
+	
+	/**
 	 * generates the text fields for the stacker
 	 */
 	protected function getUserInputTextField($data,$row)
