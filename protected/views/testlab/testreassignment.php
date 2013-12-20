@@ -30,7 +30,10 @@ Yii::app()->clientScript->registerCssFile(
 
 <h1>Change Test Assignment</h1>
 <p>*All active test assignments will be visible. If the channel is bad also check the "Mark Bad" check box for that row
-	and the channel will be set to out of commission. Once channel is repaired it can be set in the channels index. </p>
+and the channel will be set to out of commission. Once channel is repaired it can be set in the 
+<?php echo CHtml::link('Channel Index', array('channel/index')); ?> action.  Cells can also be marked as out of commission 
+in the channel index action
+</p>
 
 <?php $form=$this->beginWidget('CActiveForm', array(
     'enableAjaxValidation'=>true,

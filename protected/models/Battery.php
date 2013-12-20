@@ -277,8 +277,13 @@ class Battery extends CActiveRecord
 				{
 					$cellModel = Cell::model()->findByPk($cell);
 					$cellModel->battery_id = $battery_id;
-					$cellModel->location = '[EAP] '.$batteryModel->batterytype->name
-												.'- SN: '.$batteryModel->serial_num;
+					
+					/* moved this to testlab action deliver because the location doesn't actually change until
+					 * it is delivered to Battery Assembly
+					 */
+//					$cellModel->location = '[EAP] '.$batteryModel->batterytype->name 
+//												.'- SN: '.$batteryModel->serial_num;
+
 					$cellModel->battery_position = $position;
 					
 					$cellModel->save();

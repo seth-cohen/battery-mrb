@@ -4,7 +4,7 @@
 
 $this->breadcrumbs=array(
 	'Test Lab'=>array('/testlab'),
-	'Cell CAT',
+	'Put Cells in Storage',
 );
 
 $this->menu=array(
@@ -12,14 +12,14 @@ $this->menu=array(
 	array('label'=>'Active Formation', 'url'=>array('formationindex')),
 	array('label'=>'Put cells on CAT', 'url'=>array('cellcat')),
 	array('label'=>'Active CAT', 'url'=>array('catindex')),
-	array('label'=>'Channel Reassignments', 'url'=>array('changechannelassignment')),
+	array('label'=>'Test Reassignments', 'url'=>array('testreassignment')),
 	array('label'=>'View All Cells', 'url'=>array('/cell/index')),
 );
 ?>
 
 <h1>Move Cells to Storage</h1>
 <p>
-*All filled cells that have not been put into a battery already will be available in the list
+*All filled cells that have not been put into a battery (even if already selected) already will be available in the list
 below to be put into storage.
 </p>
 <?php

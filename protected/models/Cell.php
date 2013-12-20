@@ -721,6 +721,81 @@ class Cell extends CActiveRecord
 	}
 	
 	/**
+	 * Cells that have been selected for a battery but the battery has not yet been built
+	 */
+	public function searchForDelivery()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->select = 'id, eap_num, location';
+		$criteria->with = array(
+						'kit'=>array(
+							'select'=>array('id','serial_num'),
+							'with'=>array(
+								'celltype',
+								'anodes'=>array('select'=>'id'), 
+								'cathodes'=>array('select'=>'id'),
+							),
+						), 
+						'refNum'=>array('alias'=>'ref'),
+						'testAssignments'=>array('alias'=>'test', 'select'=>'is_active, id'),
+		); // needed for alias of search parameter tables
+
+		$criteria->together = true;
+		
+		/*if selected the battery hasn't been built yet */
+		$criteria->addCondition('EXISTS (SELECT batt.id, batt.assembler_id
+											FROM tbl_battery batt
+											WHERE t.battery_id = batt.id
+											AND batt.assembler_id = 1
+											GROUP BY t.id)', 'OR');
+				
+		$criteria->addSearchCondition('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
+		$criteria->addcondition('t.location NOT LIKE "[EAP%"');
+		
+		$criteria->compare('location',$this->location, true);
+		$criteria->compare('filler_id',$this->filler_id);
+		
+		if($this->refnum_search)
+		{
+			$references = explode(',', str_replace(' ', ',', $this->refnum_search));
+			
+			$refCriteria = new CDbCriteria();
+			foreach ($references as $reference)
+			{
+				if(!empty($reference))
+				{
+					$refCriteria->compare('ref.number', $reference, true, 'OR');
+				}
+			}
+			$criteria->mergeWith($refCriteria);
+		}
+		
+		return new KeenActiveDataProvider($this, array(
+			'pagination'=>array('pageSize' => 16),
+			'criteria'=>$criteria,
+			'withKeenLoading' => array(
+				'kit'=>array('select'=>array('celltype','serial_num')),
+				'testAssignments'=>array('alias'=>'test'),
+			),
+			'sort'=>array(
+				'attributes'=>array(
+					'refnum_search'=>array(
+						'asc'=>'ref.number',
+						'desc'=>'ref.number DESC',
+					),
+					'serial_search'=>array(
+						'asc'=>"CONCAT(celltype.name, serial_num)",
+						'desc'=>"CONCAT(celltype.name, serial_num) DESC",
+					),
+					'*',		// all others treated normally
+				),
+			),
+		));
+	}
+	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
@@ -1076,6 +1151,80 @@ class Cell extends CActiveRecord
 			$model->scenario = 'location';
 					 
 			$model->location = $location;
+				
+			if(!$model->validate())
+			{
+				$error = 1;
+			}
+			$models[] = $model;	
+		}
+		
+		/* all models validated save them all */
+		if ($error==0)
+		{
+			/* create array to return with JSON */
+			$result = array();
+			foreach($models as $model)
+			{
+				if($model->save())
+				{
+					/* set previous channel assignment to free and TestAssignment to completed */
+					/* get the latest testAssignment to find current channel */
+					$testAssignment = TestAssignment::model()->latest()->findByAttributes(
+						array(
+							'cell_id'=>$model->id,
+							'is_active'=>1,
+						)
+					);
+					
+					if($testAssignment!=null)
+					{
+						$testAssignment->is_active = 0;
+						$testAssignment->save();
+						
+						$testAssignment->channel->in_use = 0;
+						$testAssignment->channel->save();
+					}
+					
+					$result[] = array(
+						'serial'=>$model->kit->getFormattedSerial(), 
+						'location'=> $model->location,
+					);
+				}
+			}
+			return json_encode($result);
+		}
+		else /* a model failed, don't save any */
+		{
+			return CHtml::errorSummary($models); 	
+		}			
+		return null;
+	}
+	
+		/**
+	 * Provides the ability for the user to deliver a cell to battery assembly
+	 * It sets the location as [EAP} or [EAP-Spare] depedning on battery
+	 * position.
+	 * -The parameter is an array of cell_ids
+	 * @param array $deliveredCells
+	 */
+	public static function deliverCellsToAssembly(array $deliveredCells)
+	{
+		$error = 0;
+		$models = array();
+
+		/* oops, we were passed bad data */
+		if(empty($deliveredCells))
+			return;
+			
+		foreach($deliveredCells as $cell_id)
+		{
+			$model = Cell::model()->findByPk($cell_id);
+			$batteryModel = Battery::model()->findByPk($model->battery_id);
+
+			$model->location = ($model->battery_position>1000)?'[EAP-Spare] ':'[EAP] ';
+			$model->location .= $batteryModel->batterytype->name;
+			$model->location .= '- SN: '.$batteryModel->serial_num;
 				
 			if(!$model->validate())
 			{

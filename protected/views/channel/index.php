@@ -15,9 +15,13 @@ $this->menu=array(
 
 <h1>Channels</h1>
 <p>
+*Channels chan be marked out of commission using the appropriate drop down list.
+</p>
+<p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
 or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
 </p>
+
 <div class="shadow border">
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'channel-grid',
@@ -48,7 +52,13 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		),
 		array(
 			'name'=>'in_commission',
-			'value'=>'($data->in_commission==0) ? \'No\':\'Yes\'',
+			'type'=>'raw',
+			'value'=>'CHtml::dropDownList("Channel_Status[$data->id]", $data->in_commission, array("0"=>"No", "1"=>"Yes"), array(
+						"class"=>"status-dropdown",
+						"onChange"=>"statusSelected(this)",
+						"style"=>"width:100px",
+						"data-id"=>$data->id,
+			))',
 			'filter'=>Channel::forListBoolean(),
 		),
 		'min_voltage',
@@ -64,3 +74,29 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	),
 )); ?>
 </div>
+
+<script type="text/javascript">
+function statusSelected(sel)
+{
+	var status = $('option:selected', $(sel)).attr("value");
+	var id = $(sel).data("id");
+	
+	$.ajax({
+		url: '<?php echo $this->createUrl('/channel/ajaxsetstatus'); ?>',
+		type: 'POST',
+		data: 
+		{
+			id: id,
+			status: status,
+		},
+		success: function(data) {
+			$('.cycler-dropdown').val(cycler_id);
+			
+			$('.channel-dropdown').attr('disabled',false);
+			$('.channel-dropdown').html(data);
+			$('.channel-dropdown').data('prevValue', '');
+			$('.channel-dropdown').data('prevText', '');
+		},
+	});	
+}
+</script>

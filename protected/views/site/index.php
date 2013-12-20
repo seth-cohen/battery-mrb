@@ -44,7 +44,7 @@ $this->pageTitle=Yii::app()->name;
 			<li><?php echo CHtml::link('Put Cells on CAT', array('testlab/cellcat'));?></li>
 			<li><?php echo CHtml::link('View Cells on CAT', array('testlab/catindex'));?></li>
 			<li><?php echo CHtml::link('View All Cells on Test', array('testlab/cellindex'));?></li>
-			<li><?php echo CHtml::link('Channel Reassignments', array('testlab/changechannelassignment'));?></li>
+			<li><?php echo CHtml::link('Channel Reassignments', array('testlab/testreassignment'));?></li>
 		</ul>
 		<b>EQUIPMENT</b>
 		<ul>

@@ -30,8 +30,9 @@ class TestlabController extends Controller
 					'cellformation', 'ajaxformation', 
 					'cellcat', 'ajaxcat', 
 					'formationindex', 'catindex',
-					'changechannelassignment', 'ajaxchannelreassignment',
+					'testreassignment', 'ajaxtestreassignment',
 					'storage', 'ajaxstorage',
+					'deliverforbattery', 'ajaxdelivery'
 				),
 				'roles' => array('testlab'),
 				//'users'=>array('@'),
@@ -276,7 +277,7 @@ class TestlabController extends Controller
 	 * cell is currently testing on... gives the operator a chance to 
 	 * label that channel as out of commission
 	 */
-	public function actionChangeChannelAssignment()
+	public function actionTestReassignment()
 	{
 		$model=new TestAssignment('search');
 		$model->unsetAttributes();  // clear any default values
@@ -290,7 +291,7 @@ class TestlabController extends Controller
 			$model->attributes=$_GET['TestAssignment'];
 		}
 				
-		$this->render('changechannelassignment',array(
+		$this->render('testreassignment',array(
 			'model'=>$model,
 		));
 		
@@ -301,7 +302,7 @@ class TestlabController extends Controller
 	 * reassignments.  User has option to mark the channel as 'BAD' 
 	 * or out of commission.
 	 */
-	public function actionAjaxChannelReassignment()
+	public function actionAjaxTestReassignment()
 	{
 		
 		if(!isset($_POST['autoId']))
@@ -432,7 +433,61 @@ class TestlabController extends Controller
 	}
 	
 	/**
-	 * generates the text fields for the stacker
+	 * This action will allow the operator to move a cell to Battery Assembly
+	 * this will clear the channel and set the testassignment to inactive
+	 */
+	public function actionDeliverForBattery()
+	{
+		$model=new Cell('search');
+		$model->unsetAttributes();  // clear any default values
+		
+		/* uses Cell->searchForDelivery() to find all cells filled with a battery_id
+		 *  but the battery hasn't been built yet.
+		 */
+		
+		if(isset($_GET['Cell']))
+		{
+			$model->attributes=$_GET['Cell'];
+		}
+				
+		$this->render('delivery',array(
+			'model'=>$model,
+		));
+		
+	} 
+	
+	/**
+	 * This is the ajax action to deliver cells to Battery Assembly
+	 */
+	public function actionAjaxDelivery()
+	{
+		
+		if(!isset($_POST['autoId']))
+		{
+			echo 'hide';
+			Yii::app()->end();
+		}
+		
+		$deliveredCells = $_POST['autoId'];
+		$userIds = $_POST['user_ids'];
+		
+		if(count($deliveredCells)>0)
+		{	
+			$result = Cell::deliverCellsToAssembly($deliveredCells);  
+			
+			if (!json_decode($result))
+			{ /* the save failed otherwise result would be json_encoded*/
+				echo $result;
+			} 
+			else 
+			{ /* success so show count and serial numbers */
+				echo $result;
+			}
+		}
+	}
+	
+	/**
+	 * generates the text fields for the operator
 	 */
 	protected function getUserInputTextField($data,$row)
 	{

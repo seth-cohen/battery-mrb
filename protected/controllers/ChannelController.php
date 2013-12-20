@@ -32,8 +32,11 @@ class ChannelController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				'users'=>array('@'),
+				'actions'=>array(
+					'create','update',
+					'ajaxsetstatus'
+				),
+				'roles'=>array('testlab'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
@@ -167,6 +170,24 @@ class ChannelController extends Controller
 		{
 			echo CHtml::tag('option',
 						array('value'=>$id), CHtml::encode($number), true);
+		}
+	}
+	
+	/**
+	 * Sets the channel in_commission to the $_POSTed value
+	 */
+	public function actionAjaxSetStatus()
+	{
+		
+		$model=isset($_POST['id'])?Channel::model()->findByPk($_POST['id']):null;
+		
+		if($model == null)
+			Yii::app()->end();
+			
+		if(isset($_POST['status']))
+		{
+			$model->in_commission = $_POST['status'];
+			$model->save();
 		}
 	}
 	

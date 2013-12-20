@@ -12,7 +12,7 @@ $this->menu=array(
 	array('label'=>'Active Formation', 'url'=>array('formationindex')),
 	array('label'=>'Put cells on CAT', 'url'=>array('cellcat')),
 	array('label'=>'Active CAT', 'url'=>array('catindex')),
-	array('label'=>'Channel Reassignments', 'url'=>array('changechannelassignment')),
+	array('label'=>'Test Reassignments', 'url'=>array('testreassignment')),
 	array('label'=>'View All Cells', 'url'=>array('/cell/index')),
 );
 
@@ -30,7 +30,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>All Active Formation Tests</h1>
+<h1>All Cells Actively on Formation</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>

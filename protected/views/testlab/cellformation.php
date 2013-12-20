@@ -12,7 +12,7 @@ $this->menu=array(
 	array('label'=>'Active Formation', 'url'=>array('formationindex')),
 	array('label'=>'Put cells on CAT', 'url'=>array('cellcat')),
 	array('label'=>'Active CAT', 'url'=>array('catindex')),
-	array('label'=>'Channel Reassignments', 'url'=>array('changechannelassignment')),
+	array('label'=>'Test Reassignments', 'url'=>array('testreassignment')),
 	array('label'=>'View All Cells', 'url'=>array('/cell/index')),
 );
 ?>
@@ -20,9 +20,10 @@ $this->menu=array(
 <h1>Put Cells on Formation</h1>
 <p>
 *Only cells filled yesterday or today will be listed.
-If the cell you are looking for is currently on test please use the 
-<?php echo CHtml::link('Change Test Assignment', array('changechannelassignment')); ?> action.
+If you are just looking to change the test channel then please use the 
+<?php echo CHtml::link('Test Reassignment', array('testreassignment')); ?> action.
 </p>
+
 <?php
 /* ionclude JQuery scripts to allow for autocomplte */
 Yii::app()->clientScript->registerCoreScript('jquery.ui'); 

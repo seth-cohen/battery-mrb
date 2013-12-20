@@ -77,7 +77,7 @@
 							array('label'=>'Put Cells on CAT', 'url'=>array('testlab/cellcat'), 'active'=>0),
 							array('label'=>'View All Cells on CAT', 'url'=>array('testlab/catindex'), 'active'=>0),
 							array('label'=>'View All Cells on Test', 'url'=>array('testlab/cellindex'), 'active'=>0),
-							array('label'=>'Change Channel Assignment', 'url'=>array('testlab/changechannelassignment'), 'active'=>0),
+							array('label'=>'Change Channel Assignment', 'url'=>array('testlab/testreassignment'), 'active'=>0),
 						)),	
 						array('label'=>'Channels', 'url'=>array('/channel/')),
 						array('label'=>'Chambers', 'url'=>array('/chamber/'), 'active'=>0),

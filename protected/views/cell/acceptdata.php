@@ -13,7 +13,7 @@ $this->menu=array(
 	array('label'=>'Active Formation', 'url'=>array('formationindex')),
 	array('label'=>'Put cells on CAT', 'url'=>array('cellcat')),
 	array('label'=>'Active CAT', 'url'=>array('catindex')),
-	array('label'=>'Channel Reassignments', 'url'=>array('changechannelassignment')),
+	array('label'=>'Channel Reassignments', 'url'=>array('testreassignment')),
 	array('label'=>'View All Cells', 'url'=>array('/cell/index')),
 );
 ?>
