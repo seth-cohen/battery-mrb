@@ -73,11 +73,15 @@
 					'items'=>array(
 						array('label'=>'Testing', 'items'=>array(
 							array('label'=>'Put Cells on Formation', 'url'=>array('testlab/cellformation'), 'active'=>0),
-							array('label'=>'View All Cells on Formation', 'url'=>array('testlab/formationindex'), 'active'=>0),
+							array('label'=>'View Cells on Formation', 'url'=>array('testlab/formationindex'), 'active'=>0),
 							array('label'=>'Put Cells on CAT', 'url'=>array('testlab/cellcat'), 'active'=>0),
-							array('label'=>'View All Cells on CAT', 'url'=>array('testlab/catindex'), 'active'=>0),
+							array('label'=>'View Cells on CAT', 'url'=>array('testlab/catindex'), 'active'=>0),
 							array('label'=>'View All Cells on Test', 'url'=>array('testlab/cellindex'), 'active'=>0),
-							array('label'=>'Change Channel Assignment', 'url'=>array('testlab/testreassignment'), 'active'=>0),
+							array('label'=>'Test Reassignment', 'url'=>array('testlab/testreassignment'), 'active'=>0),
+						)),	
+						array('label'=>'Storage/Delivery', 'items'=>array(
+							array('label'=>'Put Cells in Storage', 'url'=>array('testlab/storage'), 'active'=>0),
+							array('label'=>'Deliver Cells to Assembly', 'url'=>array('testlab/deliverforassembly'), 'active'=>0),
 						)),	
 						array('label'=>'Channels', 'url'=>array('/channel/')),
 						array('label'=>'Chambers', 'url'=>array('/chamber/'), 'active'=>0),

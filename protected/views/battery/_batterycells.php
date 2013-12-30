@@ -20,6 +20,10 @@
 			'value'=>'$data["serial"]',
 		),
 		array(
+			'header'=>'Current Location',
+			'value'=>'$data["location"]',
+		),
+		array(
 			'class'=>'CButtonColumn',
 			'template'=>'{view}',
 			'viewButtonUrl'=>'Yii::app()->createUrl("/cell/view",array("id"=>$data["id"]))',

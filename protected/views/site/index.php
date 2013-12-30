@@ -33,6 +33,11 @@ $this->pageTitle=Yii::app()->name;
 			<li><?php echo CHtml::link('Fillport Weld Cells (Multi)', array('cell/multitipoffcells'));?></li>
 			<li><?php echo CHtml::link('View All Cells', array('cell/index'));?></li>			
 		</ul>
+		<b>Batteries</b>
+		<ul>
+			<li><?php echo CHtml::link('Assemble Battery', array('battery/assemble'));?></li>
+			<li><?php echo CHtml::link('Return Spares', array('battery/returnspares'));?></li>		
+		</ul>
 	</div>
 	
 	<div class=" link-list" id="testlab-links" style="width:33%; float:right;">
@@ -56,9 +61,10 @@ $this->pageTitle=Yii::app()->name;
 		</ul>
 		<b>STORAGE/DELIVERY</b>
 		<ul>
-			<li><?php echo CHtml::link('Deliver Cells to Battery Assembly', array('cell/multistackcells'));?></li>
-			<li><?php echo CHtml::link('Move Cells to Storage', array('cell/multifillcells'));?></li>
-			<li><?php echo CHtml::link('Scrap Cells', array('cell/multiinspectcells'));?></li>
+			<li><?php echo CHtml::link('Deliver Cells to Battery Assembly', array('testlab/deliverforassembly'));?></li>
+			<li><?php echo CHtml::link('Move Cells to Storage', array('testlab/storage'));?></li>
+			<li><?php echo CHtml::link('Handle Returned Spares', array('testlab/returnedspares'));?></li>
+			<li><?php echo CHtml::link('Scrap Cells', array('cell/scrapcells'));?></li>
 		</ul>
 	</div>
 	
@@ -73,6 +79,7 @@ $this->pageTitle=Yii::app()->name;
 		<ul>
 			<li><?php echo CHtml::link('Cell Selection', array('battery/cellselection'));?></li>
 			<li><?php echo CHtml::link('View All Batteries', array('battery/index'));?></li>
+			<li><?php echo CHtml::link('Create New Battery Type', array('battery/newtype'));?></li>
 		</ul>
 	</div>
 	<div style="clear:both"></div>

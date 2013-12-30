@@ -57,8 +57,31 @@ class BatteryController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$model = Battery::model()->with(
+				array(
+					'batterytype',
+					'cells'=>array('with'=>array(
+						'kit'=>array('with'=>array(
+							'anodes', 
+							'cathodes', 
+							'celltype'
+						)),
+					)),
+				)
+			)->findByPk($id);
+		
+		$cellDataProvider= new CArrayDataProvider($model->getBatteryCells(), array(
+		    'pagination'=>array(
+		        'pageSize'=>16,
+		    ),
+		    'sort'=>array(
+		    	'defaultOrder'=>'position',
+		    ),
+		 ));
+		 
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$model,
+			'cellDataProvider'=>$cellDataProvider
 		));
 	}
 
@@ -354,7 +377,11 @@ class BatteryController extends Controller
 		}
 		else
 		{
-			$model = $this->loadModel($id);
+			$model = Battery::model()->with(
+				array(
+					array('cells'=>with(array('kit')))
+				)
+			)->findByPk($id);
 			
 			$cellDataProvider= new CArrayDataProvider($model->getBatteryCells(), array(
 			    'pagination'=>array(

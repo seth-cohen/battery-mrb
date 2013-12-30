@@ -243,6 +243,7 @@ class Battery extends CActiveRecord
 			 	'id' =>$cell->id,
 			 	'position'=>$cell->battery_position,
 			 	'serial' => $cell->kit->getFormattedSerial(),
+			 	'location'=> $cell->location,
 			);
 		}
 		
