@@ -41,6 +41,13 @@ class BatteryController extends Controller
 				'roles'=>array('engineering'),
 				//'users'=>array('@'),
 			),
+			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				'actions'=>array(
+					'assemble', 'ajaxserialsforassembly'
+				),
+				'roles'=>array('Manufacturing Battery Assembly'),
+				//'users'=>array('@'),
+			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
 				'roles'=>array('admin'),
@@ -364,6 +371,60 @@ class BatteryController extends Controller
 		}
 	}
 	
+/**
+	 * Provides manufacturing the ability to assemble  a battery
+	 * which has had cells selected for it.
+	 */
+	public function actionAssemble()
+	{
+		$batteryModel=new Battery('search'); 
+		$batteryModel->unsetAttributes();  // clear any default values
+		
+		//validate the battery attributes
+//		if(isset($_POST['ajax']))
+//		{
+//			echo CActiveForm::validate($batteryModel);
+//			Yii::app()->end();
+//		}
+
+		/* uses battery->searchForAssembly() to get all batteries that have been created by
+		 * cell selection but haven't been built yet */
+		
+		if(isset($_POST['Battery']))
+		{
+			$batteryModel->attributes=$_POST['Battery'];
+		}
+				
+		$this->render('assemblebattery',array(
+			'batteryModel'=>$batteryModel,
+		));
+	}
+	
+/**
+	 * 
+	 * Returns options for dropdown box of all available cells that have been
+	 * approved by QA of the cell type needed for the battery type_id selected
+	 */
+	public function actionAjaxSerialsForAssembly()
+	{
+		if(!isset($_GET['type_id']))
+		{
+			Yii::app()->end();
+		}
+		
+		$type_id = $_GET['type_id'];
+		$batteryModels = Battery::model()->findAllByAttributes(
+			array('batterytype_id'=>$type_id), 
+			array('select'=>'id, serial_num')
+		);
+		
+		echo CHtml::tag('option', array('value'=>''), '-Select Serial-', true);
+		foreach($batteryModels as $battery)
+		{
+			echo CHtml::tag('option', array('value'=>$battery->id), CHtml::encode($battery->serial_num), true);
+		}
+	}
+	
 	/**
 	 * Performs the AJAX update of the battery-detail view on the index page.
 	 * @param integer $id of the battery to get the cells for
@@ -379,7 +440,7 @@ class BatteryController extends Controller
 		{
 			$model = Battery::model()->with(
 				array(
-					array('cells'=>with(array('kit')))
+					array('cells'=>array('with'=>'kit'))
 				)
 			)->findByPk($id);
 			

@@ -194,6 +194,73 @@ class Battery extends CActiveRecord
 	}
 
 	/**
+	 * Returns dataprovider with all batteries that have had cell selections done but
+	 * have not been assembled.
+	 */
+	public function searchForAssembly()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->with = array(
+						'refNum'=>array('alias'=>'ref'),
+						'batterytype'=>array('alias'=>'type'),
+		); // needed for alias of search parameter tables
+		
+		$criteria->together = true;
+		
+		$criteria->compare('id',$this->id,true);
+		$criteria->compare('batterytype_id',$this->batterytype_id,true);
+		$criteria->compare('ref_num_id',$this->ref_num_id,true);
+		$criteria->compare('eap_num',$this->eap_num,true);
+		$criteria->compare('serial_num',$this->serial_num,true);
+		$criteria->compare('assembler_id',$this->assembler_id,true);
+		$criteria->compare('assembly_date',$this->assembly_date,true);
+		
+		$criteria->compare('type.name',$this->batterytype_search, true);
+
+		if($this->refnum_search)
+		{
+			$references = explode(',', str_replace(' ', ',', $this->refnum_search));
+			
+			$refCriteria = new CDbCriteria();
+			foreach ($references as $reference)
+			{
+				if(!empty($reference))
+				{
+					$refCriteria->compare('ref.number', $reference, true, 'OR');
+				}
+			}
+			$criteria->mergeWith($refCriteria);
+		}
+		
+		return new KeenActiveDataProvider($this, array(
+			'withKeenLoading' => array(
+				array('refNum'),
+			),
+			'pagination'=>array('pageSize' => 16),
+			'criteria'=>$criteria,
+			'sort'=>array(
+				'attributes'=>array(
+					'refnum_search'=>array(
+						'asc'=>'ref.number',
+						'desc'=>'ref.number DESC',
+					),
+					'batterytype_search'=>array(
+						'asc'=>'type.name',
+						'desc'=>'type.name DESC',
+					),
+					'assembler_search'=>array(
+						'asc'=>'CONCAT(ass.first_name, " ", ass.last_name)',
+						'desc'=>'CONCAT(ass.first_name, " ", ass.last_name) DESC',
+					),
+					'*',		// all others treated normally
+				),
+			),
+		));
+	}
+	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
@@ -203,6 +270,7 @@ class Battery extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+	
 	
 	/**
 	 * 
@@ -216,6 +284,8 @@ class Battery extends CActiveRecord
 		
 	}
 	
+	
+	
 	public function hasSerialChanged()
 	{
 		if($this->previousBatteryType == null || $this->previousSerialNum == null)
@@ -228,6 +298,8 @@ class Battery extends CActiveRecord
 			
 		}
 	}
+	
+	
 	
 	/**
 	 * 
@@ -249,6 +321,7 @@ class Battery extends CActiveRecord
 		
 		return $result;
 	}
+	
 	
 	/**
 	 * 
@@ -325,4 +398,5 @@ class Battery extends CActiveRecord
 		
 	}
 	
+
 }
