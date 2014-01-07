@@ -14,12 +14,8 @@ $this->menu=array(
 	array('label'=>'Battery Admin', 'url'=>array('admin')),
 );
 
-/* include JQuery scripts to allow for autocomplte */
-Yii::app()->clientScript->registerCoreScript('jquery.ui'); 
-Yii::app()->clientScript->registerCssFile(
-        Yii::app()->clientScript->getCoreScriptUrl().
-        '/jui/css/base/jquery-ui.css'
-);
+Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/jquery.easing.1.3.js');
+Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/jquery.easing.compatibility.js');
 ?>
 
 <h1>Assemble Battery</h1>
@@ -70,6 +66,8 @@ Yii::app()->clientScript->registerCssFile(
 <div id="batterycell-details" style="overflow-x:hidden; position:relative;margin-top: 12px;"></div>
 
 <script type="text/javascript">
+var currentPage = 0;
+
 function typeSelected(sel, urlSerialsToAssemble){
 	var type_id = $('option:selected', $(sel)).val();
 	var partNum = $('option:selected', $(sel)).data('partnum');
@@ -97,15 +95,85 @@ function serialSelected(sel){
 	// populate the battery serial dropdown
 	$.ajax({
 		type:'get',
-		url: '<?php echo $this->createUrl('battery/ajaxgetbatterycells'); ?>',
+		url: '<?php echo $this->createUrl('battery/ajaxcellsforbatteryassembly'); ?>',
 		data:
 		{
 			id: battery_id.toString(),
 		},
 		success: function(data){
-			$('#batterycell-details').html(data);
+			$('#batterycell-details').html(data).css('height','400px');
+			$('#previous-module-link').hide();
 		},
 	});
 }
+
+$(document).on('click', '#next-module-link', function(event){
+	if (!$('#cellselection-wrapper-'+(currentPage+1)).length){
+		//do nothing
+	} else {
+		if (!$('#cellselection-wrapper-'+(currentPage+2)).length){
+			//do nothing
+			$('#next-module-link').hide();
+		}
+		if(currentPage == 0)
+			$('#previous-module-link').show();
+		
+		//animate current grid left
+		var $element = $('#cellselection-wrapper-'+currentPage);
+		var right = $element.parent().width()+20;
+		$element.animate({
+			right: right,
+		},{
+			easing: 'easeInExpo',
+		});
+		currentPage += 1;
+		
+		//animate next grid left to center
+		var right = $element.parent().width()/2-$element.width()/2;
+		$element = $('#cellselection-wrapper-'+currentPage);
+		$element.animate({
+			right: right,
+		},{
+			duration: 600,
+			easing: 'easeOutBounce',
+		});
+	}
+	return false;
+});
+
+$(document).on('click', '#previous-module-link', function(event){
+	if (!$('#cellselection-wrapper-'+(currentPage-1)).length){
+		//do nothing
+		$('#previous-module-link').hide();
+	} else {
+		if (!$('#cellselection-wrapper-'+(currentPage-2)).length){
+			//do nothing
+			$('#previous-module-link').hide();
+		}
+		if(!$('#cellselection-wrapper-'+(currentPage+1)).length)
+			$('#next-module-link').show();
+		
+		//animate current grid left
+		var $element = $('#cellselection-wrapper-'+currentPage);
+		var right = -$element.parent().width()-20;
+		$element.animate({
+			right: right,
+		},{
+			easing: 'easeInExpo',
+		});
+		currentPage -= 1;
+		
+		//animate next grid right to center
+		var right = $element.parent().width()/2-$element.width()/2;
+		$element = $('#cellselection-wrapper-'+currentPage);
+		$element.animate({
+			right: right,
+		},{
+			duration: 600,
+			easing: 'easeOutBounce',
+		});
+	}
+	return false;
+});
 
 </script>

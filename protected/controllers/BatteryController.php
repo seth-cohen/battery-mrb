@@ -43,7 +43,7 @@ class BatteryController extends Controller
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array(
-					'assemble', 'ajaxserialsforassembly'
+					'assemble', 'ajaxserialsforassembly', 'ajaxcellsforbatteryassembly',
 				),
 				'roles'=>array('Manufacturing Battery Assembly'),
 				//'users'=>array('@'),
@@ -423,6 +423,55 @@ class BatteryController extends Controller
 		{
 			echo CHtml::tag('option', array('value'=>$battery->id), CHtml::encode($battery->serial_num), true);
 		}
+	}
+	
+	public function actionAjaxCellsForBatteryAssembly()
+	{
+		$id=null;
+		$pageSize = 8;
+		
+		if(isset($_GET['id']))
+		{
+			$id = $_GET['id'];
+		}
+		else
+		{	// we shouldn't be here.
+			Yii::app()->end();
+		}
+		
+		$batteryModel = Battery::model()->findByPk($id);
+		
+		if ($batteryModel==null)
+			Yii::app()->end();
+			
+		/* get the cell datarpoviders */
+		$cellModel = new Cell();
+		$cellModel->unsetAttributes(); // clear any defaults
+		$cellModel->battery_id = $batteryModel->id;
+		$cellModel->battery_position = '<1000';
+		
+		for($i=0; $i<ceil($batteryModel->batterytype->num_cells/$pageSize); $i++)
+		{
+			$cellDataProviders[] = $cellModel->searchInBattery($pageSize, $i);
+		}
+		
+		/* get the spares as a list of options for the dropdownlist */
+		$cellModel->battery_position = '>=1000';
+		$spareDataProvider = $cellModel->searchInBattery(100, 0);
+		$spareOptions = array();
+		
+		foreach($spareDataProvider->data as $spare){
+			$spareOptions[$spare->id] = $spare->kit->getFormattedSerial();
+		}
+		
+		$this->renderPartial('_assemblyform',array(
+				'batteryModel'=>$batteryModel,
+				'cellDataProviders'=>$cellDataProviders,
+				'spareOptions'=>$spareOptions,
+			),
+			false,
+			true
+		);
 	}
 	
 	/**

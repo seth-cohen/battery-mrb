@@ -287,19 +287,6 @@ class TestAssignment extends CActiveRecord
 			{
 				if($model->save())
 				{ 	
-					/* update the cell location */
-					$cell = Cell::model()->findByPk($model->cell_id);
-					$cell->location = $model->is_formation ? '[FORM] ':'[CAT] ';
-					$cell->location .= $model->channel->cycler->name.
-										'{'.$model->channel->number.'} '.
-										'('.$model->chamber->name.')';
-					$cell->save();
-					
-					/* update the channel status */
-					$channel = Channel::model()->findByPk($model->channel_id);
-					$channel->in_use = 1;
-					$channel->save();
-					
 					/* need to find the previous testAssignment and channel
 					 * -must set channel in_use to false and in_commission to false if
 					 * 	marked as bad.
@@ -315,6 +302,19 @@ class TestAssignment extends CActiveRecord
 					$oldChannel->in_use = 0;
 					$oldChannel->in_commission = $badTestChannels[$test_id]?0:$oldChannel->in_commission;
 					$oldChannel->save();
+					
+					/* update the cell location */
+					$cell = Cell::model()->findByPk($model->cell_id);
+					$cell->location = $model->is_formation ? '[FORM] ':'[CAT] ';
+					$cell->location .= $model->channel->cycler->name.
+										'{'.$model->channel->number.'} '.
+										'('.$model->chamber->name.')';
+					$cell->save();
+					
+					/* update the channel status */
+					$channel = Channel::model()->findByPk($model->channel_id);
+					$channel->in_use = 1;
+					$channel->save();
 					
 					$result[] = array(
 						'serial'=>$cell->kit->getFormattedSerial(), 

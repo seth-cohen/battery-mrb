@@ -795,6 +795,43 @@ class Cell extends CActiveRecord
 			),
 		));
 	}
+
+	public function searchInBattery($pageSize, $currentPage)
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->select = 'id';
+		$criteria->with = array(
+						'kit'=>array(
+							'select'=>array('id','serial_num'),
+							'with'=>array(
+								'celltype',
+								'anodes'=>array('select'=>'id'), 
+								'cathodes'=>array('select'=>'id'),
+							),
+						), 
+		); // needed for alias of search parameter tables
+
+		$criteria->together = true;
+		
+		$criteria->compare('battery_id',$this->battery_id, true);
+		$criteria->compare('battery_position',$this->battery_position, true);
+		
+		return new KeenActiveDataProvider($this, array(
+			'pagination'=>array('pageSize' => $pageSize, 'currentPage'=>$currentPage),
+			'criteria'=>$criteria,
+			'withKeenLoading' => array(
+				'kit'=>array('select'=>array('celltype','serial_num')),
+				//'testAssignments'=>array('alias'=>'test'),
+			),
+			'sort'=>array(
+				'defaultOrder' => 'battery_position'
+			),
+		));
+	}
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

@@ -88,7 +88,6 @@ in the channel index action
 					CHtml::hiddenField("cell_ids[$data->id]", $data->cell_id) .
 					CHtml::hiddenField("is_formation[$data->id]", $data->is_formation);
 			},
-			
 		),
 		array(
 			'header'=>'New Cycler',
@@ -99,6 +98,7 @@ in the channel index action
 						"class"=>"cycler-dropdown",
 						"onChange"=>"cycSelected(this)",
 						"style"=>"width:100px",
+						"data-original"=>$data->channel->cycler->id,
 				));
 			},
 		),
@@ -108,7 +108,10 @@ in the channel index action
 			'value'=>'CHtml::dropDownList("channels[$data->id]", "", array(),array(
 						"prompt"=>"-N/A-",
 						"class"=>"channel-dropdown",
+						"onChange"=>"channelSelected(this)",
 						"style"=>"width:50px",
+						"data-channel-id"=>$data->channel->id,
+						"data-channel-number"=>$data->channel->number,
 			))',
 		),
 		array(
@@ -181,7 +184,7 @@ jQuery(function($) {
 	$('.cycler-dropdown').each(function(index){
 		cycSelected(this);
 	});
-
+	
 	jQuery(document).on('keydown', '.autocomplete-user-input', function(event) {
 		$(this).autocomplete({
 			'select': function(event, ui){
@@ -221,6 +224,43 @@ jQuery(function($) {
 });
 
 
+function channelSelected(sel)
+{
+	/* remove the selected value from the other dropdowns */
+	var el = $(sel);
+	var selectedValue = $('option:selected', el).val();
+	var changed_cycler_id = sel.id.toString().replace("channels","cyclers");
+
+	/* get the cycler value for the changed channel */
+	var changed_cycler = document.getElementById(changed_cycler_id).value;
+	
+	if(selectedValue!=''){
+		$('.channel-dropdown').not(el).each(function(index){
+			/* Check if the cycler is the same  and only remove the option if the same */
+			var cycler_id = this.id.toString().replace("channels","cyclers");
+			var cycler = document.getElementById(cycler_id).value;
+			
+			if(cycler == changed_cycler){
+				$('option[value="'+selectedValue+'"]', this).remove();
+			}
+		});	
+	} 
+	if (el.data('prevValue')){
+		/* add previous value back to selects */
+		$('.channel-dropdown').not(el).each(function(index){
+			/* Check if the cycler is the same  and only add the option if the same */
+			var cycler_id = this.id.toString().replace("channels","cyclers");
+			var cycler = document.getElementById(cycler_id).value;
+
+			if(cycler == changed_cycler){
+				$(this).append($('<option>', {value : el.data('prevValue')})
+					.text(el.data('prevText')));
+			}
+		});	
+	}
+	el.data('prevValue', sel.value);
+	el.data('prevText', sel.options[sel.selectedIndex].text);
+}
 
 function cycSelected(sel)
 {
@@ -237,10 +277,21 @@ function cycSelected(sel)
 		success: function(data) {
 			/* set all following test assignments to the same channel */
 			//$('.cycler-dropdown').val(cycler_id);
+			var el = $('#'+id);
+			var selected = document.getElementById(id);
 			
-			$('#'+id).attr('disabled',false);
-			$('#'+id).html(data);
-			$('#'+id).val('select');
+			el.attr('disabled',false);
+			el.html(data);
+
+			if($(sel).val() == $(sel).data('original')){
+				$('option[value=""]', el).remove();
+				el.prepend($('<option>', {value: el.data('channel-id')})
+						.text(el.data('channel-number')));
+				el.val(el.data('channel-id'));
+				
+				el.data('prevValue', selected.value);
+				el.data('prevText', selected.options[selected.selectedIndex].text);
+			}
 		},
 	});
 }

@@ -85,7 +85,6 @@ Yii::app()->clientScript->registerCssFile(
 					CHtml::hiddenField("cell_ids[$data->id]", $data->cell_id) .
 					CHtml::hiddenField("is_formation[$data->id]", $data->is_formation);
 			},
-			
 		),
 		array(
 			'header'=>'New Cycler',
@@ -237,7 +236,7 @@ function cycSelected(sel)
 			
 			$('#'+id).attr('disabled',false);
 			$('#'+id).html(data);
-			$('#'+id).val('select');
+			$('#'+id).val(5);
 		},
 	});
 }

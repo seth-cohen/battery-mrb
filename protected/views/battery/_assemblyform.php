@@ -1,14 +1,13 @@
 <?php
 /* @var $this BatteryController */
-/* @var $batterytypeModel Batterytype */
-/* @var $cellDataProviders  CArrayDataProvider[] */
+/* @var $batteryModel Battery */
+/* @var $cellDataProviders  CActiveDataProvider[] */
+/* @var $spareOptions  Array */
 
 $controller = $this;
 ?>
 
-<h2 style="text-align:center;"><?php echo $batterytypeModel->name; ?></h2>
-
-<?php echo CHtml::hiddenField("num_cells",$batterytypeModel->num_cells); ?>
+<h2 style="text-align:center;"><?php echo $batteryModel->batterytype->name; ?> SN <?php echo $batteryModel->serial_num; ?></h2>
 
 <?php 
 $imageUrl = CHtml::image(Yii::app()->baseUrl.'/css/left.png', 'Previous', array('style'=>'float:left;margin-left:50px;top:130px;position:relative;'));
@@ -32,14 +31,14 @@ foreach($cellDataProviders as $cellDataProvider):
 	'dataProvider'=>$cellDataProvider,
 	'columns'=>array(
 		array(
-			'name'=>'Cell No.',
-			'value'=>'$data["id"]',
+			'header'=>'Cell Serial',
+			'value'=>'$data->kit->getFormattedSerial()',
 		),
 		array(
-			'header'=>'Cell Serial',
+			'header'=>'Spares',
 			'type'=>'raw',
-			'value'=>function($data, $row) use ($controller) {
-				return	CHtml::dropDownList('Battery[Cells]['.$data->id.']', '', array(),array(
+			'value'=>function($data, $row) use ($spareOptions) {
+				return	CHtml::dropDownList('Battery[Cells]['.$data['id'].']', '', $spareOptions, array(
 						'prompt'=>'-N/A-',
 						'class'=>'cell-dropdown cells',
 						'onchange'=>'cellSelected(this)',
