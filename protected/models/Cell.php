@@ -802,7 +802,7 @@ class Cell extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->select = 'id';
+		$criteria->select = 'id, battery_position';
 		$criteria->with = array(
 						'kit'=>array(
 							'select'=>array('id','serial_num'),

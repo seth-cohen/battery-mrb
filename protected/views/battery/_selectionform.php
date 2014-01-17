@@ -39,7 +39,7 @@ foreach($cellDataProviders as $cellDataProvider):
 			'header'=>'Cell Serial',
 			'type'=>'raw',
 			'value'=>function($data, $row) use ($controller) {
-				return	CHtml::dropDownList('Battery[Cells]['.$data->id.']', '', array(),array(
+				return	CHtml::dropDownList('Battery[Cells]['.$data['id'].']', '', array(),array(
 						'prompt'=>'-N/A-',
 						'class'=>'cell-dropdown cells',
 						'onchange'=>'cellSelected(this)',

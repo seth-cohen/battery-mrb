@@ -60,11 +60,71 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/jquer
 	</div>
 	<div class="clear"></div>
 	
+	<div class="left-form">
+		<div class="row">
+			<?php echo $form->labelEx($batteryModel,'assembler_search'); ?>
+			<?php $user_id = ''; ?>
+			<?php if(Yii::app()->user->checkAccess('manufacturing supervisor') || Yii::app()->user->checkAccess('manufacturing engineer')): ?>
+				<?php $this->widget('zii.widgets.jui.CJuiAutoComplete',array( 
+					'model'=>$batteryModel,
+				 	'attribute'=>'assembler_search',
+					'sourceUrl'=>$this->createUrl('/user/ajaxUserSearch'),
+					'options' => array(
+						'select'=>'js: 
+							function(event, ui){
+								$("#Battery_assembler_id").attr("value", ui.item.id);
+							}',
+					),
+					'htmlOptions'=>array(
+						'style'=>'width:152px;',
+					),
+				)); ?>
+			<?php else: /* user can only create it as themselves */ 
+				$user_id = Yii::app()->user->id; ?>
+				<?php echo CHtml::textField('assembler_search',User::getFullNameProper($user_id), array(
+							'disabled'=>true,
+							'style'=>'width:152px;'
+				));?>
+			<?php endif; ?>
+			
+			<?php echo $form->error($batteryModel,'assembler_search'); ?>
+			<?php echo $form->hiddenField($batteryModel, 'assembler_id', array('value'=>$user_id)); ?>
+		</div>
+	</div>
+	<div class="right-form">
+		<div class="row">
+			<?php echo $form->labelEx($batteryModel,'assembly_date'); ?>
+			<?php
+			    $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+			        'model'=>$batteryModel,
+			       'name'=>'assembly_date',
+			    	'value'=>date("Y-m-d",time()),
+			        // additional javascript options for the date picker plugin
+			        'options'=>array(
+			            'showAnim'=>'slideDown',
+			            'changeMonth'=>true,
+			            'changeYear'=>true,
+			            'dateFormat' => 'yy-mm-dd',
+			        ),
+			        'htmlOptions'=>array(
+						'style'=>'width:150px;',
+					),
+			    ));
+			?>
+			<?php echo $form->error($batteryModel,'assembly_date'); ?>
+		</div>
+	</div>
+	<div class="clear"></div>
+	
+	<?php echo CHtml::ajaxSubmitButton('Filter',array('battery/assemble'), array(),array("style"=>"display:none;")); ?>
+	<?php echo CHtml::ajaxSubmitButton('Submit',array('battery/ajaxassemble'), array('success'=>'assembleComplete'), array("id"=>"submit-button")); ?>
+	
+	
 </div>
-<?php $this->endWidget(); ?>
 
 <div id="batterycell-details" style="overflow-x:hidden; position:relative;margin-top: 12px;"></div>
 
+<?php $this->endWidget(); ?>
 <script type="text/javascript">
 var currentPage = 0;
 
@@ -101,10 +161,63 @@ function serialSelected(sel){
 			id: battery_id.toString(),
 		},
 		success: function(data){
-			$('#batterycell-details').html(data).css('height','400px');
+			$('#batterycell-details').html(data).css('height','460px');
 			$('#previous-module-link').hide();
+
+			$('.grid-view').each( function (event) {
+				console.log(event);
+				$('.grid-view .filters').attr('align','center');
+				$('.grid-view .filters').children(':nth-child(1)').text('Use Spare');
+			});
 		},
 	});
+}
+
+function cellSelected(sel)
+{
+	/* remove the selected value from the other dropdowns */
+	var el = $(sel);
+	var selectedValue = $('option:selected', el).val();
+	if(selectedValue!=''){
+		$('.cell-dropdown').not(el).each(function(index){
+			$('option[value="'+selectedValue+'"]', this).remove();
+		});	
+	} 
+	if (el.data('prevValue')){
+		/* add previous value back to selects */
+		$('.cell-dropdown').not(el).each(function(index){
+			$(this).append($('<option>', {value : el.data('prevValue')})
+				.text(el.data('prevText')));
+		});	
+	}
+	el.data('prevValue', sel.value);
+	el.data('prevText', sel.options[sel.selectedIndex].text);
+}
+
+function assembleComplete(data){
+	if(data=='hide')
+	{
+		$('.errorSummary').remove();
+	}
+	else
+	{
+		try
+		{
+		   var batteryResult = $.parseJSON(data);
+		   var alertString = 'You selected cells for ' + batteryResult.batterytype + ' SN: ' + batteryResult.serial_num;
+		   alertString += '\n' + batteryResult.num_spares + ' spares were selected.\n\nWould you like to select another battery?';
+		   if(confirm(alertString)==false){
+				window.location  = urlSuccess;
+			} else {
+				 window.location.reload();
+			}
+		}
+		catch(e)
+		{
+			$('#battery-form').prepend(data);
+			console.log(e.message);
+		}
+	}
 }
 
 $(document).on('click', '#next-module-link', function(event){
@@ -175,5 +288,4 @@ $(document).on('click', '#previous-module-link', function(event){
 	}
 	return false;
 });
-
 </script>

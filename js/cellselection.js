@@ -188,9 +188,24 @@ function typeSelected(sel, urlFormContent, urlCellsAvailable)
 				data:
 				{
 					type_id: type_id.toString(),
+					bForSpares: 0,
 				},
 				success: function(data){
-					$('.cell-dropdown').html(data);
+					$('.cell-dropdown').not('.spares').html(data);
+				},
+			});
+			
+			// populate the spare cell serial dropdown
+			$.ajax({
+				type:'get',
+				url: urlCellsAvailable,
+				data:
+				{
+					type_id: type_id.toString(),
+					bForSpares: 1,
+				},
+				success: function(data){
+					$('.cell-dropdown.spares').html(data);
 				},
 			});
 		},
@@ -240,6 +255,27 @@ function cellSelected(sel)
 	if (el.data('prevValue')){
 		/* add previous value back to selects */
 		$('.cell-dropdown').not(el).each(function(index){
+			$(this).append($('<option>', {value : el.data('prevValue')})
+				.text(el.data('prevText')));
+		});	
+	}
+	el.data('prevValue', sel.value);
+	el.data('prevText', sel.options[sel.selectedIndex].text);
+}
+
+function spareSelected(sel)
+{
+	/* remove the selected value from the other dropdowns */
+	var el = $(sel);
+	var selectedValue = $('option:selected', el).val();
+	if(selectedValue!=''){
+		$('.spares').not(el).each(function(index){
+			$('option[value="'+selectedValue+'"]', this).remove();
+		});	
+	} 
+	if (el.data('prevValue')){
+		/* add previous value back to selects */
+		$('.spares').not(el).each(function(index){
 			$(this).append($('<option>', {value : el.data('prevValue')})
 				.text(el.data('prevText')));
 		});	

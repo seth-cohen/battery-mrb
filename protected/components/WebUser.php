@@ -73,6 +73,12 @@ class WebUser extends CWebUser
         		return true;
         }
         
+     if ($operation === 'manufacturing battery assembly')
+        {   		       		
+        	if(in_array('manufacturing battery assembly',$this->roles))
+        		return true;
+        }
+        
         // allow access if the operation request is the current user's role
         return (in_array($operation,$this->roles));
     }

@@ -43,9 +43,9 @@ class BatteryController extends Controller
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array(
-					'assemble', 'ajaxserialsforassembly', 'ajaxcellsforbatteryassembly',
+					'assemble', 'ajaxserialsforassembly', 'ajaxcellsforbatteryassembly', 'ajaxassemble',
 				),
-				'roles'=>array('Manufacturing Battery Assembly'),
+				'roles'=>array('manufacturing battery assembly'),
 				//'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -194,19 +194,6 @@ class BatteryController extends Controller
 		return $model;
 	}
 
-	/**
-	 * Performs the AJAX validation.
-	 * @param Battery $model the model to be validated
-	 */
-	protected function performAjaxValidation($model)
-	{
-		if(isset($_POST['ajax']))
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
-	}
-	
 	public function actionCellSelection()
 	{
 		$batteryModel = new Battery;
@@ -312,6 +299,15 @@ class BatteryController extends Controller
 		$criteria->addcondition('data_accepted=1');
 		$criteria->addcondition('battery_id IS NULL');
 		
+		$bForSpares = isset($_GET['bForSpares'])?$_GET['bForSpares']:0;
+		if($bForSpares == 0)
+		{
+			/* but are not currently a spare for another battery*/
+			$criteria->addCondition('NOT EXISTS (SELECT *
+												FROM tbl_battery_spare spare
+												WHERE t.id = spare.cell_id
+												GROUP BY t.id)');
+		}
 //		if(isset($_GET['values'])){
 //			$selectedCells = $_GET['values'];
 //			$criteria->addNotInCondition('t.id', $selectedCells);
@@ -400,6 +396,51 @@ class BatteryController extends Controller
 		));
 	}
 	
+	/**
+	 * 
+	 * Performs the action that validates the battery asembly action. 
+	 * If there are spares that are used then 
+	 */
+	public function actionAjaxAssemble()
+	{
+		$batteryModel=new Battery;
+		$cells = array();
+		$spares = array();
+		
+		if(isset($_POST['Battery']))
+		{
+			/* make sure that cells were selected for the battery */	
+			if(!isset($_POST['Battery']['Cells']) ||
+				(count(array_unique($_POST['Battery']['Cells'])) != $_POST['num_cells']))
+			{
+				$batteryModel->addError('selection_error', 'Not enough cells selected');
+				echo CHtml::errorSummary($batteryModel);
+				Yii::app()->end();
+			}
+			else 
+			{
+				$cells = $_POST['Battery']['Cells'];
+			}
+			if(isset($_POST['Battery']['Spares']))
+			{
+				$spares = $_POST['Battery']['Spares'];
+			}
+			
+			$batteryModel->attributes=$_POST['Battery'];
+			
+			//$result = Battery::batteryCellSelection($batteryModel, $cells, $spares);
+			
+			if (!json_decode($result))
+			{ /* the save failed otherwise result would be json_encoded*/
+				echo $result;
+			} 
+			else 
+			{ /* success so show count and serial numbers */
+				echo $result;
+			}
+		}
+	}
+	
 /**
 	 * 
 	 * Returns options for dropdown box of all available cells that have been
@@ -456,12 +497,11 @@ class BatteryController extends Controller
 		}
 		
 		/* get the spares as a list of options for the dropdownlist */
-		$cellModel->battery_position = '>=1000';
-		$spareDataProvider = $cellModel->searchInBattery(100, 0);
+		$spareCells = BatterySpare::model()->with('cell.kit')->findAllByAttributes(array('battery_id'=>$id));
 		$spareOptions = array();
 		
-		foreach($spareDataProvider->data as $spare){
-			$spareOptions[$spare->id] = $spare->kit->getFormattedSerial();
+		foreach($spareCells as $spare){
+			$spareOptions[$spare->cell->id] = $spare->cell->kit->getFormattedSerial();
 		}
 		
 		$this->renderPartial('_assemblyform',array(
@@ -511,4 +551,51 @@ class BatteryController extends Controller
 			);
 		}
 	}
+
+	/**
+	 * generates the text fields for the operator
+	 */
+	protected function getUserInputTextField($data,$row)
+	{
+		$disabled = '';
+		$userName = '';
+		$userId = '';
+		
+		if (Yii::app()->user->checkAccess('manufacturing supervisor') || Yii::app()->user->checkAccess('manufacturing engineer'))
+		{
+			
+		}
+		else
+		{
+			$disabled = 'true';
+			$userName = User::getFullNameProper(Yii::app()->user->id);
+			$userId = Yii::app()->user->id;
+		}
+		
+		$returnString = CHtml::textField("user_names[$data->id]",$userName,array(
+				"style"=>"width:110px;",
+				"class"=>"autocomplete-user-input",
+				"autocomplete"=>"off",
+				"disabled"=>$disabled,
+			));
+			
+		$returnString.= CHtml::hiddenField("user_ids[$data->id]",$userId, array("class"=>"user-id-input"));
+	
+		return $returnString;
+	}
+
+	/**
+	 * Performs the AJAX validation.
+	 * @param Battery $model the model to be validated
+	 */
+	protected function performAjaxValidation($model)
+	{
+		if(isset($_POST['ajax']))
+		{
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
+		}
+	}
+	
 }
+	

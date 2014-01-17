@@ -19,6 +19,7 @@
  * @property RefNum $refNum
  * @property User $assembler
  * @property Cell[] $cells
+ * @property BatterySpare[] $spares
  */
 class Battery extends CActiveRecord
 {
@@ -86,6 +87,7 @@ class Battery extends CActiveRecord
 			'refNum' => array(self::BELONGS_TO, 'RefNum', 'ref_num_id'),
 			'assembler' => array(self::BELONGS_TO, 'User', 'assembler_id'),
 			'cells' => array(self::HAS_MANY, 'Cell', 'battery_id'),
+			'spares' => array(self::HAS_MANY, 'BatterySpare', 'battery_id'),
 		);
 	}
 
@@ -373,12 +375,18 @@ class Battery extends CActiveRecord
 					{
 						$spareCount += 1;
 						$cellModel = Cell::model()->findByPk($spare['id']);
-						$cellModel->battery_id = $battery_id;
-						$cellModel->location = '[EAP-Spare] '.$batteryModel->batterytype->name
-													.'- SN: '.$batteryModel->serial_num;
-						$cellModel->battery_position = $position+1000;
+						$cellModel->location = '[EAP-Spare] '.$batteryModel->batterytype->name;
 						
 						$cellModel->save();
+						
+						/* create the batteryspares */
+						$spareModel = new BatterySpare;
+						
+						$spareModel->cell_id = $spare['id'];
+						$spareModel->battery_id = $battery_id;
+						$spareModel->position = $position;
+						
+						$spareModel->save();
 					}
 				}
 			}

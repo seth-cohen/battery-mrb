@@ -22,14 +22,24 @@ foreach($cellDataProviders as $cellDataProvider):
 ?>
 
 <div class="shadow border" id="cellselection-wrapper-<?=$x?>" 
-	style="width:300px;margin:10px auto;position:absolute;<?=$x>0?'top:25px;right:-350px;':'right:204px;';?>">
+	style="width:360px;margin:10px auto;position:absolute;<?=$x>0?'top:25px;right:-410px;':'right:174px;';?>">
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>"cellselection-grid-$x",
 	'template'=>'{summary}{items}',
 	'summaryText'=>'Choose Cells {start}-{end} of the {count} total',
 	'dataProvider'=>$cellDataProvider,
+	'filter'=>$cellDataProvider,
 	'columns'=>array(
+		array(
+            'id'=>'autoId',
+            'class'=>'CCheckBoxColumn',
+            'selectableRows' => '50',   
+        ),
+        array(
+        	'header'=>'Position',
+        	'value'=>'$data->battery_position',
+        ),
 		array(
 			'header'=>'Cell Serial',
 			'value'=>'$data->kit->getFormattedSerial()',
