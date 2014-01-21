@@ -23,9 +23,9 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/jquer
 
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-    'enableAjaxValidation'=>false, // no need for this.
+    'enableAjaxValidation'=>true, // no need for this.
 	'enableClientValidation'=>true,
-	'id'=>'stacking-form',
+	'id'=>'assembly-form',
 )); ?>
 
 <div class="form">
@@ -97,8 +97,7 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/jquer
 			<?php
 			    $this->widget('zii.widgets.jui.CJuiDatePicker', array(
 			        'model'=>$batteryModel,
-			       'name'=>'assembly_date',
-			    	'value'=>date("Y-m-d",time()),
+			       	'attribute'=>'assembly_date',
 			        // additional javascript options for the date picker plugin
 			        'options'=>array(
 			            'showAnim'=>'slideDown',
@@ -164,6 +163,11 @@ function serialSelected(sel){
 			$('#batterycell-details').html(data).css('height','460px');
 			$('#previous-module-link').hide();
 
+			if (!$('#cellselection-wrapper-'+(currentPage+1)).length){
+				//do nothing
+				$('#next-module-link').hide();
+			}
+			
 			$('.grid-view').each( function (event) {
 				console.log(event);
 				$('.grid-view .filters').attr('align','center');
@@ -207,14 +211,14 @@ function assembleComplete(data){
 		   var alertString = 'You selected cells for ' + batteryResult.batterytype + ' SN: ' + batteryResult.serial_num;
 		   alertString += '\n' + batteryResult.num_spares + ' spares were selected.\n\nWould you like to select another battery?';
 		   if(confirm(alertString)==false){
-				window.location  = urlSuccess;
+				window.location  = ' <?php echo $this->createUrl('battery/index') ?> ';
 			} else {
 				 window.location.reload();
 			}
 		}
 		catch(e)
 		{
-			$('#battery-form').prepend(data);
+			$('#assembly-form').prepend(data);
 			console.log(e.message);
 		}
 	}
@@ -287,5 +291,9 @@ $(document).on('click', '#previous-module-link', function(event){
 		});
 	}
 	return false;
+});
+
+jQuery('#submit-button').on('click', function(event) {
+	$('.errorSummary').remove();
 });
 </script>

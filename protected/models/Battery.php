@@ -8,7 +8,7 @@
  * @property string $batterytype_id
  * @property string $ref_num_id
  * @property string $eap_num
- * @property string $serial_num
+ * @property integer $serial_num
  * @property string $assembler_id
  * @property string $assembly_date
  * @property string $ship_date
@@ -47,7 +47,8 @@ class Battery extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('serial_num, batterytype_id, location', 'required'),
+			array('serial_num, batterytype_id, location, ref_num_id, eap_num', 'required'),
+			array('serial_num, batterytype_id, assembler_id, assembly_date', 'required', 'on'=>'assemble'),
 			array('serial_num', 'checkUniqueInType'),
 			
 			array('batterytype_id, ref_num_id, assembler_id', 'length', 'max'=>10),
@@ -262,6 +263,7 @@ class Battery extends CActiveRecord
 			),
 		));
 	}
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
@@ -296,7 +298,7 @@ class Battery extends CActiveRecord
 		}
 		else
 		{ 	/* if either have changed must validate */
-			return ($this->previousCellType !== $this->celltype_id || $this->previousSerialNum !== $this->serial_num);
+			return ($this->previousBatteryType !== $this->batterytype_id || $this->previousSerialNum !== $this->serial_num);
 			
 		}
 	}
@@ -316,6 +318,19 @@ class Battery extends CActiveRecord
 			 $result[] = array(
 			 	'id' =>$cell->id,
 			 	'position'=>$cell->battery_position,
+			 	'serial' => $cell->kit->getFormattedSerial(),
+			 	'location'=> $cell->location,
+			);
+		}
+		
+		/* get the list of spares */
+		$spareCells = BatterySpare::model()->with('cell.kit')->findAllByAttributes(array('battery_id'=>$this->id));
+		foreach($spareCells as $spare)
+		{
+			$cell = $spare->cell;
+			$result[] = array(
+			 	'id' =>$cell->id,
+			 	'position'=>$spare->position + 1000,
 			 	'serial' => $cell->kit->getFormattedSerial(),
 			 	'location'=> $cell->location,
 			);
@@ -375,7 +390,10 @@ class Battery extends CActiveRecord
 					{
 						$spareCount += 1;
 						$cellModel = Cell::model()->findByPk($spare['id']);
-						$cellModel->location = '[EAP-Spare] '.$batteryModel->batterytype->name;
+						/* moved this to testlab action deliver because the location doesn't actually change until
+						 * it is delivered to Battery Assembly
+						 */
+						//$cellModel->location = '[EAP-Spare] '.$batteryModel->batterytype->name;
 						
 						$cellModel->save();
 						
@@ -406,5 +424,80 @@ class Battery extends CActiveRecord
 		
 	}
 	
+	/**
+	 * 
+	 * Creates new battery and associates designated cells from the cell selection...
+	 * to default states 
+	 * 
+	 * @param Battery $batteryModel
+	 * @param Array $cells
+	 */
+	public static function batteryAssemble($batteryModel, $spares=array())
+	{
+		$spareCount = 0;
+		
+		if(empty($batteryModel) || empty($spares))
+			return;
+		
+		$batteryModel->location = 'Assembled';
+		
+		if($batteryModel->save())
+		{
+			$battery_id = $batteryModel->id;
+			
+			/* Replace the cells with spares that need to be replace in the battery and remove spares from list  */
+			if(!empty($spares))
+			{
+				foreach($spares as $cell_id=>$spare_id)
+				{
+					$spareCount += 1;
+					
+					$cellModel = Cell::model()->findByPk($cell_id);
+					$spareModel = Cell::model()->findByPk($spare_id);
+					
+					$spareModel->battery_id = $cellModel->battery_id;
+					$spareModel->battery_position = $cellModel->battery_position;
+					$spareModel->save();
+					
+					$cellModel->battery_id = null;
+					$cellModel->battery_position = null;
+					$cellModel->location = '[Dispo] - Replaced by spare {'.$spareModel->kit->getFormattedSerial().'}';
+					$cellModel->save();
+					
+					/* delete all instances of the spare as a batteryspare */
+					$batterySpares = BatterySpare::model()->findAllByAttributes(array('cell_id'=>$spareModel->id));
+					foreach($batterySpares as $spare)
+					{
+						$spare->delete();
+					}
+				}
+			}
+			
+			/* Set cell location in the battery serial number*/
+			if(!empty($batteryModel->cells))
+			{
+				foreach($batteryModel->cells as $cellModel)
+				{
+					$cellModel->location = '[Assembled] '.$batteryModel->batterytype->name . 'SN: '. $batteryModel->serial_num;
+					$cellModel->save();
+				}
+			}
+			
+			$result = array(
+				'batterytype' => $batteryModel->batterytype->name,
+				'serial_num' => $batteryModel->serial_num,
+				'num_spares' => $spareCount,
+			);
+			
+			return json_encode($result);
+		}
+		else
+		{
+			return CHtml::errorSummary($batteryModel);
+		}
+		
+		return null;
+		
+	}
 
 }

@@ -14,6 +14,8 @@ function checkSelection(data){
 		   var batteryResult = $.parseJSON(data);
 		   var alertString = 'You selected cells for ' + batteryResult.batterytype + ' SN: ' + batteryResult.serial_num;
 		   alertString += '\n' + batteryResult.num_spares + ' spares were selected.\n\nWould you like to select another battery?';
+		   alertString += '\n"Cancel" will take you to the battery index page';
+		   
 		   if(confirm(alertString)==false){
 				window.location  = urlSuccess;
 			} else {
@@ -172,7 +174,9 @@ function typeSelected(sel, urlFormContent, urlCellsAvailable)
 		},
 		success: function(data){
 			currentPage = 0;
-			$('#selection-container').html(data).css('height','400px');
+			var result = $.parseJSON(data);
+
+			$('#selection-container').html(result.view).css('height','400px');
 			
 			$('#cellspares-wrapper').show();
 			$('#previous-module-link').hide();
@@ -180,7 +184,9 @@ function typeSelected(sel, urlFormContent, urlCellsAvailable)
 				//do nothing
 				$('#next-module-link').hide();
 			}
-
+			
+			$('#last-serial').text(	"Latest serial number used for this battery type was: SN: " + result.serial + '.  This is not necessarily the highest SN selected.');
+			
 			// populate the cell serial dropdown
 			$.ajax({
 				type:'get',

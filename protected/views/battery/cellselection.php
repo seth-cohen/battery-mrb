@@ -98,10 +98,7 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/cells
 	<div class="clear"></div>
     
     <div class="row">
-        <?php echo $form->labelEx($batteryModel,'refnum_search'); ?> 
-        <?php echo $form->textField($batteryModel,'refnum_search',array('size'=>64,'maxlength'=>75)); ?>
-        <span style="padding-left:10px"; ><em><b>NOTE:</b></em> Comma or Space delimited</span>
-        <?php echo $form->error($batteryModel,'refnum_search'); ?>
+       <div style="padding-top:2px; width:500px; margin:auto;"><span id="last-serial"></span></div>
     </div>
     
     <?php echo CHtml::ajaxSubmitButton('Filter',array('battery/cellselection'), array(),array("style"=>"display:none;")); ?>

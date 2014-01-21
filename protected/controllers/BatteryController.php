@@ -36,7 +36,7 @@ class BatteryController extends Controller
 					'create','update', 
 					'cellselection', 'ajaxselection',
 					'ajaxtypeselected', 'ajaxavailablecells',
-					'ajaxgetbatterycells',
+					'ajaxcellsforbatteryview',
 				),
 				'roles'=>array('engineering'),
 				//'users'=>array('@'),
@@ -262,13 +262,31 @@ class BatteryController extends Controller
 			 ));
 		}
 		
-		$this->renderPartial('_selectionform',array(
+		$result = array();
+		$result['view'] = $this->renderPartial('_selectionform',array(
 				'batterytypeModel'=>$batterytypeModel,
 				'cellDataProviders'=>$cellDataProviders,
 			),
-			false,
-			true
+			true,
+			false
 		);
+		
+		/* get the highest serial number for that battery model that has been created */
+		$batteryModel = Battery::model()->findByAttributes(
+			array('batterytype_id'=>$id),
+			array('order'=>'id DESC', 'limit'=>1)
+		);
+		
+		if($batteryModel)
+		{
+			 $result['serial'] = $batteryModel->serial_num;
+		}
+		else 
+		{
+			$result['serial'] =  'N/A';
+		}
+		
+		echo json_encode($result);
 	}
 	
 	/**
@@ -373,18 +391,16 @@ class BatteryController extends Controller
 	 */
 	public function actionAssemble()
 	{
-		$batteryModel=new Battery('search'); 
+		$batteryModel=new Battery('assemble'); 
 		$batteryModel->unsetAttributes();  // clear any default values
+		$batteryModel->assembly_date = date("Y-m-d",time());
 		
 		//validate the battery attributes
-//		if(isset($_POST['ajax']))
-//		{
-//			echo CActiveForm::validate($batteryModel);
-//			Yii::app()->end();
-//		}
-
-		/* uses battery->searchForAssembly() to get all batteries that have been created by
-		 * cell selection but haven't been built yet */
+		if(isset($_POST['ajax']))
+		{
+			echo CActiveForm::validate($batteryModel);
+			Yii::app()->end();
+		}
 		
 		if(isset($_POST['Battery']))
 		{
@@ -403,32 +419,49 @@ class BatteryController extends Controller
 	 */
 	public function actionAjaxAssemble()
 	{
-		$batteryModel=new Battery;
+		$batteryModel;
 		$cells = array();
 		$spares = array();
 		
 		if(isset($_POST['Battery']))
 		{
+			$batteryModel = Battery::model()->findByPk($_POST['Battery']['serial_num']);
+			$cells = $_POST['Battery']['Cells'];
+			
 			/* make sure that cells were selected for the battery */	
-			if(!isset($_POST['Battery']['Cells']) ||
-				(count(array_unique($_POST['Battery']['Cells'])) != $_POST['num_cells']))
+			if( isset($_POST['autoId']) )
 			{
-				$batteryModel->addError('selection_error', 'Not enough cells selected');
-				echo CHtml::errorSummary($batteryModel);
-				Yii::app()->end();
+				$bSparesOK = true;
+				
+				/* for each of the cell_ids that needs a spare */
+				foreach($_POST['autoId'] as $id)
+				{
+					if($cells[$id] == '')
+					{
+						$bSparesOK = false;
+					}
+					else
+					{
+						$spares[$id] = $cells[$id];
+					}
+				}
+				if ($bSparesOK == false)
+				{
+					$batteryModel->addError('spares_error', 'There was no spare selected for a cell marked bad');
+					echo CHtml::errorSummary($batteryModel);
+					Yii::app()->end();
+				}
 			}
 			else 
 			{
-				$cells = $_POST['Battery']['Cells'];
-			}
-			if(isset($_POST['Battery']['Spares']))
-			{
-				$spares = $_POST['Battery']['Spares'];
+				Yii::app()->end();
 			}
 			
-			$batteryModel->attributes=$_POST['Battery'];
+			$batteryModel->assembly_date =$_POST['Battery']['assembly_date'];
+			$batteryModel->assembler_id =$_POST['Battery']['assembler_id'];
+			$batteryModel->scenario ='assemble';
 			
-			//$result = Battery::batteryCellSelection($batteryModel, $cells, $spares);
+			$result = Battery::batteryAssemble($batteryModel, $spares);
 			
 			if (!json_decode($result))
 			{ /* the save failed otherwise result would be json_encoded*/
@@ -441,10 +474,10 @@ class BatteryController extends Controller
 		}
 	}
 	
-/**
+	/**
 	 * 
-	 * Returns options for dropdown box of all available cells that have been
-	 * approved by QA of the cell type needed for the battery type_id selected
+	 * Returns options for dropdown box of all available batteries that have been
+	 * had cells selected on EAP and not been assembled
 	 */
 	public function actionAjaxSerialsForAssembly()
 	{
@@ -455,7 +488,7 @@ class BatteryController extends Controller
 		
 		$type_id = $_GET['type_id'];
 		$batteryModels = Battery::model()->findAllByAttributes(
-			array('batterytype_id'=>$type_id), 
+			array('batterytype_id'=>$type_id, 'assembler_id'=>1), 
 			array('select'=>'id, serial_num')
 		);
 		
@@ -466,6 +499,9 @@ class BatteryController extends Controller
 		}
 	}
 	
+	/**
+	 * Returns list of the cells that were selected for battery with the specified ID
+	 */
 	public function actionAjaxCellsForBatteryAssembly()
 	{
 		$id=null;
@@ -518,7 +554,7 @@ class BatteryController extends Controller
 	 * Performs the AJAX update of the battery-detail view on the index page.
 	 * @param integer $id of the battery to get the cells for
 	 */
-	public function actionAjaxGetBatteryCells($id=null)
+	public function actionAjaxCellsForBatteryView($id=null)
 	{	
 		/* load cell detail information */
 		if($id == null)

@@ -96,7 +96,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 
 		$.ajax({
 			type:'get',
-    		url: '<?php echo $this->createUrl('battery/ajaxgetbatterycells'); ?>',
+    		url: '<?php echo $this->createUrl('battery/ajaxcellsforbatteryview'); ?>',
     		data:
     		{
     			id: battery_id.toString(),
