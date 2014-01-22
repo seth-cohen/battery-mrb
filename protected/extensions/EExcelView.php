@@ -9,12 +9,11 @@
 	class EExcelView extends CGridView
 	{
 		//Document properties
-		public $creator = 'Seth Cohen';
+		public $creator = 'Nikola Kostadinov';
 		public $title = null;
 		public $subject = 'Subject';
 		public $description = '';
 		public $category = '';
-		public $sheetTitle = 'Sheet1';
 
 		//the PHPExcel object
 		public $objPHPExcel = null;
@@ -80,9 +79,6 @@
 				$this->grid_mode = 'grid';
 				Yii::log("PHP Excel lib not found($lib). Export disabled !", CLogger::LEVEL_WARNING, 'EExcelview');
 			}
-
-			if($this->disablePaging) //if needed disable paging to export all data
-				$this->dataProvider->pagination = false;
 				
 			if($this->grid_mode == 'export')
 			{			
@@ -129,6 +125,9 @@
 
 		public function renderBody()
 		{
+			if($this->disablePaging) //if needed disable paging to export all data
+				$this->dataProvider->pagination = false;
+
 			$data=$this->dataProvider->getData();
 			$n=count($data);
 
@@ -199,7 +198,6 @@
 				if($this->autoWidth)
 					foreach($this->columns as $n=>$column)
 						$this->objPHPExcel->getActiveSheet()->getColumnDimension($this->columnName($n+1))->setAutoSize(true);
-				$this->objPHPExcel->getActiveSheet()->setTitle($this->sheetTitle);
 				//create writer for saving
 				$objWriter = PHPExcel_IOFactory::createWriter($this->objPHPExcel, $this->exportType);
 				if(!$this->stream)
@@ -214,10 +212,8 @@
 					header('Content-type: '.$this->mimeTypes[$this->exportType]['Content-type']);
 					header('Content-Disposition: attachment; filename="'.$this->filename.'.'.$this->mimeTypes[$this->exportType]['extension'].'"');
 					header('Cache-Control: max-age=0');				
-					$objWriter->save('php://output');
-					ob_start();
+					$objWriter->save('php://output');			
 					Yii::app()->end();
-					ob_end_clean();
 				}
 			} else
 				parent::run();

@@ -144,7 +144,7 @@ class CellController extends Controller
 		$model=new Cell('search');
 		$model->unsetAttributes();  // clear any default values
 		
-		$visibleColumns = array(1,2,5);
+		$visibleColumns = array(1,2,5,19);
 		if(isset($_GET['Columns']))
 		{
 			$visibleColumns = $_GET['Columns'];
@@ -662,12 +662,105 @@ class CellController extends Controller
 		if(isset($_GET['Cell']))
 			$model->attributes=$_GET['Cell'];
 			
+		if(isset($_GET['Columns']))
+			$visibleColumns=$_GET['Columns'];
+		
 		$this->widget('application.extensions.EExcelView', array( 
-            'dataProvider'=> $model->search(), 
-            'grid_mode'=>'export', 
-            'exportType'=>'Excel2007', 
-            'filename'=>'report', 
-		));
+				'dataProvider'=> $model->search(), 
+				'grid_mode'=>'export', 
+				'exportType'=>'Excel2007', 
+				'filename'=>'cell_details', 
+				'stream'=>true,
+				'columns'=>array(
+					array(
+						'name'=>'serial_search',
+						'value'=>'$data->kit->celltype->name."-".$data->kit->serial_num',
+						'visible'=>in_array(1,$visibleColumns),
+					),
+					array(
+						'name'=>'refnum_search',
+						'value'=>'$data->refNum->number',
+						'visible'=>in_array(2,$visibleColumns),
+					),
+					array(
+						'name'=>'eap_num',
+						'visible'=>in_array(3,$visibleColumns),
+					),
+					array(
+						'name'=>'celltype_search',
+						'value'=>'$data->kit->celltype->name',
+						'visible'=>in_array(4,$visibleColumns),
+					),
+					array(
+						'name'=>'stacker_search',
+						'value'=>'$data->stacker->getFullName()',
+						'visible'=>in_array(5,$visibleColumns),
+					),
+					array(
+						'name'=>'stack_date',
+						'visible'=>in_array(6,$visibleColumns),
+					),
+					array(
+						'name'=>'inspector_search',
+						'value'=>'$data->inspector->getFullName()',
+						'visible'=>in_array(7,$visibleColumns),
+					),
+					array(
+						'name'=>'inspection_date',
+						'visible'=>in_array(8,$visibleColumns),
+					),
+					array(
+						'name'=>'laserwelder_search',
+						'value'=>'$data->laserwelder->getFullName()',
+						'visible'=>in_array(9,$visibleColumns),
+					),
+					array(
+						'name'=>'laserweld_date',
+						'visible'=>in_array(10,$visibleColumns),
+					),
+					array(
+						'name'=>'filler_search',
+						'value'=>'$data->filler->getFullName()',
+						'visible'=>in_array(11,$visibleColumns),
+					),
+					array(
+						'name'=>'fill_date',
+						'visible'=>in_array(12,$visibleColumns),
+					),
+					array(
+						'name'=>'portwelder_search',
+						'value'=>'$data->portwelder->getFullName()',
+						'visible'=>in_array(13,$visibleColumns),
+					),
+					array(
+						'name'=>'portweld_date',
+						'visible'=>in_array(14,$visibleColumns),
+					),
+					array(
+						'name'=>'dry_wt',
+						'visible'=>in_array(15,$visibleColumns),
+					),
+					array(
+						'name'=>'wet_wt',
+						'visible'=>in_array(16,$visibleColumns),
+					),
+					array(
+						'name'=>'anode_search',
+						'value'=>'$data->kit->getAnodeList()',
+						'visible'=>in_array(17,$visibleColumns),
+					),
+					array(
+						'name'=>'cathode_search',
+						'value'=>'$data->kit->getCathodeList()',
+						'visible'=>in_array(18,$visibleColumns),
+					),
+					array(
+						'name'=>'location',
+						'visible'=>in_array(19,$visibleColumns),
+					),
+				)
+			)
+		);
 	}
 
 	public function actionDownloadListOG()
