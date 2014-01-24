@@ -84,7 +84,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'columns'=>array(
 		array(
 			'name'=>'serial_search',
-			'value'=>'$data->kit->celltype->name."-".$data->kit->serial_num',
+			'value'=>'$data->kit->getFormattedSerial()',
 			'visible'=>in_array(1,$visibleColumns),
 		),
 		array(
@@ -165,8 +165,14 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 			'visible'=>in_array(18,$visibleColumns),
 		),
 		array(
-			'name'=>'location',
+			'name'=>'ncr_search',
+			'type'=>'html',
+			'value'=>'$data->getNCRLinks()',
 			'visible'=>in_array(19,$visibleColumns),
+		),
+		array(
+			'name'=>'location',
+			'visible'=>in_array(20,$visibleColumns),
 		),
 		array(
 			'class'=>'CButtonColumn',

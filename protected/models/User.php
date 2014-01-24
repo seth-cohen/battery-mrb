@@ -74,7 +74,7 @@ class User extends CActiveRecord
 			'roles' => array(self::MANY_MANY, 'Role', 'tbl_user_role(user_id, role_id)'),
 		);
 	}
-
+	
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */

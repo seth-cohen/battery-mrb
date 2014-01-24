@@ -74,6 +74,8 @@ return array(
 			'username' => 'root',
 			'password' => '',
 			'charset' => 'utf8',
+			/* delete this */
+			'enableParamLogging'=>true,
 		),
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors

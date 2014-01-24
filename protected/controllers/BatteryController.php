@@ -293,6 +293,7 @@ class BatteryController extends Controller
 	 * 
 	 * Returns options for dropdown box of all available cells that have been
 	 * approved by QA of the cell type needed for the battery type_id selected
+	 * that are not on open NCR or Scrapped or for ENG use only
 	 */
 	public function actionAjaxAvailableCells()
 	{
@@ -317,6 +318,13 @@ class BatteryController extends Controller
 		$criteria->addcondition('data_accepted=1');
 		$criteria->addcondition('battery_id IS NULL');
 		
+		/* but are not currently on an open NCR or scrapped/eng use only */
+		$criteria->addCondition('NOT EXISTS (SELECT *
+											FROM tbl_ncr_cell ncr
+											WHERE t.id = ncr.cell_id
+											AND ncr.disposition < 3
+											GROUP BY t.id)');
+			
 		$bForSpares = isset($_GET['bForSpares'])?$_GET['bForSpares']:0;
 		if($bForSpares == 0)
 		{
@@ -326,10 +334,6 @@ class BatteryController extends Controller
 												WHERE t.id = spare.cell_id
 												GROUP BY t.id)');
 		}
-//		if(isset($_GET['values'])){
-//			$selectedCells = $_GET['values'];
-//			$criteria->addNotInCondition('t.id', $selectedCells);
-//		}   <-- not needed moved this to jQuery function
 		
 		$cells = Cell::model()->findAll($criteria);
 		

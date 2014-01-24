@@ -90,12 +90,6 @@ function statusSelected(sel)
 			status: status,
 		},
 		success: function(data) {
-			$('.cycler-dropdown').val(cycler_id);
-			
-			$('.channel-dropdown').attr('disabled',false);
-			$('.channel-dropdown').html(data);
-			$('.channel-dropdown').data('prevValue', '');
-			$('.channel-dropdown').data('prevText', '');
 		},
 	});	
 }

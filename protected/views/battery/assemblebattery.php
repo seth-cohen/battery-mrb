@@ -19,7 +19,7 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/jquer
 ?>
 
 <h1>Assemble Battery</h1>
-<p>*Only batteries that have had cell selections will be available for assembly..</p>
+<p>*Only batteries that have had cell selections will be available for assembly.</p>
 
 
 <?php $form=$this->beginWidget('CActiveForm', array(

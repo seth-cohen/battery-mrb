@@ -287,9 +287,7 @@ class Battery extends CActiveRecord
 		return parent::afterFind();
 		
 	}
-	
-	
-	
+
 	public function hasSerialChanged()
 	{
 		if($this->previousBatteryType == null || $this->previousSerialNum == null)
@@ -302,9 +300,7 @@ class Battery extends CActiveRecord
 			
 		}
 	}
-	
-	
-	
+
 	/**
 	 * 
 	 * Return an associative array for an arraydataprovider that contains the cell id and serial number
@@ -338,7 +334,6 @@ class Battery extends CActiveRecord
 		
 		return $result;
 	}
-	
 	
 	/**
 	 * 

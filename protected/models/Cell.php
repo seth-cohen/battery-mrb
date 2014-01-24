@@ -35,6 +35,7 @@
  * @property User $portwelder
  * @property User $laserwelder
  * @property TestAssignment[] $testAssignments
+ * @property Ncr[] $ncrs
  * 
  */
 class Cell extends CActiveRecord
@@ -58,6 +59,7 @@ class Cell extends CActiveRecord
 	public $refnum_search;
 	public $anode_search;
 	public $cathode_search;
+	public $ncr_search;
 	
 	public $not_formed=null;
 	public $formed_only=null;
@@ -93,8 +95,12 @@ class Cell extends CActiveRecord
 			array('eap_num, stack_date, dry_wt, wet_wt, fill_date, inspection_date, serial_search, celltype_search, 
 					refnum_search, stacker_search, filler_search, inspector_search, laserwelder_search, portwelder_search,
 					location, not_formed, formed_only, inspector_id, laserwelder_id, portwelder_id, anode_search, cathode_search,
-					battery_id', 
-					'safe', 'on'=>'search'),
+					battery_id, ncr_search', 
+					'safe', 'on'=>'search'
+			),
+			array('serial_search, celltype_search, refnum_search, ncr_search', 
+					'safe', 'on'=>'searchOnNCR'
+			),
 		);
 	}
 
@@ -133,6 +139,7 @@ class Cell extends CActiveRecord
 			'laserwelder' => array(self::BELONGS_TO, 'User', 'laserwelder_id'),
 			'portwelder' => array(self::BELONGS_TO, 'User', 'portwelder_id'),
 			'testAssignments' => array(self::HAS_MANY, 'TestAssignment', 'cell_id'),
+			'ncrs' => array(self::MANY_MANY, 'Ncr', 'tbl_ncr_cell(cell_id, ncr_id)'),
 		);
 	}
 
@@ -172,7 +179,7 @@ class Cell extends CActiveRecord
 			'activetest_search' => 'Active Test',
 			'anode_search' => 'Anode Lots',
 			'cathode_search' => 'Cathode Lots',
-			
+			'ncr_search' => 'NCRs',
 			
 		);
 	}
@@ -211,6 +218,7 @@ class Cell extends CActiveRecord
 						'portwelder'=>array('alias'=>'port'),
 						'refNum'=>array('alias'=>'ref'),
 						'testAssignments'=>array('alias'=>'test'),
+						'ncrs',
 		); // needed for alias of search parameter tables
 
 		$criteria->together = true;
@@ -253,6 +261,21 @@ class Cell extends CActiveRecord
 			$criteria->mergeWith($refCriteria);
 		}
 		
+		/*  enable searching for multiple NCRS using comma or spaces */
+		if ($this->ncr_search)
+		{
+			$ncrs = explode(',', str_replace(' ', ',', $this->ncr_search));
+			$ncrCriteria = new CDbCriteria();
+			foreach ($ncrs as $ncr)
+			{
+				if(!empty($ncr))
+				{
+					$ncrCriteria->compare('ncrs.number', $ncr, true, 'OR');
+				}
+			}
+			$criteria->mergeWith($ncrCriteria);
+		}
+		
 		/*  enable searching for multiple lots using comma or spaces */
 		if ($this->anode_search)
 		{
@@ -292,6 +315,7 @@ class Cell extends CActiveRecord
 
 		return new KeenActiveDataProvider($this, array(
 			'withKeenLoading' => array(
+				array('ncrs'),
 				array('kit'),
 				array('kit.anodes', 'kit.cathodes', 'kit.celltype'),		
 				//'testAssignments'=>array('alias'=>'test'),
@@ -332,12 +356,114 @@ class Cell extends CActiveRecord
 						'asc'=>"CONCAT(port.first_name, ' ', port.last_name)",
 						'desc'=>"CONCAT(port.first_name, ' ', port.last_name) DESC",
 					),
+					'ncr_search'=>array(
+						'asc'=>'ncrs.number',
+						'desc'=>'ncrs.number DESC',
+					),
 					'*',		// all others treated normally
 				),
 			),
 		));
 	}
 
+	/**
+	 *Searches but only finds cells that are on NCRs.
+	 */
+	public function searchOnNCR()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->with = array(
+						'kit'=>array(
+							'select'=>array('id','serial_num'),
+							'with'=>array(
+								'celltype',
+								'anodes'=>array('select'=>'id, lot_num', 'alias'=>'anode'), 
+								'cathodes'=>array('select'=>'id, lot_num', 'alias'=>'cathode'),
+							), 
+						),
+						'refNum'=>array('alias'=>'ref'),
+						'ncrs',
+		); // needed for alias of search parameter tables
+
+		$criteria->together = true;
+		
+		$criteria->compare('celltype.name',$this->celltype_search, true);
+		
+		if($this->refnum_search)
+		{
+			$references = explode(',', str_replace(' ', ',', $this->refnum_search));
+			
+			$refCriteria = new CDbCriteria();
+			foreach ($references as $reference)
+			{
+				if(!empty($reference))
+				{
+					$refCriteria->compare('ref.number', $reference, true, 'OR');
+				}
+			}
+			$criteria->mergeWith($refCriteria);
+		}
+		
+		/*  enable searching for multiple NCRS using comma or spaces */
+		if ($this->ncr_search)
+		{
+			$ncrs = explode(',', str_replace(' ', ',', $this->ncr_search));
+			$ncrCriteria = new CDbCriteria();
+			foreach ($ncrs as $ncr)
+			{
+				if(!empty($ncr))
+				{
+					$ncrCriteria->compare('ncrs.number', $ncr, true, 'OR');
+				}
+			}
+			$criteria->mergeWith($ncrCriteria);
+		}
+		
+		/* and have been put on an NCR */
+		$criteria->addCondition('EXISTS (SELECT *
+											FROM tbl_ncr_cell ncrs
+											WHERE t.id = ncrs.cell_id
+											GROUP BY t.id)');
+		
+		/* for concatenated user name search */
+		$criteria->compare('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
+
+		return new KeenActiveDataProvider($this, array(
+			'withKeenLoading' => array(
+				array('ncrs'),
+				array('kit'),
+				array('kit.anodes', 'kit.cathodes', 'kit.celltype'),		
+				//'testAssignments'=>array('alias'=>'test'),
+			),
+			'pagination'=>array('pageSize' => 16),
+			'criteria'=>$criteria,
+			'sort'=>array(
+				'attributes'=>array(
+					'refnum_search'=>array(
+						'asc'=>'ref.number',
+						'desc'=>'ref.number DESC',
+					),
+					'serial_search'=>array(
+						'asc'=>"CONCAT(celltype.name, serial_num)",
+						'desc'=>"CONCAT(celltype.name, serial_num) DESC",
+					),
+					'celltype_search'=>array(
+						'asc'=>'celltype.name',
+						'desc'=>'celltype.name DESC',
+					),
+					'ncr_search'=>array(
+						'asc'=>'ncrs.number',
+						'desc'=>'ncrs.number DESC',
+					),
+					'*',		// all others treated normally
+				),
+			),
+		));
+	}
+	
 	public function searchUnformed()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
@@ -830,6 +956,31 @@ class Cell extends CActiveRecord
 				'defaultOrder' => 'battery_position'
 			),
 		));
+	}
+	
+	/**
+	 * Returns a comma separated list of links to the NCRs that cell has been on 
+	 * Open NCRs will be bold
+	 */
+	public function getNCRLinks()
+	{
+		$result = array();
+
+		foreach($this->ncrs as $ncr)
+		{
+			$style = '';
+			$ncrCell = NcrCell::model()->findByAttributes(array('cell_id'=>$this->id, 'ncr_id'=>$ncr->id));
+			
+			if($ncrCell!= null && $ncrCell->disposition < 3)
+			{
+				$style = 'color:red; font-weight:bold;';
+			}
+			$result[] = CHtml::link($ncr->number, Yii::app()->createUrl('ncr/view', array('id'=>$ncr->id)), array(
+				'style'=>$style,
+			));
+		}
+
+		return implode(', ', $result);
 	}
 	
 	/**
@@ -1326,7 +1477,7 @@ class Cell extends CActiveRecord
 			'Fillport Welder', 'Fillport Weld Date',
 			'Dry Wt(g)', 'Wet wt(g)',
 			'Anode Lots', 'Cathode Lots',
-			'Location'
+			'NCRs', 'Location'
 		);
 		foreach($columns as $id=>$column)
 		{

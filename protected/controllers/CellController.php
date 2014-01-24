@@ -144,7 +144,7 @@ class CellController extends Controller
 		$model=new Cell('search');
 		$model->unsetAttributes();  // clear any default values
 		
-		$visibleColumns = array(1,2,5,19);
+		$visibleColumns = array(1,2,5,19,20);
 		if(isset($_GET['Columns']))
 		{
 			$visibleColumns = $_GET['Columns'];
@@ -543,8 +543,8 @@ class CellController extends Controller
 		}
 	}
 	
-/**
-	 * Allows user to weld the fill port on mulitple cells.
+	/**
+	 * Allows user to accept the CAT data.
 	 */
 	public function actionMultiAcceptCATData()
 	{
@@ -755,8 +755,14 @@ class CellController extends Controller
 						'visible'=>in_array(18,$visibleColumns),
 					),
 					array(
-						'name'=>'location',
+						'name'=>'ncr_search',
+						'type'=>'html',
+						'value'=>'$data->getNCRLinks()',
 						'visible'=>in_array(19,$visibleColumns),
+					),
+					array(
+						'name'=>'location',
+						'visible'=>in_array(20,$visibleColumns),
 					),
 				)
 			)
