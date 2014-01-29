@@ -176,7 +176,7 @@ function typeSelected(sel, urlFormContent, urlCellsAvailable)
 			currentPage = 0;
 			var result = $.parseJSON(data);
 
-			$('#selection-container').html(result.view).css('height','400px');
+			$('#selection-container').html(result.view).css('height','448px');
 			
 			$('#cellspares-wrapper').show();
 			$('#previous-module-link').hide();
@@ -218,7 +218,7 @@ function typeSelected(sel, urlFormContent, urlCellsAvailable)
 	});
 }
 
-function cellSelected(sel)
+function cellSelected(sel, urlCellLocation)
 {
 /*	
 	var values = [];
@@ -232,24 +232,23 @@ function cellSelected(sel)
 		}
 	});
 	console.log(values);
+*/
+	// get the location of the cell and display on the selection details 
+	var id = $('option:selected', sel).val();
+	var locationElement_id = sel.id.toString().replace("Battery_Cells","Locations");
 	
 	$.ajax({
 		type:'get',
-		url: urlAjaxCellSelected,
+		url: urlCellLocation,
 		data:
 		{
-			type_id: type_id.toString(),
-			values: values,
+			id: id.toString(),
 		},
 		success: function(data){
-			$('.cell-dropdown').each(function(event){
-				if(!$(this).val()){
-					$(this).html(data);
-				}
-			});
+			$('#'+locationElement_id).html(data);
 		},
 	});
-*/
+
 	/* remove the selected value from the other dropdowns */
 	var el = $(sel);
 	var selectedValue = $('option:selected', el).val();

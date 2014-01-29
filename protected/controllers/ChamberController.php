@@ -29,9 +29,8 @@ class ChamberController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
-				//'users'=>array('*'),
+				'users'=>array('*'),
 				//'expression'=>'isset($user->depart_id) && $user->depart_id==3',
-				'roles'=>array('admin', 'engineering', 'testlab'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update'),
@@ -40,7 +39,12 @@ class ChamberController extends Controller
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				'roles'=>array('admin', 'engineering', 'testlab'),
+				'roles'=>array('admin'),
+				//'users'=>array('admin'),
+			),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('ajaxsetstatus'),
+				'roles'=>array('testlab'),
 				//'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -72,6 +76,7 @@ class ChamberController extends Controller
 		$testAssignment = new TestAssignment('search');
 		$testAssignment->unsetAttributes();  // clear any default values
 		$testAssignment->chamber_id = $id;
+		$testAssignment->is_active = 1;
 		
 		if(isset($_GET['TestAssignment']))
 		{
@@ -177,6 +182,33 @@ class ChamberController extends Controller
 		));
 	}
 
+	/**
+	 * Sets the chamber in_commission to the $_POSTed value
+	 */
+	public function actionAjaxSetStatus()
+	{
+		
+		$model=isset($_POST['id'])?Chamber::model()->findByPk($_POST['id']):null;
+		
+		if($model == null)
+		{
+			echo '0';
+			Yii::app()->end();
+		}
+			
+		if(isset($_POST['status']))
+		{
+			$model->in_commission = $_POST['status'];
+			if($model->save())
+			{
+				echo '1';
+				Yii::app()->end();
+			}
+		}
+		echo '0';
+		Yii::app()->end();
+	}
+	
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.

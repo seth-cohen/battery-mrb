@@ -44,8 +44,8 @@ class CellController extends Controller
 				//'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','ajaxmfgupdate','downloadlist'),
-				'roles' => array('admin'),
+				'actions'=>array('admin','delete','ajaxmfgupdate','downloadlist', 'ajaxgetlocation'),
+				'roles' => array('engineering'),
 				//'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -598,7 +598,7 @@ class CellController extends Controller
 	 * Performs the AJAX update of the detailView on the cellview.
 	 * @param Cell $model the model to be validated
 	 */
-	public function actionAjaxMFGUpdate($id=null)
+	public function actionAjaxMFGUpdate($id=null, $test='0')
 	{	
 		/* load cell detail information */
 		if($id == null)
@@ -607,7 +607,16 @@ class CellController extends Controller
 		}
 		else
 		{
-			$model = $this->loadModel($id);
+			if ($test == '1')
+			{
+				$testModel = TestAssignment::model()->with('cell')->findByPk($id);
+				$model = $testModel->cell;
+			}
+			else
+			{
+				$model = $this->loadModel($id);
+			}
+			
 			
 			$this->renderPartial('_ajaxcelldetail', array(
 					'model'=>$model,
@@ -812,6 +821,27 @@ class CellController extends Controller
 		$this->outputCSV($data);
 	}
 		
+	public function actionAjaxGetLocation()
+	{
+		if(!isset($_GET['id']))
+		{
+			echo 'Select Cell First';
+			Yii::app()->end();
+		}
+		
+		$cellModel = Cell::model()->findByPk($_GET['id']);
+		if($cellModel)
+		{
+			echo $cellModel->location;
+		}
+		else 
+		{
+			echo 'Select Cell First';
+		}
+		
+		Yii::app()->end();
+	}
+	
 	/* TODO move this to an extension or component */
 	function outputCSV($data) {
 	    $output = fopen("php://output", "w");

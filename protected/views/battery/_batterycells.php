@@ -17,7 +17,8 @@
 		),
 		array(
 			'header'=>'Cell Serial',
-			'value'=>'$data["serial"]',
+			'type'=>'raw',
+			'value'=>'CHtml::link(CHtml::encode($data["serial"]), array("cell/view", "id"=>$data["id"]))',
 		),
 		array(
 			'header'=>'Current Location',

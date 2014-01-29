@@ -172,7 +172,7 @@ class User extends CActiveRecord
 	public function getFullName()
 	{
 		if($this->id == 1)
-			return '';
+			return 'N/A';
 			
 		return $this->first_name.' '.$this->last_name;
 	}
@@ -180,7 +180,7 @@ class User extends CActiveRecord
 	public function getFullNameProper($id)
 	{
 		if($id == 1)
-			return '';
+			return 'N/A';
 		
 		$user = User::model()->findByPk($id); 
 		return $user->last_name.', '.$user->first_name;

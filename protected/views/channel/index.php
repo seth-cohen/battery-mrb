@@ -13,7 +13,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Channels</h1>
+<h1>All Channels</h1>
 <p>
 *Channels chan be marked out of commission using the appropriate drop down list.
 </p>
@@ -90,6 +90,17 @@ function statusSelected(sel)
 			status: status,
 		},
 		success: function(data) {
+			if(data == '1'){
+				$(sel).css('border', '2px solid green');
+				setTimeout(function() {
+					$(sel).css('border', '1px solid');
+				}, 2000);
+			}else{
+				$(sel).css('border', '2px solid red');
+				setTimeout(function() {
+					$(sel).css('border', '1px solid');
+				}, 2000);
+			}
 		},
 	});	
 }

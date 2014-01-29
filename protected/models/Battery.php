@@ -431,7 +431,7 @@ class Battery extends CActiveRecord
 	{
 		$spareCount = 0;
 		
-		if(empty($batteryModel) || empty($spares))
+		if(empty($batteryModel))
 			return;
 		
 		$batteryModel->location = 'Assembled';
@@ -473,7 +473,7 @@ class Battery extends CActiveRecord
 			{
 				foreach($batteryModel->cells as $cellModel)
 				{
-					$cellModel->location = '[Assembled] '.$batteryModel->batterytype->name . 'SN: '. $batteryModel->serial_num;
+					$cellModel->location = '[Assembled] '.$batteryModel->batterytype->name . ' SN: '. $batteryModel->serial_num;
 					$cellModel->save();
 				}
 			}

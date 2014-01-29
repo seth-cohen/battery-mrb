@@ -23,7 +23,7 @@ foreach($cellDataProviders as $cellDataProvider):
 ?>
 
 <div class="shadow border" id="cellselection-wrapper-<?=$x?>" 
-	style="width:300px;margin:10px auto;position:absolute;<?=$x>0?'top:25px;right:-350px;':'right:204px;';?>">
+	style="width:480px;margin:10px auto;position:absolute;<?=$x>0?'top:25px;right:-530px;':'right:114px;';?>">
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>"cellselection-grid-$x",
@@ -42,10 +42,19 @@ foreach($cellDataProviders as $cellDataProvider):
 				return	CHtml::dropDownList('Battery[Cells]['.$data['id'].']', '', array(),array(
 						'prompt'=>'-N/A-',
 						'class'=>'cell-dropdown cells',
-						'onchange'=>'cellSelected(this)',
+						'onchange'=>'cellSelected(this,"'
+							.$controller->createUrl('cell/ajaxgetlocation')
+						.'")',
 						'style'=>'width:150px',
 				));
 			},
+		),
+		array(
+			'header'=>'Cell Location',
+			'type'=>'html',
+			'value'=>function($data, $row) {
+				echo '<span id="Locations_' .$data['id'].  '"> Select Cell First </span>';
+			}
 		),
 	),
 	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',

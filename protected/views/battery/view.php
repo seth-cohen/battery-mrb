@@ -4,7 +4,7 @@
 
 $this->breadcrumbs=array(
 	'Batteries'=>array('index'),
-	$model->id,
+	$model->batterytype->name. ' SN: ' .$model->serial_num,
 );
 
 $this->menu=array(
@@ -21,12 +21,14 @@ $this->menu=array(
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id',
-		'batterytype_id',
-		'ref_num_id',
-		'eap_num',
+		'batterytype.name:text:Battery Type',
 		'serial_num',
-		'assembler_id',
+		'refNum.number:text:Reference No.',
+		'eap_num',
+		array(
+			'label'=>'Assembler',
+			'value'=>$model->assembler->getFullName(),
+		),
 		'assembly_date',
 		'ship_date',
 		'location',

@@ -24,12 +24,11 @@ $this->menu=array(
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id',
 		'name',
 		'brand',
 		'model',
 		'serial_num',
-		'in_commission',
+		'in_commission:boolean',
 		'govt_tag_num',
 		'cycler_id',
 		array(
@@ -49,7 +48,7 @@ $this->menu=array(
 
 
 <div class="shadow border">
-<h2>Assignment Details for <?php echo $model->name; ?></h2>
+<h2 style="width:100%; text-align:center">Assignment Details for Chamber <?php echo $model->name; ?></h2>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'assignment-grid',
 	'dataProvider'=>$testAssignmentDataProvider,
@@ -66,7 +65,7 @@ $this->menu=array(
 		array(
 			'class'=>'CButtonColumn',
 			'template'=>'{view}',
-			'viewButtonUrl'=>'Yii::app()->createUrl("/cell/view",array("id"=>$data["id"]))',
+			'viewButtonUrl'=>'Yii::app()->createUrl("/cell/view",array("id"=>$data->cell->id))',
 		),
 	),
 	'emptyText'=>'Oops, no cells on test in the chamber',

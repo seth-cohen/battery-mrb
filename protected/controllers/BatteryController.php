@@ -67,6 +67,7 @@ class BatteryController extends Controller
 		$model = Battery::model()->with(
 				array(
 					'batterytype',
+					'assembler',
 					'cells'=>array('with'=>array(
 						'kit'=>array('with'=>array(
 							'anodes', 
@@ -432,12 +433,12 @@ class BatteryController extends Controller
 			$batteryModel = Battery::model()->findByPk($_POST['Battery']['serial_num']);
 			$cells = $_POST['Battery']['Cells'];
 			
-			/* make sure that cells were selected for the battery */	
+			/* Check if spares need to be used for the battery */	
 			if( isset($_POST['autoId']) )
 			{
 				$bSparesOK = true;
 				
-				/* for each of the cell_ids that needs a spare */
+				/* for each of the cell_ids that needs a spare make sure one was selected */
 				foreach($_POST['autoId'] as $id)
 				{
 					if($cells[$id] == '')
@@ -455,10 +456,6 @@ class BatteryController extends Controller
 					echo CHtml::errorSummary($batteryModel);
 					Yii::app()->end();
 				}
-			}
-			else 
-			{
-				Yii::app()->end();
 			}
 			
 			$batteryModel->assembly_date =$_POST['Battery']['assembly_date'];

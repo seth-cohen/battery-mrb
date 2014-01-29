@@ -109,8 +109,8 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/cells
 <div id="selection-container" style="overflow-x:hidden; position:relative;margin-top: 12px;"></div>
 
 
-<div class="shadow border" id="cellspares-wrapper" style="display:none; margin:auto; width:70%;"> 
-<div style="text-align:center; width:100%; font-size:1.2em;">SPARES</div>
+<div class="shadow border" id="cellspares-wrapper" style="display:none; margin:auto; width:30%;"> 
+<div style="text-align:center; width: 100%; font-size:1.2em;">SPARES</div>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>"cellspares-grid",
 	'template'=>'{items}',
@@ -132,7 +132,7 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/cells
 				));
 			},
 		),
-		array(
+/*		array(
 			'header'=>'For Module',
 			'type'=>'raw',
 			'value'=>function($data, $row) {
@@ -140,7 +140,7 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/cells
 						'style'=>'width:75px;',
 				));
 			},
-		),
+		),*/
 	),
 	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
 	'pager' => array(

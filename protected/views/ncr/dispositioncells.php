@@ -129,7 +129,6 @@ function ncrSelected(sel)
 			cell_id: cell_id,
 		},
 		success: function(data) {
-			alert(data);
 			$('#'+dispo_id).removeAttr('disabled');
 			$('#'+dispo_id).val(data);
 		},
@@ -155,9 +154,15 @@ function dispoSelected(sel)
 		},
 		success: function(data) {
 			if(data == '1'){
-				$(sel).css('color', 'green');
+				$(sel).css('border', '2px solid green');
+				setTimeout(function() {
+					$(sel).css('border', '1px solid');
+				}, 2000);
 			}else{
-				$(sel).css('color', 'red');
+				$(sel).css('border', '2px solid red');
+				setTimeout(function() {
+					$(sel).css('border', '1px solid');
+				}, 2000);
 			}
 		},
 	});	

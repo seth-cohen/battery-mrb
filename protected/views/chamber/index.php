@@ -27,7 +27,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Chambers</h1>
+<h1>All Chambers</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -52,7 +52,17 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'brand',
 		'model',
 		'serial_num',
-		'in_commission',
+		array(
+			'name'=>'in_commission',
+			'type'=>'raw',
+			'value'=>'CHtml::dropDownList("Chamber_Status[$data->id]", $data->in_commission, array("0"=>"No", "1"=>"Yes"), array(
+						"class"=>"status-dropdown",
+						"onChange"=>"statusSelected(this)",
+						"style"=>"width:100px",
+						"data-id"=>$data->id,
+			))',
+			'filter'=>Channel::forListBoolean(),
+		),
 		/*
 		'govt_tag_num',
 		'cycler_id',
@@ -70,3 +80,34 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	),
 )); ?>
 </div>
+
+<script type="text/javascript">
+function statusSelected(sel)
+{
+	var status = $('option:selected', $(sel)).attr("value");
+	var id = $(sel).data("id");
+	
+	$.ajax({
+		url: '<?php echo $this->createUrl('/chamber/ajaxsetstatus'); ?>',
+		type: 'POST',
+		data: 
+		{
+			id: id,
+			status: status,
+		},
+		success: function(data) {
+			if(data == '1'){
+				$(sel).css('border', '2px solid green');
+				setTimeout(function() {
+					$(sel).css('border', '1px solid');
+				}, 2000);
+			}else{
+				$(sel).css('border', '2px solid red');
+				setTimeout(function() {
+					$(sel).css('border', '1px solid');
+				}, 2000);
+			}
+		},
+	});	
+}
+</script>

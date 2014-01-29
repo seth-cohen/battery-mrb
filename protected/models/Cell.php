@@ -608,7 +608,7 @@ class Cell extends CActiveRecord
 		));
 	}
 	
-	public function searchFormed()
+	public function searchForCAT()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
@@ -660,8 +660,13 @@ class Cell extends CActiveRecord
 											AND test.is_active = 1
 											GROUP BY t.id)');
 		
-		//$criteria->addcondition('t.location LIKE "[FORM]%"');
-		
+		/*and aren't already in a built battery */
+		$criteria->addCondition('NOT EXISTS (SELECT batt.id, batt.assembler_id
+											FROM tbl_battery batt
+											WHERE t.battery_id = batt.id
+											AND batt.assembler_id <> 1
+											GROUP BY t.id)');
+	
 		$criteria->addSearchCondition('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
 		
 		return new KeenActiveDataProvider($this, array(
@@ -794,6 +799,9 @@ class Cell extends CActiveRecord
 		$criteria->together = true;
 		
 		/* cell not selected for a battery yet */
+		$criteria->addCondition('portwelder_id <> 1');
+		
+		/* cell not selected for a battery yet */
 		$criteria->addCondition('battery_id is null');
 		
 		/* or, if selected the battery hasn't been built yet */
@@ -806,7 +814,6 @@ class Cell extends CActiveRecord
 		$criteria->addSearchCondition('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
 		
 		$criteria->compare('location',$this->location, true);
-		$criteria->compare('filler_id',$this->filler_id);
 		
 		if($this->refnum_search)
 		{

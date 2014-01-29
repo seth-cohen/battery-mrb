@@ -182,13 +182,22 @@ class ChannelController extends Controller
 		$model=isset($_POST['id'])?Channel::model()->findByPk($_POST['id']):null;
 		
 		if($model == null)
+		{
+			echo '0';
 			Yii::app()->end();
+		}
 			
 		if(isset($_POST['status']))
 		{
 			$model->in_commission = $_POST['status'];
-			$model->save();
+			if($model->save())
+			{
+				echo '1';
+				Yii::app()->end();
+			}
 		}
+		echo '0';
+		Yii::app()->end();
 	}
 	
 	/**

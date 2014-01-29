@@ -415,6 +415,14 @@ class TestlabController extends Controller
 			
 			foreach($storageCells as $cell_id)
 			{
+				if(!$locations[$cell_id])
+				{
+					$model = new StorageLocation();
+					$model->addError('location_empty', 'Must Select a Storage Location for All Cells');
+					echo CHtml::errorSummary($model);
+					Yii::app()->end();
+				}
+				
 				$storageLocation = StorageLocation::model()->findByPk($locations[$cell_id]);
 				$cellStorageLocations[$cell_id] = $storageLocation->name;  					
 			}

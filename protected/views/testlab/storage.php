@@ -19,7 +19,7 @@ $this->menu=array(
 
 <h1>Move Cells to Storage</h1>
 <p>
-*All filled cells that have not been put into a battery (even if already selected) already will be available in the list
+*All cells that have been have had the fill port welded but have not been assembled into a battery already (even if currently selected) will be available in the list
 below to be put into storage.
 </p>
 <?php

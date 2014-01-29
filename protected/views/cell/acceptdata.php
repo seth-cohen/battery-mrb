@@ -20,7 +20,7 @@ $this->menu=array(
 
 <h1>Accept CAT Data</h1>
 <p>
-*Only cells that have completed CAT will be visible.
+*Only cells that have completed CAT will be visible. Note that CAT is set to completed when cell is moved from channel into <?php echo CHtml::link('storage', array('testlab/storage')); ?>.
 </p>
 <?php
 /* ionclude JQuery scripts to allow for autocomplte */

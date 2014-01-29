@@ -44,7 +44,7 @@ Yii::app()->clientScript->registerCssFile(
 <div class="shadow border" >
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'cat-grid',
-	'dataProvider'=>$model->searchFormed(),
+	'dataProvider'=>$model->searchForCAT(),
 	'filter'=>$model,
 	'columns'=>array(
 		array(
@@ -148,6 +148,17 @@ function reloadGrid(data) {
 <script type="text/javascript">
 
 jQuery(function($) {
+	$(document).on('keyup', 'input', function(e){
+        if(e.which==39)
+                    $(this).closest('td').next().find('input').focus();
+        else if(e.which==37)
+                    $(this).closest('td').prev().find('input').focus();
+        else if(e.which==40)
+                    $(this).closest('tr').next().find('td:eq('+$(this).closest('td').index()+')').find('input').focus();
+        else if(e.which==38)
+                    $(this).closest('tr').prev().find('td:eq('+$(this).closest('td').index()+')').find('input').focus();
+	});
+	
 	jQuery(document).on('keydown', '.autocomplete-user-input', function(event) {
 		$(this).autocomplete({
 			'select': function(event, ui){

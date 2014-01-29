@@ -75,8 +75,8 @@ class Chamber extends CActiveRecord
 			'in_commission' => 'In Commission',
 			'govt_tag_num' => 'Govt Tag Num',
 			'cycler_id' => 'Cycler',
-			'min_temp' => 'Min Temp',
-			'max_temp' => 'Max Temp',
+			'min_temp' => 'Min Temp (&degC)',
+			'max_temp' => 'Max Temp (&degC)',
 		);
 	}
 
