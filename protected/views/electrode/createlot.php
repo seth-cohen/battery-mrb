@@ -5,13 +5,12 @@
 $this->breadcrumbs=array(
 	'Manufacturing'=>array('/manufacturing'),
     'Electrodes'=>array('index'),
-    'Create',
+    'Create New Lot',
 );
 
 $this->menu=array(
-    array('label'=>'Create Electrode', 'url'=>array('create')),
     array('label'=>'View All Electrodes', 'url'=>array('index')),
-    array('label'=>'Electrode Admin', 'url'=>array('admin')),
+    array('label'=>'Electrode Admin', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 );
 ?>
 

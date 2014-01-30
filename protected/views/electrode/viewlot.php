@@ -10,10 +10,10 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
+	array('label'=>'Edit This Lot', 'url'=>array('update', 'id'=>$model->id)),
     array('label'=>'Create Electrode Lot', 'url'=>array('create')),
-    array('label'=>'Edit Electrode Lot', 'url'=>array('update', 'id'=>$model->id)),
     array('label'=>'View All Electrodes', 'url'=>array('index')),
-    array('label'=>'Electrode Admin', 'url'=>array('admin')),
+    array('label'=>'Electrode Admin', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 );
 ?>
 
@@ -44,7 +44,7 @@ $this->menu=array(
 </div>
 
 <div class="shadow border">
-<h2>Kits using <?php echo $model->is_anode?'Anode':'Cathode'; ?> Lot <?php echo $model->lot_num; ?> </h2>
+<h2 style="width:100%; text-align:center">Cells using <?php echo $model->is_anode?'Anode':'Cathode'; ?> Lot <?php echo $model->lot_num; ?> </h2>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'kit-grid',
 	'dataProvider'=>$kitDataProvider,
@@ -55,15 +55,19 @@ $this->menu=array(
 		),
 		array(
 			'name'=>'Cell Serial',
-			'value'=>'$data["kit"]',
+			'type'=>'html',
+			'value'=>'CHtml::link(CHtml::encode($data["kit"]), array("cell/view", "id"=>$data["id"]))',
 		),
 		array(
-			'class'=>'CButtonColumn',
-			'template'=>'{view}',
-			'viewButtonUrl'=>'Yii::app()->createUrl("/kit/view",array("id"=>$data["id"]))',
+			'name'=>'Stack Date',
+			'value'=>'$data["stack_date"]',
+		),
+		array(
+			'name'=>'Cell Location',
+			'value'=>'$data["location"]',
 		),
 	),
-	'emptyText'=>'Oops, no kits using this lot yet',
+	'emptyText'=>'Oops, no cells using this lot yet',
 	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
 	'pager'=>array(
 		'cssFile' => false,

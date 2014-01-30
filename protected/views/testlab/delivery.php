@@ -19,8 +19,7 @@ $this->menu=array(
 
 <h1>Deliver Cells To Battery Assembly</h1>
 <p>
-*All filled cells that have not been put into a battery (even if already selected) already will be available in the list
-below to be put into storage.
+*All cells that have been selected for a battery that hasn't yet been built will be available for this action.
 </p>
 <?php
 /* ionclude JQuery scripts to allow for autocomplte */
@@ -50,17 +49,22 @@ Yii::app()->clientScript->registerCssFile(
             'class'=>'CCheckBoxColumn',
             'selectableRows' => '50',   
         ),
-		array(
-			'header'=>'Cells',
-			'name'=>'serial_search',
-			'type'=>'raw',
-			'value'=>'$data->kit->getFormattedSerial()',
-		),
-		array(
+        array(
 			'name'=>'refnum_search',
 			'type'=>'raw',
 			'value'=>'$data->refNum->number',
 			'htmlOptions'=>array('width'=>'60'),
+		),
+        array(
+        	'header'=>'For Battery',
+        	'name'=>'battery_search',
+        	'value'=>'$data->battery->getFormattedSerial()',
+        ),
+		array(
+			'header'=>'Cell Serials',
+			'name'=>'serial_search',
+			'type'=>'raw',
+			'value'=>'$data->kit->getFormattedSerial()',
 		),
 		array(
 			'name'=>'location',

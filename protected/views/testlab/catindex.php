@@ -51,15 +51,17 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'filter'=>$model,
 	'columns'=>array(
 		array(
-			'id'
-		),
-		array(
 			'name'=>'serial_search',
 			'value'=>'$data->cell->kit->getFormattedSerial()',
 		),
 		array(
 			'name'=>'chamber_search',
 			'value'=>'$data->chamber->name',
+			'cssClassExpression'=>function($row, $data){
+				if($data->chamber->in_commission == 0){
+					return 'red-text';
+				}
+			}
 		),
 		array(
 			'name'=>'cycler_search',

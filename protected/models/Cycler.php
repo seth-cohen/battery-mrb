@@ -109,6 +109,7 @@ class Cycler extends CActiveRecord
 		$criteria->compare('govt_tag_num',$this->govt_tag_num,true);
 
 		return new CActiveDataProvider($this, array(
+			'pagination'=>array('pageSize' => 16),
 			'criteria'=>$criteria,
 		));
 	}

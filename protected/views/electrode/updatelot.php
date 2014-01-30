@@ -10,10 +10,10 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
+	array('label'=>'View This Lot', 'url'=>array('update', 'id'=>$model->id)),
     array('label'=>'Create Electrode Lot', 'url'=>array('create')),
-    array('label'=>'View This Lot', 'url'=>array('view', 'id'=>$model->id)),
     array('label'=>'View All Electrodes', 'url'=>array('index')),
-    array('label'=>'Electrode Admin', 'url'=>array('admin')),
+    array('label'=>'Electrode Admin', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 );
 ?>
 

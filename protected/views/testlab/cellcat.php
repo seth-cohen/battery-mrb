@@ -89,6 +89,7 @@ Yii::app()->clientScript->registerCssFile(
 			'value'=>'CHtml::dropDownList("chambers[$data->id]", "", Chamber::forList(),array(
 						"prompt"=>"-Chamber-",
 						"style"=>"width:100px",
+						"options"=>Chamber::getTextColor(),
 			))',
 		),
 		array(

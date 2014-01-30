@@ -60,6 +60,7 @@ class Cell extends CActiveRecord
 	public $anode_search;
 	public $cathode_search;
 	public $ncr_search;
+	public $battery_search;
 	
 	public $not_formed=null;
 	public $formed_only=null;
@@ -95,7 +96,7 @@ class Cell extends CActiveRecord
 			array('eap_num, stack_date, dry_wt, wet_wt, fill_date, inspection_date, serial_search, celltype_search, 
 					refnum_search, stacker_search, filler_search, inspector_search, laserwelder_search, portwelder_search,
 					location, not_formed, formed_only, inspector_id, laserwelder_id, portwelder_id, anode_search, cathode_search,
-					battery_id, ncr_search', 
+					battery_search, battery_id, ncr_search', 
 					'safe', 'on'=>'search'
 			),
 			array('serial_search, celltype_search, refnum_search, ncr_search', 
@@ -872,6 +873,12 @@ class Cell extends CActiveRecord
 								'cathodes'=>array('select'=>'id'),
 							),
 						), 
+						'battery'=>array(
+							'select'=>array('id', 'serial_num'),
+							'with'=>array(
+								'batterytype',
+							),
+						),
 						'refNum'=>array('alias'=>'ref'),
 						'testAssignments'=>array('alias'=>'test', 'select'=>'is_active, id'),
 		); // needed for alias of search parameter tables
@@ -886,10 +893,8 @@ class Cell extends CActiveRecord
 											GROUP BY t.id)', 'OR');
 				
 		$criteria->addSearchCondition('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
-		$criteria->addcondition('t.location NOT LIKE "[EAP%"');
 		
 		$criteria->compare('location',$this->location, true);
-		$criteria->compare('filler_id',$this->filler_id);
 		
 		if($this->refnum_search)
 		{
@@ -905,6 +910,9 @@ class Cell extends CActiveRecord
 			}
 			$criteria->mergeWith($refCriteria);
 		}
+		
+		/* for concatenated user name search */
+		$criteria->compare('concat(batterytype.name,"-",battery.serial_num)',$this->battery_search, true);
 		
 		return new KeenActiveDataProvider($this, array(
 			'pagination'=>array('pageSize' => 16),
@@ -922,6 +930,10 @@ class Cell extends CActiveRecord
 					'serial_search'=>array(
 						'asc'=>"CONCAT(celltype.name, serial_num)",
 						'desc'=>"CONCAT(celltype.name, serial_num) DESC",
+					),
+					'battery_search'=>array(
+						'asc'=>"CONCAT(batterytype.name, battery.serial_num)",
+						'desc'=>"CONCAT(batterytype.name, battery.serial_num) DESC",
 					),
 					'*',		// all others treated normally
 				),

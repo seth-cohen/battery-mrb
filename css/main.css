@@ -307,6 +307,11 @@ div.search-form
 	box-shadow: 5px 5px 8px #888888;
 }
 
+.red-text
+{
+	color: red !important;
+}
+
 .border
 {
 	/*padding: 0 5px;*/

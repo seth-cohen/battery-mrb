@@ -101,6 +101,7 @@ $chamberList = Chamber::forList();
 						"prompt"=>"-Chamber-",
 						"class"=>"chamber-dropdown",
 						"style"=>"width:90px",
+						"options"=>Chamber::getTextColor(),
 				));
 			},
 		),

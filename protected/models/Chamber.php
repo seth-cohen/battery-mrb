@@ -121,6 +121,7 @@ class Chamber extends CActiveRecord
 		$criteria->compare('max_temp',$this->max_temp);
 
 		return new CActiveDataProvider($this, array(
+			'pagination'=>array('pageSize' => 16),
 			'criteria'=>$criteria,
 		));
 	}
@@ -151,6 +152,24 @@ class Chamber extends CActiveRecord
 		}
 		 			
 		return $arr;
+	}
+	
+	public static function getTextColor()
+	{
+		$styles = array();
+
+		$chambers = Chamber::model()->findAll();
+		
+		if($chambers != null)
+		{
+			foreach($chambers as $chamber)
+			{
+				if($chamber->in_commission == 0)
+					$styles[$chamber->id] = array('style'=>'color:red');
+			}
+		}
+			
+		return $styles;
 	}
 	
 }

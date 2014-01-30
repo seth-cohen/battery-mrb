@@ -11,9 +11,8 @@ Yii::app()->clientScript->scriptMap=array(
                     'jquery.yiigridview.js'=>false
                 ); 
 ?>
-<h2>Kits using <?php echo $model->is_anode?'Anode':'Cathode'; ?> Lot <?= $model->lot_num; ?> </h2>
 
-
+<h2 style="width:100%; text-align:center">Cells using <?php echo $model->is_anode?'Anode':'Cathode'; ?> Lot <?= $model->lot_num; ?> </h2>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'kit-grid',
 	'dataProvider'=>$kitDataProvider,
@@ -24,12 +23,16 @@ Yii::app()->clientScript->scriptMap=array(
 		),
 		array(
 			'name'=>'Cell Serial',
-			'value'=>'$data["kit"]',
+			'type'=>'html',
+			'value'=>'CHtml::link(CHtml::encode($data["kit"]), array("cell/view", "id"=>$data["id"]))',
 		),
 		array(
-			'class'=>'CButtonColumn',
-			'template'=>'{view}',
-			'viewButtonUrl'=>'Yii::app()->createUrl("/kit/view",array("id"=>$data["id"]))',
+			'name'=>'Stack Date',
+			'value'=>'$data["stack_date"]',
+		),
+		array(
+			'name'=>'Cell Location',
+			'value'=>'$data["location"]',
 		),
 	),
 	'emptyText'=>'Oops, no cells built yet',

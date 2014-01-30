@@ -97,7 +97,7 @@ class Kit extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'cells' => array(self::HAS_MANY, 'Cell', 'kit_id'),
+			'cell' => array(self::HAS_ONE, 'Cell', 'kit_id'),
 			'celltype' => array(self::BELONGS_TO, 'Celltype', 'celltype_id'),
 			'kitter' => array(self::BELONGS_TO, 'User', 'kitter_id'),
 			'refNum' => array(self::BELONGS_TO, 'RefNum', 'ref_num_id'),

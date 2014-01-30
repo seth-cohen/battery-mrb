@@ -335,6 +335,11 @@ class Battery extends CActiveRecord
 		return $result;
 	}
 	
+	public function getFormattedSerial()
+	{
+		return $this->batterytype->name. ' SN: ' .$this->serial_num;
+	}
+	
 	/**
 	 * 
 	 * Creates new battery and associates designated cells from the cell selection...

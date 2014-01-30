@@ -43,6 +43,8 @@ class ElectrodeController extends Controller
 	public function actionCreate()
 	{
 		$model = new Electrode;
+		$model->coat_date = date("Y-m-d",time());
+		
 		if(!Yii::app()->user->checkAccess('manufacturing supervisor') && !Yii::app()->user->checkAccess('manufacturing engineer'))
 		{
 			$model->coater_id = Yii::app()->user->id;
@@ -89,9 +91,10 @@ class ElectrodeController extends Controller
 	{
 		$model = Electrode::model()->with(array(
 			'kits'=>array('with'=>array(
-				'anodes', 
+				'anodes',
 				'cathodes',
 				'celltype',
+				'cell'=>array('select'=>'id, location, stack_date')
 			)),
 			'coater',
 		))->findByPk($id);
@@ -105,8 +108,15 @@ class ElectrodeController extends Controller
 		if(!empty($model->kits))
 		{
 			foreach($model->kits as $key=>$kit){
-				$kits[] = array('num'=>$key+1, 'kit'=>$kit->getFormattedSerial(), 'id'=>$kit->id);
-		
+				if($kit->cell == null)
+				{
+					$kits[] = array('num'=>$key+1, 'kit'=>$kit->getFormattedSerial(), 'location'=>'Not Stacked', 'id'=>999999999, 'stack_date'=>'Not Stacked');
+				}
+				else 
+				{
+					$kits[] = array('num'=>$key+1, 'kit'=>$kit->getFormattedSerial(), 'location'=>$kit->cell->location, 'id'=>$kit->cell->id, 'stack_date'=>$kit->cell->stack_date);
+				}
+				
 			}
 		}
 		
@@ -155,11 +165,35 @@ class ElectrodeController extends Controller
 		}
 		else
 		{
-			$model = Electrode::model()->findByPk($id);
+			$model = Electrode::model()->with(array(
+				'kits'=>array('with'=>array(
+					'anodes',
+					'cathodes',
+					'celltype',
+					'cell'=>array('select'=>'id, location, stack_date')
+				)),
+				'coater',
+			))->findByPk($id);
+			
+			if ($model == null)
+			{
+				$model = Electrode::model()->findByPk($id);
+			}
+			
 			$kits = array();
-		
-			foreach($model->kits as $key=>$kit){
-				$kits[] = array('num'=>$key+1, 'kit'=>$kit->getFormattedSerial(), 'id'=>$kit->id);
+			if(!empty($model->kits))
+			{
+				foreach($model->kits as $key=>$kit){
+					if($kit->cell == null)
+					{
+						$kits[] = array('num'=>$key+1, 'kit'=>$kit->getFormattedSerial(), 'location'=>'Not Stacked', 'id'=>999999999, 'stack_date'=>'Not Stacked');
+					}
+					else 
+					{
+						$kits[] = array('num'=>$key+1, 'kit'=>$kit->getFormattedSerial(), 'location'=>$kit->cell->location, 'id'=>$kit->cell->id, 'stack_date'=>$kit->cell->stack_date);
+					}
+					
+				}
 			}
 			
 			$kitDataProvider = new CArrayDataProvider($kits);

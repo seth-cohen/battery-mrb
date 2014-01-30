@@ -32,7 +32,9 @@ Yii::app()->clientScript->registerCssFile(
 <p>*All active test assignments will be visible. If the channel is bad also check the "Mark Bad" check box for that row
 and the channel will be set to out of commission. Once channel is repaired it can be set in the 
 <?php echo CHtml::link('Channel Index', array('channel/index')); ?> action.  Cells can also be marked as out of commission 
-in the channel index action
+in the channel index action.
+<br/><br/>
+If the Chamber is in red then it has been marked out of commission and cells should be moved to a different chamber.
 </p>
 
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -74,6 +76,11 @@ in the channel index action
 		array(
 			'name'=>'chamber_search',
 			'value'=>'$data->chamber->name',
+			'cssClassExpression'=>function($row, $data){
+				if($data->chamber->in_commission == 0){
+					return 'red-text';
+				}
+			}
 		),
 		array(
 			'name'=>'cycler_search',
@@ -122,8 +129,14 @@ in the channel index action
 						"prompt"=>"-Chamber-",
 						"class"=>"chamber-dropdown",
 						"style"=>"width:90px",
+						'options'=>Chamber::getTextColor(),
 				));
 			},
+			'cssClassExpression'=>function($row, $data){
+				if($data->chamber->in_commission == 0){
+					return 'red-text';
+				}
+			}
 		),
 		array(
 			'header' => 'Operator',
@@ -177,6 +190,7 @@ function reloadGrid(data) {
 
 <script>
 jQuery(function($) {
+
 	$('#channelassignment-grid .filters').attr('align','center');
 	/*$('#channelassignment-grid .filters').children(':nth-child(1)').text('Change');*/
 	$('#channelassignment-grid .filters').children(':nth-child(2)').text('Mark Bad');

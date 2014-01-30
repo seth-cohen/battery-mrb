@@ -47,11 +47,11 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'id',
 		'name',
 		'brand',
 		'model',
 		'serial_num',
+		'govt_tag_num',
 		array(
 			'name'=>'in_commission',
 			'type'=>'raw',
@@ -96,15 +96,21 @@ function statusSelected(sel)
 			status: status,
 		},
 		success: function(data) {
+			var message;
 			if(data == '1'){
+				message = $("<br/><span style='color:green'>Change Successful</span>");
 				$(sel).css('border', '2px solid green');
+				$(sel).parent().append(message);
 				setTimeout(function() {
 					$(sel).css('border', '1px solid');
+					message.remove();
 				}, 2000);
 			}else{
+				message = $("<br/><span>Change Failed</span>");
 				$(sel).css('border', '2px solid red');
 				setTimeout(function() {
 					$(sel).css('border', '1px solid');
+					message.remove();
 				}, 2000);
 			}
 		},
