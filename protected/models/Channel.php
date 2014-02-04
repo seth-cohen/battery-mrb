@@ -44,6 +44,7 @@ class Channel extends CActiveRecord
 		return array(
 			array('number, max_charge_rate, max_discharge_rate, min_voltage, max_voltage', 'required'),
 			array('number, max_charge_rate, max_discharge_rate, multirange, in_use, in_commission, min_voltage, max_voltage', 'numerical', 'integerOnly'=>true),
+			array('number, max_charge_rate, max_discharge_rate, max_voltage', 'numerical', 'integerOnly'=>true, 'min'=>0),
 			array('cycler_id', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -146,6 +147,68 @@ class Channel extends CActiveRecord
 		return $arr;
 	}
 
+	/**
+	 * Saves all of the models only if ALL models validate
+	 * returns associative array if successful (with details on saved model)
+	 * returns error summary if any of them fail
+	 * @param Channel[] $channelModels
+	 * @param integer $cycler_id
+	 */
+	public static function attachChannelsToCycler($channelModels, $cycler_id)
+	{
+		$error = 0;
+		$models = array();
+
+		/* oops, we were passed bad data */
+		if(empty($channelModels))
+			return;
+			
+		foreach($channelModels as $channel)
+		{
+			$model = $channel;
+			$model->cycler_id = $cycler_id;
+			
+			if(!$model->validate())
+			{
+				$error = 1;
+				/* delete the cycler that these were going to connect to */
+				$commandDelete = Yii::app()->db->createCommand();
+				$commandDelete->delete('tbl_cycler', 
+					'id = :id',
+					array(':id'=>$cycler_id)
+				);
+			}
+			$models[] = $model;	
+		}
+		
+	/* all models validated save them all */
+		if ($error==0)
+		{
+			/* create array to return with JSON */
+			$result = array();
+			foreach($models as $model)
+			{
+				if($model->save())
+				{	
+					$result[] = array(
+						'num'=>$model->number,
+						'minV'=>$model->min_voltage,
+						'maxV'=>$model->max_voltage,
+						'maxC'=>$model->max_charge_rate,
+						'maxD'=>$model->max_discharge_rate,
+						'multi'=>$model->multirange,
+					);
+				}
+			}
+			return json_encode($result);
+		}
+		else /* a model failed, don't save any */
+		{
+			return CHtml::errorSummary($models); 	
+		}			
+		return null;
+	}
+		
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

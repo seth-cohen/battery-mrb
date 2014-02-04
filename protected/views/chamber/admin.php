@@ -10,8 +10,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'Add New Chamber', 'url'=>array('create')),
-	array('label'=>'View All Chambers', 'url'=>array('index')),
-	array('label'=>'Manage Chambers', 'url'=>array('admin')),
+	array('label'=>'Manage Chambers', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -28,7 +27,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Chambers</h1>
+<h1>Viewing All Chambers</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -48,12 +47,22 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'id',
 		'name',
 		'brand',
 		'model',
 		'serial_num',
-		'in_commission',
+		'govt_tag_num',
+		array(
+			'name'=>'in_commission',
+			'type'=>'raw',
+			'value'=>'CHtml::dropDownList("Chamber_Status[$data->id]", $data->in_commission, array("0"=>"No", "1"=>"Yes"), array(
+						"class"=>"status-dropdown",
+						"onChange"=>"statusSelected(this)",
+						"style"=>"width:100px",
+						"data-id"=>$data->id,
+			))',
+			'filter'=>Channel::forListBoolean(),
+		),
 		/*
 		'govt_tag_num',
 		'cycler_id',
@@ -64,9 +73,76 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 			'class'=>'CButtonColumn',
 		),
 	),
+	'selectionChanged'=>'chamberSelected',
 	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
 	'pager' => array(
 		'cssFile' => false,
 	),
 )); ?>
 </div>
+
+<div id="test-details" class="shadow border" style="display:none"></div>
+
+<script type="text/javascript">
+function statusSelected(sel)
+{
+	var status = $('option:selected', $(sel)).attr("value");
+	var id = $(sel).data("id");
+	
+	$.ajax({
+		url: '<?php echo $this->createUrl('/chamber/ajaxsetstatus'); ?>',
+		type: 'POST',
+		data: 
+		{
+			id: id,
+			status: status,
+		},
+		success: function(data) {
+			var message;
+			if(data == '1'){
+				message = $("<br/><span style='color:green'>Change Successful</span>");
+				$(sel).css('border', '2px solid green');
+				$(sel).parent().append(message);
+				setTimeout(function() {
+					$(sel).css('border', '1px solid');
+					message.remove();
+				}, 2000);
+			}else{
+				message = $("<br/><span>Change Failed</span>");
+				$(sel).css('border', '2px solid red');
+				setTimeout(function() {
+					$(sel).css('border', '1px solid');
+					message.remove();
+				}, 2000);
+			}
+		},
+	});	
+}
+</script>
+
+<script type="text/javascript">
+	function chamberSelected(target_id){
+		var chamber_id;
+		chamber_id = $.fn.yiiGridView.getSelection(target_id);		
+
+		$.ajax({
+			type:'get',
+    		url: '<?php echo $this->createUrl('chamber/ajaxchambertests'); ?>',
+    		data:
+    		{
+    			id: chamber_id.toString(),
+    		},
+    		success: function(data){
+        		if(data == 'hide')
+        		{
+        			$('#test-details').hide();
+        		}
+        		else
+        		{
+        			$('#test-details').show();
+            		$('#test-details').html(data);
+        		}
+    		},
+    	});
+	}
+</script>

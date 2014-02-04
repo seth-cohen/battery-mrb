@@ -12,11 +12,6 @@
 )); ?>
 
 	<div class="row">
-		<?php echo $form->label($model,'id'); ?>
-		<?php echo $form->textField($model,'id',array('size'=>10,'maxlength'=>10)); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->label($model,'name'); ?>
 		<?php echo $form->textField($model,'name',array('size'=>50,'maxlength'=>50)); ?>
 	</div>
@@ -38,7 +33,7 @@
 
 	<div class="row">
 		<?php echo $form->label($model,'in_commission'); ?>
-		<?php echo $form->textField($model,'in_commission',array('size'=>50,'maxlength'=>50)); ?>
+		<?php echo $form->dropDownList($model, 'in_commission', array('0'=>'No', '1'=>'Yes'), array('prompt'=>'-Select-')); ?>
 	</div>
 
 	<div class="row">
@@ -48,7 +43,7 @@
 
 	<div class="row">
 		<?php echo $form->label($model,'cycler_id'); ?>
-		<?php echo $form->textField($model,'cycler_id',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->dropDownList($model, 'cycler_id', Cycler::forList(), array('prompt'=>'-Select-')); ?>
 	</div>
 
 	<div class="row">

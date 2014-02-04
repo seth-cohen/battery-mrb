@@ -218,7 +218,7 @@ class Kit extends CActiveRecord
 			{
 				if(!empty($anodeLot))
 				{
-					$anodeLotCriteria->compare('anode.lot_num', $anodeLot, true, 'OR');
+					$anodeLotCriteria->compare('anodes.lot_num', $anodeLot, true, 'OR');
 				}
 			}
 			$criteria->mergeWith($anodeLotCriteria);
@@ -232,7 +232,7 @@ class Kit extends CActiveRecord
 			{
 				if(!empty($cathodeLot))
 				{
-					$cathodeLotCriteria->compare('cathode.lot_num', $cathodeLot, true, 'OR');
+					$cathodeLotCriteria->compare('cathodes.lot_num', $cathodeLot, true, 'OR');
 				}
 			}
 			$criteria->mergeWith($cathodeLotCriteria);
@@ -268,12 +268,12 @@ class Kit extends CActiveRecord
 						'desc'=>"CONCAT(first_name, ' ', last_name) DESC",
 					),
 					'anode_search'=>array(
-						'asc'=>'anode.lot_num',
-						'desc'=>'anode.lot_num DESC',
+						'asc'=>'anodes.lot_num',
+						'desc'=>'anodes.lot_num DESC',
 					),
 					'cathode_search'=>array(
-						'asc'=>'cathode.lot_num',
-						'desc'=>'cathode.lot_num DESC',
+						'asc'=>'cathodes.lot_num',
+						'desc'=>'cathodes.lot_num DESC',
 					),
 					'*',		// all others treated normally
 				),

@@ -32,7 +32,7 @@ class CyclerController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update', 'ajaxchannellist'),
+				'actions'=>array('create', 'ajaxcreate', 'update', 'ajaxchannellist'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -88,20 +88,26 @@ class CyclerController extends Controller
 		$model=new Cycler;
 
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		$this->performAjaxValidation($model);
 
-		if(isset($_POST['Cycler']))
-		{
-			$model->attributes=$_POST['Cycler'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+		$channelsArray = array();
+		for ($i = 1; $i <= 5; ++$i){
+			$channelsArray[] = array('id'=>$i);
 		}
-
+		
+		$channelsDataProvider = new CArrayDataProvider($channelsArray, array(
+		    'pagination'=>array(
+		        'pageSize'=>10,
+		    )
+		 ));
+		 
 		$this->render('create',array(
 			'model'=>$model,
+			'channelsDataProvider' => $channelsDataProvider,
 		));
 	}
 
+	
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
@@ -126,6 +132,63 @@ class CyclerController extends Controller
 		));
 	}
 
+	public function actionAjaxCreate()
+	{
+		$model = new Cycler;
+		
+		if(isset($_POST['Cycler']))
+		{
+			$model->attributes=$_POST['Cycler'];
+			
+			$channelModels = array();
+			$channelCount= 0;
+			
+			foreach($_POST['Channels'] as $channel)
+			{		
+				if($channel['num'] > 0)
+				{
+					if(!isset($channel['minV']) || !isset($channel['maxV']) 
+						|| !isset($channel['maxC']) || !isset($channel['maxD'])
+						|| !isset($channel['multi'])  )
+					{
+						$channelModel = new Channel;
+						$channelModel->addError('channel_details', 'Incomplete channel details.  Cycler has NOT been saved!!');
+						echo CHtml::errorSummary($channelModel);
+						Yii::app()->end();
+					}
+					else 
+					{
+						
+						for ($i = $channelCount+1; $i <= $channelCount + $channel['num']; $i++ )
+						{
+							$tempChannel = new Channel;
+							$tempChannel->number = $i;
+							$tempChannel->min_voltage = $channel['minV'];
+							$tempChannel->max_voltage = $channel['maxV'];
+							$tempChannel->max_charge_rate = $channel['maxC'];
+							$tempChannel->max_discharge_rate = $channel['maxD'];
+							$tempChannel->multirange = $channel['multi'];
+							$tempChannel->in_commission = 1;
+							$tempChannel->in_use = 0;
+							
+							$channelModels[] = $tempChannel;
+						}
+						$channelCount += $channel['num'];
+					}
+				}
+			}
+			
+			$model->num_channels = $channelCount;
+			if(!$model->save())
+			{
+				echo CHtml::errorSummary($model);
+				Yii::app()->end();
+			}
+			
+			echo Channel::attachChannelsToCycler($channelModels, $model->id);
+		}
+	}
+	
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.

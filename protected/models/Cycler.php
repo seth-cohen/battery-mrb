@@ -20,6 +20,7 @@
  */
 class Cycler extends CActiveRecord
 {
+	
 	/**
 	 * @return string the associated database table name
 	 */
@@ -27,6 +28,9 @@ class Cycler extends CActiveRecord
 	{
 		return 'tbl_cycler';
 	}
+	
+	/* related model helpers */
+	public $calibrator_search;
 	
 	/**
 	 * @return array validation rules for model attributes.
@@ -36,15 +40,17 @@ class Cycler extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('sy_number, name, num_channels', 'required'),
+			array('sy_number, name, num_channels, cal_date, cal_due_date', 'required'),
+			array('sy_number, name, name', 'unique'),
 			array('sy_number, num_channels', 'numerical', 'integerOnly'=>true),
+			array('num_channels', 'numerical', 'integerOnly'=>true, 'min'=>1),
 			array('name', 'length', 'max'=>128),
 			array('calibrator_id', 'length', 'max'=>10),
 			array('maccor_job_num, govt_tag_num', 'length', 'max'=>50),
 			array('cal_date, cal_due_date', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, sy_number, name, num_channels, cal_date, cal_due_date, calibrator_id, maccor_job_num, govt_tag_num', 'safe', 'on'=>'search'),
+			array('id, sy_number, name, num_channels, cal_date, cal_due_date, calibrator_id, maccor_job_num, govt_tag_num, calibrator_search', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -77,6 +83,7 @@ class Cycler extends CActiveRecord
 			'calibrator_id' => 'Calibrator',
 			'maccor_job_num' => 'Maccor Job Num',
 			'govt_tag_num' => 'Govt Tag Num',
+			'calibrator_search' => 'Calibrator',
 		);
 	}
 
@@ -98,6 +105,10 @@ class Cycler extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
+		$criteria->with = array(
+						'calibrator'=>array('alias'=>'cal'), 
+		); // needed for alias of search parameter tables
+		
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('sy_number',$this->sy_number);
 		$criteria->compare('name',$this->name,true);
@@ -108,6 +119,8 @@ class Cycler extends CActiveRecord
 		$criteria->compare('maccor_job_num',$this->maccor_job_num,true);
 		$criteria->compare('govt_tag_num',$this->govt_tag_num,true);
 
+		$criteria->addSearchCondition('concat(cal.first_name, " ", cal.last_name)', $this->calibrator_search);
+		
 		return new CActiveDataProvider($this, array(
 			'pagination'=>array('pageSize' => 16),
 			'criteria'=>$criteria,

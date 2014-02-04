@@ -12,11 +12,6 @@
 )); ?>
 
 	<div class="row">
-		<?php echo $form->label($model,'id'); ?>
-		<?php echo $form->textField($model,'id',array('size'=>10,'maxlength'=>10)); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->label($model,'sy_number'); ?>
 		<?php echo $form->textField($model,'sy_number'); ?>
 	</div>
@@ -33,17 +28,49 @@
 
 	<div class="row">
 		<?php echo $form->label($model,'cal_date'); ?>
-		<?php echo $form->textField($model,'cal_date'); ?>
+		<?php
+			    $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+			        'model'=>$model,
+			        'attribute'=>'cal_date',
+			    	'value'=>$model->cal_date,
+			        // additional javascript options for the date picker plugin
+			        'options'=>array(
+			            'showAnim'=>'slideDown',
+			            'changeMonth'=>true,
+			            'changeYear'=>true,
+			            'dateFormat' => 'yy-mm-dd',
+			        ),
+			        'htmlOptions'=>array(
+						'style'=>'width:150px;',
+					),
+			    ));
+			?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->label($model,'cal_due_date'); ?>
-		<?php echo $form->textField($model,'cal_due_date'); ?>
+		<?php
+			    $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+			        'model'=>$model,
+			        'attribute'=>'cal_due_date',
+			    	'value'=>$model->cal_due_date,
+			        // additional javascript options for the date picker plugin
+			        'options'=>array(
+			            'showAnim'=>'slideDown',
+			            'changeMonth'=>true,
+			            'changeYear'=>true,
+			            'dateFormat' => 'yy-mm-dd',
+			        ),
+			        'htmlOptions'=>array(
+						'style'=>'width:150px;',
+					),
+			    ));
+			?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'calibrator_id'); ?>
-		<?php echo $form->textField($model,'calibrator_id',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->label($model,'calibrator_search'); ?>
+		<?php echo $form->textField($model,'calibrator_search',array('size'=>10,'maxlength'=>10)); ?>
 	</div>
 
 	<div class="row">

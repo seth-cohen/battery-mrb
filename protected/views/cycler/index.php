@@ -11,7 +11,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Add New Cycler', 'url'=>array('create')),
 	array('label'=>'View All Cyclers', 'url'=>array('index')),
-	array('label'=>'Manage Cyclers', 'url'=>array('admin')),
+	array('label'=>'Manage Cyclers', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -48,17 +48,18 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'id',
 		'sy_number',
 		'name',
 		'num_channels',
-		'cal_date',
 		'cal_due_date',
+		array(
+			'name' => 'calibrator_search',
+			'value' => '$data->calibrator->getFullName()',
+		),
 		/*
-		'calibrator_id',
 		'maccor_job_num',
-		'govt_tag_num',
 		*/
+		'govt_tag_num',
 		array(
 			'class'=>'CButtonColumn',
 			'template' => '{view} {update}',

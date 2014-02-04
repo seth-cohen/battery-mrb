@@ -5,12 +5,12 @@
 $this->breadcrumbs=array(
 	'Testlab'=>array('/testlab'),
 	'Chambers'=>array('index'),
-	'Manage',
+	'Index',
 );
 
 $this->menu=array(
 	array('label'=>'Add New Chamber', 'url'=>array('create')),
-	array('label'=>'Manage Chambers', 'url'=>array('admin')),
+	array('label'=>'Manage Chambers', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -27,7 +27,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>All Chambers</h1>
+<h1>Viewing All Chambers</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
