@@ -9,12 +9,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Put cells on Formation', 'url'=>array('cellformation')),
-	array('label'=>'Active Formation', 'url'=>array('formationindex')),
-	array('label'=>'Put cells on CAT', 'url'=>array('cellcat')),
-	array('label'=>'Active CAT', 'url'=>array('catindex')),
-	array('label'=>'Channel Reassignments', 'url'=>array('testreassignment')),
-	array('label'=>'View All Cells', 'url'=>array('/cell/index')),
+	array('label'=>'View All Cells', 'url'=>array('index')),
+	array('label'=>'Cell Admin', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 );
 ?>
 

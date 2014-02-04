@@ -14,7 +14,7 @@
  * @property integer $is_stacked
  *
  * The followings are the available model relations:
- * @property Cell[] $cells
+ * @property Cell $cell
  * @property Celltype $celltype
  * @property User $kitter
  * @property RefNum $refNum
@@ -56,7 +56,9 @@ class Kit extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			//array('serial_num, ref_num_id, kitting_date, kitter_id, anodeIds, cathodeIds, celltype_id', 'required'),
-			array('serial_num, ref_num_id, kitting_date, kitter_id, celltype_id', 'required'),
+			array('serial_num, ref_num_id, kitting_date, kitter_id, celltype_id, eap_num', 'required'),
+			array('eap_num', 'checkEAP'),
+			
 			array('anodeIds, cathodeIds', 'checkLotNumbers'),
 			array('serial_num, eap_num', 'length', 'max'=>50),
 			array('serial_num', 'checkUniqueInType'),
@@ -81,6 +83,16 @@ class Kit extends CActiveRecord
 	    }
 	}
 	
+	public function checkEAP($attribute,$params) 
+	{
+		$pattern = '/ADD\s$|ADD$/';
+		
+        if(preg_match($pattern, $this->$attribute))
+        {
+        	$this->addError( $attribute, "EAP Addendum is missing!" );
+        }	    
+	}
+	
 	public function checkLotNumbers($attribute,$params) 
 	{
         if(in_array(0,$this->$attribute))
@@ -101,11 +113,25 @@ class Kit extends CActiveRecord
 			'celltype' => array(self::BELONGS_TO, 'Celltype', 'celltype_id'),
 			'kitter' => array(self::BELONGS_TO, 'User', 'kitter_id'),
 			'refNum' => array(self::BELONGS_TO, 'RefNum', 'ref_num_id'),
-			'anodes' => array(self::MANY_MANY, 'Electrode', 'tbl_electrode_kit(kit_id, electrode_id)', 'alias'=>'anode', 'condition'=>'anode.is_anode=1'),
-			'cathodes' => array(self::MANY_MANY, 'Electrode', 'tbl_electrode_kit(kit_id, electrode_id)', 'alias'=>'cathode', 'condition'=>'cathode.is_anode=0'),
+			'anodes' => array(self::MANY_MANY, 'Electrode', 'tbl_electrode_kit(kit_id, electrode_id)', 'alias'=>'anodes', 'condition'=>'anodes.is_anode=1'),
+			'cathodes' => array(self::MANY_MANY, 'Electrode', 'tbl_electrode_kit(kit_id, electrode_id)', 'alias'=>'cathodes', 'condition'=>'cathodes.is_anode=0'),
 		);
 	}
 
+	/**
+	 * @return array of the query criteria to be used for particular query
+	 */
+	public function defaultScope()
+	{
+		$alias = $this->getTableAlias( false, false );
+        return array(
+			'with'=>array(
+				'cathodes',
+        		'anodes',
+			),
+		);
+	}
+	
 	/**
 	 * @return array of the query criteria to be used for particular query
 	 */
@@ -167,8 +193,8 @@ class Kit extends CActiveRecord
 						'celltype'=>array('alias'=>'celltype'), 
 						'kitter'=>array('alias'=>'user'), 
 						'refNum'=>array('alias'=>'ref'),	
-						'anodes'=>array('alias'=>'anode'),
-						'cathodes'=>array('alias'=>'cathode'),
+						'anodes'=>array('alias'=>'anodes'),
+						'cathodes'=>array('alias'=>'cathodes'),
 		); // needed for alias of search parameter tables
 		
 		//$criteria->group = 't.id, anode.id, cathode.id';
@@ -219,7 +245,9 @@ class Kit extends CActiveRecord
 		return new KeenActiveDataProvider($this, array(
 			'pagination'=>array('pageSize' => 16),
 			'criteria'=>$criteria,
-			'withKeenLoading' => array('anodes', 'cathodes'),
+			'withKeenLoading' => array(
+				array('anodes', 'cathodes', 'celltype'),
+			),
 			'sort'=>array(
 				'defaultOrder'=>'kitting_date',
 				'attributes'=>array(

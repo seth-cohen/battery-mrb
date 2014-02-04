@@ -38,7 +38,7 @@ class Chamber extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('brand, model, serial_num, in_commission, min_temp, max_temp', 'required'),
+			array('name, brand, model, serial_num, in_commission, min_temp, max_temp', 'required'),
 			array('min_temp, max_temp', 'numerical', 'integerOnly'=>true),
 			array('name, brand, model, serial_num, in_commission, govt_tag_num', 'length', 'max'=>50),
 			array('cycler_id', 'length', 'max'=>10),

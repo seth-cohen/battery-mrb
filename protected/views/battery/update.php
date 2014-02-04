@@ -1,6 +1,7 @@
 <?php
 /* @var $this BatteryController */
 /* @var $model Battery */
+/* @var $cellDataProvider cellDataProvider */
 
 $this->breadcrumbs=array(
 	'Batteries'=>array('index'),
@@ -19,3 +20,13 @@ $this->menu=array(
 <h1>Update Battery <?php echo $model->id; ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>
+
+<div id="battery-details" class="shadow border"  style="margin-top:10px;">
+<?php  $this->renderPartial('_batterycells', array(
+		'model'=>$model,
+		'cellDataProvider'=>$cellDataProvider,
+	), 
+	false, 
+	false
+);?>
+</div>

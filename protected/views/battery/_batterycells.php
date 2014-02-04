@@ -5,7 +5,7 @@
 
 ?>
 
-<h2>Battery <?php echo $model->batterytype->name; ?> SN: <?php echo $model->serial_num; ?> Cell Details</h2>
+<h2 style="text-align:center">Battery <?php echo $model->batterytype->name; ?> SN: <?php echo $model->serial_num; ?> Cell Details</h2>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>"batterycells-grid",

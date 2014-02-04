@@ -8,9 +8,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create New Kit', 'url'=>array('create')),
-	array('label'=>'View All Kits', 'url'=>array('index')),
-	array('label'=>'Manage Kit', 'url'=>array('admin')),
+	array('label'=>'Create Kits', 'url'=>array('multicreate')),
+	array('label'=>'Kit Admin', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -27,7 +26,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>All Kits</h1>
+<h1>Viewing All Kits</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -35,11 +34,11 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 <br/><br/>Multiple lot numbers may be searched for by separating with a space or comma.  It is an 'OR' comparison.
 </p>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+<?php //echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
+<?php /*$this->renderPartial('_search',array(
 	'model'=>$model,
-)); ?>
+)); */?>
 </div><!-- search-form -->
 
 <div class="shadow border">
@@ -74,8 +73,8 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 			'value'=>'$data->is_stacked?"Yes":"No"',
 		),
 		//'kitter_id',
-		/*
 		'kitting_date',
+		/*
 		'celltype_id',
 		*/
 		array(

@@ -9,8 +9,11 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'Battery Cell Selections', 'url'=>array('cellselection')),
+	array('label'=>'Assemble Battery', 'url'=>array('assemble')),
+	array('label'=>'Accept Test Data', 'url'=>array('accepttestdata'), 'visible'=>Yii::app()->user->checkAccess('quality')),
+	array('label'=>'Ship Batteries', 'url'=>array('ship')),
 	array('label'=>'View All Batteries', 'url'=>array('index')),
-	array('label'=>'Battery Admin', 'url'=>array('admin')),
+	array('label'=>'Battery Admin', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -70,8 +73,8 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 				return $result;
 			},
 		),
+		'data_accepted:boolean',
 		/*
-		'assembly_date',
 		'ship_date',
 		'location',
 		*/

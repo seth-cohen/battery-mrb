@@ -48,6 +48,12 @@ class BatteryController extends Controller
 				'roles'=>array('manufacturing battery assembly'),
 				//'users'=>array('@'),
 			),
+			array('allow',
+				'actions'=>array(
+					'accepttestdata', 'ajaxaccepttestdata',
+				),
+				'roles'=>array('quality'),
+			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
 				'roles'=>array('admin'),
@@ -128,15 +134,25 @@ class BatteryController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
+		$cellDataProvider= new CArrayDataProvider($model->getBatteryCells(), array(
+		    'pagination'=>array(
+		        'pageSize'=>16,
+		    ),
+		    'sort'=>array(
+		    	'defaultOrder'=>'position',
+		    ),
+		 ));
+		 
 		if(isset($_POST['Battery']))
 		{
 			$model->attributes=$_POST['Battery'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
-
+		 
 		$this->render('update',array(
 			'model'=>$model,
+			'cellDataProvider'=>$cellDataProvider
 		));
 	}
 
@@ -159,9 +175,13 @@ class BatteryController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Battery');
+		$model=new Battery('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['Battery']))
+			$model->attributes=$_GET['Battery'];
+
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'model'=>$model,
 		));
 	}
 
@@ -589,6 +609,60 @@ class BatteryController extends Controller
 		}
 	}
 
+	/**
+	 * Allows user to accept the CAT data.
+	 */
+	public function actionAcceptTestData()
+	{
+		$model=new Battery('search');
+		$model->unsetAttributes();  // clear any default values
+		
+		$model->assembler_id = '<>1';
+		$model->data_accepted = 0;
+		
+		/* uses battery->search() to find cells that have been assembled  */
+		
+		if(isset($_GET['Battery']))
+		{
+			$model->attributes=$_GET['Battery'];
+		}
+				
+		$this->render('accepttestdata',array(
+			'model'=>$model,
+		));
+	}
+	
+	/**
+	 * Ajax action to save the model for Accepting CAT data.
+	 */
+	public function actionAjaxAcceptTestData()
+	{
+		
+		if(!isset($_POST['autoId']))
+		{
+			echo 'hide';
+			Yii::app()->end();
+		}
+		
+		$acceptedBatteries = $_POST['autoId'];
+		$dates = $_POST['dates'];
+		
+		if(count($acceptedBatteries)>0)
+		{	
+			$result = Battery::acceptData($acceptedBatteries);
+			
+			if (!json_decode($result))
+			{ /* the save failed otherwise result would be json_encoded*/
+				echo $result;
+			} 
+			else 
+			{ /* success so show count and serial numbers */
+				echo $result;
+			}
+		}
+	}
+	
+	
 	/**
 	 * generates the text fields for the operator
 	 */

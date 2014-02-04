@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'View All Chambers', 'url'=>array('index')),
-	array('label'=>'Manage Chambers', 'url'=>array('admin')),
+	array('label'=>'Chamber Admin', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 );
 ?>
 

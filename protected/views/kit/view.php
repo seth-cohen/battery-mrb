@@ -9,11 +9,10 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create New Kit', 'url'=>array('create')),
-	array('label'=>'Create Kits (Multi)', 'url'=>array('multicreate')),
-	array('label'=>'Edit Kit', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Edit This Kit', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Create Kits', 'url'=>array('multicreate')),
 	array('label'=>'View All Kits', 'url'=>array('index')),
-	array('label'=>'Manage Kit', 'url'=>array('admin')),
+	array('label'=>'Kit Admin', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 );
 ?>
 
@@ -52,7 +51,7 @@ $this->menu=array(
 		array(
 			'label'=>'Cell Link',
 			'type'=>'html',
-			'value'=>(empty($model->cells))?'Not stacked yet':CHtml::link('View Cell Details', $this->createUrl('cell/view', array('id'=>$model->cells[0]->id))),
+			'value'=>($model->cell==null)?'Not stacked yet':CHtml::link('View Cell Details', $this->createUrl('cell/view', array('id'=>$model->cell->id))),
 		),
 	),
 	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',

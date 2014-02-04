@@ -68,6 +68,7 @@ class KitController extends Controller
 	public function actionCreate()
 	{
 		$model=new Kit;
+		$model->kitting_date = date("Y-m-d",time());
 		
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
@@ -258,6 +259,7 @@ class KitController extends Controller
 	{
 		$model=new Kit('search');
 		$model->unsetAttributes();  // clear any default values
+		
 		if(isset($_GET['Kit']))
 			$model->attributes=$_GET['Kit'];
 

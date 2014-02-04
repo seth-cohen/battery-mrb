@@ -108,6 +108,11 @@ class CellController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
+		if(isset($_POST['Kit']['anodeIds']) && isset($_POST['Kit']['cathodeIds']))
+		{
+			$model->kit->saveKitElectrodes(array_merge($_POST['Kit']['anodeIds'], $_POST['Kit']['cathodeIds']));
+		}
+		
 		if(isset($_POST['Cell']))
 		{
 			$model->attributes=$_POST['Cell'];
@@ -188,7 +193,15 @@ class CellController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=Cell::model()->findByPk($id);
+		$model=Cell::model()->with(array(
+			'kit.celltype',
+			'refNum',
+			'stacker',
+			'filler',
+			'inspector',
+			'battery',
+		))->findByPk($id);
+		
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -564,7 +577,7 @@ class CellController extends Controller
 	}
 	
 	/**
-	 * Ajax action to save the model for fill port welded cells.
+	 * Ajax action to save the model for Accepting CAT data.
 	 */
 	public function actionAjaxAcceptCATData()
 	{
@@ -671,8 +684,8 @@ class CellController extends Controller
 		if(isset($_GET['Cell']))
 			$model->attributes=$_GET['Cell'];
 			
-		if(isset($_GET['Columns']))
-			$visibleColumns=$_GET['Columns'];
+		if(isset($_GET['Printcolumns']))
+			$visibleColumns=$_GET['Printcolumns'];
 		
 		$this->widget('application.extensions.EExcelView', array( 
 				'dataProvider'=> $model->search(), 

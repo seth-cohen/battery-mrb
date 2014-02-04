@@ -58,7 +58,7 @@ class Battery extends CActiveRecord
 			// @todo Please remove those attributes that should not be searched.
 			array('id, batterytype_id, ref_num_id, eap_num, serial_num, assembler_id, 
 					assembly_date, ship_date, location, refnum_search,
-					batterytype_search, assembler_search' , 
+					batterytype_search, assembler_search, data_accepted' , 
 					'safe', 'on'=>'search'
 			),
 		);
@@ -145,8 +145,9 @@ class Battery extends CActiveRecord
 		$criteria->compare('ref_num_id',$this->ref_num_id,true);
 		$criteria->compare('eap_num',$this->eap_num,true);
 		$criteria->compare('serial_num',$this->serial_num,true);
-		$criteria->compare('assembler_id',$this->assembler_id,true);
+		$criteria->compare('assembler_id',$this->assembler_id);
 		$criteria->compare('assembly_date',$this->assembly_date,true);
+		$criteria->compare('data_accepted',$this->data_accepted,true);
 		$criteria->compare('ship_date',$this->ship_date,true);
 		$criteria->compare('location',$this->location,true);
 		
@@ -220,6 +221,7 @@ class Battery extends CActiveRecord
 		$criteria->compare('serial_num',$this->serial_num,true);
 		$criteria->compare('assembler_id',$this->assembler_id,true);
 		$criteria->compare('assembly_date',$this->assembly_date,true);
+		$criteria->compare('data_accepted',$this->data_accepted,true);
 		
 		$criteria->compare('type.name',$this->batterytype_search, true);
 
@@ -333,6 +335,68 @@ class Battery extends CActiveRecord
 		}
 		
 		return $result;
+	}
+	
+ 	/**
+	 * saves Battery records and updates as data accepted
+	 * This function is different than the other mmulti save functions in that the
+	 * parameter passed is not an associative array containing actual Cell objects
+	 * it is an array of battery_ids to be updated.
+	 * 
+	 * Spares for the battery should be cleared
+	 * 
+	 * @param array $acceptedCells
+	 */
+	public static function acceptData(array $acceptedBatteries)
+	{
+		$error = 0;
+		$models = array();
+
+		/* oops, we were passed bad data */
+		if(empty($acceptedBatteries))
+			return;
+			
+		foreach($acceptedBatteries as $battery_id)
+		{
+			$model = Battery::model()->findByPk($battery_id);
+			$model->data_accepted = 1;
+				
+			if(!$model->validate())
+			{
+				$error = 1;
+			}
+			$models[] = $model;	
+		}
+		
+		/* all models validated save them all */
+		if ($error==0)
+		{
+			/* create array to return with JSON */
+			$result = array();
+			foreach($models as $model)
+			{
+				if($model->save())
+				{
+					$result[] = array(
+						'serial'=>$model->getFormattedSerial(), 
+					);
+					
+					/* find the spares and delete them */
+					/* clear the join table of roles */
+					$commandDelete = Yii::app()->db->createCommand();
+					$commandDelete->delete('tbl_battery_spare', 
+						'battery_id = :id',
+						array(':id'=>$model->id)
+					);
+				}
+			}
+			return json_encode($result);
+		}
+		else /* a model failed, don't save any */
+		{
+			return CHtml::errorSummary($models); 	
+		}			
+		return null;
 	}
 	
 	public function getFormattedSerial()

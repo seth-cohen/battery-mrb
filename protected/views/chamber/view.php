@@ -11,10 +11,10 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
+	array('label'=>'Edit This Chamber', 'url'=>array('update', 'id'=>$model->id)),
 	array('label'=>'Add New Chamber', 'url'=>array('create')),
-	array('label'=>'Update Chamber', 'url'=>array('update', 'id'=>$model->id)),
 	array('label'=>'View All Chambers', 'url'=>array('index')),
-	array('label'=>'Manage Chambers', 'url'=>array('admin')),
+	array('label'=>'Manage Chambers', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 );
 ?>
 

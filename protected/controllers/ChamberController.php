@@ -28,7 +28,10 @@ class ChamberController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array(
+					'index','view',
+					'ajaxchambertests'
+			),
 				'users'=>array('*'),
 				//'expression'=>'isset($user->depart_id) && $user->depart_id==3',
 			),
@@ -100,11 +103,13 @@ class ChamberController extends Controller
 		$model=new Chamber;
 
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		$this->performAjaxValidation($model);
 
 		if(isset($_POST['Chamber']))
 		{
 			$model->attributes=$_POST['Chamber'];
+			$model->in_commission = 1;
+			
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -207,6 +212,39 @@ class ChamberController extends Controller
 		}
 		echo '0';
 		Yii::app()->end();
+	}
+	
+	/**
+	 * Performs the AJAX update of the detailView on the chamber.
+	 * @param Cell $model the model to be validated
+	 */
+	public function actionAjaxChamberTests($id=null, $test='0')
+	{	
+		/* load cell detail information */
+		if($id == null)
+		{
+			echo 'hide';
+		}
+		else
+		{
+			$testAssignment = new TestAssignment('search');
+			$testAssignment->unsetAttributes();  // clear any default values
+			$testAssignment->chamber_id = $id;
+			$testAssignment->is_active = 1;
+			
+			if(isset($_GET['TestAssignment']))
+			{
+				$testAssignment->attributes = $_GET['TestAssignment'];
+			}
+			$testAssignmentDataProvider = $testAssignment->search();
+		
+			$this->renderPartial('_ajaxtestassignments',array(
+				'testAssignmentDataProvider'=>$testAssignmentDataProvider,
+				'testAssignment'=>$testAssignment,
+				false,
+				true
+			));
+		}
 	}
 	
 	/**

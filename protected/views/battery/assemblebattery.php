@@ -10,8 +10,10 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'Battery Cell Selections', 'url'=>array('cellselection')),
+	array('label'=>'Accept Test Data', 'url'=>array('accepttestdata'), 'visible'=>Yii::app()->user->checkAccess('quality')),
+	array('label'=>'Ship Batteries', 'url'=>array('ship')),
 	array('label'=>'View All Batteries', 'url'=>array('index')),
-	array('label'=>'Battery Admin', 'url'=>array('admin')),
+	array('label'=>'Battery Admin', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 );
 
 Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/jquery.easing.1.3.js');

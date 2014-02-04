@@ -9,9 +9,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create Single Kit', 'url'=>array('create')),
 	array('label'=>'View All Kits', 'url'=>array('index')),
-	array('label'=>'Manage Kit', 'url'=>array('admin')),
+	array('label'=>'Kit Admin', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 );
 ?>
 

@@ -67,9 +67,15 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 			'type'=>'raw',
 			'value'=>'$data->getCathodeList()',
 		),
+		array(
+			'name'=>'is_stacked',
+			'filter'=>array(''=>'-All-', 0=>'No', 1=>'Yes'),
+			'type'=>'raw',
+			'value'=>'$data->is_stacked?"Yes":"No"',
+		),
 		//'kitter_id',
-		/*
 		'kitting_date',
+		/*
 		'celltype_id',
 		*/
 		array(

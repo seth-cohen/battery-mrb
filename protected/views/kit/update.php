@@ -9,13 +9,13 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create New Kit', 'url'=>array('create')),
-	array('label'=>'View Kit', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'View This Kit', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'Create Kits', 'url'=>array('multicreate')),
 	array('label'=>'View All Kits', 'url'=>array('index')),
-	array('label'=>'Manage Kit', 'url'=>array('admin')),
+	array('label'=>'Kit Admin', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 );
 ?>
 
-<h1>Edit Kit <?php echo $model->getFormattedSerial(); ?></h1>
+<h1>Edit Kit <?php echo $model->getFormattedSerial(); ?> <?php echo $model->is_stacked?'(stacked)':'';?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

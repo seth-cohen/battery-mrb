@@ -74,12 +74,15 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 			'template'=>'{view} {update}'
 		),
 	),
+	'selectionChanged'=>'chamberSelected',
 	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
 	'pager' => array(
 		'cssFile' => false,
 	),
 )); ?>
 </div>
+
+<div id="test-details" class="shadow border" style="display:none"></div>
 
 <script type="text/javascript">
 function statusSelected(sel)
@@ -116,4 +119,31 @@ function statusSelected(sel)
 		},
 	});	
 }
+</script>
+
+<script type="text/javascript">
+	function chamberSelected(target_id){
+		var chamber_id;
+		chamber_id = $.fn.yiiGridView.getSelection(target_id);		
+
+		$.ajax({
+			type:'get',
+    		url: '<?php echo $this->createUrl('chamber/ajaxchambertests'); ?>',
+    		data:
+    		{
+    			id: chamber_id.toString(),
+    		},
+    		success: function(data){
+        		if(data == 'hide')
+        		{
+        			$('#test-details').hide();
+        		}
+        		else
+        		{
+        			$('#test-details').show();
+            		$('#test-details').html(data);
+        		}
+    		},
+    	});
+	}
 </script>

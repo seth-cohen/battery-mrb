@@ -46,7 +46,8 @@ class Role extends CActiveRecord
 	
 	public function defaultScope()
 	{
-	    return array("order" => "name");
+		$alias = $this->getTableAlias( false, false );
+	    return array("order" => $alias.'.name');
 	}
 
 	/**

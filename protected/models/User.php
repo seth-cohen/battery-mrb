@@ -90,7 +90,7 @@ class User extends CActiveRecord
 			'depart_id' => 'Depart',
 		);
 	}
-
+	
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *

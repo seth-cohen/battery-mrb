@@ -9,13 +9,14 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create New Kit', 'url'=>array('kit/create')),
-	array('label'=>'Stack Cells (multi)', 'url'=>array('multistackcells')),
-	array('label'=>'Inspect Cells (multi)', 'url'=>array('multiinspectcells')),
-	array('label'=>'Laser Weld Cells (multi)', 'url'=>array('multilasercells')),
-	array('label'=>'Fill Cells (multi)', 'url'=>array('multifillcells')),
-	array('label'=>'Fillport Weld Cells (multi)', 'url'=>array('multitipoffcells')),
+	array('label'=>'Create Kits', 'url'=>array('kit/multicreate')),
+	array('label'=>'Stack Cells', 'url'=>array('multistackcells')),
+	array('label'=>'Inspect Cells', 'url'=>array('multiinspectcells')),
+	array('label'=>'Laser Weld Cells', 'url'=>array('multilasercells')),
+	array('label'=>'Fill Cells', 'url'=>array('multifillcells')),
+	array('label'=>'Accept CAT Data', 'url'=>array('multiacceptcatdata'), 'visible'=>Yii::app()->user->checkAccess('quality')),
 	array('label'=>'View All Cells', 'url'=>array('index')),
+	array('label'=>'Cell Admin', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 );
 ?>
 

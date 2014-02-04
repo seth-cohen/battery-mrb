@@ -113,9 +113,9 @@ class Cell extends CActiveRecord
 		}
 	}
 	
-	public function checkEAP($attribute,$params) 
+  	public function checkEAP($attribute,$params) 
 	{
-		$pattern = '/ADD$/';
+		$pattern = '/ADD\s$|ADD$/';
 		
         if(preg_match($pattern, $this->$attribute))
         {
@@ -208,8 +208,8 @@ class Cell extends CActiveRecord
 							'select'=>array('id','serial_num'),
 							'with'=>array(
 								'celltype',
-								'anodes'=>array('select'=>'id, lot_num', 'alias'=>'anode'), 
-								'cathodes'=>array('select'=>'id, lot_num', 'alias'=>'cathode'),
+								'anodes'=>array('select'=>'id, lot_num', 'alias'=>'anodes'), 
+								'cathodes'=>array('select'=>'id, lot_num', 'alias'=>'cathodes'),
 							), 
 						),
 						'stacker'=>array('alias'=>'stack'), 

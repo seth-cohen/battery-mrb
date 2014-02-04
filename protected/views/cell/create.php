@@ -17,6 +17,7 @@ $this->menu=array(
 	array('label'=>'Laser Weld Cells (multi)', 'url'=>array('multilasercells')),
 	array('label'=>'Fill Cells (multi)', 'url'=>array('multifillcells')),
 	array('label'=>'Fillport Weld Cells (multi)', 'url'=>array('multitipoffcells')),
+	array('label'=>'Accept CAT Data', 'url'=>array('multiacceptcatdata'), 'visible'=>Yii::app()->user->checkAccess('quality')),
 	array('label'=>'View All Cells', 'url'=>array('index')),
 );
 ?>
