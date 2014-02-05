@@ -10,13 +10,13 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
+	array('label'=>'View This Chamber', 'url'=>array('view', 'id'=>$model->id)),
 	array('label'=>'Add New Chamber', 'url'=>array('create')),
-	array('label'=>'View Chamber', 'url'=>array('view', 'id'=>$model->id)),
 	array('label'=>'View All Chambers', 'url'=>array('index')),
-	array('label'=>'Manage Chambers', 'url'=>array('admin')),
+	array('label'=>'Chamber Admin', 'url'=>array('admin'), 'visibility'=>Yii::app()->user->checkAccess('admin')),
 );
 ?>
 
-<h1>Update Chamber <?php echo $model->id; ?></h1>
+<h1>Edit Chamber <?php echo $model->name; ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

@@ -9,14 +9,14 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Put Cells on NCR', 'url'=>array('dispocellsonncr')),
-	array('label'=>'View All NCRs', 'url'=>array('dispocellsonncr')),
-	array('label'=>'NCR Admin', 'url'=>array('admin')),
+	array('label'=>'Put Cells on NCR', 'url'=>array('putcellsonncr')),
+	array('label'=>'View All NCRs', 'url'=>array('index')),
+	array('label'=>'NCR Admin', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 );
 
 ?>
 
-<h1>Put Cells on NCR</h1>
+<h1>Disposition Cells on NCRs</h1>
 <span>*All cells that are on at least one NCR will be visible.  You can search by NCR number or any other field</span>
 
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -28,57 +28,43 @@ $this->menu=array(
 <div class="shadow border" >
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'ncr-grid',
-	'dataProvider'=>$cellModel->searchOnNCR(),
-	'filter'=>$cellModel,
+	'dataProvider'=>$ncrCellModel->search(),
+	'filter'=>$ncrCellModel,
 	'columns'=>array(
-        array(
-			'name'=>'serial_search',
-			'value'=>'$data->kit->getFormattedSerial()',
+		array(
+			'name'=>'ncr_search',
+			'value'=>'"NCR-".$data->ncr->number',
 		),
         array(
-			'name'=>'celltype_search',
-			'value'=>'$data->kit->celltype->name',
+			'name'=>'serial_search',
+			'value'=>'$data->cell->kit->getFormattedSerial()',
 		),
        array(
 			'name'=>'refnum_search',
-			'value'=>'$data->refNum->number',
+			'value'=>'$data->cell->refNum->number',
 		),
 		array(
-			'name'=>'ncr_search',
-			'header'=>'NCR to Dispo',
+			'name'=>'disposition_string',
 			'type'=>'raw',
-			'value'=>function($data,$row) {
-				return CHtml::dropDownList('Ncr['.$data->id.']', '', 
-					CHtml::listData($data->ncrs, 'id', 'number'), 
+			'value'=>function($data, $row){
+				return 
+				CHtml::activeDropDownList($data,"disposition",
 					array(
-							"prompt"=>"-Select NCR-",
-							"class"=>"ncr-dropdown",
-							"onChange"=>"ncrSelected(this)",
-							"style"=>"width:100px",
-							"data-cell-id"=>$data->id,
+						"0"=>"Open",
+						"1"=>"Scrap",
+						"2"=>"Eng Use Only",
+						"3"=>"Accept",
+						"4"=>"Use As Is",
+					), 
+					array(
+						"prompt"=>"-N/A-",
+						"onChange"=>"dispoSelected(this)",
+						"style"=>"width:100px",
+						'data-cell-id'=>$data->cell->id,
+						'data-ncr-id'=>$data->ncr->id,
 					)
 				);
 			},
-		),
-		array(
-			'header'=>'Disposition',
-			'type'=>'raw',
-			'value'=>'CHtml::dropDownList("Dispo[$data->id]", "", 
-				array(
-					"0"=>"Open",
-					"1"=>"Scrap",
-					"2"=>"Eng Use Only",
-					"3"=>"Accept",
-					"4"=>"Use As Is",
-				), 
-				array(
-					"prompt"=>"-N/A-",
-					"onChange"=>"dispoSelected(this)",
-					"style"=>"width:100px",
-					"disabled"=>"disabled",
-					"data-cell-id"=>$data->id,
-				)
-			)',
 		),
     ),
     //'htmlOptions'=>array('class'=>'shadow grid-view'),
@@ -113,33 +99,11 @@ $(document).ready(function($) {
 	});
 });
 
-function ncrSelected(sel)
-{
-	var dispo_id = sel.id.toString().replace("Ncr","Dispo");
-	
-	var ncr_id = $('option:selected', $(sel)).attr("value");
-	var cell_id =$(sel).data("cell-id");
-
-	$.ajax({
-		url: '<?php echo $this->createUrl('/ncr/ajaxgetncrcelldispo'); ?>',
-		type: 'POST',
-		data: 
-		{
-			id: ncr_id,
-			cell_id: cell_id,
-		},
-		success: function(data) {
-			$('#'+dispo_id).removeAttr('disabled');
-			$('#'+dispo_id).val(data);
-		},
-	});
-}
-
 function dispoSelected(sel)
 {
 	var ncrElement = sel.id.toString().replace("Dispo","Ncr");
 	
-	var ncr_id = $('option:selected', $('#'+ncrElement)).attr("value");
+	var ncr_id = $(sel).data("ncr-id");
 	var cell_id =$(sel).data("cell-id");
 	var dispo = $('option:selected', $(sel)).attr("value");
 	
@@ -153,15 +117,22 @@ function dispoSelected(sel)
 			dispo: dispo,
 		},
 		success: function(data) {
+			var message;
 			if(data == '1'){
+				message = $("<br/><span style='color:green'>Change Successful</span>");
 				$(sel).css('border', '2px solid green');
+				$(sel).parent().append(message);
 				setTimeout(function() {
 					$(sel).css('border', '1px solid');
+					message.remove();
 				}, 2000);
 			}else{
+				message = $("<br/><span style='color:red'>Change Failed</span>");
 				$(sel).css('border', '2px solid red');
+				$(sel).parent().append(message);
 				setTimeout(function() {
 					$(sel).css('border', '1px solid');
+					message.remove();
 				}, 2000);
 			}
 		},

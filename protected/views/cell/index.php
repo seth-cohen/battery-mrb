@@ -77,6 +77,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 </div>
 
 <div class="shadow border" >
+<span>*NCRs for Cells that are Open/Scrapped/Eng Use only are bold and red.</span>
 <?php $this->widget(/*'zii.widgets.grid.CGridView'*/'application.extensions.EExcelView', array(
 	'id'=>'cell-grid',
 	'dataProvider'=>$model->search(),

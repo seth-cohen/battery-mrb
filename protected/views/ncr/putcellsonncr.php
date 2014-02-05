@@ -9,8 +9,9 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Dispo Cells on NCR', 'url'=>array('dispocellsonncr')),
-	array('label'=>'NCR Admin', 'url'=>array('admin')),
+	array('label'=>'Dispo Cells on NCR', 'url'=>array('dispositioncells')),
+	array('label'=>'View All NCRs', 'url'=>array('index')),
+	array('label'=>'NCR Admin', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 );
 
 ?>
@@ -113,10 +114,10 @@ function ncrComplete(data) {
     	   var results = $.parseJSON(data);
     	   var alertString = results.cells.length +' cells were added to NCR'+ results.ncr + '. Serial numbers: \n';
     	   results.cells.forEach(function(cell) {
-    		   alertString += results.cells.serial  + '\n';
+    		   alertString += cell.serial  + '\n';
     	   });
     	   alert(alertString);
-    	   $.fn.yiiGridView.update('ncr-grid');
+    	   location.reload();
     	}
     	catch(e)
     	{

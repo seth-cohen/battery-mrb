@@ -4,17 +4,15 @@
 /* @var $form CActiveForm */
 ?>
 
-<div class="form">
+
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'ncr-form',
-	// Please note: When you enable ajax validation, make sure the corresponding
-	// controller action is handling ajax validation correctly.
-	// There is a call to performAjaxValidation() commented in generated controller code.
-	// See class documentation of CActiveForm for details on this.
-	'enableAjaxValidation'=>false,
+	'enableAjaxValidation'=>true,
+	'enableClientValidation'=>true,
 )); ?>
 
+<div class="form">
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
@@ -30,11 +28,83 @@
 		<?php echo $form->textField($model,'date'); ?>
 		<?php echo $form->error($model,'date'); ?>
 	</div>
+</div><!-- form -->
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-	</div>
+<div class="shadow border" style="margin-top:15px;">
+<h2 style="text-align:center">Cells on NCR-<?php echo $model->number; ?></h2>
+<?php $this->widget('zii.widgets.grid.CGridView', array(
+	'id'=>'channel-grid',
+	'dataProvider'=>$ncrCellDataProvider,
+	'filter'=>$ncrCell,
+	'columns'=>array(
+		array(
+            'id'=>'removeId',
+            'class'=>'CCheckBoxColumn',
+            'selectableRows' => '50',   
+        ),
+		array(
+			'name'=>'ncr_search',
+			'value'=>'"NCR-".$data->ncr->number',
+		),
+		 array(
+			'name'=>'serial_search',
+		 	'type'=>'raw',
+			'value'=>function($data, $row){
+				return 
+				CHtml::link($data->cell->kit->getFormattedSerial(), 
+					array("cell/view", "id"=>$data->cell->id)
+				);
+			}
+		),
+		array(
+			'name'=>'refnum_search',
+			'value'=>'$data->cell->refNum->number',
+		),
+		'disposition_string',
+	),		
+	'emptyText'=>'Oops, no cells on this NCR',
+	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
+	'pager'=>array(
+		'cssFile' => false,
+	),
+)); 
+?>	
+</div>
+
+<?php echo CHtml::ajaxSubmitButton('Submit',array('ncr/ajaxupdate'), array('success'=>'checkSuccess'), array("id"=>"submit-button")); ?>
 
 <?php $this->endWidget(); ?>
 
-</div><!-- form -->
+<script type="text/javascript">
+jQuery(function($){
+	$('#channel-grid .filters').attr('align','center');
+	/*$('#channelassignment-grid .filters').children(':nth-child(1)').text('Change');*/
+	$('#channel-grid .filters').children(':nth-child(1)').text('Remove Cell');
+});
+
+function checkSuccess(data) {	
+	if(data=='hide')
+    {
+    	$('.errorSummary').remove();
+    }
+    else
+    {
+    	try
+    	{
+    	   var channels = $.parseJSON(data);
+    	   var alertString = channels.length+' channels were added to the Cycler. Channel Details: \n';
+    	   channels.forEach(function(channel) {
+    		   alertString += channel.num + ': minV:' + channel.minV + ' maxV:' + channel.maxV + ' maxC:' + channel.maxC 
+    		   					+ ' maxD:' + channel.maxD + ' multi:' + channel.multi + '\n';
+    	   });
+    	   alert(alertString);
+    	   location.reload();
+    	}
+    	catch(e)
+    	{
+    		$('#cycler-form').prepend(data);
+    		console.log(e.message);
+    	}
+    }
+}
+</script>

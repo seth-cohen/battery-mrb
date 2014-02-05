@@ -9,17 +9,18 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Channel', 'url'=>array('index')),
-	array('label'=>'Create Channel', 'url'=>array('create')),
-	array('label'=>'Update Channel', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Channel', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Channel', 'url'=>array('admin')),
+	array('label'=>'Edit This Channel', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'View All Channels', 'url'=>array('index')),
+	array('label'=>'Add New Cycler', 'url'=>array('/cycler/create')),
+	array('label'=>'Channel Admin', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 );
 ?>
 
 <h1>View Channel : <?php echo $model->number.' ['.$model->cycler->name.']'; ?></h1>
 
-<?php echo CHtml::dropDownList('cycler_id', 'name', Cycler::forList(), 
+<div class="shadow border">
+<?php echo CHtml::label('Quick Navigate', 'Cycler', array('style'=>'display:block; clear:both; margin-left:5px;'));?>
+<?php echo CHtml::dropDownList('cycler_id', $model->cycler_id, Cycler::forList(), 
 		array(
 			'ajax'=>array(
 				'type'=>'POST',
@@ -30,7 +31,8 @@ $this->menu=array(
 			'style'=>'display:block; float:left; margin-right:5px;'
 		))?>
 		
-<?php echo CHtml::dropDownList('channel_id', '-Select Cycler-', array(),
+<?php echo CHtml::dropDownList('channel_id', $model->id, 
+		CHtml::listData(Channel::model()->findAllByAttributes(array('cycler_id'=>$model->cycler_id)), 'id', 'number'),
 		array(
 			'onchange'=>
 				'url = "'.CController::createUrl('channel/').'";
@@ -75,15 +77,17 @@ $this->menu=array(
 	}?>
 
 
-
-<div class="shadow border">
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
 		'number',
 		array(
 			'label'=>'Cycler',
-			'value'=>$model->cycler->name,
+			'type'=>'raw',
+			'value'=>function($data){
+				return 
+				CHtml::link($data->cycler->name, array('cycler/view', 'id'=>$data->cycler_id));
+			},
 		),
 		'max_charge_rate',
 		'max_discharge_rate',
@@ -92,6 +96,22 @@ $this->menu=array(
 		'in_commission:boolean',
 		'min_voltage',
 		'max_voltage',
+		array(
+			'label'=>'Active Test Cell',
+			'type'=>'raw',
+			'value'=>function($data){
+				if($data->activeTestAssignment != null)
+				{
+					return CHtml::link($data->activeTestAssignment->cell->kit->getFormattedSerial(), 
+									array("cell/view", "id"=>$data->activeTestAssignment->cell->id)
+								);
+				}
+				else 
+				{
+					return 'No Active Test';
+				}
+			},
+		),
 	),
 	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
 )); ?>

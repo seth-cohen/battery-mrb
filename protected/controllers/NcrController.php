@@ -32,7 +32,7 @@ class NcrController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update', 'ajaxupdate'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -54,8 +54,21 @@ class NcrController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$ncrCell = new NcrCell('search');
+		$ncrCell->unsetAttributes();  // clear any default values
+		$ncrCell->ncr_id = $id;
+		
+		if(isset($_GET['NcrCell']))
+		{
+			$ncrCell->attributes = $_GET['NcrCell'];
+		}
+		
+		$ncrCellDataProvider = $ncrCell->search();
+		
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
+			'ncrCellDataProvider'=>$ncrCellDataProvider,
+			'ncrCell' =>$ncrCell,
 		));
 	}
 
@@ -94,18 +107,34 @@ class NcrController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
+		$ncrCell = new NcrCell('search');
+		$ncrCell->unsetAttributes();  // clear any default values
+		$ncrCell->ncr_id = $id;
+		
+		if(isset($_GET['NcrCell']))
+		{
+			$ncrCell->attributes=$_GET['NcrCell'];
+		}
+		
 		if(isset($_POST['Ncr']))
 		{
 			$model->attributes=$_POST['Ncr'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
 		}
 
+		$ncrCellDataProvider = $ncrCell->search();
+		
 		$this->render('update',array(
 			'model'=>$model,
+			'ncrCellDataProvider'=>$ncrCellDataProvider,
+			'ncrCell' =>$ncrCell,
 		));
 	}
 
+	public function actionAjaxUpdate()
+	{
+		
+	}
+	
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
@@ -125,10 +154,15 @@ class NcrController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Ncr');
+		$model=new Ncr('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['Ncr']))
+			$model->attributes=$_GET['Ncr'];
+			
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'model'=>$model,
 		));
+		
 	}
 
 	/**
@@ -244,18 +278,18 @@ class NcrController extends Controller
 	public function actionDispositionCells()
 	{
 		
-		$cellModel=new Cell('searchOnNCR');
-		$cellModel->unsetAttributes();  // clear any default values
+		$ncrCellModel=new NcrCell('search');
+		$ncrCellModel->unsetAttributes();  // clear any default values
 		
-		if(isset($_GET['Cell']))
+		if(isset($_GET['NcrCell']))
 		{
-			$cellModel->attributes=$_GET['Cell'];
+			$ncrCellModel->attributes=$_GET['NcrCell'];
 		}
 		
 		/* uses Cell->searchOnNCR to find cells on NCR */
 		
 		$this->render('dispositioncells', array(
-			'cellModel'=>$cellModel,
+			'ncrCellModel'=>$ncrCellModel,
 		));
 	}
 	

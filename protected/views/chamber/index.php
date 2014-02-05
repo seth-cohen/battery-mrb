@@ -109,8 +109,9 @@ function statusSelected(sel)
 					message.remove();
 				}, 2000);
 			}else{
-				message = $("<br/><span>Change Failed</span>");
+				message = $("<br/><span style='color:red'>Change Failed</span>");
 				$(sel).css('border', '2px solid red');
+				$(sel).parent().append(message);
 				setTimeout(function() {
 					$(sel).css('border', '1px solid');
 					message.remove();

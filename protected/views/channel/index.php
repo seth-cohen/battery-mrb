@@ -8,8 +8,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create Channel', 'url'=>array('create')),
-	array('label'=>'Manage Channel', 'url'=>array('admin')),
+	array('label'=>'Add New Cycler', 'url'=>array('/cycler/create')),
+	array('label'=>'Channel Admin', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 );
 ?>
 
@@ -33,7 +33,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 			'htmlOptions'=>array('style'=>'width:50px;'),
 		),
 		array(
-			'name'=>'cycler_search',
+			'name'=>'cycler_id',
 			'value'=>'$data->cycler->name',
 			'filter'=>Cycler::forList(),
 		),
@@ -100,8 +100,9 @@ function statusSelected(sel)
 					message.remove();
 				}, 2000);
 			}else{
-				message = $("<br/><span>Change Failed</span>");
+				message = $("<br/><span style='color:red'>Change Failed</span>");
 				$(sel).css('border', '2px solid red');
+				$(sel).parent().append(message);
 				setTimeout(function() {
 					$(sel).css('border', '1px solid');
 					message.remove();

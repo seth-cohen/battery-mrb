@@ -156,6 +156,5 @@ class Ncr extends CActiveRecord
 			return CHtml::errorSummary($models); 	
 		}			
 		return null;
-		
 	}
 }

@@ -9,10 +9,11 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'Put cells on Formation', 'url'=>array('cellformation')),
-	array('label'=>'Active Formation', 'url'=>array('formationindex')),
+	array('label'=>'View Cells on Formation', 'url'=>array('formationindex')),
 	array('label'=>'Put cells on CAT', 'url'=>array('cellcat')),
-	array('label'=>'Active CAT', 'url'=>array('catindex')),
-	array('label'=>'Test Reassignments', 'url'=>array('testreassignment')),
+	array('label'=>'View Cells on CAT', 'url'=>array('catindex')),
+	array('label'=>'Move Cells to Storage', 'url'=>array('storage')),
+	array('label'=>'Deliver Cells to Assembly', 'url'=>array('deliverforbattery')),
 	array('label'=>'View All Cells', 'url'=>array('/cell/index')),
 );
 

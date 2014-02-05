@@ -1,6 +1,7 @@
 <?php
 /* @var $this CyclerController */
 /* @var $model Cycler */
+/* @var $channelsDataProvider CArrayDataProvider */
 
 $this->breadcrumbs=array(
 	'Testlab'=>array('/testlab'),
@@ -10,12 +11,13 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Add New Cycler', 'url'=>array('create')),
+	array('label'=>'View This Cycler', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'Add a New Cycler', 'url'=>array('create')),
 	array('label'=>'View All Cyclers', 'url'=>array('index')),
-	array('label'=>'Manage Cyclers', 'url'=>array('admin')),
+	array('label'=>'Cycler Admin', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 );
 ?>
 
-<h1>Update Cycler <?php echo $model->id; ?></h1>
+<h1>Edit Cycler <?php echo $model->name; ?></h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->renderPartial('_form', array('model'=>$model, 'channelsDataProvider'=>$channelsDataProvider)); ?>

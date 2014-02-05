@@ -40,8 +40,8 @@ class Cycler extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('sy_number, name, num_channels, cal_date, cal_due_date', 'required'),
-			array('sy_number, name, name', 'unique'),
+			array('sy_number, name, num_channels, cal_date, cal_due_date, calibrator_id, calibrator_search', 'required'),
+			array('sy_number, name, name', 'unique', 'on'=>'insert'),
 			array('sy_number, num_channels', 'numerical', 'integerOnly'=>true),
 			array('num_channels', 'numerical', 'integerOnly'=>true, 'min'=>1),
 			array('name', 'length', 'max'=>128),
@@ -141,6 +141,98 @@ class Cycler extends CActiveRecord
 			$arr[$cycler->id] = $cycler->name;
 		}
 		 			
+		return $arr;
+	}
+	
+	/*
+	 * REturns one associative array of the channel types on the cycler.
+	 * @return 
+	 */
+	public function getChannelGroups()
+	{
+		$arr = array();
+		$attributes = array();
+		
+		$channels = $this->channels;
+	
+		$groupCount = 0;
+		$channelCount = 0;
+		foreach ($channels as $channel)
+		{
+			if ($channelCount == 0)
+			{
+				$channelCount++;
+				$groupCount++;
+				
+				$attributes = array(
+					'minV' =>$channel->min_voltage, 
+					'maxV'=>$channel->max_voltage, 
+					'maxC'=>$channel->max_charge_rate, 
+					'maxD'=>$channel->max_discharge_rate, 
+					'multi'=>$channel->multirange
+				);
+				continue;
+			}
+	
+			$tempAttributes = array(
+				'minV' =>$channel->min_voltage, 
+				'maxV'=>$channel->max_voltage, 
+				'maxC'=>$channel->max_charge_rate, 
+				'maxD'=>$channel->max_discharge_rate, 
+				'multi'=>$channel->multirange
+			);
+			
+			$diffArray = array_diff_assoc($tempAttributes, $attributes);
+			
+			if (empty($diffArray))
+			{ /* they are the same and increase the channel count for the group */
+				$channelCount++;
+			}
+			else 
+			{/* they are different so create a group entry and start a new group*/
+				$arr[] = array(
+					'id'=>$groupCount, 
+					'numChannels'=>$channelCount, 
+					'minV' => $attributes['minV'],
+					'maxV'=> $attributes['maxV'],
+					'maxC'=> $attributes['maxC'],
+					'maxD'=> $attributes['maxD'],
+					'multi'=> $attributes['multi'],
+				);
+				$groupCount++;
+				$channelCount = 1;
+				$attributes = array(
+					'minV' =>$channel->min_voltage, 
+					'maxV'=>$channel->max_voltage, 
+					'maxC'=>$channel->max_charge_rate, 
+					'maxD'=>$channel->max_discharge_rate, 
+					'multi'=>$channel->multirange
+				);
+			}
+		}
+		/* add the last group to the erturn array */
+		$arr[] = array(
+			'id'=>$groupCount, 
+			'numChannels'=>$channelCount, 
+			'minV' => $attributes['minV'],
+			'maxV'=> $attributes['maxV'],
+			'maxC'=> $attributes['maxC'],
+			'maxD'=> $attributes['maxD'],
+			'multi'=> $attributes['multi'],
+		);	
+		
+		for($groupCount++; $groupCount <= 6; $groupCount++)
+		{
+			$arr[] = array(
+			'id'=>$groupCount, 
+			'numChannels'=>'', 
+			'minV' => '',
+			'maxV'=> '',
+			'maxC'=> '',
+			'maxD'=> '',
+			'multi'=> '',
+		);	
+		}
 		return $arr;
 	}
 	

@@ -10,8 +10,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'Add New Cycler', 'url'=>array('create')),
-	array('label'=>'View All Cyclers', 'url'=>array('index')),
-	array('label'=>'Manage Cyclers', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
+	array('label'=>'Cycler Admin', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -65,9 +64,38 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 			'template' => '{view} {update}',
 		),
 	),
+	'selectionChanged'=>'cyclerSelected',
 	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
 	'pager'=>array(
 		'cssFile' => false,
 	),
 )); ?>
 </div>
+
+<div id="test-details" class="shadow border" style="display:none"></div>
+
+<script type="text/javascript">
+	function cyclerSelected(target_id){
+		var cycler_id = $.fn.yiiGridView.getSelection(target_id);		
+
+		$.ajax({
+			type:'get',
+    		url: '<?php echo $this->createUrl('cycler/ajaxcyclertests'); ?>',
+    		data:
+    		{
+    			id: cycler_id.toString(),
+    		},
+    		success: function(data){
+        		if(data == 'hide')
+        		{
+        			$('#test-details').hide();
+        		}
+        		else
+        		{
+        			$('#test-details').show();
+            		$('#test-details').html(data);
+        		}
+    		},
+    	});
+	}
+</script>

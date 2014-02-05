@@ -10,13 +10,13 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Channel', 'url'=>array('index')),
-	array('label'=>'Create Channel', 'url'=>array('create')),
-	array('label'=>'View Channel', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Channel', 'url'=>array('admin')),
+	array('label'=>'View This Channel', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'View All Channels', 'url'=>array('index')),
+	array('label'=>'Add New Cycler', 'url'=>array('/cycler/create')),
+	array('label'=>'Channel Admin', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 );
 ?>
 
-<h1>Update Channel <?php echo $model->number.' ['.$model->cycler->name.']'; ?> </h1>
+<h1>Edit Channel <?php echo $model->number.' ['.$model->cycler->name.']'; ?> </h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

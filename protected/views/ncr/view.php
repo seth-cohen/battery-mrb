@@ -1,6 +1,8 @@
 <?php
 /* @var $this NcrController */
 /* @var $model Ncr */
+/* @var $ncrCellDataProvider CActiveDataProvider */
+/* @var $ncrCell NcrCell */
 
 $this->breadcrumbs=array(
 	'Ncrs'=>array('index'),
@@ -8,21 +10,59 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Ncr', 'url'=>array('index')),
-	array('label'=>'Create Ncr', 'url'=>array('create')),
-	array('label'=>'Update Ncr', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Ncr', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Ncr', 'url'=>array('admin')),
+	array('label'=>'Edit This NCR', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Put Cells on NCR', 'url'=>array('putcellsonncr')),
+	array('label'=>'Dispo Cells on NCR', 'url'=>array('dispositioncells')),
+	array('label'=>'View All NCRs', 'url'=>array('index')),
+	array('label'=>'NCR Admin', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 );
 ?>
 
-<h1>View Ncr #<?php echo $model->id; ?></h1>
+<h1>View NCR-<?php echo $model->number; ?></h1>
 
+<div class="shadow border">
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id',
 		'number',
 		'date',
 	),
+	'cssFile'=>Yii::app()->baseUrl . '/css/styles.css',
 )); ?>
+</div>
+
+<div class="shadow border">
+<h2 style="text-align:center">Cells on NCR-<?php echo $model->number; ?></h2>
+<?php $this->widget('zii.widgets.grid.CGridView', array(
+	'id'=>'channel-grid',
+	'dataProvider'=>$ncrCellDataProvider,
+	'filter'=>$ncrCell,
+	'columns'=>array(
+		array(
+			'name'=>'ncr_search',
+			'value'=>'"NCR-".$data->ncr->number',
+		),
+		 array(
+			'name'=>'serial_search',
+		 	'type'=>'raw',
+			'value'=>function($data, $row){
+				return 
+				CHtml::link($data->cell->kit->getFormattedSerial(), 
+					array("cell/view", "id"=>$data->cell->id)
+				);
+			}
+		),
+		array(
+			'name'=>'refnum_search',
+			'value'=>'$data->cell->refNum->number',
+		),
+		'disposition_string',
+	),		
+	'emptyText'=>'Oops, no cells on this NCR',
+	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
+	'pager'=>array(
+		'cssFile' => false,
+	),
+)); 
+?>
+</div>

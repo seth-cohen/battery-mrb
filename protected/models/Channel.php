@@ -17,6 +17,8 @@
  *
  * The followings are the available model relations:
  * @property Cycler $cycler
+ * @property TestAssignment[] $testAssignments
+ * @property TestAssignment $activeTestAssignment
  */
 class Channel extends CActiveRecord
 {
@@ -61,9 +63,15 @@ class Channel extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'cycler' => array(self::BELONGS_TO, 'Cycler', 'cycler_id'),
+			'testAssignments' => array(self::HAS_MANY, 'TestAssignment', 'channel_id'),
+			'activeTestAssignment' => array(self::HAS_ONE, 'TestAssignment', 'channel_id', 'condition'=>'activeTestAssignment.is_active=1'),
 		);
 	}
 
+	 public function defaultScope() {
+	    return array('order'=>'number');
+	  }
+  
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
@@ -105,7 +113,7 @@ class Channel extends CActiveRecord
 		$criteria->with = array('cycler');		// needed for cycler name search
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('number',$this->number);
-		$criteria->compare('cycler_id',$this->cycler_id,true);
+		$criteria->compare('cycler_id',$this->cycler_id);
 		$criteria->compare('max_charge_rate',$this->max_charge_rate);
 		$criteria->compare('max_discharge_rate',$this->max_discharge_rate);
 		$criteria->compare('multirange',$this->multirange);
@@ -120,8 +128,9 @@ class Channel extends CActiveRecord
 			'pagination'=>array('pageSize' => 16),
 			'criteria'=>$criteria,
 			'sort'=>array(
+				'defaultOrder'=>'cycler.name',
 				'attributes'=>array(
-					'cycler_search'=>array(
+					'cycler_id'=>array(
 						'asc'=>'cycler.name',
 						'desc'=>'cycler.name DESC',
 					),

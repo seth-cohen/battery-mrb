@@ -16,6 +16,10 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update Ncr <?php echo $model->id; ?></h1>
+<h1>Edit NCR-<?php echo $model->number; ?></h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->renderPartial('_form', array(
+	'model'=>$model, 
+	'ncrCellDataProvider'=>$ncrCellDataProvider,
+	'ncrCell' =>$ncrCell
+)); ?>

@@ -324,6 +324,7 @@ class Cell extends CActiveRecord
 			'pagination'=>array('pageSize' => 16),
 			'criteria'=>$criteria,
 			'sort'=>array(
+				'defaultOrder'=>'CONCAT(celltype.name, serial_num)',
 				'attributes'=>array(
 					'refnum_search'=>array(
 						'asc'=>'ref.number',
@@ -381,8 +382,8 @@ class Cell extends CActiveRecord
 							'select'=>array('id','serial_num'),
 							'with'=>array(
 								'celltype',
-								'anodes'=>array('select'=>'id, lot_num', 'alias'=>'anode'), 
-								'cathodes'=>array('select'=>'id, lot_num', 'alias'=>'cathode'),
+								'anodes'=>array('select'=>'id, lot_num', 'alias'=>'anodes'), 
+								'cathodes'=>array('select'=>'id, lot_num', 'alias'=>'cathodes'),
 							), 
 						),
 						'refNum'=>array('alias'=>'ref'),
