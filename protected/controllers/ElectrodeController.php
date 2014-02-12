@@ -23,16 +23,16 @@ class ElectrodeController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index', 'ajaxGetElectrodeCells'),
+				'actions'=>array('index', 'ajaxGetElectrodeCells','view'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','view'),
-				'users'=>array('@'),
+				'actions'=>array('create', 'update'),
+				'roles'=>array('manufacturing'),
 			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('update'),
-				'roles' => array('manufacturing supervisor', 'manufacturing engineer'),
+			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				'actions'=>array('admin'),
+				'roles'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -146,7 +146,7 @@ class ElectrodeController extends Controller
 			$model->attributes=$_POST['Electrode'];
 			
 			if($model->save())
-				$this->redirect(array('viewlot','id'=>$model->id));
+				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('updatelot',array('model'=>$model,));
@@ -186,11 +186,11 @@ class ElectrodeController extends Controller
 				foreach($model->kits as $key=>$kit){
 					if($kit->cell == null)
 					{
-						$kits[] = array('num'=>$key+1, 'kit'=>$kit->getFormattedSerial(), 'location'=>'Not Stacked', 'id'=>999999999, 'stack_date'=>'Not Stacked');
+						$kits[] = array('num'=>$key+1, 'kit'=>$kit->getFormattedSerial(), 'location'=>'Not Stacked', 'id'=>999999999, 'stack_date'=>'Not Stacked', 'anodes'=>$kit->getAnodeList(),  'cathodes'=>$kit->getCathodeList());
 					}
 					else 
 					{
-						$kits[] = array('num'=>$key+1, 'kit'=>$kit->getFormattedSerial(), 'location'=>$kit->cell->location, 'id'=>$kit->cell->id, 'stack_date'=>$kit->cell->stack_date);
+						$kits[] = array('num'=>$key+1, 'kit'=>$kit->getFormattedSerial(), 'location'=>$kit->cell->location, 'id'=>$kit->cell->id, 'stack_date'=>$kit->cell->stack_date,  'anodes'=>$kit->getAnodeList(), 'cathodes'=>$kit->getCathodeList());
 					}
 					
 				}

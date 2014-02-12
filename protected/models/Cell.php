@@ -220,6 +220,10 @@ class Cell extends CActiveRecord
 						'refNum'=>array('alias'=>'ref'),
 						'testAssignments'=>array('alias'=>'test'),
 						'ncrs',
+						'battery'=>array(
+							'alias'=>'batt',
+							'with'=>array('batterytype'=>array('alias'=>'battype')),
+						),
 		); // needed for alias of search parameter tables
 
 		$criteria->together = true;
@@ -228,7 +232,7 @@ class Cell extends CActiveRecord
 //		$criteria->compare('kit_id',$this->kit_id,true);
 		$criteria->compare('t.eap_num',$this->eap_num,true);
 		$criteria->compare('stack_date',$this->stack_date,true);
-		$criteria->compare('location',$this->location, true);
+		$criteria->compare('t.location',$this->location, true);
 		$criteria->compare('dry_wt',$this->dry_wt);
 		$criteria->compare('wet_wt',$this->wet_wt);
 		
@@ -243,7 +247,6 @@ class Cell extends CActiveRecord
 		$criteria->compare('portweld_date',$this->portweld_date,true);
 		$criteria->compare('fill_date',$this->fill_date,true);
 		$criteria->compare('inspection_date',$this->inspection_date,true);
-		$criteria->compare('location',$this->location,true);
 		
 		$criteria->compare('celltype.name',$this->celltype_search, true);
 		
@@ -308,6 +311,7 @@ class Cell extends CActiveRecord
 		
 		/* for concatenated user name search */
 		$criteria->compare('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
+		$criteria->compare('concat(battype.name,"-",batt.serial_num)',$this->battery_search, true);
 		$criteria->addSearchCondition('concat(stack.first_name, " ", stack.last_name)', $this->stacker_search);
 		$criteria->addSearchCondition('concat(fill.first_name, " ", fill.last_name)', $this->filler_search);
 		$criteria->addSearchCondition('concat(insp.first_name, " ", insp.last_name)', $this->inspector_search);
@@ -324,15 +328,15 @@ class Cell extends CActiveRecord
 			'pagination'=>array('pageSize' => 16),
 			'criteria'=>$criteria,
 			'sort'=>array(
-				'defaultOrder'=>'CONCAT(celltype.name, serial_num)',
+				'defaultOrder'=>'CONCAT(celltype.name, kit.serial_num)',
 				'attributes'=>array(
 					'refnum_search'=>array(
 						'asc'=>'ref.number',
 						'desc'=>'ref.number DESC',
 					),
 					'serial_search'=>array(
-						'asc'=>"CONCAT(celltype.name, serial_num)",
-						'desc'=>"CONCAT(celltype.name, serial_num) DESC",
+						'asc'=>"CONCAT(celltype.name, kit.serial_num)",
+						'desc'=>"CONCAT(celltype.name, kit.serial_num) DESC",
 					),
 					'celltype_search'=>array(
 						'asc'=>'celltype.name',
@@ -361,6 +365,10 @@ class Cell extends CActiveRecord
 					'ncr_search'=>array(
 						'asc'=>'ncrs.number',
 						'desc'=>'ncrs.number DESC',
+					),
+					'battery_search'=>array(
+						'asc'=>"CONCAT(battype.name, ' ', batt.serial_num)",
+						'desc'=>"CONCAT(battype.name, ' ', batt.serial_num) DESC",
 					),
 					'*',		// all others treated normally
 				),
@@ -1483,6 +1491,22 @@ class Cell extends CActiveRecord
 		return null;
 	}
 	
+	public function getLink()
+	{
+		return CHtml::link($this->kit->getFormattedSerial(), Yii::app()->createUrl('/cell/view',array('id'=>$this->id)));
+	}
+	
+	public function getBatteryLink()
+	{
+		$batteryModel = $this->battery;
+		if($batteryModel){
+			return CHtml::link($batteryModel->getFormattedSerial(), Yii::app()->createUrl('/battery/view',array('id'=>$batteryModel->id)));
+		} else {
+			return '-N/A-';
+		}
+		
+	}
+	
 	public static function getColumnList()
 	{
 		$results = array();
@@ -1497,7 +1521,7 @@ class Cell extends CActiveRecord
 			'Fillport Welder', 'Fillport Weld Date',
 			'Dry Wt(g)', 'Wet wt(g)',
 			'Anode Lots', 'Cathode Lots',
-			'NCRs', 'Location'
+			'NCRs', 'Location', 'Battery'
 		);
 		foreach($columns as $id=>$column)
 		{

@@ -10,6 +10,8 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Edit This Battery', 'url'=>array('update', 'id'=>$model->id)),
 	array('label'=>'Battery Cell Selections', 'url'=>array('cellselection')),
+	array('label'=>'Accept Test Data', 'url'=>array('accepttestdata'), 'visible'=>Yii::app()->user->checkAccess('quality')),
+	array('label'=>'Ship Batteries', 'url'=>array('ship')),
 	array('label'=>'View All Batteries', 'url'=>array('index')),
 	array('label'=>'Battery Admin', 'url'=>array('admin')),
 );
@@ -30,6 +32,7 @@ $this->menu=array(
 			'value'=>$model->assembler->getFullName(),
 		),
 		'assembly_date',
+		'data_accepted:boolean',
 		'ship_date',
 		'location',
 	),

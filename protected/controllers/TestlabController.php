@@ -8,6 +8,11 @@ class TestlabController extends Controller
 	 */
 	public $layout='//layouts/column2';
 	
+	public function actionIndex()
+	{
+		$this->render('index');
+	}
+	
 	// Uncomment the following methods and override them if needed
 	
 	public function filters()
@@ -22,19 +27,18 @@ class TestlabController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index'),
+				'actions'=>array('index','formationindex', 'catindex',),
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array(
 					'cellformation', 'ajaxformation', 
 					'cellcat', 'ajaxcat', 
-					'formationindex', 'catindex',
 					'testreassignment', 'ajaxtestreassignment',
 					'storage', 'ajaxstorage',
 					'deliverforbattery', 'ajaxdelivery'
 				),
-				'roles' => array('testlab'),
+				'roles'=>array('admin', 'engineering', 'testlab', 'quality'),
 				//'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions

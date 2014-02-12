@@ -182,6 +182,12 @@
 </div>
 <div class="clear"></div>
 
+	<div class="row">
+		<?php echo $form->labelEx($model,'location'); ?>
+		<?php echo $form->textField($model,'location',array('size'=>50,'maxlength'=>50)); ?>
+		<?php echo $form->error($model,'location'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>

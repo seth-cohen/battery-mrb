@@ -28,16 +28,15 @@ class KitController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','lastserial'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array(
 					'create','update', 
-					'multicreate', 'ajaxmulticreate',
-					'lastserial'
+					'multicreate', 'ajaxmulticreate'
 				),
-				'roles'=>array('manufacturing'),
+				'roles'=>array('manufacturing, engineering'),
 				//'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -344,7 +343,7 @@ class KitController extends Controller
 		$userName = '';
 		$userId = '';
 		
-		if (Yii::app()->user->checkAccess('manufacturing supervisor') || Yii::app()->user->checkAccess('manufacturing engineer'))
+		if (Yii::app()->user->checkAccess('manufacturing supervisor') || Yii::app()->user->checkAccess('manufacturing engineer') || Yii::app()->user->checkAccess('engineering'))
 		{
 			
 		}

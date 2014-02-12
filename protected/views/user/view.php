@@ -21,6 +21,32 @@ $this->menu=array(
 <h1>Details for "<?php echo $model->getFullName(); ?>"</h1>
 
 <div class="shadow border">
+<?php 
+	/* make sure this isn't the last channel for the cycler */
+		echo CHtml::link('Next User', 
+			array(
+				'user/view',
+				'id'=>$model->id+1,
+			),
+			array(
+				'style'=>'float:right; margin-left:25px; margin-right:25px;',
+			)
+		);
+?>
+<?php 
+	/* make sure this isn't the first channel for the cycler */
+	if ($model->id != 1)
+	{
+		echo CHtml::link('Previous User', 
+			array(
+				'user/view',
+				'id'=>$model->id-1,
+			),
+			array(
+				'style'=>'float:right;',
+			)
+		);
+	}?>
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(

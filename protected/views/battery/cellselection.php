@@ -33,14 +33,17 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/cells
 	<?php $this->renderPartial('_addbatterytype', array('batterytypeModel'=>$batterytypeModel)); ?>
 </div>
 
-
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'battery-form',
+	'action'=>$this->createUrl('uploadselection'),
 	// Please note: When you enable ajax validation, make sure the corresponding
 	// controller action is handling ajax validation correctly.
 	// There is a call to performAjaxValidation() commented in generated controller code.
 	// See class documentation of CActiveForm for details on this.
 	'enableAjaxValidation'=>true,
+	'htmlOptions'=>array(
+		'enctype'=>"multipart/form-data",
+	),
 )); ?>
 
 <div class="form">
@@ -68,8 +71,8 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/cells
 			<?php echo $form->error($batteryModel,'eap_num'); ?>
 		</div>
 	</div>
-	
 	<div class="clear"></div>
+	
 	<div class="left-form">
 		<div class="row">
 	        <?php echo $form->labelEx($batteryModel,'batterytype_id'); ?>
@@ -88,7 +91,6 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/cells
 	        <?php echo $form->error($batteryModel,'batterytype_id'); ?>
 	    </div>
 	</div>
-
 	<div class="right-form">
 		<div class="row">
 	        <?php echo $form->labelEx($batteryModel,'serial_num'); ?>
@@ -96,19 +98,37 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/cells
 	        <?php echo $form->error($batteryModel,'serial_num'); ?>
 	    </div>
 	</div>
-	    
 	<div class="clear"></div>
-    
     <div class="row">
        <div style="padding-top:2px; width:500px; margin:auto;"><span id="last-serial"></span></div>
     </div>
+    
+    <hr style="margin:0;height:0;border-top: 1px solid black"/>
+	<div class="row">
+		<?php echo CHtml::label('Upload a file for selections?', 'Upload');?>
+        <?php echo CHtml::checkBox('Upload', false, array());?>
+    </div>
+	<div class="row"  id="upload-wrapper" style='display:none'>
+		<?php echo CHtml::image(Yii::app()->baseUrl.'/images/csv.jpg', 'Example File', array('style'=>'float:right;top:-45px;position:relative'))?>
+          Please choose a file: <br/>
+          <input name="Uploaded" type="file" /><br />
+          <p style="padding:5px;color:blue;"><i>Note:  The file must be a CSV file and have the cell position as the first column and the cell serial number
+          as the second column.  The serial number should be the full cell serial number including
+          the cell type separated by the serial number by a hyphen '-'. [NCP55-6-XXXX or LiBC16DV-1-XXXX]<br/><br/>
+          Any other columns will be ignored. Position number for spares should be s1 through 
+          sN with N being the number of spares and listed in order of preference.</i></p>
+   	 </div>
+    
+    <div class="row buttons">
+		<?php echo CHtml::submitButton('Upload', array('style'=>'display:none', 'id'=>'upload-button')); ?>
+	</div>
     
     <?php echo CHtml::ajaxSubmitButton('Filter',array('battery/cellselection'), array(),array("style"=>"display:none;")); ?>
 	<?php echo CHtml::ajaxSubmitButton('Submit',array('battery/ajaxselection'), array('success'=>'checkSelection'), array("id"=>"submit-button")); ?>
     
 </div><!-- Form div -->
 
-<div id="selection-container" style="overflow-x:hidden; position:relative;margin-top: 12px;"></div>
+<div id="selection-container" style="overflow-x:hidden; position:relative;margin-top: 12px; display:none;"></div>
 
 
 <div class="shadow border" id="cellspares-wrapper" style="display:none; margin:auto; width:30%;"> 
@@ -155,4 +175,32 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/cells
 
 <script type="text/javascript">
 	urlSuccess = ' <?php echo $this->createUrl('battery/index') ?> ';
+
+$(function(){
+	if ($('#Upload').is(":checked")){
+		$('#upload-wrapper').show();
+		$('#upload-button').show(); 
+		$('#submit-button').hide();
+	}
+	
+	$(document).on('change','#Upload', function(){
+		if ($('#Upload').is(":checked")){
+			$('#upload-wrapper').show();
+			$('#upload-button').show();
+			
+			$('#selection-container').hide();
+			$('#cellspares-wrapper').hide();
+			$('#submit-button').hide();
+		} else {
+			$('#upload-wrapper').hide();
+			$('#upload-button').hide();
+			
+			$('#selection-container').show();
+			$('#submit-button').show();
+			if( $('#Battery_batterytype_id').val() !='')
+				$('#cellspares-wrapper').show();
+		}
+	});
+});
+
 </script>

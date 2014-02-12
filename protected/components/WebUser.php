@@ -2,6 +2,22 @@
 class WebUser extends CWebUser
 {
 	public $roles = array();
+	public $department_id;
+	
+	public function getDept()
+    {	
+    	if (empty($this->id)) {
+            // Not identified => no rights
+            return false;
+        }
+        
+        /* only populate if $roles is empty */
+        if (empty($this->department_id)){
+	        $user = User::model()->findByPk($this->id);
+	        $this->department_id = $user->depart_id;
+        }
+        return $this->department_id;
+    }
     /**
      * Overrides a Yii method that is used for roles in controllers (accessRules).
      *
@@ -30,7 +46,9 @@ class WebUser extends CWebUser
             return true; // admin role has access to everything
         }
         
-        if ($operation === 'testlab')
+        $operation = array_map('trim',explode(',', $operation));
+        
+        if (in_array('testlab',$operation))
         {
         	if(in_array('testlab engineer',$this->roles))
         		return true;
@@ -40,10 +58,39 @@ class WebUser extends CWebUser
         		
         	if(in_array('testlab tech',$this->roles))
         		return true;
-        	
         }
         
-        if ($operation === 'manufacturing')
+    	if (in_array('testlab tech',$operation))
+        {
+        	if(in_array('testlab engineer',$this->roles))
+        		return true;
+        		
+        	if(in_array('testlab supervisor',$this->roles))
+        		return true;
+        		
+        	if(in_array('testlab tech',$this->roles))
+        		return true;
+        }
+        
+    	if (in_array('testlab supervisor',$operation))
+        {
+        	if(in_array('testlab engineer',$this->roles))
+        		return true;
+        		
+        	if(in_array('testlab supervisor',$this->roles))
+        		return true;
+        }
+        
+   	 	if (in_array('testlab engineer',$operation))
+        {
+        	if(in_array('testlab engineer',$this->roles))
+        		return true;
+        		
+        	if(in_array('testlab supervisor',$this->roles))
+        		return true;
+        }
+        
+        if (in_array('manufacturing',$operation))
         {
         	if(in_array('manufacturing engineer',$this->roles))
         		return true;
@@ -61,7 +108,7 @@ class WebUser extends CWebUser
         		return true;
         }
         
-    if ($operation === 'manufacturing tech')
+    	if (in_array('manufacturing tech',$operation))
         {   		       		
         	if(in_array('manufacturing coating',$this->roles))
         		return true;
@@ -71,11 +118,65 @@ class WebUser extends CWebUser
         		
         	if(in_array('manufacturing battery assembly',$this->roles))
         		return true;
+        		
+        	if(in_array('manufacturing engineer',$this->roles))
+        		return true;
+        		
+        	if(in_array('manufacturing supervisor',$this->roles))
+        		return true;
         }
         
-     if ($operation === 'manufacturing battery assembly')
+     	if (in_array('manufacturing battery assembly', $operation))
         {   		       		
         	if(in_array('manufacturing battery assembly',$this->roles))
+        		return true;
+        		
+        	if(in_array('manufacturing engineer',$this->roles))
+        		return true;
+        		
+        	if(in_array('manufacturing supervisor',$this->roles))
+        		return true;
+        }
+        
+    	if(in_array('manufacturing coating', $operation))
+        {   		       		
+        	if(in_array('manufacturing coating',$this->roles))
+        		return true;
+        		
+        	if(in_array('manufacturing engineer',$this->roles))
+        		return true;
+        		
+        	if(in_array('manufacturing supervisor',$this->roles))
+        		return true;
+        }
+        
+   		 if(in_array('manufacturing supervisor', $operation))
+        {   		       			
+        	if(in_array('manufacturing engineer',$this->roles))
+        		return true;
+        		
+        	if(in_array('manufacturing supervisor',$this->roles))
+        		return true;
+        }
+        
+    	if(in_array('manufacturing engineer', $operation))
+        {   		       			
+        	if(in_array('manufacturing engineer',$this->roles))
+        		return true;
+        		
+        	if(in_array('manufacturing supervisor',$this->roles))
+        		return true;
+        }
+        
+        if(in_array('quality', $operation))
+        {   
+        	if(in_array('quality',$this->roles))
+        		return true;
+        }
+        
+   	  	if(in_array('engineering', $operation))
+        {   
+        	if(in_array('engineering',$this->roles))
         		return true;
         }
         

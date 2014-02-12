@@ -36,7 +36,7 @@ class ChannelController extends Controller
 					'create','update',
 					'ajaxsetstatus'
 				),
-				'roles'=>array('testlab'),
+				'roles'=>array('admin', 'engineering', 'testlab', 'quality'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),

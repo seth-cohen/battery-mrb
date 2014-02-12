@@ -178,7 +178,11 @@ function typeSelected(sel, urlFormContent, urlCellsAvailable)
 
 			$('#selection-container').html(result.view).css('height','448px');
 			
-			$('#cellspares-wrapper').show();
+			if(!$('#Upload').is(":checked")){
+				$('#selection-container').show();
+				$('#cellspares-wrapper').show();
+			}
+			
 			$('#previous-module-link').hide();
 			if (!$('#cellselection-wrapper-'+(currentPage+1)).length){
 				//do nothing

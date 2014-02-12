@@ -10,6 +10,7 @@
  *
  * The followings are the available model relations:
  * @property Cell[] $cells
+ * @property Cell[] $openCells
  */
 class Ncr extends CActiveRecord
 {
@@ -30,6 +31,7 @@ class Ncr extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('number', 'length', 'max'=>10),
+			array('date', 'required'),
 			array('number', 'unique'),
 			array('number', 'numerical', 'integerOnly'=>true),
 			array('date', 'safe'),
@@ -48,6 +50,7 @@ class Ncr extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'cells' => array(self::MANY_MANY, 'Cell', 'tbl_ncr_cell(ncr_id, cell_id)'),
+			'openCells' => array(self::MANY_MANY, 'Cell', 'tbl_ncr_cell(ncr_id, cell_id)', 'alias'=>'openCells', 'condition'=>'disposition=0'),
 		);
 	}
 

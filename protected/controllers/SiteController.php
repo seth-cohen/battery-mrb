@@ -92,10 +92,53 @@ class SiteController extends Controller
 			$model->attributes=$_POST['LoginForm'];
 			// validate user input and redirect to the previous page if valid
 			if($model->validate() && $model->login())
+			{
 				$this->redirect(Yii::app()->user->returnUrl);
+			}
 		}
 		// display the login form
 		$this->render('login',array('model'=>$model));
+	}
+	
+	/**
+	 * Displays the change password page, when requried
+	 */
+	public function actionChangePassword($returnUrl, $user_id)
+	{
+		$model=new ChangePasswordForm;
+		$user = User::model()->findByPk($user_id);
+		$model->username = $user->username;
+		
+		// if it is ajax validation request
+		if(isset($_POST['ajax']) && $_POST['ajax']==='password-form')
+		{
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
+		}
+
+		// collect user input data
+		if(isset($_POST['ChangePasswordForm']))
+		{
+			$model->attributes=$_POST['ChangePasswordForm'];
+			// validate user input and redirect to the previous page if valid
+			if($model->validate())
+			{
+				$user->password = CPasswordHelper::hashPassword($model->password);
+				$user->change_password = 0;
+				
+				if($user->save())
+				{
+					$model->_identity=new UserIdentity($user->username,$model->password);
+					$model->_identity->authenticate();
+					$model->login();
+					
+					// redirect to where they came from
+					$this->redirect($returnUrl);
+				}
+			}
+		}
+		// display the login form
+		$this->render('changepassword',array('model'=>$model));
 	}
 	
 	/**

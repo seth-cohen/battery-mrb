@@ -26,6 +26,14 @@ $this->menu=array(
 	'attributes'=>array(
 		'number',
 		'date',
+		array(
+			'label'=>'Number of Cells on NCR',
+			'value'=>count($model->cells),
+		),
+		array(
+			'label'=>'Open Cells on NCR',
+			'value'=>count($model->openCells),
+		),
 	),
 	'cssFile'=>Yii::app()->baseUrl . '/css/styles.css',
 )); ?>

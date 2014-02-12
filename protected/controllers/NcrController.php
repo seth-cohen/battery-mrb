@@ -28,19 +28,26 @@ class NcrController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array(
+					'index','view', 'ajaxcellsforncr'
+				),
 				'users'=>array('*'),
 			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update', 'ajaxupdate'),
-				'users'=>array('@'),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('update', 'ajaxupdate',
+								'putcellsonncr', 'ajaxputcellsonncr',
+				),
+				'roles'=>array('engineering, quality, testlab'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete',
-								'putcellsonncr', 'ajaxputcellsonncr',
-								'dispositioncells','ajaxgetncrcelldispo','ajaxsetdispo'
+				'actions'=>array(
+					'dispositioncells','ajaxgetncrcelldispo','ajaxsetdispo'
+				),
+				'roles'=>array('engineering, quality'),
 			),
-				'roles'=>array('engineering, qa, testing'),
+			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				'actions'=>array('admin', 'delete'),
+				'roles'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -130,9 +137,58 @@ class NcrController extends Controller
 		));
 	}
 
-	public function actionAjaxUpdate()
+	public function actionAjaxUpdate($id)
 	{
+		$result = array();
 		
+		$ncrModel=$this->loadModel($id);
+		if(isset($_POST['Ncr']['date']))
+		{
+			$ncrModel->date = $_POST['Ncr']['date'];
+			if(!$ncrModel->save())
+			{
+				echo CHtml::errorSummary($ncrModel);
+				Yii::app()->end();
+			}
+		}
+		
+		if (isset($_POST['removeId']))
+		{
+			foreach($_POST['removeId'] as $pk)
+			{
+				 $keys = explode(",", $pk);
+				 /* get the cell serial and disposition before deleting */
+				 $ncrCellModel = NcrCell::model()->with(
+				 	array(
+				 		'cell', 'cell.kit', 'cell.kit.celltype'
+				 	))->findByPk(
+				 	array(
+				 		'cell_id'=>$keys[0], 
+				 		'ncr_id'=>$keys[1]
+				 	)
+				 );
+				 
+				 $serial = $ncrCellModel->cell->kit->getFormattedSerial();
+				 $dispo = $ncrCellModel->disposition_string;
+				 
+				 /* remove the cell from the ncr returns number of rows affected*/
+				$commandDelete = Yii::app()->db->createCommand();
+				$rtnCode = $commandDelete->delete('tbl_ncr_cell', 
+						'cell_id = :cell_id AND ncr_id = :ncr_id',
+					array(
+						':cell_id'=>$keys[0],
+						':ncr_id'=>$keys[1],
+					)
+				);
+				
+				$result[] = array(
+					'serial'=>$serial, 
+					'dispo'=>$dispo,
+					'success'=>$rtnCode?1:0,
+				);
+			}
+		}
+		echo json_encode($result);
 	}
 	
 	/**
@@ -346,5 +402,34 @@ class NcrController extends Controller
 			}
 		}
 		echo '0';
+	}
+	
+	public function actionAjaxCellsforNCR($id=null)
+	{
+		if($id == null)
+		{
+			echo 'hide';
+			Yii::app()->end();
+		}
+		
+		$ncrCell = new NcrCell('search');
+		$ncrCell->unsetAttributes();  // clear any default values
+		$ncrCell->ncr_id = $id;
+		
+		if(isset($_GET['NcrCell']))
+		{
+			$ncrCell->attributes = $_GET['NcrCell'];
+		}
+		
+		$ncrCellDataProvider = $ncrCell->search();
+		
+		$this->renderPartial('_ajaxcellsforncr',
+			array(
+				'ncrCellDataProvider'=>$ncrCellDataProvider,
+				'ncrCell' =>$ncrCell,
+			),
+			false,
+			false
+		);
 	}
 }

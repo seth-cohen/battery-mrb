@@ -224,7 +224,7 @@ function checkSuccess(data) {
     		   					+ ' maxD:' + channel.maxD + ' multi:' + channel.multi + '\n';
     	   });
     	   alert(alertString);
-    	   location.reload();
+    	   location = '<?php echo $this->createUrl('index');?>';
     	}
     	catch(e)
     	{

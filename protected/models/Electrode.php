@@ -11,6 +11,9 @@
  * @property string $ref_num_id
  * @property string $coat_date
  * @property integer $is_anode
+ * @property string $moisture
+ * @property string $thickness
+ * @property string $cal_date
  *
  * The followings are the available model relations:
  * @property RefNum $refNum
@@ -39,16 +42,17 @@ class Electrode extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('lot_num, coat_date, is_anode', 'required'),
-			array('is_anode', 'numerical', 'integerOnly'=>true),
+			array('lot_num, coat_date, is_anode, coater_id', 'required'),
+			array('is_anode, thickness, moisture', 'numerical', 'integerOnly'=>true),
 			array('lot_num, eap_num', 'length', 'max'=>50),
+			array('cal_date','safe'),  // variables with no rules won't save
 			
 			array('eap_num', 'checkEAP'),
-			array('lot_num', 'unique',),
+			array('lot_num', 'unique','on'=>'insert'),
 			array('coater_id, ref_num_id', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, lot_num, eap_num, coater_id, ref_num_id, coat_date, is_anode, coater_search, refnum_search', 'safe', 'on'=>'search'),
+			array('id, lot_num, eap_num, coater_id, ref_num_id, coat_date, is_anode, coater_search, refnum_search, cal_date, thickness, moisture', 'safe', 'on'=>'search'),
 		);
 	}
 	
@@ -111,6 +115,9 @@ class Electrode extends CActiveRecord
 			'ref_num_id' => 'Ref Num',
 			'coat_date' => 'Coat Date',
 			'is_anode' => 'Type',
+			'moisture' => 'Moisture (PPM)',
+			'thickness'=> 'Thickness (um)',
+			'cal_date' => 'Cal Date',
 		
 			'coater_search' => 'Coater',
 			'refnum_search' => 'Reference No.',
@@ -146,15 +153,32 @@ class Electrode extends CActiveRecord
 		$criteria->compare('coater_id',$this->coater_id,true);
 		$criteria->compare('ref_num_id',$this->ref_num_id,true);
 		$criteria->compare('coat_date',$this->coat_date,true);
+		$criteria->compare('cal_date',$this->cal_date,true);
+		$criteria->compare('thickness',$this->thickness,true);
+		$criteria->compare('moisture',$this->moisture,true);
 		$criteria->compare('is_anode',$this->is_anode);
 
 		/* for concatenated user name search */
 		$criteria->addSearchCondition('concat(user.first_name, " ", user.last_name)', $this->coater_search);
-		$criteria->addSearchCondition('ref.number', $this->refnum_search);
+		
+		if($this->refnum_search)
+		{
+			$references = explode(',', str_replace(' ', ',', $this->refnum_search));
+			
+			$refCriteria = new CDbCriteria();
+			foreach ($references as $reference)
+			{
+				if(!empty($reference))
+				{
+					$refCriteria->compare('ref.number', $reference, true, 'OR');
+				}
+			}
+			$criteria->mergeWith($refCriteria);
+		}
 		
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
-			
+			'pagination'=>array('pageSize' => 16),
 			'sort'=>array(
 				'attributes'=>array(
 					'coater_search'=>array(

@@ -50,13 +50,51 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'number',
 		'date',
 		array(
+			'header'=>'No. of Cells',
+			'value'=>'count($data->cells)',
+		),
+		array(
+			'header'=>'No. Open Cells',
+			'value'=>'count($data->openCells)',
+		),
+		array(
 			'class'=>'CButtonColumn',
 			'template'=>'{view} {update}',
 		),
 	),
+	'selectionChanged'=>'ncrSelected',
 	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
 	'pager'=>array(
 		'cssFile' => false,
 	),
 )); ?>
 </div>
+
+<div id="ncr-details" class="shadow border" style="display:none"></div>
+
+<script type="text/javascript">
+	function ncrSelected(target_id){
+		var battery_id;
+		battery_id = $.fn.yiiGridView.getSelection(target_id);		
+
+		$.ajax({
+			type:'get',
+    		url: '<?php echo $this->createUrl('ncr/ajaxcellsforncr'); ?>',
+    		data:
+    		{
+    			id: battery_id.toString(),
+    		},
+    		success: function(data){
+        		if(data == 'hide')
+        		{
+        			$('#ncr-details').hide();
+        		}
+        		else
+        		{
+        			$('#ncr-details').show();
+            		$('#ncr-details').html(data);
+        		}
+    		},
+    	});
+	}
+</script>

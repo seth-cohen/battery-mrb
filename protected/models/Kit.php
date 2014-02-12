@@ -56,7 +56,7 @@ class Kit extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			//array('serial_num, ref_num_id, kitting_date, kitter_id, anodeIds, cathodeIds, celltype_id', 'required'),
-			array('serial_num, ref_num_id, kitting_date, kitter_id, celltype_id, eap_num', 'required'),
+			array('serial_num, ref_num_id, kitting_date, kitter_id, celltype_id, eap_num, anodeIds, cathodeIds', 'required'),
 			array('eap_num', 'checkEAP'),
 			
 			array('anodeIds, cathodeIds', 'checkLotNumbers'),
@@ -206,8 +206,22 @@ class Kit extends CActiveRecord
 		$criteria->compare('is_stacked',$this->is_stacked);
 		$criteria->compare('t.eap_num',$this->eap_num, true);
 		
-		$criteria->compare('ref.number', $this->refnum_search, true);	
 		$criteria->compare('celltype.name',$this->celltype_search, true);
+		
+		if($this->refnum_search)
+		{
+			$references = explode(',', str_replace(' ', ',', $this->refnum_search));
+			
+			$refCriteria = new CDbCriteria();
+			foreach ($references as $reference)
+			{
+				if(!empty($reference))
+				{
+					$refCriteria->compare('ref.number', $reference, true, 'OR');
+				}
+			}
+			$criteria->mergeWith($refCriteria);
+		}
 		
 		/*  enable searching for multiple lots using comma or spaces */
 		if ($this->anode_search)

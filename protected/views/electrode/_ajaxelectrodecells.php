@@ -27,12 +27,25 @@ Yii::app()->clientScript->scriptMap=array(
 			'value'=>'CHtml::link(CHtml::encode($data["kit"]), array("cell/view", "id"=>$data["id"]))',
 		),
 		array(
+			'header'=>'Anode Lots',
+			'type'=>'raw',
+			'value'=>'$data["anodes"]',
+			'htmlOptions'=>array('width'=>'150px')
+		),
+		array(
+			'header'=>'Cathode Lots',
+			'type'=>'raw',
+			'value'=>'$data["cathodes"]',
+			'htmlOptions'=>array('width'=>'150px')
+		),
+		array(
 			'name'=>'Stack Date',
 			'value'=>'$data["stack_date"]',
 		),
 		array(
 			'name'=>'Cell Location',
 			'value'=>'$data["location"]',
+			'htmlOptions'=>array('width'=>'150px')
 		),
 	),
 	'emptyText'=>'Oops, no cells built yet',

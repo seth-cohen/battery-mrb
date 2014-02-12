@@ -53,18 +53,20 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 			'name'=>'refnum_search',
 			'value'=>'$data->refNum->number',
 		),	
+		'eap_num',
 		array(
 			'name'=>'is_anode',
 			'value'=>'$data->is_anode?"Anode":"Cathode"',
 			'filter'=>array('0'=>'Cathode', '1'=>'Anode'),
 			'htmlOptions'=>array('width'=>'60'),
 		),
-		'eap_num',
 		array(
 			'name'=>'coater_search',
 			'value'=>'$data->coater->getFullName()',
 		),
 		'coat_date',
+		'thickness',
+		'moisture',
 		array(
 			'class'=>'CButtonColumn',
 			'template'=>'{view} {update}',

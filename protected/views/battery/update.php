@@ -12,6 +12,8 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'View This Battery', 'url'=>array('view', 'id'=>$model->id)),
 	array('label'=>'Battery Cell Selections', 'url'=>array('cellselection')),
+	array('label'=>'Accept Test Data', 'url'=>array('accepttestdata'), 'visible'=>Yii::app()->user->checkAccess('quality')),
+	array('label'=>'Ship Batteries', 'url'=>array('ship')),
 	array('label'=>'View All Batteries', 'url'=>array('index')),
 	array('label'=>'Battery Admin', 'url'=>array('admin')),
 );

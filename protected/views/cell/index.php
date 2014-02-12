@@ -86,7 +86,8 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'columns'=>array(
 		array(
 			'name'=>'serial_search',
-			'value'=>'$data->kit->getFormattedSerial()',
+			'type'=>'raw',
+			'value'=>'$data->getLink()',
 			'visible'=>in_array(1,$visibleColumns),
 		),
 		array(
@@ -175,6 +176,12 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		array(
 			'name'=>'location',
 			'visible'=>in_array(20,$visibleColumns),
+		),
+		array(
+			'name'=>'battery_search',
+			'type'=>'raw',
+			'value'=>'$data->getBatteryLink()',
+			'visible'=>in_array(21,$visibleColumns),
 		),
 		array(
 			'class'=>'CButtonColumn',

@@ -37,8 +37,10 @@ class BatteryController extends Controller
 					'cellselection', 'ajaxselection',
 					'ajaxtypeselected', 'ajaxavailablecells',
 					'ajaxcellsforbatteryview',
+					'ship', 'ajaxship',
+					'uploadselection'
 				),
-				'roles'=>array('engineering'),
+				'roles'=>array('engineering, quality'),
 				//'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -52,7 +54,7 @@ class BatteryController extends Controller
 				'actions'=>array(
 					'accepttestdata', 'ajaxaccepttestdata',
 				),
-				'roles'=>array('quality'),
+				'roles'=>array('quality, engineering'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
@@ -132,7 +134,7 @@ class BatteryController extends Controller
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		$this->performAjaxValidation($model);
 
 		$cellDataProvider= new CArrayDataProvider($model->getBatteryCells(), array(
 		    'pagination'=>array(
@@ -146,6 +148,18 @@ class BatteryController extends Controller
 		if(isset($_POST['Battery']))
 		{
 			$model->attributes=$_POST['Battery'];
+			
+			if($model->ship_date < date('Y-m-d', mktime(0,0,0,1,1,1900)))
+			{
+				$model->ship_date = null;
+				$model->location = '[ACCEPTED]';
+			}
+			if($model->data_accepted == 0)
+			{
+				$model->ship_date = null;
+				$model->location = '[ASSEMBLED]';
+			}
+			
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -355,6 +369,7 @@ class BatteryController extends Controller
 												WHERE t.id = spare.cell_id
 												GROUP BY t.id)');
 		}
+		$criteria->order = 'kit.serial_num';
 		
 		$cells = Cell::model()->findAll($criteria);
 		
@@ -662,7 +677,134 @@ class BatteryController extends Controller
 		}
 	}
 	
+	/**
+	 * Allows user to mark battery as shipped.
+	 */
+	public function actionShip()
+	{
+		$model=new Battery('search');
+		$model->unsetAttributes();  // clear any default values
+		
+		$model->data_accepted = 1;
+		
+		$model->ship_date = array(null);
+		
+		/* uses battery->search() to find cells that have had data accepted  */
+		
+		if(isset($_GET['Battery']))
+		{
+			$model->attributes=$_GET['Battery'];
+		}
+				
+		$this->render('shipbatteries',array(
+			'model'=>$model,
+		));
+	}
 	
+	/**
+	 * Ajax action to save the model for shipping battery.
+	 */
+	public function actionAjaxship()
+	{
+		
+		if(!isset($_POST['autoId']))
+		{
+			echo 'hide';
+			Yii::app()->end();
+		}
+		
+		$shippedBatteries = $_POST['autoId'];
+		$dates = $_POST['dates'];
+		
+		if(count($shippedBatteries)>0)
+		{	
+			$result = Battery::ship($shippedBatteries);
+			
+			if (!json_decode($result))
+			{ /* the save failed otherwise result would be json_encoded*/
+				echo $result;
+			} 
+			else 
+			{ /* success so show count and serial numbers */
+				echo $result;
+			}
+		}
+	}
+	
+	/**
+	 * Creates a battery cell selection from uploaded CSV file
+	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 */
+	public function actionUploadSelection()
+	{
+		/* this cannot be an AJAX request... uploading files from AJAX is not straight forward, though it 
+		 * is possible with the use of an iframe and some javascript
+		 */
+		$batteryModel=new Battery;
+		$batterytypeModel = new Batterytype;
+		
+		// Uncomment the following line if AJAX validation is needed
+		$this->performAjaxValidation($batteryModel);
+
+		if(isset($_FILES['Uploaded']))
+		{
+			$batteryModel->attributes = $_POST['Battery'];
+			if(Battery::selectionFromUpload($batteryModel, $_FILES['Uploaded']))
+			{
+				$cellDataProvider= new CArrayDataProvider($batteryModel->getBatteryCells(), array(
+				    'pagination'=>array(
+				        'pageSize'=>16,
+				    ),
+				    'sort'=>array(
+				    	'defaultOrder'=>'position',
+				    ),
+				 ));
+				 
+				$this->redirect(array('view', 'id'=>$batteryModel->id));
+			}
+		}
+		else
+		{ /* go try the cell selection again */
+			$batteryModel->addError('selection_error', 'No file uploaded');
+		}
+		
+		$sparesDataProvider = new CArrayDataProvider($batterytypeModel->getSparesInputArray(), array(
+		    'pagination'=>array(
+		        'pageSize'=>10,
+		    )
+		 ));
+		
+		$this->render('cellselection',array(
+			'batteryModel'=>$batteryModel,
+			'batterytypeModel'=>$batterytypeModel,
+			'sparesDataProvider'=>$sparesDataProvider,
+		));
+				
+			/*$target = Yii::app()->basePath."/uploads/"; 
+ 			$target = $target . basename( $_FILES['uploaded']['name']) ; 
+			 $ok=1; 
+			 
+			 if(move_uploaded_file($_FILES['uploaded']['tmp_name'], $target) )
+			 {
+				echo "The file ". basename( $_FILES['uploaded']['name']). " has been uploaded";
+			 } 
+			 else 
+			 {
+				echo "Sorry, there was a problem uploading your file.";
+			 }
+			 
+			 echo "</br>";
+			 $handle = fopen($target, "r");
+			 $row = 1;
+			 *
+			 
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id));
+		}
+		*/
+	}
+	
+		
 	/**
 	 * generates the text fields for the operator
 	 */

@@ -8,7 +8,6 @@
 class UserIdentity extends CUserIdentity
 {
 	private $_id;
-	
 	/**
 	 * Authenticates a user.
 	 * The example implementation makes sure if the username and password
@@ -32,6 +31,10 @@ class UserIdentity extends CUserIdentity
 		}
 		else
 		{
+			if($user->change_password)
+			{
+				Yii::app()->getController()->redirect(array('/site/changepassword', 'returnUrl'=>Yii::app()->user->returnUrl, 'user_id'=>$user->id));
+			}
 			$this->_id = $user->id;
 			$this->username = $user->username;
 			$this->errorCode = self::ERROR_NONE;

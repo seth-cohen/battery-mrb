@@ -19,4 +19,4 @@ $this->menu=array(
 
 <h1>Update Electrode Lot <?php echo $model->lot_num; ?></h1>
 
-<?php $this->renderPartial('_createelectrodeform', array('model'=>$model)); ?>
+<?php $this->renderPartial('_updateform', array('model'=>$model)); ?>

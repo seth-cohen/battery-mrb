@@ -36,18 +36,13 @@ class ChamberController extends Controller
 				//'expression'=>'isset($user->depart_id) && $user->depart_id==3',
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				'roles'=>array('admin', 'engineering', 'testlab'),
+				'actions'=>array('create','update', 'ajaxsetstatus'),
+				'roles'=>array('admin', 'engineering', 'testlab', 'quality'),
 				//'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
 				'roles'=>array('admin'),
-				//'users'=>array('admin'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('ajaxsetstatus'),
-				'roles'=>array('testlab'),
 				//'users'=>array('admin'),
 			),
 			array('deny',  // deny all users

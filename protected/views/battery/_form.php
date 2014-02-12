@@ -26,12 +26,8 @@
 	        <?php echo $form->dropDownList($model, 'batterytype_id', 
 								CHtml::listData(Batterytype::model()->findAll(), 'id','name'), 
 								array(
+									'disabled'=>'disabled',
 									'prompt'=>' -Select Battery Type- ',
-									'onchange'=>'typeSelected(this,"'
-											.$this->createUrl('battery/ajaxtypeselected')
-											.'","'
-											.$this->createUrl('battery/ajaxavailablecells')
-											.'")',
 									'style'=>'width:152px',
 									'options'=>Batterytype::getIdPartNums(),
 								)); ?> <span id='part-num' style='margin-left:5px;'></span>
@@ -100,6 +96,14 @@
 </div>
 <div class="clear"></div>
 
+<div class="left-form">
+	<div class="row">
+		<?php echo $form->labelEx($model,'data_accepted'); ?>
+		<?php echo $form->dropDownList($model, 'data_accepted', array("0"=>"No", "1"=>"Yes"), array()); ?>
+		<?php echo $form->error($model,'data_accepted'); ?>
+	</div>
+</div>
+<div class="right-form">
 	<div class="row">
 		<?php echo $form->labelEx($model,'ship_date'); ?>
 		<?php
@@ -118,6 +122,8 @@
 		?>
 		<?php echo $form->error($model,'ship_date'); ?>
 	</div>
+</div>
+<div class="clear"></div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'location'); ?>

@@ -7,8 +7,27 @@ $this->pageTitle=Yii::app()->name;
 <h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
 
 
-<p>You may navigate to the necessary action using the quick links below.</p>
-<div class = "shadow border" style="padding:5px 5px 0 5px;">
+<p>You may navigate to the necessary action using the quick links below.  Expand the panel by clicking on the header</p>
+<div class = "shadow border" style="padding:5px;height:600px">
+
+<?php 
+$this->widget('zii.widgets.jui.CJuiAccordion',array(
+    'panels'=>array(
+        'Manufacturing Quick Links'=>$this->renderPartial('//manufacturing/index',null,true),
+        'TestLab Quick Links'=>$this->renderPartial('//testlab/index',null,true),
+        // panel 3 contains the content rendered by a partial view
+        'Quality/Engineering Quick Links'=>$this->renderPartial('//quality/index',null,true),
+    ),
+    // additional javascript options for the accordion plugin
+    'options'=>array(
+        'animated'=>'bounceslide',
+     	'collapsible'=>true,
+    	'heightStyle' => 'fill',
+    	'active'=>(Yii::app()->user->isGuest)?0:min(Yii::app()->user->getDept()-1, 2),
+    ),
+));
+?>
+<!-- 
 	<div class=" link-list" id="mfg-link-list" style="width:33%; float:left;">
 	<h3 style="text-align:center">Manufacturing</h3>
 		<b>ELECTRODES</b>
@@ -83,4 +102,5 @@ $this->pageTitle=Yii::app()->name;
 		</ul>
 	</div>
 	<div style="clear:both"></div>
+-->
 </div>

@@ -9,10 +9,11 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Ncr', 'url'=>array('index')),
-	array('label'=>'Create Ncr', 'url'=>array('create')),
-	array('label'=>'View Ncr', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Ncr', 'url'=>array('admin')),
+	array('label'=>'View This NCR', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'Put Cells on NCR', 'url'=>array('putcellsonncr')),
+	array('label'=>'Dispo Cells on NCR', 'url'=>array('dispositioncells')),
+	array('label'=>'View All NCRs', 'url'=>array('index')),
+	array('label'=>'NCR Admin', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 );
 ?>
 

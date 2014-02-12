@@ -27,6 +27,7 @@ class Battery extends CActiveRecord
 	public $refnum_search;
 	public $batterytype_search;
 	public $assembler_search;
+	public $upload_file;
 	
 	public $previousSerialNum = null;
 	public $previousBatteryType = null;
@@ -53,7 +54,7 @@ class Battery extends CActiveRecord
 			
 			array('batterytype_id, ref_num_id, assembler_id', 'length', 'max'=>10),
 			array('eap_num, serial_num, location', 'length', 'max'=>50),
-			array('assembly_date, ship_date', 'safe'),
+			array('assembly_date, ship_date, data_accepted', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, batterytype_id, ref_num_id, eap_num, serial_num, assembler_id, 
@@ -360,7 +361,8 @@ class Battery extends CActiveRecord
 		{
 			$model = Battery::model()->findByPk($battery_id);
 			$model->data_accepted = 1;
-				
+			$model->location = '[ACCEPTED] '.date("Y-m-d",time());
+			
 			if(!$model->validate())
 			{
 				$error = 1;
@@ -387,6 +389,58 @@ class Battery extends CActiveRecord
 					$commandDelete->delete('tbl_battery_spare', 
 						'battery_id = :id',
 						array(':id'=>$model->id)
+					);
+				}
+			}
+			return json_encode($result);
+		}
+		else /* a model failed, don't save any */
+		{
+			return CHtml::errorSummary($models); 	
+		}			
+		return null;
+	}
+	
+/**
+	 * saves Battery records and updates as shipped
+	 * 
+	 * Spares for the battery should be cleared
+	 * 
+	 * @param array $shippedBatteries
+	 */
+	public static function ship(array $shippedBatteries)
+	{
+		$error = 0;
+		$models = array();
+
+		/* oops, we were passed bad data */
+		if(empty($shippedBatteries))
+			return;
+			
+		foreach($shippedBatteries as $battery_id)
+		{
+			$model = Battery::model()->findByPk($battery_id);
+			$model->ship_date = date("Y-m-d",time());
+			$model->location = '[SHIP] ' .date("Y-m-d",time());
+			
+			if(!$model->validate())
+			{
+				$error = 1;
+			}
+			$models[] = $model;	
+		}
+		
+		/* all models validated save them all */
+		if ($error==0)
+		{
+			/* create array to return with JSON */
+			$result = array();
+			foreach($models as $model)
+			{
+				if($model->save())
+				{
+					$result[] = array(
+						'serial'=>$model->getFormattedSerial(), 
 					);
 				}
 			}
@@ -490,6 +544,150 @@ class Battery extends CActiveRecord
 	
 	/**
 	 * 
+	 * Creates new battery and associates designated cells from the cell using an uploaded file
+	 * 
+	 * @param Battery $batteryModel
+	 * @param array $uploadedFile
+	 */
+	public static function selectionFromUpload($batteryModel, $uploadedFile)
+	{
+		$cells = array();
+		$spares = array();
+		
+		if(empty($batteryModel) || empty($uploadedFile))
+			return false;
+		
+		$batteryModel->location = '[EAP] Cell Selection';
+		$result = array();
+		
+		if($batteryModel->save())
+		{
+			$battery_id = $batteryModel->id;
+			
+			/* save the uploaded file */
+			$target = Yii::app()->basePath."/uploads/";
+			$target = $target . $batteryModel->batterytype->name . "-" . $batteryModel->serial_num .".csv";
+			
+			$ext = pathinfo($uploadedFile['name'], PATHINFO_EXTENSION);
+			if($ext != 'csv')
+			{
+				$batteryModel->addError('upload_error', "The file must be a csv file.  The uploaded file's extension was '$ext'" );
+				$batteryModel->delete();
+				return false;
+			}
+		 	if(!move_uploaded_file($uploadedFile['tmp_name'], $target) )
+			 {
+			 	$batteryModel->addError('upload_error', 'There was an error uploading the file please try again');
+			 	$batteryModel->delete();
+				return false;
+			 }
+			 
+			 /* parse the file to get an array of cells */
+			$row = 1;
+			$handle = fopen($target, "r");
+			
+			while (($data = fgetcsv($handle, 5000, ",")) !== FALSE) { 
+			    $pos = strrpos($data[1], "-");  // position of the last hyphen
+			    $serial = substr($data[1], $pos+1);
+			    $type = substr($data[1], 0, $pos);
+			    if($type != $batteryModel->batterytype->celltype->name)
+			    {
+			    	$batteryModel->addError('upload_error', "Expecting cell type $batteryModel->batterytype->celltype->name 
+			    		but $type was found for cell at position $data[0]"
+			    	);
+			    	$batteryModel->delete();
+					return false;
+			    }
+			    
+			    $cell = Cell::model()->with(
+					array(
+						'kit'=>array(
+							'alias'=>'kit',
+							'with'=>array(
+								'celltype'=>array(
+									'alias'=>'type',
+								)
+							)
+						)
+					)
+				)->findByAttributes(
+					array(), 
+					array(
+						'condition'=>'type.name=:typename AND kit.serial_num=:serial AND battery_id IS NULL AND data_accepted = 1',
+						'params'=>array(':typename'=>$type, ':serial'=>$serial)
+					)
+				);
+				if ($cell == null){
+					$batteryModel->addError('upload_error', "There was an error for cell at position $data[0]. It is possible that the cell has already been 
+						selected, does not exist or the data has not yet been accepted"
+					);
+					$batteryModel->delete();
+					return false;
+				}
+				/* put the cell into the data array as a spare if it is none numeric but has the correct configuration */
+			    if(is_numeric($data[0])){
+			    	$cells[$data[0]] = $cell;
+			    } else {
+			    	$position = str_replace(array('s','S'),'',$data[0]);
+			    	if (is_numeric($position)){
+			    		$spares[$position] = $cell;
+			    	} else {
+			    		$batteryModel->addError('upload_error', "There was an error for cell at position $data[0].");
+			    		$batteryModel->delete();
+			    		return false;
+			    	}
+			    }
+					
+			 }
+			/* assign the cells to the battery and set the location to be on EAP */
+			if(!empty($cells) && count($cells)==$batteryModel->batterytype->num_cells)
+			{
+				foreach($cells as $position=>$cellModel)
+				{
+					$cellModel->battery_id = $battery_id;
+					$cellModel->battery_position = $position;
+					
+					$cellModel->save();
+				}
+			}
+			else {
+				$batteryModel->addError('upload_error', "Not enough cells were selected, or there may have been a duplicate
+					position listed.  Please fix the file and try again."
+				);
+				$batteryModel->delete();
+				return false;
+			}
+			/* assign the spares to the battery and set the location to be on EAP-spare */
+			$spareCount = 0;
+			if(!empty($spares))
+			{
+				foreach($spares as $position=>$cellModel)
+				{
+					if($cellModel)
+					{
+						$spareCount += 1;
+						
+						/* create the batteryspares */
+						$spareModel = new BatterySpare;
+						
+						$spareModel->cell_id = $cellModel->id;
+						$spareModel->battery_id = $battery_id;
+						$spareModel->position = $position;
+						
+						$spareModel->save();
+					}
+				}
+			}
+		}
+		else
+		{
+			return false;
+		}
+		return true;
+	}
+	
+	/**
+	 * 
 	 * Creates new battery and associates designated cells from the cell selection...
 	 * to default states 
 	 * 
@@ -503,7 +701,7 @@ class Battery extends CActiveRecord
 		if(empty($batteryModel))
 			return;
 		
-		$batteryModel->location = 'Assembled';
+		$batteryModel->location = '[ASSEMBLED] '.date("Y-m-d",time());
 		
 		if($batteryModel->save())
 		{

@@ -11,6 +11,7 @@
  * @property string $last_name
  * @property string $email
  * @property string $depart_id
+ * @property integer $change_password
  *
  * The followings are the available model relations:
  * @property Cell[] $cellsStacked
@@ -43,6 +44,7 @@ class User extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('username, password, first_name, last_name', 'required'),
+			array('change_password', 'numerical', 'integerOnly'=>true),
 			array('password', 'length', 'max'=>64),
 			array('username, first_name, last_name', 'length', 'max'=>50),
 			array('username','unique', 'message'=>'Username is already taken'),
@@ -157,6 +159,7 @@ class User extends CActiveRecord
 		}
 		return parent::beforeSave();
 	}
+	
 	
 	public function validatePassword($password)
 	{

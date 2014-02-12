@@ -28,24 +28,35 @@ class CellController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view', 'downloadlist', 'ajaxgetlocation','ajaxmfgupdate'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update', 
+				'actions'=>array('create',
 								'multistackcells', 'ajaxstackcells', 
 								'multiinspectcells', 'ajaxinspectcells',
 								'multilasercells', 'ajaxlasercells',
 								'multifillcells', 'ajaxfillcells', 
 								'multitipoffcells', 'ajaxtipoffcells',			
-								'multiacceptcatdata', 'ajaxacceptcatdata',		
 				),
 				'roles' => array('manufacturing'),
 				//'users'=>array('@'),
 			),
+			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				'actions'=>array(
+								'multiinspectcells', 'ajaxinspectcells',	
+				),
+				'roles' => array('manufacturing, engineering, quality'),
+				//'users'=>array('@'),
+			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','ajaxmfgupdate','downloadlist', 'ajaxgetlocation'),
-				'roles' => array('engineering'),
+				'actions'=>array('delete','update', 'multiacceptcatdata', 'ajaxacceptcatdata'),
+				'roles' => array('engineering, manufacturing supervisor, quality'),
+				//'users'=>array('admin'),
+			),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('admin'),
+				'roles' => array('admin'),
 				//'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -649,7 +660,7 @@ class CellController extends Controller
 		$userName = '';
 		$userId = '';
 		
-		if (Yii::app()->user->checkAccess('manufacturing supervisor') || Yii::app()->user->checkAccess('manufacturing engineer'))
+		if (Yii::app()->user->checkAccess('manufacturing supervisor') || Yii::app()->user->checkAccess('manufacturing engineer') || Yii::app()->user->checkAccess('engineering'))
 		{
 			
 		}

@@ -50,7 +50,13 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		//'id',
 		array(
 			'name'=>'serial_search',
-			'value'=>'$data->getFormattedSerial()'
+			'type'=>'html',
+			'value'=>function($data, $row){
+				if($data->cell != null)
+					return CHtml::link(CHtml::encode($data->getFormattedSerial()), array("cell/view", "id"=>$data->cell->id));
+				else 	
+					return $data->getFormattedSerial();
+			}		
 		),
 		array(
 			'name'=>'refnum_search',

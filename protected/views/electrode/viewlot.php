@@ -28,16 +28,19 @@ $this->menu=array(
 			'label'=>'Anode/Cathode',
 			'value'=>($model->is_anode)?'Anode':'Cathode',
 		),
+		array(
+        	'label'=>'Reference No.',
+        	'value'=>$model->refNum->number,
+        ),
         'eap_num',
         array(
         	'label'=>'Coater',
         	'value'=>$model->coater->getFullName(),
         ),
         'coat_date',
-        array(
-        	'label'=>'Reference No.',
-        	'value'=>$model->refNum->number,
-        ),
+        'thickness',
+        'cal_date',
+        'moisture',
     ),
     'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
 )); ?>
