@@ -119,6 +119,7 @@ function reloadGrid(data) {
 <script type="text/javascript">
 
 jQuery(function($) {
+	
 	jQuery(document).on('keydown', '.autocomplete-user-input', function(event) {
 		$(this).autocomplete({
 			'select': function(event, ui){

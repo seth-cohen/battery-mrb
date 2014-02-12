@@ -24,6 +24,8 @@ $this->menu=array(
 If you are just looking to change the test channel then please use the 
 <?php echo CHtml::link('Test Reassignment', array('testreassignment')); ?> action.  If the cell's formation test
 assignment is still active then the test assignment needs to be cleared by the MFG action to weld fillport.
+Only channels that are not in use and are currently marked as in commission will be available.  
+Chambers that are marked out of commission will be listed in red in the drop down.
 </p>
 <?php
 /* ionclude JQuery scripts to allow for autocomplte */

@@ -22,7 +22,8 @@ $this->menu=array(
 <p>
 *Only cells filled yesterday or today will be listed.
 If you are just looking to change the test channel then please use the 
-<?php echo CHtml::link('Test Reassignment', array('testreassignment')); ?> action.
+<?php echo CHtml::link('Test Reassignment', array('testreassignment')); ?> action.  Only channels that are not in use and are currently marked as in commission will be available.  
+Chambers that are marked out of commission will be listed in red in the drop down.
 </p>
 
 <?php
