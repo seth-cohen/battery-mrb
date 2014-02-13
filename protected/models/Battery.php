@@ -590,6 +590,8 @@ class Battery extends CActiveRecord
 			    $pos = strrpos($data[1], "-");  // position of the last hyphen
 			    $serial = substr($data[1], $pos+1);
 			    $type = substr($data[1], 0, $pos);
+			    $is_numeric = is_numeric($data[0]);
+			    
 			    if($type != $batteryModel->batterytype->celltype->name)
 			    {
 			    	$batteryModel->addError('upload_error', "Expecting cell type $batteryModel->batterytype->celltype->name 
@@ -599,7 +601,10 @@ class Battery extends CActiveRecord
 					return false;
 			    }
 			    
-			    $cell = Cell::model()->with(
+			    /* --------------------------------------------------------------------------------------
+			     * ------- REPLACED WITH CDBCriteria BELOW!!!!!!!!! -------
+			     * --------------------------------------------------------------------------------------
+			   $cell = Cell::model()->with(
 					array(
 						'kit'=>array(
 							'alias'=>'kit',
@@ -616,22 +621,77 @@ class Battery extends CActiveRecord
 						'condition'=>'type.name=:typename AND kit.serial_num=:serial AND battery_id IS NULL AND data_accepted = 1',
 						'params'=>array(':typename'=>$type, ':serial'=>$serial)
 					)
-				);
+				);*/
+			    $criteria=new CDbCriteria;
+			    $criteria->with = array(
+			    	'kit'=>array(
+						'alias'=>'kit',
+						'with'=>array(
+							'celltype'=>array(
+								'alias'=>'type',
+							)
+						)
+					)
+			    );
+			    $criteria->together = true;
+			    
+			    $criteria->compare('type.name', $type);
+			    $criteria->compare('kit.serial_num', $serial);
+				$criteria->addcondition('battery_id IS NULL');
+			    $criteria->addcondition('data_accepted=1');
+			    
+			    /* but are not currently on an open NCR or scrapped/eng use only */
+				$criteria->addCondition('NOT EXISTS (SELECT *
+											FROM tbl_ncr_cell ncr
+											WHERE t.id = ncr.cell_id
+											AND ncr.disposition < 3
+											GROUP BY t.id)');
+			    
+				if($is_numeric)
+			    {
+			    	/* but are not currently a spare for another battery*/
+					$criteria->addCondition('NOT EXISTS (SELECT *
+												FROM tbl_battery_spare spare
+												WHERE t.id = spare.cell_id
+												GROUP BY t.id)');
+			    }
+				
+				$cell = Cell::model()->find($criteria);
+				
 				if ($cell == null){
 					$batteryModel->addError('upload_error', "There was an error for cell at position $data[0]. It is possible that the cell has already been 
-						selected, does not exist or the data has not yet been accepted"
+						selected, does not exist, is Open/Scrapped/Eng Use on an NCR or the data has not yet been accepted"
 					);
 					$batteryModel->delete();
 					return false;
 				}
+				
 				/* put the cell into the data array as a spare if it is none numeric but has the correct configuration */
-			    if(is_numeric($data[0])){
+			    if($is_numeric)
+			    {
+			    	if(in_array($cell,array_merge($cells, $spares)))
+			    	{
+			    		$batteryModel->addError('upload_error', "There was duplicate cell selection at position $data[0]");
+						$batteryModel->delete();
+						return false;
+			    	}
 			    	$cells[$data[0]] = $cell;
-			    } else {
+			    } 
+			    else 
+			    {
 			    	$position = str_replace(array('s','S'),'',$data[0]);
-			    	if (is_numeric($position)){
+			    	if (is_numeric($position))
+			    	{
+				    	if(in_array($cell,array_merge($cells, $spares)))
+				    	{
+				    		$batteryModel->addError('upload_error', "There was duplicate cell selection at position $data[0]");
+							$batteryModel->delete();
+							return false;
+				    	}
 			    		$spares[$position] = $cell;
-			    	} else {
+			    	} 
+			    	else 
+			    	{
 			    		$batteryModel->addError('upload_error', "There was an error for cell at position $data[0].");
 			    		$batteryModel->delete();
 			    		return false;

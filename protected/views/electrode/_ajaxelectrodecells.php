@@ -24,7 +24,12 @@ Yii::app()->clientScript->scriptMap=array(
 		array(
 			'name'=>'Cell Serial',
 			'type'=>'html',
-			'value'=>'CHtml::link(CHtml::encode($data["kit"]), array("cell/view", "id"=>$data["id"]))',
+			'value'=>function($data, $row){
+				if($data['stack_date']!='Not Stacked')
+					return CHtml::link(CHtml::encode($data['kit']), array("cell/view", "id"=>$data['id']));
+				else 	
+					return $data['kit'];
+			}	
 		),
 		array(
 			'header'=>'Anode Lots',

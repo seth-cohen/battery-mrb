@@ -37,7 +37,7 @@ class NcrController extends Controller
 				'actions'=>array('update', 'ajaxupdate',
 								'putcellsonncr', 'ajaxputcellsonncr',
 				),
-				'roles'=>array('engineering, quality, testlab'),
+				'roles'=>array('engineering, quality, testlab, manufacturing supervisor'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array(
