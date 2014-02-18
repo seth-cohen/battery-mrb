@@ -4,7 +4,7 @@
 
 $this->breadcrumbs=array(
 	'Batteries'=>array('index'),
-	'Admin',
+	'All Batteries',
 );
 
 $this->menu=array(

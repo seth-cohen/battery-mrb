@@ -2,7 +2,7 @@
 /* @var $this BatteryController */
 /* @var $model Battery */
 /* @var $cellDataProvider  CArrayDataProvider */
-
+/* @var $spareOptions  Array */
 ?>
 
 <h2 style="text-align:center">Battery <?php echo $model->batterytype->name; ?> SN: <?php echo $model->serial_num; ?> Cell Details</h2>
@@ -23,6 +23,26 @@
 		array(
 			'header'=>'Current Location',
 			'value'=>'$data["location"]',
+		),
+		array(
+			'header'=>'Notes',
+			'value'=>'$data["notes"]'
+		),
+		array(
+			'header'=>'Spares',
+			'type'=>'raw',
+			'value'=>function($data, $row) use ($spareOptions) {
+				if ($data['position'] < 1000)
+				{
+					return	 CHtml::dropDownList('Battery[Cells]['.$data['id'].']', '', $spareOptions, array(
+							'prompt'=>'-N/A-',
+							'class'=>'cell-dropdown cells',
+							'onchange'=>'spareUsed(this)',
+							'style'=>'width:150px',
+					));
+				}
+			},
+			'visible'=>($this->action->id == 'update' && $model->data_accepted !=1),
 		),
 		array(
 			'class'=>'CButtonColumn',

@@ -4,23 +4,27 @@
 
 $this->breadcrumbs=array(
 	'Test Lab'=>array('/testlab'),
-	'Deliver Cells To Battery Assembly',
+	'Cell Conditioning',
 );
 
 $this->menu=array(
 	array('label'=>'Put cells on Formation', 'url'=>array('cellformation')),
 	array('label'=>'View Cells on Formation', 'url'=>array('formationindex')),
-	array('label'=>'Put cells on CAT', 'url'=>array('cellcat')),
 	array('label'=>'View Cells on CAT', 'url'=>array('catindex')),
 	array('label'=>'Test Reassignments', 'url'=>array('testreassignment')),
 	array('label'=>'Move Cells to Storage', 'url'=>array('storage')),
+	array('label'=>'Deliver Cells to Assembly', 'url'=>array('deliverforbattery')),
 	array('label'=>'View All Cells', 'url'=>array('/cell/index')),
 );
 ?>
 
-<h1>Deliver Cells To Battery Assembly</h1>
+<h1>Put Cells on Conditioning Charge</h1>
 <p>
-*All cells that have been selected for a battery that hasn't yet been built will be available for this action.
+*Only cells that have been selected for a battery (even as a spare) not currently on test will be listed. 
+If you are just looking to change the test channel then please use the 
+<?php echo CHtml::link('Test Reassignment', array('testreassignment')); ?> action. 
+Only channels that are not in use and are currently marked as in commission will be available.  
+Chambers that are marked out of commission will be listed in red in the drop down.
 </p>
 <?php
 /* ionclude JQuery scripts to allow for autocomplte */
@@ -34,15 +38,15 @@ Yii::app()->clientScript->registerCssFile(
 <?php $form=$this->beginWidget('CActiveForm', array(
     'enableAjaxValidation'=>true,
 	'enableClientValidation'=>true,
-	'id'=>'storage-form',
+	'id'=>'cat-form',
 )); ?>
 
 <?php echo CHtml::checkBox('singleUser', true)?><span style="margin-left:5px">Assign to Single User</span>
 
 <div class="shadow border" >
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'storage-grid',
-	'dataProvider'=>$model->searchForDelivery(),
+	'id'=>'cat-grid',
+	'dataProvider'=>$model->searchForAssembly(),
 	'filter'=>$model,
 	'columns'=>array(
 		array(
@@ -50,44 +54,66 @@ Yii::app()->clientScript->registerCssFile(
             'class'=>'CCheckBoxColumn',
             'selectableRows' => '50',   
         ),
-        array(
-			'name'=>'refnum_search',
+		array(
+			'header'=>'Selected Cells',
+			'name'=>'serial_search',
 			'type'=>'raw',
-			'value'=>'$data->refNum->number',
-			'htmlOptions'=>array('width'=>'60'),
+			'value'=>'$data->kit->getFormattedSerial()',
 		),
-        array(
-        	'header'=>'For Battery',
-        	'name'=>'battery_search',
-        	'value'=>function($data,$row){
+		array(
+			'header'=>'Battery',
+			'name'=>'battery_search',
+			'type'=>'raw',
+			'value'=>function($data,$row){
 				if($data->battery){
 					return $data->battery->getSerialNumber();
 				} else {
 					return $data->getBatteryAsSpareList();
 				}	
 			},
-        ),
-		array(
-			'header'=>'Cell Serials',
-			'name'=>'serial_search',
-			'type'=>'raw',
-			'value'=>'$data->kit->getFormattedSerial()',
 		),
 		array(
-			'name'=>'location',
-			'header' => 'Current Location',
-			'value' =>'$data->location',
+			'header'=>'Cycler',
+			'type'=>'raw',
+			'value'=>'CHtml::dropDownList("cyclers[$data->id]", "", Cycler::forList(),array(
+						"prompt"=>"-Cycler-",
+						"class"=>"cycler-dropdown",
+						"onChange"=>"cycSelected(this)",
+			))',
+		),
+		array(
+			'header'=>'Channel',
+			'type'=>'raw',
+			'value'=>'CHtml::dropDownList("channels[$data->id]", "", array(),array(
+						"prompt"=>"-N/A-",
+						"class"=>"channel-dropdown",
+						"onChange"=>"chanSelected(this)",
+			))',
+		),
+		array(
+			'header'=>'Chamber',
+			'type'=>'raw',
+			'value'=>'CHtml::dropDownList("chambers[$data->id]", "", Chamber::forList(),array(
+						"prompt"=>"-Chamber-",
+						"style"=>"width:100px",
+						"options"=>Chamber::getTextColor(),
+			))',
 		),
 		array(
 			'header' => 'Operator',
 			'type' => 'raw',
 			'value' => array($this, 'getUserInputTextField'),
+//			'value'=>'CHtml::textField("user_name[$data->id]",User::getFullNameProper(Yii::app()->user->id),array(
+//				"style"=>"width:150px;",
+//				"class"=>"ui-autocomplete-input",
+//				"autocomplete"=>"off",'.$disabled.'
+//			))',
 		),
-//		array(
-//			'header' => 'Storage Date',
-//			'type' => 'raw',
-//			'value'=>'CHtml::textField("dates[$data->id]",date("Y-m-d",time()),array("style"=>"width:100px;", "class"=>"hasDatePicker"))',	
-//		),
+		array(
+			'header' => 'Condition Date',
+			'type' => 'raw',
+			'value'=>'CHtml::textField("dates[$data->id]",date("Y-m-d",time()),array("style"=>"width:100px;", "class"=>"hasDatePicker"))',	
+		),
 	),
 	'htmlOptions'=>array('width'=>'100%'),
 	'cssFile' => Yii::app()->baseUrl . '/css/styles.css',
@@ -107,29 +133,40 @@ function reloadGrid(data) {
     	try
     	{
     	   var cells = $.parseJSON(data);
-    	   var alertString = cells.length+' cells were delivered to battery assembly: \n';
+    	   var alertString = cells.length+' cells were put on conditioning charge. Serial numbers: \n';
     	   cells.forEach(function(cell) {
-    		   alertString += cell.serial + ' on ' + cell.location + '\n';
+    		   alertString += cell.serial + ' on ' + cell.cycler + '-' + cell.channel + '\n';
     	   });
     	   alert(alertString);
-    	   $.fn.yiiGridView.update('storage-grid');
+    	   $.fn.yiiGridView.update('cat-grid');
     	}
     	catch(e)
     	{
-    		$('#storage-form').prepend(data);
+    		$('#cat-form').prepend(data);
     		console.log(e.message);
     	}
     }
 }
 </script>
-<?php echo CHtml::ajaxSubmitButton('Filter',array('testlab/deliverforbattery'), array(),array("style"=>"display:none;")); ?>
-<?php echo CHtml::ajaxSubmitButton('Submit',array('testlab/ajaxdelivery'), array('success'=>'reloadGrid'), array("id"=>"submit-button")); ?>
+<?php echo CHtml::ajaxSubmitButton('Filter',array('testlab/cellcat'), array(),array("style"=>"display:none;")); ?>
+<?php echo CHtml::ajaxSubmitButton('Submit',array('testlab/ajaxconditioning'), array('success'=>'reloadGrid'), array("id"=>"submit-button")); ?>
 
 <?php $this->endWidget(); ?>
 
 <script type="text/javascript">
 
 jQuery(function($) {
+	$(document).on('keyup', 'input', function(e){
+        if(e.which==39)
+                    $(this).closest('td').next().find('input').focus();
+        else if(e.which==37)
+                    $(this).closest('td').prev().find('input').focus();
+        else if(e.which==40)
+                    $(this).closest('tr').next().find('td:eq('+$(this).closest('td').index()+')').find('input').focus();
+        else if(e.which==38)
+                    $(this).closest('tr').prev().find('td:eq('+$(this).closest('td').index()+')').find('input').focus();
+	});
+	
 	jQuery(document).on('keydown', '.autocomplete-user-input', function(event) {
 		$(this).autocomplete({
 			'select': function(event, ui){
@@ -158,7 +195,7 @@ jQuery(function($) {
 
 		if(noneChecked)
 		{
-			alert('You must select at least one cell to move to deliver to battery assembly');
+			alert('You must select at least one cell to put on CAT');
 			return false;
 		}
 	});
@@ -170,7 +207,7 @@ jQuery(function($) {
 
 function cycSelected(sel)
 {
-	var id = sel.id.toString().replace("cyclers","channels");
+	var id = sel.id.toString().replace("Channel_Status","");
 	var cycler_id = $('option:selected', $(sel)).attr("value");
 
 	$.ajax({
@@ -185,6 +222,8 @@ function cycSelected(sel)
 			
 			$('.channel-dropdown').attr('disabled',false);
 			$('.channel-dropdown').html(data);
+			$('.channel-dropdown').data('prevValue', '');
+			$('.channel-dropdown').data('prevText', '');
 		},
 	});	
 }

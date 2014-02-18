@@ -21,6 +21,7 @@
  * @property string $portwelder_id
  * @property string $portweld_date
  * @property string $location
+ * @property string $notes
  * @property integer $data_accepted
  * @property string $battery_id
  * @property string $battery_position
@@ -36,6 +37,7 @@
  * @property User $laserwelder
  * @property TestAssignment[] $testAssignments
  * @property Ncr[] $ncrs
+ * @property BatterySpare[] $spareFor
  * 
  */
 class Cell extends CActiveRecord
@@ -91,12 +93,14 @@ class Cell extends CActiveRecord
 			array('dry_wt, wet_wt', 'numerical'),
 			array('kit_id, ref_num_id, stacker_id, filler_id, inspector_id', 'length', 'max'=>10),
 			array('eap_num, location', 'length', 'max'=>50),
+			array('notes', 'length', 'max'=>120),
+			
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('eap_num, stack_date, dry_wt, wet_wt, fill_date, inspection_date, serial_search, celltype_search, 
 					refnum_search, stacker_search, filler_search, inspector_search, laserwelder_search, portwelder_search,
-					location, not_formed, formed_only, inspector_id, laserwelder_id, portwelder_id, anode_search, cathode_search,
-					battery_search, battery_id, ncr_search', 
+					location, notes, not_formed, formed_only, inspector_id, laserwelder_id, portwelder_id, anode_search, 
+					cathode_search,	battery_search, battery_id, ncr_search', 
 					'safe', 'on'=>'search'
 			),
 			array('serial_search, celltype_search, refnum_search, ncr_search', 
@@ -141,6 +145,7 @@ class Cell extends CActiveRecord
 			'portwelder' => array(self::BELONGS_TO, 'User', 'portwelder_id'),
 			'testAssignments' => array(self::HAS_MANY, 'TestAssignment', 'cell_id'),
 			'ncrs' => array(self::MANY_MANY, 'Ncr', 'tbl_ncr_cell(cell_id, ncr_id)'),
+			'spareFor'=>array(self::HAS_MANY, 'BatterySpare', 'cell_id'),
 		);
 	}
 
@@ -701,6 +706,114 @@ class Cell extends CActiveRecord
 			),
 		));
 	}
+
+	public function searchForAssembly()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->select = 'id, eap_num';
+		$criteria->with = array(
+						'kit'=>array(
+							'select'=>array('id','serial_num'),
+							'with'=>array(
+								'celltype',
+								'anodes'=>array('select'=>'id'), 
+								'cathodes'=>array('select'=>'id'),
+							),
+						), 
+						'refNum'=>array('alias'=>'ref'),
+						'testAssignments'=>array('alias'=>'test', 'select'=>'is_active, id'),
+						'battery'=>array('alias'=>'batt', 'select'=>'serial_num, id'),
+						'battery.batterytype'=>array('alias'=>'batterytype','select'=>'name'),
+						'spareFor'=>array('alias'=>'spare'),
+						'spareFor.battery'=>array('alias'=>'sparebattery'),
+						'spareFor.battery.batterytype'=>array('alias'=>'sparebatterytype'),
+		); // needed for alias of search parameter tables
+
+		$criteria->together = true;
+		
+		if($this->refnum_search)
+		{
+			$references = explode(',', str_replace(' ', ',', $this->refnum_search));
+			
+			$refCriteria = new CDbCriteria();
+			foreach ($references as $reference)
+			{
+				if(!empty($reference))
+				{
+					$refCriteria->compare('ref.number', $reference, true, 'OR');
+				}
+			}
+			$criteria->mergeWith($refCriteria);
+		}
+		
+		/* cells that have been selected for a battery */
+		$criteria->addcondition('t.battery_id IS NOT NULL');
+		
+		// or it is selected as a spare
+		$criteria->addcondition('EXISTS (SELECT spare.cell_id, spare.battery_id
+											FROM tbl_battery_spare spare
+											WHERE t.id = spare.cell_id
+											GROUP BY t.id)', 'OR');
+		
+		/* not actively on test */
+		$criteria->addCondition('NOT EXISTS (SELECT test.id, test.is_formation
+											FROM tbl_test_assignment test
+											WHERE t.id = test.cell_id
+											AND test.is_active = 1
+											GROUP BY t.id)');
+		
+		// and aren't already in a built battery 
+		$criteria->addCondition('NOT EXISTS (SELECT batt.id, batt.assembler_id
+											FROM tbl_battery batt
+											WHERE t.battery_id = batt.id
+											AND batt.assembler_id <> 1
+											GROUP BY t.id)');
+	
+		$criteria->addSearchCondition('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
+		
+		if($this->battery_search)
+		{			
+			$battCriteria = new CDbCriteria();
+			
+			/* for concatenated battery serial search */
+			$battCriteria->compare('concat(batterytype.name,"-",batt.serial_num)',$this->battery_search, true);
+			/* for concatenated battery serial search for the spares */
+			$battCriteria->compare('concat(sparebatterytype.name,"-",sparebattery.serial_num)',$this->battery_search, true, 'OR');
+			
+			$criteria->mergeWith($battCriteria);
+		}
+		
+		return new KeenActiveDataProvider($this, array(
+			'pagination'=>array('pageSize' => 16),
+			'criteria'=>$criteria,
+			'withKeenLoading' => array(
+				'kit'=>array('select'=>array('celltype','kit.serial_num')),
+				'testAssignments'=>array('alias'=>'test'),
+				'spareFor'
+			),
+			'sort'=>array(
+				'defaultOrder'=>'CONCAT(batterytype.name,batt.serial_num)',
+				'attributes'=>array(
+					'refnum_search'=>array(
+						'asc'=>'ref.number',
+						'desc'=>'ref.number DESC',
+					),
+					'serial_search'=>array(
+						'asc'=>"CONCAT(celltype.name, kit.serial_num)",
+						'desc'=>"CONCAT(celltype.name, kit.serial_num) DESC",
+					),
+					'battery_search'=>array(
+						'asc'=>"CONCAT(batterytype.name, batt.serial_num)",
+						'desc'=>"CONCAT(batterytype.name, batt.serial_num) DESC",
+					),
+					'*',		// all others treated normally
+				),
+			),
+		));
+	}
 	
 	public function searchCATComplete()
 	{
@@ -899,6 +1012,12 @@ class Cell extends CActiveRecord
 											FROM tbl_battery batt
 											WHERE t.battery_id = batt.id
 											AND batt.assembler_id = 1
+											GROUP BY t.id)', 'OR');
+		
+		// or it is selected as a spare
+		$criteria->addcondition('EXISTS (SELECT spare.cell_id, spare.battery_id
+											FROM tbl_battery_spare spare
+											WHERE t.id = spare.cell_id
 											GROUP BY t.id)', 'OR');
 				
 		$criteria->addSearchCondition('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
@@ -1505,6 +1624,17 @@ class Cell extends CActiveRecord
 			return '-N/A-';
 		}
 		
+	}
+	
+	public function getBatteryAsSpareList()
+	{
+		$result = array();
+		foreach($this->spareFor as $batterySpare)
+		{
+			$result[] = $batterySpare->battery->getSerialNumber();
+		}
+		sort($result);
+		return implode(', ', $result);
 	}
 	
 	public static function getColumnList()

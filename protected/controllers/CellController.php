@@ -28,7 +28,7 @@ class CellController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view', 'downloadlist', 'ajaxgetlocation','ajaxmfgupdate'),
+				'actions'=>array('index','view', 'downloadlist', 'ajaxgetlocation','ajaxmfgupdate','ajaxgetnotes'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -857,6 +857,27 @@ class CellController extends Controller
 		if($cellModel)
 		{
 			echo $cellModel->location;
+		}
+		else 
+		{
+			echo 'Select Cell First';
+		}
+		
+		Yii::app()->end();
+	}
+	
+	public function actionAjaxGetNotes()
+	{
+		if(!isset($_GET['id']))
+		{
+			echo 'Select Cell First';
+			Yii::app()->end();
+		}
+		
+		$cellModel = Cell::model()->findByPk($_GET['id']);
+		if($cellModel)
+		{
+			echo $cellModel->notes;
 		}
 		else 
 		{

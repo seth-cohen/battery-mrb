@@ -278,7 +278,6 @@ class Battery extends CActiveRecord
 		return parent::model($className);
 	}
 	
-	
 	/**
 	 * 
 	 */
@@ -319,6 +318,7 @@ class Battery extends CActiveRecord
 			 	'position'=>$cell->battery_position,
 			 	'serial' => $cell->kit->getFormattedSerial(),
 			 	'location'=> $cell->location,
+			 	'notes'=> $cell->notes,
 			);
 		}
 		
@@ -332,10 +332,19 @@ class Battery extends CActiveRecord
 			 	'position'=>$spare->position + 1000,
 			 	'serial' => $cell->kit->getFormattedSerial(),
 			 	'location'=> $cell->location,
+			   	'notes'=> $cell->notes,
 			);
 		}
 		
 		return $result;
+	}
+	
+	/*
+	 * Returns the formatted battery serial number and name.
+	 */
+	public function getSerialNumber()
+	{
+		return $this->batterytype->name. ' SN: ' .$this->serial_num;
 	}
 	
  	/**
@@ -507,14 +516,7 @@ class Battery extends CActiveRecord
 					if($spare['id'])
 					{
 						$spareCount += 1;
-						$cellModel = Cell::model()->findByPk($spare['id']);
-						/* moved this to testlab action deliver because the location doesn't actually change until
-						 * it is delivered to Battery Assembly
-						 */
-						//$cellModel->location = '[EAP-Spare] '.$batteryModel->batterytype->name;
-						
-						$cellModel->save();
-						
+								
 						/* create the batteryspares */
 						$spareModel = new BatterySpare;
 						
@@ -594,7 +596,7 @@ class Battery extends CActiveRecord
 			    
 			    if($type != $batteryModel->batterytype->celltype->name)
 			    {
-			    	$batteryModel->addError('upload_error', "Expecting cell type $batteryModel->batterytype->celltype->name 
+			    	$batteryModel->addError('upload_error', "Expecting cell type {$batteryModel->batterytype->celltype->name} 
 			    		but $type was found for cell at position $data[0]"
 			    	);
 			    	$batteryModel->delete();
@@ -783,7 +785,10 @@ class Battery extends CActiveRecord
 					
 					$cellModel->battery_id = null;
 					$cellModel->battery_position = null;
-					$cellModel->location = '[Dispo] - Replaced by spare {'.$spareModel->kit->getFormattedSerial().'}';
+					$cellModel->notes = 'Was replaced by spare '.$spareModel->kit->getFormattedSerial().' in '
+						.$batteryModel->batterytype->name .' SN: ' .$batteryModel->serial_num;
+					$cellModel->location = 'Battery Assembly';
+					
 					$cellModel->save();
 					
 					/* delete all instances of the spare as a batteryspare */

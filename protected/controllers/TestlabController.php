@@ -27,13 +27,14 @@ class TestlabController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','formationindex', 'catindex',),
+				'actions'=>array('index','formationindex', 'catindex', 'conditioningindex'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array(
 					'cellformation', 'ajaxformation', 
 					'cellcat', 'ajaxcat', 
+					'cellconditioning', 'ajaxconditioning',
 					'testreassignment', 'ajaxtestreassignment',
 					'storage', 'ajaxstorage',
 					'deliverforbattery', 'ajaxdelivery'
@@ -86,6 +87,7 @@ class TestlabController extends Controller
 		/* uses TestAssignment->search() to find all active formation
 		 * test assignments	 */
 		$model->is_formation = 0;
+		$model->is_conditioning = 0;
 		$model->is_active = 1;
 		
 		if(isset($_GET['TestAssignment']))
@@ -94,6 +96,30 @@ class TestlabController extends Controller
 		}
 				
 		$this->render('catindex',array(
+			'model'=>$model,
+		));
+	}
+	
+	/**
+	 * Lists all cells that are actively on formation.
+	 */
+	public function actionConditioningIndex()
+	{
+		$model=new TestAssignment('search');
+		$model->unsetAttributes();  // clear any default values
+		
+		/* uses TestAssignment->search() to find all active formation
+		 * test assignments	 */
+		$model->is_formation = 0;
+		$model->is_conditioning = 1;
+		$model->is_active = 1;
+		
+		if(isset($_GET['TestAssignment']))
+		{
+			$model->attributes=$_GET['TestAssignment'];
+		}
+				
+		$this->render('conditioningindex',array(
 			'model'=>$model,
 		));
 	}
@@ -264,6 +290,95 @@ class TestlabController extends Controller
 			}
 			
 			$result = TestAssignment::putCellsOnTest($cellsCAT);  
+			
+			if (!json_decode($result))
+			{ /* the save failed otherwise result would be json_encoded*/
+				echo $result;
+			} 
+			else 
+			{ /* success so show count and serial numbers */
+				echo $result;
+			}
+		}
+	}
+	
+	/**
+	 * Allows user to put multiple cells on conditioning charge for battery assembly
+	 */
+	public function actionCellConditioning()
+	{
+		$model=new Cell('search'); 
+		$model->unsetAttributes();  // clear any default values
+		
+		/* uses cell->searchForAssembly() to get all cells that have been through 
+		 * formation and are not actively on test */
+		
+		if(isset($_GET['Cell']))
+		{
+			$model->attributes=$_GET['Cell'];
+		}
+				
+		$this->render('cellconditioning',array(
+			'model'=>$model,
+		));
+	}
+	
+	/**
+	 * This is the ajax action to save the Conditioning test assignments
+	 * TODO it should be possible to combine CAT and FORM into one action
+	 * by passing a parameter
+	 */
+	public function actionAjaxConditioning()
+	{
+		
+		if(!isset($_POST['autoId']))
+		{
+			echo 'hide';
+			Yii::app()->end();
+		}
+		
+		$conditionCells = $_POST['autoId'];
+		$userIds = $_POST['user_ids'];
+		$dates = $_POST['dates'];
+		$chambers = $_POST['chambers'];
+		$tempChannels = $_POST['channels'];
+		
+		/* make sure there are no duplicate channel selections */
+		$channels = array();
+		foreach($conditionCells as $test_id)
+		{
+			$channels[$test_id] = $tempChannels[$test_id];		
+		}
+
+		if (count($channels) !== count(array_unique($channels)))
+		{ /* then we have duplicates set error and bail */		
+			$model = new Cell();
+			$model->addError('channel_error', 'Duplicate Channel Selection!');
+			echo CHtml::errorSummary($model);
+			Yii::app()->end();
+		}
+		
+		if(count($conditionCells)>0)
+		{
+			$cellsCondition = array();
+			
+			foreach($conditionCells as $cell_id)
+			{	
+				$tempTest = new TestAssignment;
+				
+				$tempTest->cell_id = $cell_id;
+				$tempTest->channel_id = $channels[$cell_id];
+				$tempTest->chamber_id = $chambers[$cell_id];
+				$tempTest->operator_id = $userIds[$cell_id];
+				$tempTest->test_start = date("Y-m-d",time());
+				$tempTest->is_formation = 0;
+				$tempTest->is_conditioning = 1;
+					
+				$cellsCondition[$cell_id] = $tempTest;
+				
+			}
+			
+			$result = TestAssignment::putCellsOnTest($cellsCondition);  
 			
 			if (!json_decode($result))
 			{ /* the save failed otherwise result would be json_encoded*/

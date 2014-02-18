@@ -12,6 +12,7 @@
  * @property string $formation_start
  * @property string $is_formation
  * @property string $is_active
+ * @property string $is_conditioning
  *
  * The followings are the available model relations:
  * @property Cell $cell
@@ -25,6 +26,7 @@ class TestAssignment extends CActiveRecord
 	public $serial_search;
 	public $chamber_search;
 	public $cycler_search;
+	public $battery_search;
 	
 	/**
 	 * @return string the associated database table name
@@ -42,13 +44,13 @@ class TestAssignment extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cell_id, channel_id, chamber_id, operator_id, test_start, is_formation, is_active', 'required'),
+			array('cell_id, channel_id, chamber_id, operator_id, test_start, is_formation, is_active, is_conditioning', 'required'),
 			array('cell_id, channel_id, chamber_id, operator_id', 'length', 'max'=>10),
 			array('test_start', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, cell_id, channel_id, chamber_id, operator_id, test_start, is_active, is_formation 
-					serial_search, chamber_search, cycler_search', 'safe', 'on'=>'search'),
+					serial_search, chamber_search, cycler_search, is_conditioning', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -142,6 +144,7 @@ class TestAssignment extends CActiveRecord
 		$criteria->compare('test_start',$this->test_start,true);
 		$criteria->compare('is_formation',$this->is_formation,true);
 		$criteria->compare('is_active',$this->is_active,true);
+		$criteria->compare('is_conditioning',$this->is_conditioning,true);
 
 		$criteria->compare('cham.name',$this->chamber_search,true);
 		
@@ -221,7 +224,15 @@ class TestAssignment extends CActiveRecord
 				{
 					/* update the cell location */
 					$cell = Cell::model()->findByPk($model->cell_id);
-					$cell->location = $model->is_formation ? '[FORM] ':'[CAT] ';
+					if($model->is_formation)
+					{
+						$cell->location = '[FORM] ';
+					}
+					else 
+					{
+						$cell->location = ($model->is_conditioning) ? '[COND] ':'[CAT] ';
+					}
+					
 					$cell->location .= $model->channel->cycler->name.
 										'{'.$model->channel->number.'} '.
 										'('.$model->chamber->name.')';

@@ -37,6 +37,7 @@ class BatteryController extends Controller
 					'cellselection', 'ajaxselection',
 					'ajaxtypeselected', 'ajaxavailablecells',
 					'ajaxcellsforbatteryview',
+					'ajaxaddspares', 'ajaxusespares',
 					'ship', 'ajaxship',
 					'uploadselection'
 				),
@@ -95,9 +96,18 @@ class BatteryController extends Controller
 		    ),
 		 ));
 		 
+		 /* get the spares as a list of options for the dropdownlist */
+		$spareCells = BatterySpare::model()->with('cell.kit')->findAllByAttributes(array('battery_id'=>$id));
+		$spareOptions = array();
+		
+		foreach($spareCells as $spare){
+			$spareOptions[$spare->cell->id] = $spare->cell->kit->getFormattedSerial();
+		}
+		
 		$this->render('view',array(
 			'model'=>$model,
-			'cellDataProvider'=>$cellDataProvider
+			'cellDataProvider'=>$cellDataProvider,
+			'spareOptions'=>$spareOptions,
 		));
 	}
 
@@ -132,7 +142,7 @@ class BatteryController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-
+		
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model);
 
@@ -144,6 +154,16 @@ class BatteryController extends Controller
 		    	'defaultOrder'=>'position',
 		    ),
 		 ));
+		 
+		 /* get the spares as a list of options for the dropdownlist */
+		$spareCells = BatterySpare::model()->with('cell.kit')->findAllByAttributes(array('battery_id'=>$id), 
+			array('order'=>'kit.serial_num')
+		);
+		$spareOptions = array();
+		
+		foreach($spareCells as $spare){
+			$spareOptions[$spare->cell->id] = $spare->cell->kit->getFormattedSerial();
+		}
 		 
 		if(isset($_POST['Battery']))
 		{
@@ -157,16 +177,51 @@ class BatteryController extends Controller
 			if($model->data_accepted == 0)
 			{
 				$model->ship_date = null;
-				$model->location = '[ASSEMBLED]';
+				$model->location = '[ASSEMBLED] ' .$model->assembly_date;
+			}
+			else 
+			{
+				/* find the spares and delete them */
+				/* clear the join table of roles */
+				$commandDelete = Yii::app()->db->createCommand();
+				$commandDelete->delete('tbl_battery_spare', 
+					'battery_id = :id',
+					array(':id'=>$model->id)
+				);
+			}
+			if($model->assembler_id == 1)
+			{
+				$model->assembly_date = null;
+				$model->data_accepted = false;
+				$model->location = '[EAP] Cell Selection';
+			}
+			else 
+			{ // battery has been assembled.
+				foreach ($model->cells as $cell)
+				{
+					if (strpos($cell->location, '[Assembled]' )  == FALSE)
+					{ // then the location of the cells hasn't been set yet.
+						$cell->location = '[Assembled] '.$model->batterytype->name . ' SN: '. $model->serial_num;
+						$cell->save();
+					}
+				}
 			}
 			
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
 		 
+		$sparesDataProvider = new CArrayDataProvider($model->batterytype->getSparesInputArray(), array(
+		    'pagination'=>array(
+		        'pageSize'=>10,
+		    )
+		 ));
+		 
 		$this->render('update',array(
 			'model'=>$model,
-			'cellDataProvider'=>$cellDataProvider
+			'cellDataProvider'=>$cellDataProvider,
+			'spareOptions'=>$spareOptions,
+			'sparesDataProvider'=>$sparesDataProvider,
 		));
 	}
 
@@ -368,6 +423,16 @@ class BatteryController extends Controller
 												FROM tbl_battery_spare spare
 												WHERE t.id = spare.cell_id
 												GROUP BY t.id)');
+		}
+		else
+		{
+			$battery_id = isset($_GET['battery_id'])?$_GET['battery_id']:0;
+			/* but are not currently a spare for this battery*/
+			$criteria->addCondition('NOT EXISTS (SELECT *
+												FROM tbl_battery_spare spare
+												WHERE spare.cell_id = t.id
+												AND spare.battery_id = '. $battery_id
+												.' GROUP BY t.id)');
 		}
 		$criteria->order = 'kit.serial_num';
 		
@@ -804,7 +869,154 @@ class BatteryController extends Controller
 		*/
 	}
 	
+/**
+	 * 
+	 * Add the ability to add spares to the battery population and saves the battery
+	 */
+	public function actionAjaxAddSpares($id=null)
+	{
+		if(isset($_GET['id']))
+		{
+			$id = $_GET['id'];
+		}
+		else
+		{	// we shouldn't be here.
+			Yii::app()->end();
+		}
+		$batteryModel = Battery::model()->findByPk($id);
 		
+		$spares = array();
+		$spareCount = 0;
+		
+		if(isset($_POST['Battery']))
+		{
+			if(isset($_POST['Battery']['Spares']))
+			{
+				$spares = $_POST['Battery']['Spares'];
+				$existingSpares = BatterySpare::model()->with('cell')->findAllByAttributes(array('battery_id'=>$batteryModel->id), 
+					array('order'=>'position DESC')
+				);
+				$posOffset = (!empty($existingSpares))?$existingSpares[0]->position:0;
+				
+				foreach($spares as $pos=>$spare)
+				{
+					if($spare['id'])
+					{
+						/* create the batteryspares */
+						$spareModel = new BatterySpare;
+						
+						$spareModel->cell_id = $spare['id'];
+						$spareModel->battery_id = $batteryModel->id;
+						$spareModel->position = $pos + $posOffset;
+						
+						$spareModel->save();
+						
+						$spareCount++;
+					}
+				}
+				if ($spareCount == 0)
+				{
+					$batteryModel->addError('selection_error', 'No spare cells selected to add.');
+					echo CHtml::errorSummary($batteryModel);
+					Yii::app()->end();
+				}
+			}
+			
+			$result = json_encode(array(
+				'batterytype' => $batteryModel->batterytype->name,
+				'serial_num' => $batteryModel->serial_num,
+				'num_spares' => $spareCount,
+			));
+			
+			if (!json_decode($result))
+			{ /* the save failed otherwise result would be json_encoded*/
+				echo $result;
+			} 
+			else 
+			{ /* success so show count and serial numbers */
+				echo $result;
+			}
+		}
+	}
+		
+	/**
+	 * 
+	 * Add the ability to use the spares in the battery population and saves the battery
+	 */
+	public function actionAjaxUseSpares($id=null)
+	{
+		if(isset($_GET['id']))
+		{
+			$id = $_GET['id'];
+		}
+		else
+		{	// we shouldn't be here.
+			Yii::app()->end();
+		}
+		$batteryModel = Battery::model()->findByPk($id);
+		
+		$spares = array();
+		$spareCount = 0;
+		
+		if(isset($_POST['Battery']))
+		{
+			if(isset($_POST['Battery']['Cells']))
+			{
+				$cellsReplaced = $_POST['Battery']['Cells'];
+				foreach($cellsReplaced as $cell_id=>$spare_id)
+				{
+					if($spare_id)
+					{
+						$cellModel = Cell::model()->findByPk($cell_id);
+						$spareModel = Cell::model()->findByPk($spare_id);
+						
+						$spareModel->battery_id = $cellModel->battery_id;
+						$spareModel->battery_position = $cellModel->battery_position;
+						$spareModel->save();
+						
+						$cellModel->battery_id = null;
+						$cellModel->battery_position = null;
+						$cellModel->notes = 'Was replaced by spare '.$spareModel->kit->getFormattedSerial().' in '
+							.$batteryModel->batterytype->name .' SN: ' .$batteryModel->serial_num;
+						$cellModel->location = 'Battery Assembly';
+						
+						$cellModel->save();
+						
+						/* delete all instances of the spare as a batteryspare */
+						$batterySpares = BatterySpare::model()->findAllByAttributes(array('cell_id'=>$spareModel->id));
+						foreach($batterySpares as $spare)
+						{
+							$spare->delete();
+						}
+					
+						$spareCount++;
+					}
+				}
+				if ($spareCount == 0)
+				{
+					$batteryModel->addError('selection_error', 'No spare cells selected for use.');
+					echo CHtml::errorSummary($batteryModel);
+					Yii::app()->end();
+				}
+			}
+			
+			$result = json_encode(array(
+				'batterytype' => $batteryModel->batterytype->name,
+				'serial_num' => $batteryModel->serial_num,
+				'num_spares' => $spareCount,
+			));
+			
+			if (!json_decode($result))
+			{ /* the save failed otherwise result would be json_encoded*/
+				echo $result;
+			} 
+			else 
+			{ /* success so show count and serial numbers */
+				echo $result;
+			}
+		}
+	}
+	
 	/**
 	 * generates the text fields for the operator
 	 */

@@ -105,6 +105,7 @@ out.
 
 <?php echo CHtml::checkBox('singleUser', true)?><span style="margin-left:5px">Assign to Single User</span>
 
+
 <div class="shadow border" >
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'kitting-grid',
@@ -121,13 +122,14 @@ out.
 			'value'=>'$data["id"]',
 		),
 		array(
-			'header' => 'Serial No.',
+			'header' => 'Serial No. <input id="auto-fill" type="submit" name="auto-fill" value="AutoFill">',
 			'type' => 'raw',
 			'value'=>function($data,$row){
 				return 
 					'<span></span>'.
 					CHtml::textField('serials['.$data["id"].']','',array(
-						'style'=>'width:100px;', 
+						'style'=>'width:100px;',
+						'class'=>'serial-nums', 
 					));
 			},	
 			'htmlOptions'=>array(
@@ -217,6 +219,24 @@ $(document).ready(function($) {
 			},
 			'source':'/ytpdb/user/ajaxUserSearch'
 		});
+	});
+
+	$(document).on('click', '#auto-fill', function(event) {
+		if($('#serials_1').val() == ''){
+			alert('Enter the first serial number in line 1 before clicking this button');
+			$('.serial-nums').val('');
+		}
+		else{
+			var serial_one = +$('#serials_1').val();
+			$('.serial-nums').not('#serials_1').each(function(key, value){
+				var new_serial = '' + (serial_one + key+1);
+				while(new_serial.length < 4){
+					new_serial = '0' + new_serial;
+				}
+				$(this).val(new_serial);
+			});
+		}
+		return false;
 	});
 
 	$('#submit-button').on('click', function(event) {

@@ -38,7 +38,7 @@
 	<div class="right-form">
 		<div class="row">
 	        <?php echo $form->labelEx($model,'serial_num'); ?>
-	        <?php echo $form->textField($model,'serial_num',array('size'=>20,'maxlength'=>50)); ?>
+	        <?php echo $form->textField($model,'serial_num',array('size'=>20,'maxlength'=>50, 'disabled'=>'disabled')); ?>
 	        <?php echo $form->error($model,'serial_num'); ?>
 	    </div>
 	</div>
@@ -98,19 +98,34 @@
 
 <div class="left-form">
 	<div class="row">
+		<?php 
+			$disabled = array();
+			if($model->assembler_id == 1)
+			{
+				$disabled['disabled'] = 'disabled';
+			}
+		?>
 		<?php echo $form->labelEx($model,'data_accepted'); ?>
-		<?php echo $form->dropDownList($model, 'data_accepted', array("0"=>"No", "1"=>"Yes"), array()); ?>
+		<?php echo $form->dropDownList($model, 'data_accepted', array("0"=>"No", "1"=>"Yes"), $disabled); ?>
 		<?php echo $form->error($model,'data_accepted'); ?>
 	</div>
 </div>
 <div class="right-form">
 	<div class="row">
+		<?php 
+			$disabled = array();
+			if($model->data_accepted != 1)
+			{
+				$disabled['disabled'] = 'disabled';
+			}
+		?>
 		<?php echo $form->labelEx($model,'ship_date'); ?>
 		<?php
 		    $this->widget('zii.widgets.jui.CJuiDatePicker', array(
 		        'model'=>$model,
 		        'attribute'=>'ship_date',
 		    	'value'=>$model->ship_date,
+		    	'htmlOptions'=>$disabled,
 		        // additional javascript options for the date picker plugin
 		        'options'=>array(
 		            'showAnim'=>'slideDown',

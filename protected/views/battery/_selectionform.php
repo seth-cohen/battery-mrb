@@ -44,6 +44,8 @@ foreach($cellDataProviders as $cellDataProvider):
 						'class'=>'cell-dropdown cells',
 						'onchange'=>'cellSelected(this,"'
 							.$controller->createUrl('cell/ajaxgetlocation')
+							.'","'
+							.$controller->createUrl('cell/ajaxgetnotes')
 						.'")',
 						'style'=>'width:150px',
 				));
@@ -54,6 +56,13 @@ foreach($cellDataProviders as $cellDataProvider):
 			'type'=>'html',
 			'value'=>function($data, $row) {
 				echo '<span id="Locations_' .$data['id'].  '"> Select Cell First </span>';
+			}
+		),
+		array(
+			'header'=>'Cell Notes',
+			'type'=>'html',
+			'value'=>function($data, $row) {
+				echo '<span id="Notes_' .$data['id'].  '"> Select Cell First </span>';
 			}
 		),
 	),

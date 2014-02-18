@@ -10,6 +10,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Edit This Battery', 'url'=>array('update', 'id'=>$model->id)),
 	array('label'=>'Battery Cell Selections', 'url'=>array('cellselection')),
+	array('label'=>'Assemble Battery', 'url'=>array('assemble')),
 	array('label'=>'Accept Test Data', 'url'=>array('accepttestdata'), 'visible'=>Yii::app()->user->checkAccess('quality')),
 	array('label'=>'Ship Batteries', 'url'=>array('ship')),
 	array('label'=>'View All Batteries', 'url'=>array('index')),
@@ -44,6 +45,7 @@ $this->menu=array(
 <?php  $this->renderPartial('_batterycells', array(
 		'model'=>$model,
 		'cellDataProvider'=>$cellDataProvider,
+		'spareOptions'=>$spareOptions,
 	), 
 	false, 
 	false
