@@ -39,7 +39,8 @@ class BatteryController extends Controller
 					'ajaxcellsforbatteryview',
 					'ajaxaddspares', 'ajaxusespares',
 					'ship', 'ajaxship',
-					'uploadselection'
+					'uploadselection',
+					'addbatterytype'
 				),
 				'roles'=>array('engineering, quality'),
 				//'users'=>array('@'),
@@ -134,6 +135,38 @@ class BatteryController extends Controller
 		));
 	}
 
+	/**
+	 * Creates a new battery type.
+	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 */
+	public function actionAddBatteryType()
+	{
+		$model=new Batterytype;
+
+		$typeDataProvider=new CActiveDataProvider('Batterytype', array(
+		    'criteria'=>array(
+		        'with'=>array('celltype'),
+		    ),
+		    'pagination'=>array(
+		        'pageSize'=>16,
+		    ),
+		));
+		
+		// Uncomment the following line if AJAX validation is needed
+		$this->performAjaxValidation($model);
+
+		if(isset($_POST['Batterytype']))
+		{
+			$model->attributes=$_POST['Batterytype'];
+			$model->save();
+		}
+		
+		$this->render('newbatterytype',array(
+			'batterytypeModel'=>$model,
+			'typeDataProvider' => $typeDataProvider,
+		));
+	}
+	
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
@@ -405,7 +438,12 @@ class BatteryController extends Controller
 		);
 		$criteria->addcondition('kit.celltype_id=:ct_id');
 		$criteria->params = array(':ct_id'=>$batterytype->celltype_id);
-		$criteria->addcondition('data_accepted=1');
+		
+		if(!isset($_GET['bypassChecks']))
+		{
+			$criteria->addcondition('data_accepted=1');
+		}
+			
 		$criteria->addcondition('battery_id IS NULL');
 		
 		/* but are not currently on an open NCR or scrapped/eng use only */

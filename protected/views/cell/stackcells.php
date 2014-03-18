@@ -61,7 +61,7 @@ Yii::app()->clientScript->registerCssFile(
 			'type'=>'raw',
 			'value'=>
 					'CHtml::dropDownList("refnumIds[$data->id]",$data->ref_num_id,
-							CHtml::listData(RefNum::model()->findAll(),"id", "number"),
+							CHtml::listData(RefNum::model()->findAll(array("condition"=>"id <> 70")),"id", "number"),
 							array(
 								"empty"=>"-Select Reference-",
 								"onChange"=>"refSelected(this)",

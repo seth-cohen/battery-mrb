@@ -49,7 +49,7 @@
 	<div class="row">
 		<?php echo $form->labelEx($model,'ref_num_id'); ?>
 			<?php echo CHtml::activeDropDownList($model, 'ref_num_id', 
-							CHtml::listData(RefNum::model()->findAll(), 'id','number'), 
+							CHtml::listData(RefNum::model()->findAll(array('condition'=>'id <> 70')), 'id','number'), 
 							array(
 								'prompt'=>' -Select Reference No.- ',
 								'onchange'=>'refSelected(this)',

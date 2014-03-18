@@ -206,7 +206,7 @@ div.search-form
 
 .portlet
 {
-
+	border-radius:25px;
 }
 
 .portlet-decoration
@@ -214,7 +214,8 @@ div.search-form
 	padding: 3px 8px;
 	background: #666E73;
 	border-left: 5px solid #2D444F;
-	box-shadow: 5px 5px 8px #888888;
+	box-shadow: -5px 5px 8px #888888;
+	border-radius: 12px 12px 0px 0px;
 }
 
 .portlet-title
@@ -234,7 +235,10 @@ div.search-form
 	padding: 5px 8px;
 	background:#DDDDDD;
 	border: 1px solid #888888;
-	box-shadow: 5px 5px 8px #888888;
+	box-shadow: -5px 5px 8px #888888;
+	border-radius: 0px 0px 12px 12px;
+	border-left: 5px solid #2D444F;
+	border-bottom: 2px solid #2D444F;
 }
 
 .portlet-content ul
@@ -304,7 +308,7 @@ div.search-form
 
 .shadow
 {
-	box-shadow: 5px 5px 8px #888888;
+	box-shadow: -5px 5px 8px #888888;
 }
 
 .red-text
@@ -317,6 +321,9 @@ div.search-form
 	/*padding: 0 5px;*/
 	margin-bottom:12px;
 	border:1px solid #888888;
+	border-radius: 0px 0px 12px 12px;
+	border-left: 5px solid #2D444F;
+	border-bottom: 2px solid #2D444F;
 }
 
 div.link-list

@@ -83,6 +83,11 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		),
 		'test_start',
 		array(
+			'name' => 'test_start_time',
+			'value' => 'date("H:i:s", $data->test_start_time)',
+			'filter'=>false,
+		),
+		array(
 			'class'=>'CButtonColumn',
 			'template'=>'{view} {update}',
 			'viewButtonUrl'=>'Yii::app()->createUrl("cell/view", array("id"=>$data->cell->id))',

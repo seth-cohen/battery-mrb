@@ -16,6 +16,7 @@ $this->menu=array(
 	array('label'=>'Assemble Battery', 'url'=>array('assemble')),
 	array('label'=>'Accept Test Data', 'url'=>array('accepttestdata'), 'visible'=>Yii::app()->user->checkAccess('quality')),
 	array('label'=>'Ship Batteries', 'url'=>array('ship')),
+	array('label'=>'Add Battery Type', 'url'=>array('addbatterytype')),
 	array('label'=>'View All Batteries', 'url'=>array('index')),
 	array('label'=>'Battery Admin', 'url'=>array('admin')),
 );
@@ -72,7 +73,6 @@ $this->menu=array(
 	)); ?>
 
 	<div class="shadow border" id="cellspares-wrapper" style="margin:auto;;"> 
-	<?php echo CHtml::ajaxSubmitButton('Submit',array('battery/ajaxaddspares','id'=>$model->id), array('success'=>'reloadGrid'), array("id"=>"submit-spares-button", "style"=>"float:left;")); ?>
 	<div style="text-align:center; width: 100%; font-size:1.2em;">ADD SPARES</div>
 		<?php $this->widget('zii.widgets.grid.CGridView', array(
 			'id'=>"cellspares-grid",
@@ -222,7 +222,10 @@ function showAddSpares(){
 }
 
 function submitAddSpares(){
+
+	$('.errorSummary').remove();
 	// populate the spare cell serial dropdown
+	
 	$.ajax({
 		type:'post',
 		url: '<?php  echo $this->createUrl('battery/ajaxaddspares',array('id'=>$model->id)); ?>',

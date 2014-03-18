@@ -39,7 +39,10 @@ div.form
 	background: #DDDDDD;
 	border: 1px solid #888888;
 	padding: 5px;
-	box-shadow: 5px 5px 8px #888888;
+	box-shadow: -5px 5px 8px #888888;
+	border-left: 5px solid #2D444F;
+	border-bottom: 2px solid #2D444F;
+	border-radius: 12px;
 }
 
 div.form input,

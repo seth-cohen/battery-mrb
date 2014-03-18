@@ -73,6 +73,8 @@
 							array('label'=>'View Cells on Formation', 'url'=>array('testlab/formationindex'), 'active'=>0),
 							array('label'=>'Put Cells on CAT', 'url'=>array('testlab/cellcat'), 'active'=>0),
 							array('label'=>'View Cells on CAT', 'url'=>array('testlab/catindex'), 'active'=>0),
+							array('label'=>'Condition for Assembly', 'url'=>array('testlab/cellconditioning'), 'active'=>0),
+							array('label'=>'View Cells Conditioning', 'url'=>array('testlab/conditioningindex'), 'active'=>0),
 							array('label'=>'Test Reassignment', 'url'=>array('testlab/testreassignment'), 'active'=>0),
 						)),	
 						array('label'=>'Storage/Delivery', 'items'=>array(
@@ -103,12 +105,16 @@
 							array('label'=>'Battery Cell Selections', 'url'=>array('/battery/cellselection'),'active'=>0),
 							array('label'=>'Accept Test Data', 'url'=>array('/battery/accepttestdata'),'active'=>0),
 							array('label'=>'Ship Batteries', 'url'=>array('/battery/ship'),'active'=>0),
+							array('label'=>'Add Battery Type', 'url'=>array('/battery/addbatterytype'),'active'=>0),
 							array('label'=>'View All Batteries', 'url'=>array('/battery/index'),'active'=>0),
 						)),
 						array('label'=>'NCRs', 'items'=>array(
 							array('label'=>'Put Cells on NCR', 'url'=>array('/ncr/putcellsonncr'),'active'=>0),
 							array('label'=>'Dispo Cells on NCR', 'url'=>array('/ncr/dispositioncells'),'active'=>0),
 							array('label'=>'View All NCRs', 'url'=>array('/ncr/index'),'active'=>0),
+						)),
+						array('label'=>'General', 'items'=>array(
+							array('label'=>'Add Reference Number', 'url'=>array('/refnum/addreferencenumber'),'active'=>0),
 						)),
 					),
 				),

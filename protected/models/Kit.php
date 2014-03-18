@@ -58,6 +58,7 @@ class Kit extends CActiveRecord
 			//array('serial_num, ref_num_id, kitting_date, kitter_id, anodeIds, cathodeIds, celltype_id', 'required'),
 			array('serial_num, ref_num_id, kitting_date, kitter_id, celltype_id, eap_num, anodeIds, cathodeIds', 'required'),
 			array('eap_num', 'checkEAP'),
+			array('kitting_date', 'date', 'format'=>'yyyy-MM-dd'),
 			
 			array('anodeIds, cathodeIds', 'checkLotNumbers'),
 			array('serial_num, eap_num', 'length', 'max'=>50),

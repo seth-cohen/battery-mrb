@@ -5,6 +5,8 @@
 		<li><?php echo CHtml::link('View Cells on Formation', array('testlab/formationindex'));?></li>
 		<li><?php echo CHtml::link('Put Cells on CAT', array('testlab/cellcat'));?></li>
 		<li><?php echo CHtml::link('View Cells on CAT', array('testlab/catindex'));?></li>
+		<li><?php echo CHtml::link('Condition for Assembly', array('testlab/cellconditioning'));?></li>
+		<li><?php echo CHtml::link('View Cells Conditioning', array('testlab/conditioningindex'));?></li>
 		<li><?php echo CHtml::link('Test Reassignments', array('testlab/testreassignment'));?></li>
 	</ul>
 	<b>STORAGE/DELIVERY</b>

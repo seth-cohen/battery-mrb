@@ -29,6 +29,8 @@ class Celltype extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name', 'length', 'max'=>50),
+			array('name', 'unique'),
+			array('name', 'required'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, name', 'safe', 'on'=>'search'),
@@ -47,6 +49,19 @@ class Celltype extends CActiveRecord
 		);
 	}
 
+	/**
+	 * @return array of the query criteria to be used for particular query
+	 */
+	public function scopes()
+	{
+		$alias = $this->getTableAlias( false, false );
+        return array(
+			'inOrder'=>array(
+				'order'=>$alias.'.name',
+			),
+		);
+	}
+	
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */

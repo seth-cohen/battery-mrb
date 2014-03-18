@@ -210,6 +210,15 @@ class CyclerController extends Controller
 		{
 			$model->attributes=$_POST['Cycler'];
 			
+			if($_GET['full'] == 0)
+			{ //just save the cycler details
+				if(!$model->save())
+				{
+					echo CHtml::errorSummary($model);
+				}
+				echo 'cycler save complete';
+				Yii::app()->end();
+			}
 			$channelModels = array();
 			$channelCount= 0;
 			

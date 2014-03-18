@@ -31,7 +31,7 @@
 	<div class="row">
 		<?php echo $form->labelEx($model,'ref_num_id'); ?>
 			<?php echo CHtml::activeDropDownList($model, 'ref_num_id', 
-							CHtml::listData(RefNum::model()->findAll(), 'id','number'), 
+							CHtml::listData(RefNum::model()->findAll(array('condition'=>'id <> 70')), 'id','number'), 
 							array(
 								'prompt'=>' -Select Reference No.- ',
 								'onchange'=>'refSelected(this)',
@@ -155,7 +155,7 @@
 <div class="left-form">
 	<div class="row multidrop5">
 		<?php echo CHtml::label('Anode Lots', 'Kit_anodeIds'); ?>
-		<?php echo CHtml::DropDownList('Kit[anodeIds][]', $model->kit->anodeIds, 
+		<?php echo CHtml::DropDownList('Kit[anodeIds][]', $kit->anodeIds, 
 						CHtml::listData(Electrode::model()->anodes()->findAll(), 'id','lot_num'), 
 						array(
 							'multiple'=>'multiple',
@@ -169,7 +169,7 @@
 <div class="right-form">
 	<div class="row multidrop5">
 		<?php echo CHtml::label('Cathode Lots', 'Kit_cathodeIds'); ?>
-		<?php echo CHtml::DropDownList('Kit[cathodeIds][]', $model->kit->cathodeIds, 
+		<?php echo CHtml::DropDownList('Kit[cathodeIds][]', $kit->cathodeIds, 
 						CHtml::listData(Electrode::model()->cathodes()->findAll(), 'id','lot_num'), 
 						array(
 							'multiple'=>'multiple',

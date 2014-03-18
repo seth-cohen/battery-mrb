@@ -93,12 +93,16 @@ class Electrode extends CActiveRecord
 	 */
 	public function scopes()
 	{
+		$alias = $this->getTableAlias( false, false );
 		return array(
 			'anodes'=>array(
 				'condition'=>'is_anode=1',
 			),
 			'cathodes'=>array(
 				'condition'=>'is_anode=0',
+			),
+			'notGeneric'=>array(
+				'condition'=>$alias.'.id <> 29 AND '.$alias.'.id <> 30',
 			),
 		);
 	}
@@ -195,6 +199,63 @@ class Electrode extends CActiveRecord
 		));
 	}
 
+/**
+	 * 
+	 * Creates new electrodes and creates ref number if needed using an uploaded file
+	 * 
+	 * @param array $uploadedFile
+	 */
+	public static function uploadFromCSV($electrodeModel, $uploadedFile)
+	{	
+		if(empty($electrodeModel) || empty($uploadedFile))
+			return false;
+			
+		/* save the uploaded file */
+		$target = Yii::app()->basePath."/uploads/";
+		$target = $target . 'electrodes-'.date('Y_m_d');
+			
+		$ext = pathinfo($uploadedFile['name'], PATHINFO_EXTENSION);
+		if($ext != 'csv')
+		{
+			$electrodeModel->addError('upload_error', "The file must be a csv file.  The uploaded file's extension was '$ext'" );
+			return false;
+		}
+	 	if(!move_uploaded_file($uploadedFile['tmp_name'], $target) )
+		 {
+		 	$electrodeModel->addError('upload_error', 'There was an error uploading the file please try again');
+			return false;
+		 }
+			 
+		 /* parse the file to get an array of cells */
+		$row = 1;
+		$handle = fopen($target, "r");
+			
+		while (($data = fgetcsv($handle, 5000, ",")) !== FALSE) { 
+		    $electrode = new Electrode;
+		    
+		    // try to find reference number, create new one if not exists
+		    $ref_num_id = RefNum::model()->findByAttributes(array('number'=>$data[4]));
+		    if($ref_num_id == null)
+		    {
+		    	$refnum = new RefNum;
+		    	$refnum->number = $data[4];
+		    	$refnum->save();
+		    	$ref_num_id = $refnum;	
+		    }
+			$ref_num_id = $ref_num_id->id;	
+			
+		    $electrode->lot_num = $data[1];
+		    $electrode->eap_num = $data[2];
+		    $electrode->coater_id = $data[3];
+		    $electrode->ref_num_id = $ref_num_id;
+		    $electrode->coat_date = $data[5];
+		    $electrode->is_anode = $data[6];
+		    
+		    $electrode->save();
+		}
+		return true;
+	}
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

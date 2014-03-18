@@ -88,6 +88,7 @@ class Cell extends CActiveRecord
 			array('portweld_date, portwelder_id', 'required', 'on'=>'tipoff'),
 			array('data_accepted', 'required', 'on'=>'accept'),
 			array('location', 'required', 'on'=>'storage'),
+			array('stack_date, inspection_date, laserweld_date, fill_date, portweld_date', 'date', 'format'=>'yyyy-MM-dd'),
 			
 			array('eap_num', 'checkEAP'),
 			array('dry_wt, wet_wt', 'numerical'),
@@ -530,6 +531,7 @@ class Cell extends CActiveRecord
 				//'testAssignments'=>array('alias'=>'test'),
 			),
 			'sort'=>array(
+				'defaultOrder'=>'CONCAT(celltype.name, serial_num)',
 				'attributes'=>array(
 					'refnum_search'=>array(
 						'asc'=>'ref.number',
@@ -1606,6 +1608,116 @@ class Cell extends CActiveRecord
 		else /* a model failed, don't save any */
 		{
 			return CHtml::errorSummary($models); 	
+		}			
+		return null;
+	}
+	
+	/**
+	 * creates new cells and kits, attaches them to generic users and electrodes. 
+	 * assigns fill date as date for all actions.
+	 * 
+	 * @param array $indices the array keys for the serial numbers
+	 * @param array $serials the array of se
+	 */
+	public static function createGenericCells($indices, $serials, $refnumId, $EAP, $celltypeId, $date, $anodeIds = array(30), $cathodeIds = array(29))
+	{
+		$error = 0;
+		$kitModels = array();
+		$cellModels = array();
+			
+		// create all of the kits
+		foreach($indices as $index)
+		{
+			$kitModel = new Kit;
+			$kitModel->serial_num = $serials[$index];
+			$kitModel->ref_num_id = $refnumId;
+			$kitModel->eap_num = $EAP;
+			$kitModel->kitter_id = 73;
+			$kitModel->kitting_date = $date;
+			$kitModel->celltype_id = $celltypeId;
+			$kitModel->is_stacked = 1;
+			$kitModel->anodeIds = $anodeIds;
+			$kitModel->cathodeIds =  $cathodeIds;
+				
+			if(!$kitModel->validate())
+			{
+				$error = 1;
+			}
+			$kitModels[] = $kitModel;	
+		}
+		
+		/* all models validated save them all */
+		if ($error==0)
+		{
+			/* create array to return with JSON */
+			$result = array();
+			$result['success'] = array();
+			$result['failure'] = array();
+			
+			foreach($kitModels as $kitModel)
+			{
+				if($kitModel->save())
+				{
+					//create kit electrodes
+					$kitModel->saveKitElectrodes(array_merge($anodeIds, $cathodeIds));
+					
+					// create the cells
+					$cellModel = new Cell;
+					$cellModel->kit_id = $kitModel->id;
+					$cellModel->ref_num_id = $refnumId;
+					$cellModel->eap_num = $EAP;
+					$cellModel->stacker_id = 73;
+					$cellModel->stack_date = $date;
+					$cellModel->dry_wt = 999999;
+					$cellModel->wet_wt = 9999999;
+					$cellModel->filler_id = 73;
+					$cellModel->fill_date = $date;
+					$cellModel->inspector_id = 73;
+					$cellModel->inspection_date = $date;
+					$cellModel->location = '[BYPASS] Generic Storage';
+					$cellModel->portwelder_id = 73;
+					$cellModel->portweld_date = $date;
+					$cellModel->laserwelder_id = 73;
+					$cellModel->laserweld_date = $date;
+					
+					if($cellModel->save())
+					{
+						//create a formation test assignment - assign generically to Formation Channel 1
+						$testAssignmentModel = new TestAssignment();
+						$testAssignmentModel->cell_id = $cellModel->id;
+						$testAssignmentModel->channel_id = 481;
+						$testAssignmentModel->chamber_id = 16;
+						$testAssignmentModel->operator_id = 73;
+						$testAssignmentModel->test_start = $date;
+						$testAssignmentModel->is_formation = 1;
+						$testAssignmentModel->is_active = $date > date("Y-m-d",mktime(0,0,0, date('m'), date('d')-3, date('Y')))?1:0;
+						$testAssignmentModel->is_conditioning = 0;
+						$testAssignmentModel->test_start_time = strtotime($date);
+						
+						$testAssignmentModel->save();
+						
+						$result['success'][] = array(
+							'serial'=>$kitModel->getFormattedSerial(), 
+						);
+					}
+					else 
+					{
+						//delete the kit if the cell failed
+						$kitModel->delete();
+						
+						$result['failure'][] = array(
+							'serial'=>$kitModel->getFormattedSerial(), 
+							'errors'=>$cellModel->getErrors,
+						);
+					}
+				}
+			}
+			
+			return json_encode($result);
+		}
+		else /* a model failed, don't save any */
+		{
+			return CHtml::errorSummary($kitModels); 	
 		}			
 		return null;
 	}

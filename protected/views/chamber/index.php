@@ -44,7 +44,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 <div class="shadow border">
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'chamber-grid',
-	'dataProvider'=>$model->search(),
+	'dataProvider'=>$model->notGeneric()->search(),
 	'filter'=>$model,
 	'columns'=>array(
 		'name',

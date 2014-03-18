@@ -26,6 +26,8 @@ class RefNum extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('number', 'length', 'max'=>50),
+			array('number', 'unique'),
+			array('number', 'required'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, number', 'safe', 'on'=>'search'),
@@ -44,13 +46,26 @@ class RefNum extends CActiveRecord
 	}
 
 	/**
+	 * @return array of the query criteria to be used for particular query
+	 */
+	public function scopes()
+	{
+		$alias = $this->getTableAlias( false, false );
+        return array(
+			'inOrder'=>array(
+				'order'=>$alias.'.number',
+			),
+		);
+	}
+	
+	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
 	public function attributeLabels()
 	{
 		return array(
 			'id' => 'ID',
-			'number' => 'Number',
+			'number' => 'Reference Number',
 		);
 	}
 
@@ -77,6 +92,9 @@ class RefNum extends CActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>array(
+				'defaultOrder'=>'number',
+			),
 		));
 	}
 

@@ -60,7 +60,7 @@ class Chamber extends CActiveRecord
 			'testAssignments' => array(self::HAS_MANY, 'TestAssignment', 'chamber_id'),
 		);
 	}
-
+    
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
@@ -88,6 +88,19 @@ class Chamber extends CActiveRecord
 		$alias = $this->getTableAlias( false, false );
         return array(
 			'order'=>$alias.'.name',
+		);
+	}
+	
+	/**
+	 * @return array of the query criteria to be used for particular query
+	 */
+	public function scopes()
+	{
+		$alias = $this->getTableAlias( false, false );
+        return array(
+			'notGeneric'=>array(
+        		 'condition'=>$alias.'.id <> 16',
+			),
 		);
 	}
 	
@@ -144,7 +157,7 @@ class Chamber extends CActiveRecord
 	public function forList()
 	{
 		$arr = array();
-		$chambers = Chamber::model()->findAll();
+		$chambers = Chamber::model()->notGeneric()->findAll();
 	
 		foreach ($chambers as $chamber)
 		{

@@ -111,6 +111,12 @@
 </div>
 <div class="clear"></div>
 
+<?php if($this->action->id == 'update'):?>
+<div class="row buttons">
+	<?php echo CHtml::ajaxSubmitButton('Submit Gerneral Only',array('cycler/ajaxupdate', 'id'=>$model->id, 'full'=>0), array('success'=>'checkSuccess'), array("id"=>"submit-button-partial")); ?>
+</div>
+<?php endif; ?>
+
 </div><!-- form -->
 
 <div class="shadow border" id="channels-wrapper" style="margin:auto; margin-top:15px"> 
@@ -200,9 +206,9 @@
 <?php echo CHtml::ajaxSubmitButton('Filter',array('cycler/create'), array(), array("style"=>'display:none')); ?>
 
 <?php if($this->action->id == 'update'):?>
-	<?php echo CHtml::ajaxSubmitButton('Submit',array('cycler/ajaxupdate', 'id'=>$model->id), array('success'=>'checkSuccess'), array("id"=>"submit-button")); ?>
+	<?php echo CHtml::ajaxSubmitButton('Submit All',array('cycler/ajaxupdate', 'id'=>$model->id, 'full'=>1), array('success'=>'checkSuccess'), array("id"=>"submit-button")); ?>
 <?php else:?>
-	<?php echo CHtml::ajaxSubmitButton('Submit',array('cycler/ajaxcreate'), array('success'=>'checkSuccess'), array("id"=>"submit-button")); ?>
+	<?php echo CHtml::ajaxSubmitButton('Submit All',array('cycler/ajaxcreate'), array('success'=>'checkSuccess'), array("id"=>"submit-button")); ?>
 <?php endif; ?>
 
 <?php $this->endWidget(); ?>
@@ -213,6 +219,11 @@ function checkSuccess(data) {
     {
     	$('.errorSummary').remove();
     }
+	else if (data=='cycler save complete')
+	{
+		alert('Successfully saved cycler details.');
+		 location = '<?php echo $this->createUrl('index');?>';
+	}
     else
     {
     	try

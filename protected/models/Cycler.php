@@ -41,7 +41,7 @@ class Cycler extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('sy_number, name, num_channels, cal_date, cal_due_date, calibrator_id, calibrator_search', 'required'),
-			array('sy_number, name, name', 'unique', 'on'=>'insert'),
+			array('sy_number, name, name', 'unique', 'on'=>'insert, update'),
 			array('sy_number, num_channels', 'numerical', 'integerOnly'=>true),
 			array('num_channels', 'numerical', 'integerOnly'=>true, 'min'=>1),
 			array('name', 'length', 'max'=>128),
@@ -68,6 +68,27 @@ class Cycler extends CActiveRecord
 		);
 	}
 
+	public function defaultScope()
+    {
+    	$alias = $this->getTableAlias( false, false );
+        return array(
+            'order'=>$alias.'.name',
+        );
+    }
+    
+/**
+	 * @return array of the query criteria to be used for particular query
+	 */
+	public function scopes()
+	{
+		$alias = $this->getTableAlias( false, false );
+        return array(
+			'notGeneric'=>array(
+        		'condition'=>$alias.'.id <> 21',
+			),
+		);
+	}
+    
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
@@ -134,7 +155,7 @@ class Cycler extends CActiveRecord
 	public function forList()
 	{
 		$arr = array();
-		$cyclers = Cycler::model()->findAll();
+		$cyclers = Cycler::model()->notGeneric()->findAll();
 	
 		foreach ($cyclers as $cycler)
 		{

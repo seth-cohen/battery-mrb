@@ -12,6 +12,7 @@ $this->menu=array(
 	array('label'=>'Assemble Battery', 'url'=>array('assemble')),
 	array('label'=>'Accept Test Data', 'url'=>array('accepttestdata'), 'visible'=>Yii::app()->user->checkAccess('quality')),
 	array('label'=>'Ship Batteries', 'url'=>array('ship')),
+	array('label'=>'Add Battery Type', 'url'=>array('addbatterytype')),
 	array('label'=>'Battery Admin', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 );
 

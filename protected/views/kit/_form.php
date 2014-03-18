@@ -24,7 +24,7 @@
 		<div class="row">
 			<?php echo $form->labelEx($model,'celltype_id'); ?>
 			<?php echo CHtml::activeDropDownList($model, 'celltype_id', 
-							CHtml::listData(Celltype::model()->findAll(), 'id','name'), 
+							CHtml::listData(Celltype::model()->inOrder()->findAll(), 'id','name'), 
 							array(
 								'prompt'=>' -Select Cell Type- ',
 								'onchange'=>'typeSelected(this)',
@@ -35,7 +35,7 @@
 		<div class="row">
 			<?php echo $form->labelEx($model,'ref_num_id'); ?>
 			<?php echo CHtml::activeDropDownList($model, 'ref_num_id', 
-							CHtml::listData(RefNum::model()->findAll(), 'id','number'), 
+							CHtml::listData(RefNum::model()->findAll(array('condition'=>'id <> 70')), 'id','number'), 
 							array(
 								'prompt'=>' -Select Reference No.- ',
 								'onchange'=>'refSelected(this)',

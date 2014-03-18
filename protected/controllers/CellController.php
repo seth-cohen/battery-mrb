@@ -55,7 +55,7 @@ class CellController extends Controller
 				//'users'=>array('admin'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin'),
+				'actions'=>array('admin', 'creategenericcells', 'ajaxcreategenericcells', 'uploadcells'),
 				'roles' => array('admin'),
 				//'users'=>array('admin'),
 			),
@@ -121,15 +121,24 @@ class CellController extends Controller
 
 		if(isset($_POST['Kit']['anodeIds']) && isset($_POST['Kit']['cathodeIds']))
 		{
-			$model->kit->saveKitElectrodes(array_merge($_POST['Kit']['anodeIds'], $_POST['Kit']['cathodeIds']));
+			if(in_array("", $_POST['Kit']['anodeIds']) || in_array("", $_POST['Kit']['cathodeIds']) )
+			{
+				$model->addError('some_error', 'Must select valid anode and cathode lots before saving!');
+			}
+			else
+			{
+				$model->kit->saveKitElectrodes(array_merge($_POST['Kit']['anodeIds'], $_POST['Kit']['cathodeIds']));
+				
+				if(isset($_POST['Cell']))
+				{
+					$model->attributes=$_POST['Cell'];
+					if($model->save())
+						$this->redirect(array('view','id'=>$model->id));
+				}
+			}
 		}
 		
-		if(isset($_POST['Cell']))
-		{
-			$model->attributes=$_POST['Cell'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
-		}
+		
 
 		$this->render('update',array(
 			'model'=>$model,
@@ -616,6 +625,103 @@ class CellController extends Controller
 				echo $result;
 			}
 		}
+	}
+	
+	/**
+	 * Allows user to create a generic cell from DRH cell fill log... generic information will be used.
+	 * 
+	 * This will bypass the traditional validations and proceses
+	 */
+	public function actionCreateGenericCells()
+	{
+		$cellModel=new Cell('search');
+		//$cellModel->unsetAttributes();  // clear any default values
+//		$cellModel->fill_date = date('Y-m-d',time());
+		
+		$kitModel=new Kit('search');
+		//$kitModel->unsetAttributes();  // clear any default values
+		
+		$this->performAjaxValidation($kitModel);
+		$this->performAjaxValidation($cellModel);
+		
+		$kits = array();
+		for($i = 1; $i <= 16; ++$i)
+		{
+			$kits[] = array('id'=>$i);
+		}
+		
+		$kitDataProvider = new CArrayDataProvider($kits, array(
+		    'pagination'=>array(
+		        'pageSize'=>16,
+		    ),
+		 ));
+				
+		$this->render('creategenericcells',array(
+			'cellModel'=>$cellModel,
+			'kitModel'=>$kitModel,
+			'kitDataProvider'=>$kitDataProvider,
+		));
+	}
+	
+	/**
+	 * Allows user to create a generic cell from DRH cell fill log... generic information will be used.
+	 * 
+	 * This is the action that performs that actual saving
+	 */
+	public function actionAjaxCreateGenericCells()
+	{
+	
+		$serialString = $_POST['Kit']['serial_string'];
+		$serialsExplode = array_map('trim', explode(',', $serialString));
+		$serials = array();
+		
+		foreach ($serialsExplode as $serial)
+		{
+			$position = strpos($serial, '-');
+			
+			if ($position)
+			{ // then this is a range of cells
+				$firstSerial = substr($serial, 0, $position);
+				$lastSerial = substr($serial, $position+1);
+				
+				if(!is_numeric($firstSerial) || !is_numeric($lastSerial))
+				{ // make sure we actually have numbers in the string
+					$kitModel = new Kit;
+					$kitModel->addError('some_error', 'There was an error in the formatting of your serial string.');
+					echo CHtml::errorSummary($kitModel); 	
+					Yii::app()->end();
+				}
+				for ($i = intval($firstSerial); $i <= $lastSerial; ++$i)
+				{
+					$serials[] = $i; 
+				}
+			}
+			else 
+			{
+				$serials[] = intval($serial);
+			}
+		}
+		
+		//make sure that each serial number is at least 4 digits long so add leading zeros if necessary
+		foreach ($serials as &$serial){	// pass by reference
+			$serial = str_pad($serial, 4, "0", STR_PAD_LEFT);
+		}
+		
+		$date = $_POST['Cell']['fill_date'];
+		$refnumId = $_POST['Cell']['ref_num_id'];
+		$EAP = $_POST['Cell']['eap_num'];
+		$celltypeId = $_POST['Kit']['celltype_id'];
+		$anodeIds = array(30);
+		$cathodeIds = array(29);
+		
+		if(isset($_POST['Kit']['anodeIds']) && isset($_POST['Kit']['anodeIds']))
+		{
+			$anodeIds = $_POST['Kit']['anodeIds'];
+			$cathodeIds = $_POST['Kit']['cathodeIds'];
+		}
+				
+		echo Cell::createGenericCells(array_keys($serials), $serials, $refnumId, $EAP, $celltypeId, $date, $anodeIds, $cathodeIds);  
+			
 	}
 	
 	/**

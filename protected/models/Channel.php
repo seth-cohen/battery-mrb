@@ -53,7 +53,7 @@ class Channel extends CActiveRecord
 			array('id, number, cycler_id, max_charge_rate, max_discharge_rate, multirange, in_use, in_commission, min_voltage, max_voltage, cycler_search', 'safe', 'on'=>'search'),
 		);
 	}
-
+    
 	/**
 	 * @return array relational rules.
 	 */
@@ -69,9 +69,23 @@ class Channel extends CActiveRecord
 	}
 
 	 public function defaultScope() {
-	    return array('order'=>'number');
+	 	$alias = $this->getTableAlias( false, false );
+	    return array('order'=>$alias.'.number');
 	  }
   
+	/**
+	 * @return array of the query criteria to be used for particular query
+	 */
+	public function scopes()
+	{
+		$alias = $this->getTableAlias( false, false );
+        return array(
+			'notGeneric'=>array(
+        		 'condition'=>$alias.'.id <> 481'
+			),
+		);
+	}
+	
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */

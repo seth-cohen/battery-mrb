@@ -4,8 +4,19 @@
 /* @var $form CActiveForm */
 ?>
 
-<div class="form border" style="padding:15px; background-color:white;">
-<?php echo CHtml::link('Hide','#',array('id'=>'batterytype-hide-link', 'style'=>'float:right; padding-right:20px;')) ?>
+<?php 
+$style = 'padding:15px; '; 
+if ($this->action->id == 'cellselection'){
+	$style .= 'background-color:white;';
+}
+?>
+
+<div class="form border" style="<?php echo $style ?>">
+
+<?php if ($this->action->id == 'cellselection'): ?>
+	<?php echo CHtml::link('Hide','#',array('id'=>'batterytype-hide-link', 'style'=>'float:right; padding-right:20px;')) ?>
+<?php endif; ?>
+
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'batterytype-form',
 	// Please note: When you enable ajax validation, make sure the corresponding
@@ -14,7 +25,11 @@
 	// See class documentation of CActiveForm for details on this.
 	'enableAjaxValidation'=>true,
 )); ?>
+
+<?php if ($this->action->id == 'cellselection'): ?>
 	<h2 style="text-align:center">Register New Battery Type</h2> 
+<?php endif; ?>
+	
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($batterytypeModel); ?>
@@ -39,7 +54,7 @@
 	<div class="row">
 		<?php echo $form->labelEx($batterytypeModel,'celltype_id'); ?>
 		<?php echo $form->dropDownList($batterytypeModel, 'celltype_id', 
-							CHtml::listData(Celltype::model()->findAll(), 'id','name'),
+							CHtml::listData(Celltype::model()->inOrder()->findAll(), 'id','name'),
 							array(
 								'prompt'=>'-Select Type-',
 								'class'=>'celltype-dropdown',

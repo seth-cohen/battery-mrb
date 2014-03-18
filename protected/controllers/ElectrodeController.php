@@ -31,7 +31,7 @@ class ElectrodeController extends Controller
 				'roles'=>array('manufacturing'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('admin'),
+				'actions'=>array('admin', 'uploadelectrodes'),
 				'roles'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -152,6 +152,38 @@ class ElectrodeController extends Controller
 		$this->render('updatelot',array('model'=>$model,));
 	}
 	
+	/**
+	 * creates electrode lots from the uploaded CSV file
+	 * If creation is successful, the browser will be redirected to the 'index' page.
+	 */
+	public function actionUploadElectrodes()
+	{
+		/* this cannot be an AJAX request... uploading files from AJAX is not straight forward, though it 
+		 * is possible with the use of an iframe and some javascript
+		 */
+		$electrodeModel=new Electrode;
+		
+		// Uncomment the following line if AJAX validation is needed
+		$this->performAjaxValidation($electrodeModel);
+
+		if(isset($_FILES['Uploaded']))
+		{
+			if(Electrode::uploadFromCSV($electrodeModel, $_FILES['Uploaded']))
+			{	 
+				$this->redirect(array('index'));
+			}
+		}
+		else
+		{ /* go try the cell selection again */
+			$electrodeModel->addError('selection_error', 'No file uploaded');
+		}
+		
+		
+		$this->render('uploadelectrodes',array(
+			'electrodeModel'=>$electrodeModel,
+		));
+	}
+		
 /**
 	 * Performs the AJAX update of the detailView on the cellview.
 	 * @param Cell $model the model to be validated
@@ -205,6 +237,19 @@ class ElectrodeController extends Controller
 				false, 
 				true
 			);
+		}
+	}
+	
+	/**
+	 * Performs the AJAX validation.
+	 * @param Electrode $model the model to be validated
+	 */
+	protected function performAjaxValidation($model)
+	{
+		if(isset($_POST['ajax']))
+		{
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
 		}
 	}
 }

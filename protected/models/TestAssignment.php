@@ -10,9 +10,10 @@
  * @property string $chamber_id
  * @property string $operator_id
  * @property string $formation_start
- * @property string $is_formation
- * @property string $is_active
- * @property string $is_conditioning
+ * @property integer $is_formation
+ * @property integer $is_active
+ * @property integer $is_conditioning
+ * @property string $test_start_time
  *
  * The followings are the available model relations:
  * @property Cell $cell
@@ -27,6 +28,7 @@ class TestAssignment extends CActiveRecord
 	public $chamber_search;
 	public $cycler_search;
 	public $battery_search;
+	public $type_search;
 	
 	/**
 	 * @return string the associated database table name
@@ -44,13 +46,15 @@ class TestAssignment extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cell_id, channel_id, chamber_id, operator_id, test_start, is_formation, is_active, is_conditioning', 'required'),
+			array('cell_id, channel_id, chamber_id, operator_id, test_start, test_start_time', 'required'),
 			array('cell_id, channel_id, chamber_id, operator_id', 'length', 'max'=>10),
+			array('test_start_time', 'length', 'max'=>10),
+			array('is_formation, is_active, is_conditioning', 'numerical', 'integerOnly'=>true),
 			array('test_start', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, cell_id, channel_id, chamber_id, operator_id, test_start, is_active, is_formation 
-					serial_search, chamber_search, cycler_search, is_conditioning', 'safe', 'on'=>'search'),
+					serial_search, chamber_search, cycler_search, is_conditioning, test_start_time, type_search', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -81,6 +85,7 @@ class TestAssignment extends CActiveRecord
 			'chamber_id' => 'Chamber',
 			'operator_id' => 'Operator',
 			'test_start' => 'Test Date',
+			'test_start_time' => 'Start Time',
 		
 			'serial_search' => 'Cell Serial',
 			'chamber_search' => 'Chamber',
@@ -145,9 +150,24 @@ class TestAssignment extends CActiveRecord
 		$criteria->compare('is_formation',$this->is_formation,true);
 		$criteria->compare('is_active',$this->is_active,true);
 		$criteria->compare('is_conditioning',$this->is_conditioning,true);
-
+		$criteria->compare('test_start_time',$this->test_start_time,true);
+		
 		$criteria->compare('cham.name',$this->chamber_search,true);
 		
+		// search for test type
+		if($this->type_search == 0) //formation
+		{
+			$criteria->compare('is_formation', 1);
+		}
+		elseif ($this->type_search == 1) //CAT
+		{
+			$criteria->compare('is_formation',0); 
+			$criteria->compare('is_conditioning',0); 
+		}
+		else // conditioning
+		{	
+			$criteria->compare('is_conditioning', 1);
+		}
 		/* for concatenated user name search */
 		$criteria->addSearchCondition('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
 		$criteria->addSearchCondition('concat(cyc.name,"-",chan.number)',$this->cycler_search, true);

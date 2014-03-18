@@ -1,11 +1,11 @@
 <?php
-/* @var $this CellController */
+/* @var $this KitController */
 /* @var $dataProvider CArrayDataProvider */
 /* @var $model Cell */
 
 $this->breadcrumbs=array(
-	'Test Lab'=>array('/testlab'),
-	'Cell Formation',
+	'Kits'=>array('index'),
+	'Create Multiple Kits',
 );
 
 $this->menu=array(
@@ -43,7 +43,7 @@ out.
 		<div class="row">
 			<?php echo $form->labelEx($model,'ref_num_id'); ?>
 			<?php echo $form->dropDownList($model, 'ref_num_id', 
-							CHtml::listData(RefNum::model()->findAll(), 'id','number'), 
+							CHtml::listData(RefNum::model()->findAll(array('condition'=>'id <> 70')), 'id','number'), 
 							array(
 								'prompt'=>' -Select Reference No.- ',
 								'onchange'=>'refSelected(this)',
@@ -54,7 +54,7 @@ out.
 		<div class="row multidrop5">
 			<?php echo CHtml::label('Anode Lots', 'Kit_anodeIds'); ?>
 			<?php echo CHtml::DropDownList('Kit[anodeIds][]', $model->anodeIds, 
-							CHtml::listData(Electrode::model()->anodes()->findAll(), 'id','lot_num'), 
+							CHtml::listData(Electrode::model()->anodes()->notGeneric()->findAll(), 'id','lot_num'), 
 							array(
 								'multiple'=>'multiple',
 								'prompt'=>' -Select Anode Lots- ',
@@ -66,7 +66,7 @@ out.
 		<div class="row">
 			<?php echo $form->labelEx($model,'celltype_id'); ?>
 			<?php echo $form->dropDownList($model, 'celltype_id', 
-							CHtml::listData(Celltype::model()->findAll(), 'id','name'),
+							CHtml::listData(Celltype::model()->inOrder()->findAll(), 'id','name'),
 							array(
 								'prompt'=>'-Select Type-',
 								'class'=>'celltype-dropdown',
@@ -87,7 +87,7 @@ out.
 		<div class="row multidrop5">
 			<?php echo CHtml::label('Cathode Lots', 'Kit_cathodeIds'); ?>
 			<?php echo CHtml::DropDownList('Kit[cathodeIds][]', $model->cathodeIds, 
-							CHtml::listData(Electrode::model()->cathodes()->findAll(), 'id','lot_num'), 
+							CHtml::listData(Electrode::model()->cathodes()->notGeneric()->findAll(), 'id','lot_num'), 
 							array(
 								'multiple'=>'multiple',
 								'prompt'=>' -Select Cathode Lots- ',
@@ -227,10 +227,17 @@ $(document).ready(function($) {
 			$('.serial-nums').val('');
 		}
 		else{
-			var serial_one = +$('#serials_1').val();
+			var serial_one = $('#serials_1').val();
+			while(serial_one.length < 4){ // zero pad with leading 0s if less than 4
+				serial_one = '0' + serial_one;
+				alert('in loop');
+			}
+			$('#serials_1').val(serial_one);
+			var serial_one = +serial_one; // convert to a number
+			
 			$('.serial-nums').not('#serials_1').each(function(key, value){
 				var new_serial = '' + (serial_one + key+1);
-				while(new_serial.length < 4){
+				while(new_serial.length < 4){	// increment each additional serial number by 1
 					new_serial = '0' + new_serial;
 				}
 				$(this).val(new_serial);

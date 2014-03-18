@@ -32,6 +32,7 @@ class Batterytype extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name, num_cells, part_num, celltype_id', 'required'),
+			array('name, part_num' , 'unique'),
 			array('part_num, name', 'length', 'max'=>50),
 			array('num_cells, celltype_id', 'length', 'max'=>10),
 			array('num_cells', 'numerical', 

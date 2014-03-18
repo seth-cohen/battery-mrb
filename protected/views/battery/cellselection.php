@@ -13,6 +13,7 @@ $this->menu=array(
 	array('label'=>'Assemble Battery', 'url'=>array('assemble')),
 	array('label'=>'Accept Test Data', 'url'=>array('accepttestdata'), 'visible'=>Yii::app()->user->checkAccess('quality')),
 	array('label'=>'Ship Batteries', 'url'=>array('ship')),
+	array('label'=>'Add Battery Type', 'url'=>array('addbatterytype')),
 	array('label'=>'View All Batteries', 'url'=>array('index')),
 	array('label'=>'Battery Admin', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 );
@@ -55,7 +56,7 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/cells
 		<div class="row">
 	        <?php echo $form->labelEx($batteryModel,'ref_num_id'); ?>
 	        <?php echo $form->dropDownList($batteryModel, 'ref_num_id', 
-								CHtml::listData(RefNum::model()->findAll(), 'id','number'), 
+								CHtml::listData(RefNum::model()->findAll(array('condition'=>'id <> 70')), 'id','number'), 
 								array(
 									'prompt'=>' -Select Reference No.- ',
 									'onchange'=>'refSelected(this)',

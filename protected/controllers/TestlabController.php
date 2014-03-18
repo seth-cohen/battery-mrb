@@ -27,7 +27,7 @@ class TestlabController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','formationindex', 'catindex', 'conditioningindex'),
+				'actions'=>array('index','formationindex', 'catindex', 'conditioningindex', 'testindex'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -125,6 +125,26 @@ class TestlabController extends Controller
 	}
 	
 	/**
+	 * Lists all test assignments that have ever been.
+	 */
+	public function actionTestIndex()
+	{
+		$model=new TestAssignment('search');
+		$model->unsetAttributes();  // clear any default values
+		
+		/* uses TestAssignment->search() to find all */
+		
+		if(isset($_GET['TestAssignment']))
+		{
+			$model->attributes=$_GET['TestAssignment'];
+		}
+				
+		$this->render('alltestassignments',array(
+			'model'=>$model,
+		));
+	}
+	
+	/**
 	 * Allows user to put multiple cells on formation as long as they have been
 	 * filled today or yesterday
 	 */
@@ -134,8 +154,8 @@ class TestlabController extends Controller
 		$model->unsetAttributes();  // clear any default values
 		
 		/* Uses cell->searchUnFormed to find all cells with no
-		 * test assignments and that were filled today */
-		$model->fill_date = '>='.date("Y-m-d",time());
+		 * test assignments and that were filled today or yesterday */
+		$model->fill_date = '>='.date("Y-m-d",mktime(0,0,0, date('m'), date('d')-15, date('Y')));
 		
 		if(isset($_GET['Cell']))
 		{
@@ -194,7 +214,8 @@ class TestlabController extends Controller
 				$tempTest->channel_id = $channels[$cell_id];
 				$tempTest->chamber_id = $chambers[$cell_id];
 				$tempTest->operator_id = $userIds[$cell_id];
-				$tempTest->test_start = date("Y-m-d",time());
+				$tempTest->test_start = $dates[$cell_id];
+				$tempTest->test_start_time = time();
 				$tempTest->is_formation = 1;
 				
 				$cellsFormation[$cell_id] = $tempTest;
@@ -283,6 +304,7 @@ class TestlabController extends Controller
 				$tempTest->chamber_id = $chambers[$cell_id];
 				$tempTest->operator_id = $userIds[$cell_id];
 				$tempTest->test_start = date("Y-m-d",time());
+				$tempTest->test_start_time = time();
 				$tempTest->is_formation = 0;
 					
 				$cellsCAT[$cell_id] = $tempTest;
@@ -371,6 +393,7 @@ class TestlabController extends Controller
 				$tempTest->chamber_id = $chambers[$cell_id];
 				$tempTest->operator_id = $userIds[$cell_id];
 				$tempTest->test_start = date("Y-m-d",time());
+				$tempTest->test_start_time = time();
 				$tempTest->is_formation = 0;
 				$tempTest->is_conditioning = 1;
 					

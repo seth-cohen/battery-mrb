@@ -9,6 +9,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'Battery Cell Selections', 'url'=>array('cellselection')),
+	array('label'=>'Add Battery Type', 'url'=>array('addbatterytype')),
 	array('label'=>'View All Batteries', 'url'=>array('index')),
 	array('label'=>'Battery Admin', 'url'=>array('admin')),
 );
