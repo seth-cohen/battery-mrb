@@ -125,7 +125,9 @@ class Channel extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->with = array('cycler');		// needed for cycler name search
-		$criteria->compare('id',$this->id,true);
+		
+		$criteria->addCondition('t.id<>481');
+		
 		$criteria->compare('number',$this->number);
 		$criteria->compare('cycler_id',$this->cycler_id);
 		$criteria->compare('max_charge_rate',$this->max_charge_rate);

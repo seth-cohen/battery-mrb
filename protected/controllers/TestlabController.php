@@ -645,7 +645,7 @@ class TestlabController extends Controller
 		$userName = '';
 		$userId = '';
 		
-		if (Yii::app()->user->checkAccess('manufacturing supervisor') || Yii::app()->user->checkAccess('manufacturing engineer'))
+		if (Yii::app()->user->checkAccess('testlab supervisor'))
 		{
 			
 		}
