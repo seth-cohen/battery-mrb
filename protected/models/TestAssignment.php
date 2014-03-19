@@ -31,7 +31,7 @@ class TestAssignment extends CActiveRecord
 	public $chamber_search;
 	public $cycler_search;
 	public $battery_search;
-	public $type_search;
+	public $type_search = 4;
 	
 	/**
 	 * @return string the associated database table name
