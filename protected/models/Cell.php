@@ -694,6 +694,7 @@ class Cell extends CActiveRecord
 				'testAssignments'=>array('alias'=>'test'),
 			),
 			'sort'=>array(
+				'defaultOrder'=>'CONCAT(celltype.name, serial_num)',
 				'attributes'=>array(
 					'refnum_search'=>array(
 						'asc'=>'ref.number',

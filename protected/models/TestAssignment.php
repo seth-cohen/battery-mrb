@@ -165,10 +165,11 @@ class TestAssignment extends CActiveRecord
 			$criteria->compare('is_formation',0); 
 			$criteria->compare('is_conditioning',0); 
 		}
-		else // conditioning
+		elseif ($this->type_search == self::CONDITIONING) // conditioning
 		{	
 			$criteria->compare('is_conditioning', 1);
 		}
+
 		/* for concatenated user name search */
 		$criteria->addSearchCondition('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
 		$criteria->addSearchCondition('concat(cyc.name,"-",chan.number)',$this->cycler_search, true);
