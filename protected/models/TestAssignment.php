@@ -23,6 +23,9 @@
  */
 class TestAssignment extends CActiveRecord
 {
+	const FORMATION = 0;
+	const CAT = 1;
+	const CONDITIONING = 2;
 	
 	public $serial_search;
 	public $chamber_search;
@@ -147,19 +150,17 @@ class TestAssignment extends CActiveRecord
 		$criteria->compare('chamber_id',$this->chamber_id,true);
 		$criteria->compare('operator_id',$this->operator_id,true);
 		$criteria->compare('test_start',$this->test_start,true);
-		$criteria->compare('is_formation',$this->is_formation,true);
 		$criteria->compare('is_active',$this->is_active,true);
-		$criteria->compare('is_conditioning',$this->is_conditioning,true);
 		$criteria->compare('test_start_time',$this->test_start_time,true);
 		
 		$criteria->compare('cham.name',$this->chamber_search,true);
 		
 		// search for test type
-		if($this->type_search == 0) //formation
+		if($this->type_search == self::FORMATION) //formation
 		{
 			$criteria->compare('is_formation', 1);
 		}
-		elseif ($this->type_search == 1) //CAT
+		elseif ($this->type_search == self::CAT) //CAT
 		{
 			$criteria->compare('is_formation',0); 
 			$criteria->compare('is_conditioning',0); 
@@ -181,7 +182,7 @@ class TestAssignment extends CActiveRecord
 			),
 			'criteria'=>$criteria,
 			'sort'=>array(
-				'defaultOrder'=>'test_start DESC',
+				'defaultOrder'=>'CONCAT(celltype.name, kit.serial_num)',
 				'attributes'=>array(
 					'serial_search'=>array(
 						'asc'=>"CONCAT(celltype.name, kit.serial_num)",

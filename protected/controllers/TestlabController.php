@@ -63,7 +63,7 @@ class TestlabController extends Controller
 		
 		/* uses TestAssignment->search() to find all active formation
 		 * test assignments	 */
-		$model->is_formation = 1;
+		$model->type_search = TestAssignment::FORMATION;
 		$model->is_active = 1;
 		
 		if(isset($_GET['TestAssignment']))
@@ -86,8 +86,7 @@ class TestlabController extends Controller
 		
 		/* uses TestAssignment->search() to find all active formation
 		 * test assignments	 */
-		$model->is_formation = 0;
-		$model->is_conditioning = 0;
+		$model->type_search = TestAssignment::CAT;
 		$model->is_active = 1;
 		
 		if(isset($_GET['TestAssignment']))
@@ -110,8 +109,7 @@ class TestlabController extends Controller
 		
 		/* uses TestAssignment->search() to find all active formation
 		 * test assignments	 */
-		$model->is_formation = 0;
-		$model->is_conditioning = 1;
+		$model->type_search = TestAssignment::CONDITIONING;
 		$model->is_active = 1;
 		
 		if(isset($_GET['TestAssignment']))

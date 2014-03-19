@@ -158,6 +158,10 @@ function reloadGrid(data) {
 <script type="text/javascript">
 
 jQuery(function($) {
+	$(document).on('focus','input', function(e){
+		this.select();
+	});
+	
 	$(document).on('keyup', 'input', function(e){
         if(e.which==39)
                     $(this).closest('td').next().find('input').focus();
