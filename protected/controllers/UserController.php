@@ -37,7 +37,7 @@ class UserController extends Controller
 			),
 			array('allow',	
 				'actions'=>array('ajaxusersearch'),
-				'roles'=>array('manufacturing supervisor, manufactuing engineer, testlab supervisor'),
+				'roles'=>array('manufacturing supervisor, manufactuing engineer, testlab supervisor, testlab'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete','ajaxassignrole'),

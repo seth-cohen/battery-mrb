@@ -14,6 +14,8 @@
  * @property double $wet_wt
  * @property string $filler_id
  * @property string $fill_date
+ * @property string $cover_attacher_id
+ * @property string $cover_attach_date
  * @property string $inspector_id
  * @property string $inspection_date
  * @property string $laserwelder_id
@@ -55,6 +57,7 @@ class Cell extends CActiveRecord
 	public $celltype_search;
 	public $stacker_search;
 	public $filler_search;
+	public $cover_attacher_search;
 	public $inspector_search;
 	public $portwelder_search;
 	public $laserwelder_search;
@@ -82,6 +85,7 @@ class Cell extends CActiveRecord
 			array('wet_wt', 'greaterThanDry'),
 			
 			array('stack_date, stacker_id, kit_id, ref_num_id, eap_num', 'required', 'on'=>'stack'),
+			array('cover_attach_date, cover_attacher_id', 'required', 'on'=>'cover_attach'),
 			array('inspection_date, inspector_id', 'required', 'on'=>'inspect'),
 			array('laserweld_date, laserwelder_id', 'required', 'on'=>'laser'),
 			array('fill_date, filler_id, wet_wt, dry_wt', 'required', 'on'=>'fill'),
@@ -101,6 +105,7 @@ class Cell extends CActiveRecord
 			array('eap_num, stack_date, dry_wt, wet_wt, fill_date, inspection_date, serial_search, celltype_search, 
 					refnum_search, stacker_search, filler_search, inspector_search, laserwelder_search, portwelder_search,
 					location, notes, not_formed, formed_only, inspector_id, laserwelder_id, portwelder_id, anode_search, 
+					cover_attacher_search, cover_attach_date,
 					cathode_search,	battery_search, battery_id, ncr_search', 
 					'safe', 'on'=>'search'
 			),
@@ -142,6 +147,7 @@ class Cell extends CActiveRecord
 			'stacker' => array(self::BELONGS_TO, 'User', 'stacker_id'),
 			'filler' => array(self::BELONGS_TO, 'User', 'filler_id'),
 			'inspector' => array(self::BELONGS_TO, 'User', 'inspector_id'),
+			'cover_attacher' => array(self::BELONGS_TO, 'User', 'cover_attacher_id'),
 			'laserwelder' => array(self::BELONGS_TO, 'User', 'laserwelder_id'),
 			'portwelder' => array(self::BELONGS_TO, 'User', 'portwelder_id'),
 			'testAssignments' => array(self::HAS_MANY, 'TestAssignment', 'cell_id'),
@@ -179,6 +185,7 @@ class Cell extends CActiveRecord
 			'serial_search' => 'Serial No.',
 			'celltype_search' => 'Cell Type',
 			'stacker_search' => 'Stacked By',
+			'cover_attacher_search' => 'Cover Attacher',
 			'laserwelder_search' => 'Laser Welded By',
 			'filler_search' => 'Filled By',
 			'portwelder_search' => 'Fill Port Welded By',
@@ -222,6 +229,7 @@ class Cell extends CActiveRecord
 						'filler'=>array('alias'=>'fill'), 
 						'inspector'=>array('alias'=>'insp'), 
 						'laserwelder'=>array('alias'=>'laser'),
+						'cover_attacher'=>array('alias'=>'cover'),
 						'portwelder'=>array('alias'=>'port'),
 						'refNum'=>array('alias'=>'ref'),
 						'testAssignments'=>array('alias'=>'test'),
@@ -244,11 +252,13 @@ class Cell extends CActiveRecord
 		
 		$criteria->compare('stacker_id',$this->stacker_id);
 		$criteria->compare('filler_id',$this->filler_id);
+		$criteria->compare('cover_attacher_id',$this->cover_attacher_id);
 		$criteria->compare('inspector_id',$this->inspector_id);
 		$criteria->compare('laserwelder_id',$this->laserwelder_id);
 		$criteria->compare('portwelder_id',$this->portwelder_id);
 		
 		$criteria->compare('stack_date',$this->stack_date,true);
+		$criteria->compare('cover_attach_date',$this->cover_attach_date,true);
 		$criteria->compare('laserweld_date',$this->laserweld_date,true);
 		$criteria->compare('portweld_date',$this->portweld_date,true);
 		$criteria->compare('fill_date',$this->fill_date,true);
@@ -323,6 +333,7 @@ class Cell extends CActiveRecord
 		$criteria->addSearchCondition('concat(insp.first_name, " ", insp.last_name)', $this->inspector_search);
 		$criteria->addSearchCondition('concat(laser.first_name, " ", laser.last_name)', $this->laserwelder_search);
 		$criteria->addSearchCondition('concat(port.first_name, " ", port.last_name)', $this->portwelder_search);
+		$criteria->addSearchCondition('concat(cover.first_name, " ", cover.last_name)', $this->cover_attacher_search);
 
 		return new KeenActiveDataProvider($this, array(
 			'withKeenLoading' => array(
@@ -367,6 +378,10 @@ class Cell extends CActiveRecord
 					'portwelder_search'=>array(
 						'asc'=>"CONCAT(port.first_name, ' ', port.last_name)",
 						'desc'=>"CONCAT(port.first_name, ' ', port.last_name) DESC",
+					),
+					'cover_attacher_search'=>array(
+						'asc'=>"CONCAT(cover.first_name, ' ', cover.last_name)",
+						'desc'=>"CONCAT(cover.first_name, ' ', cover.last_name) DESC",
 					),
 					'ncr_search'=>array(
 						'asc'=>'ncrs.number',
@@ -1195,6 +1210,55 @@ class Cell extends CActiveRecord
 		return null;
 	}
 
+	public static function coverAttachCells($coverAttachedCells)
+	{
+		$error = 0;
+		$models = array();
+
+		/* oops, we were passed bad data */
+		if(empty($coverAttachedCells))
+			return;
+			
+		foreach($coverAttachedCells as $cell_id=>$cell)
+		{
+			$model = Cell::model()->findByPk($cell_id);
+			$model->scenario = 'cover_attach';
+					 
+			$model->cover_attacher_id = $cell->cover_attacher_id;
+			$model->cover_attach_date = $cell->cover_attach_date;
+			$model->location = 'cover attached';
+				
+			if(!$model->validate())
+			{
+				$error = 1;
+			}
+			$models[] = $model;	
+		}
+		
+		/* all models validated save them all */
+		if ($error==0)
+		{
+			/* create array to return with JSON */
+			$result = array();
+			foreach($models as $model)
+			{
+				if($model->save())
+				{
+					$result[] = array(
+						'serial'=>$model->kit->getFormattedSerial(), 
+						'cover_attacher'=>User::getFullNameProper($model->cover_attacher_id),
+					);
+				}
+			}
+			return json_encode($result);
+		}
+		else /* a model failed, don't save any */
+		{
+			return CHtml::errorSummary($models); 	
+		}			
+		return null;
+	}
+	
 	public static function inspectCells($inspectedCells)
 	{
 		$error = 0;
@@ -1673,6 +1737,8 @@ class Cell extends CActiveRecord
 					$cellModel->wet_wt = 9999999;
 					$cellModel->filler_id = 73;
 					$cellModel->fill_date = $date;
+					$cellModel->cover_attacher_id = 73;
+					$cellModel->cover_attach_date = $date;
 					$cellModel->inspector_id = 73;
 					$cellModel->inspection_date = $date;
 					$cellModel->location = '[BYPASS] Generic Storage';
@@ -1758,6 +1824,7 @@ class Cell extends CActiveRecord
 			'Serial No.', 'Reference No.',
 			'EAP No.', 'Cell Type',
 			'Stacker', 'Stack Date',
+			'Cover Attacher', 'Cover Attach Date',
 			'Inspector', 'Inspection Date',
 			'Laser Welder', 'Laser Weld Date',
 			'Filler', 'Fill Date',

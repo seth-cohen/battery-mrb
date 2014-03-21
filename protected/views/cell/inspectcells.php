@@ -5,12 +5,13 @@
 $this->breadcrumbs=array(
 	'Manufacturing'=>array('/manufacturing'),
 	'Cells'=>array('index'),
-	'Fill Cells (multi)',
+	'Inspect Cells',
 );
 
 $this->menu=array(
 	array('label'=>'Create Kits', 'url'=>array('kit/multicreate')),
 	array('label'=>'Stack Cells', 'url'=>array('multistackcells')),
+	array('label'=>'Cover Attachment', 'url'=>array('multicoverattachcells')),
 	array('label'=>'Laser Weld Cells', 'url'=>array('multilasercells')),
 	array('label'=>'Fill Cells', 'url'=>array('multifillcells')),
 	array('label'=>'Fillport Weld Cells', 'url'=>array('multitipoffcells')),
@@ -20,8 +21,8 @@ $this->menu=array(
 );
 ?>
 
-<h1>Inspect Cells (Multi)</h1>
-<p>*Only cells that have been stacked but not yet inspected will be visible in this list.</p>
+<h1>Inspect Cells</h1>
+<p>*Only cells that have had covers attached but have not yet been inspected will be visible in this list.</p>
 <?php
 /* ionclude JQuery scripts to allow for autocomplte */
 Yii::app()->clientScript->registerCoreScript('jquery.ui'); 

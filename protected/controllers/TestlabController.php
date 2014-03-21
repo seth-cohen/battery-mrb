@@ -182,6 +182,7 @@ class TestlabController extends Controller
 		$formationCells = $_POST['autoId'];
 		$userIds = $_POST['user_ids'];
 		$dates = $_POST['dates'];
+		$times = $_POST['times'];
 		$chambers = $_POST['chambers'];
 		$tempChannels = $_POST['channels'];
 		
@@ -208,12 +209,15 @@ class TestlabController extends Controller
 			{
 				$tempTest = new TestAssignment;
 				
+				$splitTime = explode(':', $times[$cell_id]);
+				$date = strtotime($dates[$cell_id]);
+				
 				$tempTest->cell_id = $cell_id;
 				$tempTest->channel_id = $channels[$cell_id];
 				$tempTest->chamber_id = $chambers[$cell_id];
 				$tempTest->operator_id = $userIds[$cell_id];
 				$tempTest->test_start = $dates[$cell_id];
-				$tempTest->test_start_time = time();
+				$tempTest->test_start_time = mktime($splitTime[0], $splitTime[1], 0, date('n',$date), date('j',$date), date('Y',$date));
 				$tempTest->is_formation = 1;
 				
 				$cellsFormation[$cell_id] = $tempTest;
@@ -643,7 +647,7 @@ class TestlabController extends Controller
 		$userName = '';
 		$userId = '';
 		
-		if (Yii::app()->user->checkAccess('testlab supervisor'))
+		if (Yii::app()->user->checkAccess('testlab supervisor, testlab'))
 		{
 			
 		}

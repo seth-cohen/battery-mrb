@@ -15,6 +15,7 @@
 	<b>CELLS</b>
 	<ul>
 		<li><?php echo CHtml::link('Stack Cells', array('cell/multistackcells'));?></li>
+		<li><?php echo CHtml::link('Attach Covers To Cells', array('cell/multiattachcells'));?></li>
 		<li><?php echo CHtml::link('Inspect Cells', array('cell/multiinspectcells'));?></li>
 		<li><?php echo CHtml::link('Laser Weld Cells', array('cell/multiinspectcells'));?></li>
 		<li><?php echo CHtml::link('Fill Cells', array('cell/multifillcells'));?></li>

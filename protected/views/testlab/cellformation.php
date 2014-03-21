@@ -35,6 +35,10 @@ Yii::app()->clientScript->registerCssFile(
         Yii::app()->clientScript->getCoreScriptUrl().
         '/jui/css/base/jquery-ui.css'
 );
+
+$baseUrl = Yii::app()->baseUrl;
+Yii::app()->clientScript->registerScriptFile($baseUrl.'/js/jquery.ui.timepicker.js');
+Yii::app()->clientScript->registerCssFile($baseUrl.'/css/jquery.ui.timepicker.css');
 ?>
 
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -122,7 +126,12 @@ $chamberList = Chamber::forList();
 		array(
 			'header' => 'Formation Date',
 			'type' => 'raw',
-			'value'=>'CHtml::textField("dates[$data->id]",date("Y-m-d",time()),array("style"=>"width:100px;", "class"=>"hasDatePicker"))',	
+			'value'=>'CHtml::textField("dates[$data->id]",date("Y-m-d",time()),array("style"=>"width:75px;", "class"=>"hasDatePicker"))',	
+		),
+		array(
+			'header' => 'Start Time',
+			'type' => 'raw',
+			'value'=>'CHtml::textField("times[$data->id]","",array("style"=>"width:50px;", "class"=>"hasTimePicker"))',	
 		),
 	),
 	'htmlOptions'=>array('width'=>'100%'),
@@ -214,6 +223,10 @@ jQuery(function($) {
 		}
 	});
 
+	jQuery('body').on('focus', '.hasTimePicker', function(event) {
+		$(this).timepicker();
+	});
+	
 	jQuery('body').on('focus', '.hasDatePicker', function(event) {
 		$(this).datepicker({'showAnim':'slideDown','changeMonth':true,'changeYear':true,'dateFormat':'yy-mm-dd'});
 	});

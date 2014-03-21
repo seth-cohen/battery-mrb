@@ -34,6 +34,7 @@ class CellController extends Controller
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create',
 								'multistackcells', 'ajaxstackcells', 
+								'multiattachcells', 'ajaxcoverattachcells',
 								'multiinspectcells', 'ajaxinspectcells',
 								'multilasercells', 'ajaxlasercells',
 								'multifillcells', 'ajaxfillcells', 
@@ -169,7 +170,7 @@ class CellController extends Controller
 		$model=new Cell('search');
 		$model->unsetAttributes();  // clear any default values
 		
-		$visibleColumns = array(1,2,5,19,20);
+		$visibleColumns = array(1,2,5,21,22);
 		if(isset($_GET['Columns']))
 		{
 			$visibleColumns = $_GET['Columns'];
@@ -310,6 +311,70 @@ class CellController extends Controller
 	}
 
 	/**
+	 * Allows user to attach covers to mulitple cells.
+	 */
+	public function actionMultiAttachCells()
+	{
+		$model=new Cell('search');
+		$model->unsetAttributes();  // clear any default values
+		
+		/* any cell that is stacked and not attached to a cover can be cover attached */
+		$model->cover_attacher_id = 1; 
+		
+		if(isset($_GET['Cell']))
+		{
+			$model->attributes=$_GET['Cell'];
+		}
+				
+		$this->render('coverattachcells',array(
+			'model'=>$model,
+		));
+	}
+	
+	/**
+	 * Ajax action to save the model for cover attached cells.
+	 */
+	public function actionAjaxCoverAttachCells()
+	{
+		
+		if(!isset($_POST['autoId']))
+		{
+			echo 'hide';
+			Yii::app()->end();
+		}
+		
+		$coverAttachCells = $_POST['autoId'];
+		$userIds = $_POST['user_ids'];
+		$dates = $_POST['dates'];
+		
+		if(count($coverAttachCells)>0)
+		{
+			$cellsCoverAttached = array();
+			
+			foreach($coverAttachCells as $cell_id)
+			{
+				$tempCell = new Cell();
+				
+				$tempCell->cover_attacher_id = $userIds[$cell_id];
+				$tempCell->cover_attach_date = $dates[$cell_id];
+				
+				$cellsCoverAttached[$cell_id] = $tempCell;
+			}
+			
+			$result = Cell::coverAttachCells($cellsCoverAttached);
+			
+			if (!json_decode($result))
+			{ /* the save failed otherwise result would be json_encoded*/
+				echo $result;
+			} 
+			else 
+			{ /* success so show count and serial numbers */
+				echo $result;
+			}
+		}
+	}
+	
+	/**
 	 * Allows user to inspect mulitple cells.
 	 */
 	public function actionMultiInspectCells()
@@ -317,8 +382,9 @@ class CellController extends Controller
 		$model=new Cell('search');
 		$model->unsetAttributes();  // clear any default values
 		
-		/* any cell that is stacked and not inspected can be inspected */
+		/* any cell has had the cover attached and not inspected can be inspected */
 		$model->inspector_id = 1; 
+		$model->cover_attacher_id = '>1'; 
 		
 		if(isset($_GET['Cell']))
 		{
@@ -329,6 +395,7 @@ class CellController extends Controller
 			'model'=>$model,
 		));
 	}
+	
 	
 	/**
 	 * Ajax action to save the model for inspected cells.
@@ -813,7 +880,8 @@ class CellController extends Controller
 				'columns'=>array(
 					array(
 						'name'=>'serial_search',
-						'value'=>'$data->kit->celltype->name."-".$data->kit->serial_num',
+						'type'=>'raw',
+						'value'=>'$data->getLink()',
 						'visible'=>in_array(1,$visibleColumns),
 					),
 					array(
@@ -840,68 +908,83 @@ class CellController extends Controller
 						'visible'=>in_array(6,$visibleColumns),
 					),
 					array(
-						'name'=>'inspector_search',
-						'value'=>'$data->inspector->getFullName()',
+						'name'=>'cover_attacher_search',
+						'value'=>'$data->cover_attacher->getFullName()',
 						'visible'=>in_array(7,$visibleColumns),
 					),
 					array(
-						'name'=>'inspection_date',
+						'name'=>'cover_attach_date',
 						'visible'=>in_array(8,$visibleColumns),
+					),
+					array(
+						'name'=>'inspector_search',
+						'value'=>'$data->inspector->getFullName()',
+						'visible'=>in_array(9,$visibleColumns),
+					),
+					array(
+						'name'=>'inspection_date',
+						'visible'=>in_array(10,$visibleColumns),
 					),
 					array(
 						'name'=>'laserwelder_search',
 						'value'=>'$data->laserwelder->getFullName()',
-						'visible'=>in_array(9,$visibleColumns),
+						'visible'=>in_array(11,$visibleColumns),
 					),
 					array(
 						'name'=>'laserweld_date',
-						'visible'=>in_array(10,$visibleColumns),
+						'visible'=>in_array(12,$visibleColumns),
 					),
 					array(
 						'name'=>'filler_search',
 						'value'=>'$data->filler->getFullName()',
-						'visible'=>in_array(11,$visibleColumns),
+						'visible'=>in_array(13,$visibleColumns),
 					),
 					array(
 						'name'=>'fill_date',
-						'visible'=>in_array(12,$visibleColumns),
+						'visible'=>in_array(14,$visibleColumns),
 					),
 					array(
 						'name'=>'portwelder_search',
 						'value'=>'$data->portwelder->getFullName()',
-						'visible'=>in_array(13,$visibleColumns),
-					),
-					array(
-						'name'=>'portweld_date',
-						'visible'=>in_array(14,$visibleColumns),
-					),
-					array(
-						'name'=>'dry_wt',
 						'visible'=>in_array(15,$visibleColumns),
 					),
 					array(
-						'name'=>'wet_wt',
+						'name'=>'portweld_date',
 						'visible'=>in_array(16,$visibleColumns),
+					),
+					array(
+						'name'=>'dry_wt',
+						'visible'=>in_array(17,$visibleColumns),
+					),
+					array(
+						'name'=>'wet_wt',
+						'visible'=>in_array(18,$visibleColumns),
 					),
 					array(
 						'name'=>'anode_search',
 						'value'=>'$data->kit->getAnodeList()',
-						'visible'=>in_array(17,$visibleColumns),
+						'visible'=>in_array(19,$visibleColumns),
 					),
 					array(
 						'name'=>'cathode_search',
 						'value'=>'$data->kit->getCathodeList()',
-						'visible'=>in_array(18,$visibleColumns),
+						'visible'=>in_array(20,$visibleColumns),
 					),
 					array(
 						'name'=>'ncr_search',
 						'type'=>'html',
 						'value'=>'$data->getNCRLinks()',
-						'visible'=>in_array(19,$visibleColumns),
+						'visible'=>in_array(21,$visibleColumns),
 					),
 					array(
 						'name'=>'location',
-						'visible'=>in_array(20,$visibleColumns),
+						'visible'=>in_array(22,$visibleColumns),
+					),
+					array(
+						'name'=>'battery_search',
+						'type'=>'raw',
+						'value'=>'$data->getBatteryLink()',
+						'visible'=>in_array(23,$visibleColumns),
 					),
 				)
 			)

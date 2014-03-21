@@ -11,6 +11,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Create Kits', 'url'=>array('kit/multicreate')),
 	array('label'=>'Stack Cells', 'url'=>array('multistackcells')),
+	array('label'=>'Cover Attachment', 'url'=>array('multicoverattachcells')),
 	array('label'=>'Inspect Cells', 'url'=>array('multiinspectcells')),
 	array('label'=>'Fill Cells', 'url'=>array('multifillcells')),
 	array('label'=>'Fillport Weld Cells', 'url'=>array('multitipoffcells')),

@@ -51,6 +51,7 @@
 						)),
 						array('label'=>'Cells', 'items'=>array(
 							array('label'=>'Stack Cells', 'url'=>array('cell/multistackcells'), 'active'=>0),
+							array('label'=>'Cover Attachment', 'url'=>array('cell/multiattachcells'), 'active'=>0),
 							array('label'=>'Inspect Cells', 'url'=>array('cell/multiinspectcells'), 'active'=>0),
 							array('label'=>'Laser Weld Cells', 'url'=>array('cell/multilasercells'), 'active'=>0),
 							array('label'=>'Fill Cells', 'url'=>array('cell/multifillcells'), 'active'=>0),

@@ -13,6 +13,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Create Kits', 'url'=>array('kit/multicreate')),
 	array('label'=>'Stack Cells', 'url'=>array('multistackcells')),
+	array('label'=>'Cover Attachment', 'url'=>array('multicoverattachcells')),
 	array('label'=>'Inspect Cells', 'url'=>array('multiinspectcells')),
 	array('label'=>'Laser Weld Cells', 'url'=>array('multilasercells')),
 	array('label'=>'Fill Cells', 'url'=>array('multifillcells')),
@@ -114,78 +115,83 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 			'visible'=>in_array(6,$visibleColumns),
 		),
 		array(
-			'name'=>'inspector_search',
-			'value'=>'$data->inspector->getFullName()',
+			'name'=>'cover_attacher_search',
+			'value'=>'$data->cover_attacher->getFullName()',
 			'visible'=>in_array(7,$visibleColumns),
 		),
 		array(
-			'name'=>'inspection_date',
+			'name'=>'cover_attach_date',
 			'visible'=>in_array(8,$visibleColumns),
+		),
+		array(
+			'name'=>'inspector_search',
+			'value'=>'$data->inspector->getFullName()',
+			'visible'=>in_array(9,$visibleColumns),
+		),
+		array(
+			'name'=>'inspection_date',
+			'visible'=>in_array(10,$visibleColumns),
 		),
 		array(
 			'name'=>'laserwelder_search',
 			'value'=>'$data->laserwelder->getFullName()',
-			'visible'=>in_array(9,$visibleColumns),
+			'visible'=>in_array(11,$visibleColumns),
 		),
 		array(
 			'name'=>'laserweld_date',
-			'visible'=>in_array(10,$visibleColumns),
+			'visible'=>in_array(12,$visibleColumns),
 		),
 		array(
 			'name'=>'filler_search',
 			'value'=>'$data->filler->getFullName()',
-			'visible'=>in_array(11,$visibleColumns),
+			'visible'=>in_array(13,$visibleColumns),
 		),
 		array(
 			'name'=>'fill_date',
-			'visible'=>in_array(12,$visibleColumns),
+			'visible'=>in_array(14,$visibleColumns),
 		),
 		array(
 			'name'=>'portwelder_search',
 			'value'=>'$data->portwelder->getFullName()',
-			'visible'=>in_array(13,$visibleColumns),
-		),
-		array(
-			'name'=>'portweld_date',
-			'visible'=>in_array(14,$visibleColumns),
-		),
-		array(
-			'name'=>'dry_wt',
 			'visible'=>in_array(15,$visibleColumns),
 		),
 		array(
-			'name'=>'wet_wt',
+			'name'=>'portweld_date',
 			'visible'=>in_array(16,$visibleColumns),
+		),
+		array(
+			'name'=>'dry_wt',
+			'visible'=>in_array(17,$visibleColumns),
+		),
+		array(
+			'name'=>'wet_wt',
+			'visible'=>in_array(18,$visibleColumns),
 		),
 		array(
 			'name'=>'anode_search',
 			'value'=>'$data->kit->getAnodeList()',
-			'visible'=>in_array(17,$visibleColumns),
+			'visible'=>in_array(19,$visibleColumns),
 		),
 		array(
 			'name'=>'cathode_search',
 			'value'=>'$data->kit->getCathodeList()',
-			'visible'=>in_array(18,$visibleColumns),
+			'visible'=>in_array(20,$visibleColumns),
 		),
 		array(
 			'name'=>'ncr_search',
 			'type'=>'html',
 			'value'=>'$data->getNCRLinks()',
-			'visible'=>in_array(19,$visibleColumns),
+			'visible'=>in_array(21,$visibleColumns),
 		),
 		array(
 			'name'=>'location',
-			'visible'=>in_array(20,$visibleColumns),
+			'visible'=>in_array(22,$visibleColumns),
 		),
 		array(
 			'name'=>'battery_search',
 			'type'=>'raw',
 			'value'=>'$data->getBatteryLink()',
-			'visible'=>in_array(21,$visibleColumns),
-		),
-		array(
-			'class'=>'CButtonColumn',
-			'template'=>'{view} {update}',
+			'visible'=>in_array(23,$visibleColumns),
 		),
 	),
 	//'htmlOptions'=>array('class'=>'shadow grid-view'),

@@ -13,6 +13,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Create Kits', 'url'=>array('kit/multicreate')),
 	array('label'=>'Stack Cells', 'url'=>array('multstackcells')),
+	array('label'=>'Cover Attachment', 'url'=>array('multicoverattachcells')),
 	array('label'=>'Inspect Cells', 'url'=>array('multiinspectcells')),
 	array('label'=>'Laser Weld Cells', 'url'=>array('multilasercells')),
 	array('label'=>'Fill Cells', 'url'=>array('multifillcells')),

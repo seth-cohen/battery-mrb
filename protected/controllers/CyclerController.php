@@ -360,11 +360,12 @@ class CyclerController extends Controller
 			$testAssignmentDataProvider = $testAssignment->search();
 		
 			$this->renderPartial('_ajaxtestassignments',array(
-				'testAssignmentDataProvider'=>$testAssignmentDataProvider,
-				'testAssignment'=>$testAssignment,
+					'testAssignmentDataProvider'=>$testAssignmentDataProvider,
+					'testAssignment'=>$testAssignment,
+				),
 				false,
 				true
-			));
+			);
 		}
 	}
 	

@@ -6,6 +6,12 @@
 
 <?php Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/styles.css'); ?>
 
+<?php 
+Yii::app()->clientScript->scriptMap=array(
+                    'jquery.yiigridview.js'=>false
+                ); 
+?>
+
 <?php if($testAssignment == null):?>
 <?php else: ?>
 
