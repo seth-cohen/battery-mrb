@@ -1,4 +1,5 @@
 <?php
+require_once 'Mail.php';
 
 class ChamberController extends Controller
 {
@@ -200,7 +201,22 @@ class ChamberController extends Controller
 		{
 			$model->in_commission = $_POST['status'];
 			if($model->save())
-			{
+			{	
+				$commissionStatus = $model->in_commission?'In Commission':'Out of Commission';
+				$userName = User::getFullNameProper(Yii::app()->user->id);
+				
+				$message = new YiiMailMessage;
+				
+				$message->view = '_chamberemail';
+				$params = array('model'=>$model, 'commissionStatus'=>$commissionStatus, 'user'=>$userName);
+				$message->from = "scohen@yardney.com";
+				$message->addTo('jkelledes@yardney.com');
+				$message->addTo('scohen@yardney.com');
+				$message->subject = 'ALERT: Chamber marked as '.$commissionStatus  ;
+				$message->setBody($params, 'text/html');
+				
+				Yii::app()->mail->send($message);
+ 
 				echo '1';
 				Yii::app()->end();
 			}

@@ -195,7 +195,7 @@ class TestlabController extends Controller
 
 		if (count($channels) !== count(array_unique($channels)))
 		{ /* then we have duplicates set error and bail */		
-			$model = new Cell();
+			$model = new Channel();
 			$model->addError('channel_error', 'Duplicate Channel Selection!');
 			echo CHtml::errorSummary($model);
 			Yii::app()->end();
@@ -209,8 +209,17 @@ class TestlabController extends Controller
 			{
 				$tempTest = new TestAssignment;
 				
-				$splitTime = explode(':', $times[$cell_id]);
+				$splitTime = array_map('trim',explode(':', $times[$cell_id]));
 				$date = strtotime($dates[$cell_id]);
+				
+				if($splitTime[0] < 0 || $splitTime[0] > 23 || $splitTime[1] < 0 || $splitTime[1] > 59 
+				  ||!is_numeric($splitTime[0]) || !is_numeric($splitTime[1]) )
+				{
+					$model = new Channel();
+					$model->addError('channel_error', 'There was an error in your time formatting!!');
+					echo CHtml::errorSummary($model);
+					Yii::app()->end();
+				}
 				
 				$tempTest->cell_id = $cell_id;
 				$tempTest->channel_id = $channels[$cell_id];

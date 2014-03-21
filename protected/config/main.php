@@ -16,6 +16,7 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+		'ext.yii-mail.YiiMailMessage'
 	),
 
 	'modules'=>array(
@@ -99,8 +100,18 @@ return array(
 			),
 		),
 	
+		'mail' => array(
+			'class' => 'ext.yii-mail.YiiMail',
+			'transportType'=>'smtp',
+			'transportOptions'=>array(
+	        	'host'=>'ssl://secure.emailsrvr.com',
+	        	'username'=>'scohen@yardney.com',
+	            'password'=>'Monday11',
+	            'port'=>'465',                       
+	         ),
+	         'viewPath' => 'application.views.mail',
+	     ),
 	),
-
 	'timeZone' => 'America/New_York',
 	// application-level parameters that can be accessed
 	// using Yii::app()->params['paramName']
