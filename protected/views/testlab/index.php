@@ -7,7 +7,10 @@
 		<li><?php echo CHtml::link('View Cells on CAT', array('testlab/catindex'));?></li>
 		<li><?php echo CHtml::link('Condition for Assembly', array('testlab/cellconditioning'));?></li>
 		<li><?php echo CHtml::link('View Cells Conditioning', array('testlab/conditioningindex'));?></li>
+		<li><?php echo CHtml::link('Miscellaneous Testing', array('misctesting'));?></li>
+		<li><?php echo CHtml::link('View Miscellaneous Tests', array('miscindex'));?></li>
 		<li><?php echo CHtml::link('Test Reassignments', array('testlab/testreassignment'));?></li>
+		<li><?php echo CHtml::link('View All Tests (Historic)', array('testindex'));?></li>
 	</ul>
 	<b>STORAGE/DELIVERY</b>
 	<ul>

@@ -12,9 +12,12 @@ $this->menu=array(
 	array('label'=>'View Cells on Formation', 'url'=>array('formationindex')),
 	array('label'=>'Put cells on CAT', 'url'=>array('cellcat')),
 	array('label'=>'Condition for Assembly', 'url'=>array('cellconditioning')),
+	array('label'=>'Miscellaneous Testing', 'url'=>array('misctesting')),
+	array('label'=>'View Miscellaneous Tests', 'url'=>array('miscindex')),
 	array('label'=>'Test Reassignments', 'url'=>array('testreassignment')),
 	array('label'=>'Move Cells to Storage', 'url'=>array('storage')),
 	array('label'=>'Deliver Cells to Assembly', 'url'=>array('deliverforbattery')),
+	array('label'=>'View All Tests (Historic)', 'url'=>array('testindex')),
 	array('label'=>'View All Cells', 'url'=>array('/cell/index')),
 );
 
@@ -84,14 +87,14 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'test_start',
 		array(
 			'name' => 'test_start_time',
-			'value' => 'date("H:i:s", $data->test_start_time)',
+			'value' => 'date("H:i", $data->test_start_time)',
 			'filter'=>false,
 		),
 		array(
 			'class'=>'CButtonColumn',
 			'template'=>'{view} {update}',
-			'viewButtonUrl'=>'Yii::app()->createUrl("cell/view", array("id"=>$data->cell->id))',
-			'updateButtonUrl'=>'Yii::app()->createUrl("cell/update", array("id"=>$data->cell->id))',
+			'viewButtonUrl'=>'Yii::app()->createUrl("testlab/viewassignment", array("id"=>$data->id))',
+			'updateButtonUrl'=>'Yii::app()->createUrl("testlab/updatetestassignment", array("id"=>$data->id))',
 		),
 	),
 	//'htmlOptions'=>array('class'=>'shadow grid-view'),

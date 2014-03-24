@@ -13,6 +13,7 @@
  * @property integer $is_formation
  * @property integer $is_active
  * @property integer $is_conditioning
+ * @property integer $is_misc
  * @property string $test_start_time
  *
  * The followings are the available model relations:
@@ -26,11 +27,13 @@ class TestAssignment extends CActiveRecord
 	const FORMATION = 0;
 	const CAT = 1;
 	const CONDITIONING = 2;
+	const MISC = 3;
 	
 	public $serial_search;
 	public $chamber_search;
 	public $cycler_search;
 	public $battery_search;
+	public $operator_search;
 	public $type_search = 4;
 	
 	/**
@@ -52,11 +55,11 @@ class TestAssignment extends CActiveRecord
 			array('cell_id, channel_id, chamber_id, operator_id, test_start, test_start_time', 'required'),
 			array('cell_id, channel_id, chamber_id, operator_id', 'length', 'max'=>10),
 			array('test_start_time', 'length', 'max'=>10),
-			array('is_formation, is_active, is_conditioning', 'numerical', 'integerOnly'=>true),
+			array('is_formation, is_active, is_conditioning, is_misc', 'numerical', 'integerOnly'=>true),
 			array('test_start', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, cell_id, channel_id, chamber_id, operator_id, test_start, is_active, is_formation 
+			array('id, cell_id, channel_id, chamber_id, operator_id, test_start, is_active, is_formation, is_misc, 
 					serial_search, chamber_search, cycler_search, is_conditioning, test_start_time, type_search', 'safe', 'on'=>'search'),
 		);
 	}
@@ -94,6 +97,7 @@ class TestAssignment extends CActiveRecord
 			'chamber_search' => 'Chamber',
 			'cycler_search' => 'Cycler {Channel}',
 			'refNum_search' => 'Reference No.',
+			'operator_search' => 'Operator',
 		);
 	}
 
@@ -164,10 +168,15 @@ class TestAssignment extends CActiveRecord
 		{
 			$criteria->compare('is_formation',0); 
 			$criteria->compare('is_conditioning',0); 
+			$criteria->compare('is_misc', 0);
 		}
 		elseif ($this->type_search == self::CONDITIONING) // conditioning
 		{	
 			$criteria->compare('is_conditioning', 1);
+		}
+		elseif ($this->type_search == self::MISC) // conditioning
+		{	
+			$criteria->compare('is_misc', 1);
 		}
 
 		/* for concatenated user name search */
@@ -250,9 +259,17 @@ class TestAssignment extends CActiveRecord
 					{
 						$cell->location = '[FORM] ';
 					}
-					else 
+					elseif($model->is_conditioning) 
 					{
-						$cell->location = ($model->is_conditioning) ? '[COND] ':'[CAT] ';
+						$cell->location = '[COND] ';
+					}
+					elseif($model->is_misc) 
+					{
+						$cell->location = '[MISC] ';
+					}
+					else
+					{
+						$cell->location = '[CAT] ';
 					}
 					
 					$cell->location .= $model->channel->cycler->name.

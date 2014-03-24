@@ -13,16 +13,19 @@ $this->menu=array(
 	array('label'=>'View Cells on CAT', 'url'=>array('catindex')),
 	array('label'=>'Condition for Assembly', 'url'=>array('cellconditioning')),
 	array('label'=>'View Cells Conditioning', 'url'=>array('conditioningindex')),
+	array('label'=>'Miscellaneous Testing', 'url'=>array('misctesting')),
+	array('label'=>'View Miscellaneous Tests', 'url'=>array('miscindex')),
 	array('label'=>'Test Reassignments', 'url'=>array('testreassignment')),
 	array('label'=>'Move Cells to Storage', 'url'=>array('storage')),
 	array('label'=>'Deliver Cells to Assembly', 'url'=>array('deliverforbattery')),
+	array('label'=>'View All Tests (Historic)', 'url'=>array('testindex')),
 	array('label'=>'View All Cells', 'url'=>array('/cell/index')),
 );
 ?>
 
 <h1>Put Cells on CAT</h1>
 <p>
-*Only cells that have been put on formation and are not currently on test will be listed. 
+*Only cells that have been put on formation, have their fill ports welded, haven't been through CAT and are not currently on test will be listed. 
 If you are just looking to change the test channel then please use the 
 <?php echo CHtml::link('Test Reassignment', array('testreassignment')); ?> action.  If the cell's formation test
 assignment is still active then the test assignment needs to be cleared by the MFG action to weld fillport.
@@ -61,7 +64,7 @@ Yii::app()->clientScript->registerCssFile(
 			'header'=>'Formed Cells',
 			'name'=>'serial_search',
 			'type'=>'raw',
-			'value'=>'$data->kit->getFormattedSerial()',
+			'value'=>'$data->getLink()',
 		),
 		array(
 			'name'=>'refnum_search',

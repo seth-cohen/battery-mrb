@@ -640,7 +640,7 @@ class Cell extends CActiveRecord
 		));
 	}
 	
-	public function searchForCAT()
+public function searchForCAT()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
@@ -685,7 +685,94 @@ class Cell extends CActiveRecord
 											AND test.is_active = 0
 											GROUP BY t.id)');
 		
-		/* but are not currently on CAT*/
+		/* but have not been through CAT */
+		$criteria->addCondition('NOT EXISTS (SELECT test.id, test.is_active
+											FROM tbl_test_assignment test
+											WHERE t.id = test.cell_id
+											AND test.is_formation = 0
+											AND test.is_conditioning = 0
+											AND test.is_misc = 0
+											GROUP BY t.id)');
+		
+		/* but are not currently on Test*/
+		$criteria->addCondition('NOT EXISTS (SELECT test.id, test.is_active
+											FROM tbl_test_assignment test
+											WHERE t.id = test.cell_id
+											AND test.is_active = 1
+											GROUP BY t.id)');
+	
+		$criteria->addSearchCondition('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
+		
+		return new KeenActiveDataProvider($this, array(
+			'pagination'=>array('pageSize' => 16),
+			'criteria'=>$criteria,
+			'withKeenLoading' => array(
+				'kit'=>array('select'=>array('celltype','serial_num')),
+				'testAssignments'=>array('alias'=>'test'),
+			),
+			'sort'=>array(
+				'defaultOrder'=>'CONCAT(celltype.name, serial_num)',
+				'attributes'=>array(
+					'refnum_search'=>array(
+						'asc'=>'ref.number',
+						'desc'=>'ref.number DESC',
+					),
+					'serial_search'=>array(
+						'asc'=>"CONCAT(celltype.name, serial_num)",
+						'desc'=>"CONCAT(celltype.name, serial_num) DESC",
+					),
+					'*',		// all others treated normally
+				),
+			),
+		));
+	}
+	
+	public function searchMisc()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->select = 'id, eap_num';
+		$criteria->with = array(
+						'kit'=>array(
+							'select'=>array('id','serial_num'),
+							'with'=>array(
+								'celltype',
+								'anodes'=>array('select'=>'id'), 
+								'cathodes'=>array('select'=>'id'),
+							),
+						), 
+						'refNum'=>array('alias'=>'ref'),
+						'testAssignments'=>array('alias'=>'test', 'select'=>'is_active, id'),
+		); // needed for alias of search parameter tables
+
+		$criteria->together = true;
+		
+		if($this->refnum_search)
+		{
+			$references = explode(',', str_replace(' ', ',', $this->refnum_search));
+			
+			$refCriteria = new CDbCriteria();
+			foreach ($references as $reference)
+			{
+				if(!empty($reference))
+				{
+					$refCriteria->compare('ref.number', $reference, true, 'OR');
+				}
+			}
+			$criteria->mergeWith($refCriteria);
+		}
+		
+		/* cells that have been through formation */
+		$criteria->addCondition('EXISTS (SELECT test.id, test.is_formation
+											FROM tbl_test_assignment test
+											WHERE t.id = test.cell_id
+											AND test.is_formation = 1
+											AND test.is_active = 0
+											GROUP BY t.id)');
+		
+		/* but are not currently on Test*/
 		$criteria->addCondition('NOT EXISTS (SELECT test.id, test.is_active
 											FROM tbl_test_assignment test
 											WHERE t.id = test.cell_id

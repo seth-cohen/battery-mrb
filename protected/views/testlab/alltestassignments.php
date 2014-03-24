@@ -14,6 +14,8 @@ $this->menu=array(
 	array('label'=>'View Cells on CAT', 'url'=>array('catindex')),
 	array('label'=>'Condition for Assembly', 'url'=>array('cellconditioning')),
 	array('label'=>'View Cells Conditioning', 'url'=>array('conditioningindex')),
+	array('label'=>'Miscellaneous Testing', 'url'=>array('misctesting')),
+	array('label'=>'View Miscellaneous Tests', 'url'=>array('miscindex')),
 	array('label'=>'Test Reassignments', 'url'=>array('testreassignment')),
 	array('label'=>'Move Cells to Storage', 'url'=>array('storage')),
 	array('label'=>'Deliver Cells to Assembly', 'url'=>array('deliverforbattery')),
@@ -71,11 +73,13 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 					return 'Form';
 				}elseif($data->is_conditioning ==1){
 					return 'COND';
+				}elseif($data->is_misc ==1){
+					return 'Misc';
 				}else{
 					return 'CAT';
 				}
 			},
-			'filter' =>array(0=>'FORM', 1=>'CAT', 2=>'COND'),
+			'filter' =>array('4'=>'ALL', 0=>'FORM', 1=>'CAT', 2=>'COND', 3=>'MISC'),
 		),
 		array(
 			'name'=>'chamber_search',
@@ -93,14 +97,14 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'test_start',
 		array(
 			'name' => 'test_start_time',
-			'value' => 'date("H:i:s", $data->test_start_time)',
+			'value' => 'date("H:i", $data->test_start_time)',
 			'filter'=>false,
 		),
 		array(
 			'class'=>'CButtonColumn',
 			'template'=>'{view} {update}',
-			'viewButtonUrl'=>'Yii::app()->createUrl("cell/view", array("id"=>$data->cell->id))',
-			'updateButtonUrl'=>'Yii::app()->createUrl("cell/update", array("id"=>$data->cell->id))',
+			'viewButtonUrl'=>'Yii::app()->createUrl("testlab/viewassignment", array("id"=>$data->id))',
+			'updateButtonUrl'=>'Yii::app()->createUrl("testlab/updatetestassignment", array("id"=>$data->id))',
 		),
 	),
 	//'htmlOptions'=>array('class'=>'shadow grid-view'),

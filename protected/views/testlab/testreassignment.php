@@ -14,8 +14,11 @@ $this->menu=array(
 	array('label'=>'View Cells on CAT', 'url'=>array('catindex')),
 	array('label'=>'Condition for Assembly', 'url'=>array('cellconditioning')),
 	array('label'=>'View Cells Conditioning', 'url'=>array('conditioningindex')),
+	array('label'=>'Miscellaneous Testing', 'url'=>array('misctesting')),
+	array('label'=>'View Miscellaneous Tests', 'url'=>array('miscindex')),
 	array('label'=>'Move Cells to Storage', 'url'=>array('storage')),
 	array('label'=>'Deliver Cells to Assembly', 'url'=>array('deliverforbattery')),
+	array('label'=>'View All Tests (Historic)', 'url'=>array('testindex')),
 	array('label'=>'View All Cells', 'url'=>array('/cell/index')),
 );
 

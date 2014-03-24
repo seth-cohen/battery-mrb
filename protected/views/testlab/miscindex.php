@@ -4,18 +4,16 @@
 
 $this->breadcrumbs=array(
 	'Test Lab'=>array('/testlab'),
-	'Active CAT',
+	'Miscellaneous Testing',
 );
 
 $this->menu=array(
 	array('label'=>'Put cells on Formation', 'url'=>array('cellformation')),
 	array('label'=>'View Cells on Formation', 'url'=>array('formationindex')),
 	array('label'=>'Put cells on CAT', 'url'=>array('cellcat')),
-	array('label'=>'View Cells on CAT', 'url'=>array('catindex')),
 	array('label'=>'Condition for Assembly', 'url'=>array('cellconditioning')),
 	array('label'=>'View Cells Conditioning', 'url'=>array('conditioningindex')),
 	array('label'=>'Miscellaneous Testing', 'url'=>array('misctesting')),
-	array('label'=>'View Miscellaneous Tests', 'url'=>array('miscindex')),
 	array('label'=>'Test Reassignments', 'url'=>array('testreassignment')),
 	array('label'=>'Move Cells to Storage', 'url'=>array('storage')),
 	array('label'=>'Deliver Cells to Assembly', 'url'=>array('deliverforbattery')),
@@ -37,7 +35,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>All Cells Actively on CAT</h1>
+<h1>All Cells on Active Miscellaneous Tests</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -59,8 +57,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'columns'=>array(
 		array(
 			'name'=>'serial_search',
-			'type'=>'html',
-			'value'=>'$data->cell->getLink()',
+			'value'=>'$data->cell->kit->getFormattedSerial()',
 		),
 		array(
 			'name'=>'chamber_search',

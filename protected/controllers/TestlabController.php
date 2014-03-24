@@ -27,7 +27,7 @@ class TestlabController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','formationindex', 'catindex', 'conditioningindex', 'testindex'),
+				'actions'=>array('index','formationindex', 'catindex', 'conditioningindex', 'miscindex', 'testindex'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -35,9 +35,11 @@ class TestlabController extends Controller
 					'cellformation', 'ajaxformation', 
 					'cellcat', 'ajaxcat', 
 					'cellconditioning', 'ajaxconditioning',
+					'misctesting', 'ajaxmisctesting',
 					'testreassignment', 'ajaxtestreassignment',
 					'storage', 'ajaxstorage',
-					'deliverforbattery', 'ajaxdelivery'
+					'deliverforbattery', 'ajaxdelivery',
+					'updatetestassignment','viewassignment'
 				),
 				'roles'=>array('admin', 'engineering', 'testlab', 'quality'),
 				//'users'=>array('@'),
@@ -118,6 +120,29 @@ class TestlabController extends Controller
 		}
 				
 		$this->render('conditioningindex',array(
+			'model'=>$model,
+		));
+	}
+	
+	/**
+	 * Lists all cells that are actively on formation.
+	 */
+	public function actionMiscIndex()
+	{
+		$model=new TestAssignment('search');
+		$model->unsetAttributes();  // clear any default values
+		
+		/* uses TestAssignment->search() to find all active formation
+		 * test assignments	 */
+		$model->type_search = TestAssignment::MISC;
+		$model->is_active = 1;
+		
+		if(isset($_GET['TestAssignment']))
+		{
+			$model->attributes=$_GET['TestAssignment'];
+		}
+				
+		$this->render('miscindex',array(
 			'model'=>$model,
 		));
 	}
@@ -405,7 +430,6 @@ class TestlabController extends Controller
 				$tempTest->operator_id = $userIds[$cell_id];
 				$tempTest->test_start = date("Y-m-d",time());
 				$tempTest->test_start_time = time();
-				$tempTest->is_formation = 0;
 				$tempTest->is_conditioning = 1;
 					
 				$cellsCondition[$cell_id] = $tempTest;
@@ -423,6 +447,194 @@ class TestlabController extends Controller
 				echo $result;
 			}
 		}
+	}
+	
+/**
+	 * Allows user to put multiple cells on miscellaneous  testing
+	 */
+	public function actionMiscTesting()
+	{
+		$model=new Cell('search'); 
+		$model->unsetAttributes();  // clear any default values
+		
+		/* uses cell->searchForAssembly() to get all cells that have been through 
+		 * formation and are not actively on test */
+		
+		if(isset($_GET['Cell']))
+		{
+			$model->attributes=$_GET['Cell'];
+		}
+				
+		$this->render('misctesting',array(
+			'model'=>$model,
+		));
+	}
+	
+	/**
+	 * This is the ajax action to save the Conditioning test assignments
+	 * TODO it should be possible to combine CAT and FORM into one action
+	 * by passing a parameter
+	 */
+	public function actionAjaxMiscTesting()
+	{
+		
+		if(!isset($_POST['autoId']))
+		{
+			echo 'hide';
+			Yii::app()->end();
+		}
+		
+		$miscCells = $_POST['autoId'];
+		$userIds = $_POST['user_ids'];
+		$dates = $_POST['dates'];
+		$chambers = $_POST['chambers'];
+		$tempChannels = $_POST['channels'];
+		
+		/* make sure there are no duplicate channel selections */
+		$channels = array();
+		foreach($miscCells as $test_id)
+		{
+			$channels[$test_id] = $tempChannels[$test_id];		
+		}
+
+		if (count($channels) !== count(array_unique($channels)))
+		{ /* then we have duplicates set error and bail */		
+			$model = new Cell();
+			$model->addError('channel_error', 'Duplicate Channel Selection!');
+			echo CHtml::errorSummary($model);
+			Yii::app()->end();
+		}
+		
+		if(count($miscCells)>0)
+		{
+			$cellsMisc = array();
+			
+			foreach($miscCells as $cell_id)
+			{	
+				$tempTest = new TestAssignment;
+				
+				$tempTest->cell_id = $cell_id;
+				$tempTest->channel_id = $channels[$cell_id];
+				$tempTest->chamber_id = $chambers[$cell_id];
+				$tempTest->operator_id = $userIds[$cell_id];
+				$tempTest->test_start = date("Y-m-d",time());
+				$tempTest->test_start_time = time();
+				$tempTest->is_misc = 1;
+					
+				$cellsMisc[$cell_id] = $tempTest;
+				
+			}
+			
+			$result = TestAssignment::putCellsOnTest($cellsMisc);  
+			
+			if (!json_decode($result))
+			{ /* the save failed otherwise result would be json_encoded*/
+				echo $result;
+			} 
+			else 
+			{ /* success so show count and serial numbers */
+				echo $result;
+			}
+		}
+	}
+	
+	/**
+	 * Lists all cells that are actively on formation.
+	 */
+	public function actionUpdateTestAssignment($id)
+	{
+		$model=TestAssignment::model()->findByPk($id);
+		$model->operator_search = User::getFullNameProper($model->operator_id);
+		
+		$prevChannel = null;
+		
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['TestAssignment']))
+		{
+			// cache the previous channel
+			$prevChannel = $model->channel_id;
+			$model->attributes=$_POST['TestAssignment'];
+			
+			$time = $_POST['start_time'];
+			
+			$splitTime = array_map('trim',explode(':', $time));
+			$date = strtotime($model->test_start);
+			
+			//validate the test time format 24 hour clock
+			if($splitTime[0] < 0 || $splitTime[0] > 23 || $splitTime[1] < 0 || $splitTime[1] > 59 
+			  ||!is_numeric($splitTime[0]) || !is_numeric($splitTime[1]) )
+			{
+				$model = new Channel();
+				$model->addError('channel_error', 'There was an error in your time formatting!!');
+				echo CHtml::errorSummary($model);
+				Yii::app()->end();
+			}
+				
+			$model->test_start_time = mktime($splitTime[0], $splitTime[1], 0, date('n',$date), date('j',$date), date('Y',$date));
+			
+			$testType = $_POST['test_type'];
+			if ($testType == 0)
+			{
+				$model->is_formation = 1;
+				$model->is_conditioning = 0;
+				$model->is_misc = 0;
+			}
+			elseif ($testType == 1)
+			{
+				$model->is_formation = 0;
+				$model->is_conditioning = 0;
+				$model->is_misc = 0;
+			}
+			elseif ($testType == 2)
+			{
+				$model->is_formation = 0;
+				$model->is_conditioning = 1;
+				$model->is_misc = 0;
+			}
+			else
+			{
+				$model->is_formation = 0;
+				$model->is_conditioning = 0;
+				$model->is_misc = 1;
+			}
+			
+			if($model->save())
+			{
+				if($model->channel_id != $prevChannel)
+				{	//this is a new channel so we should clear the previous channel
+					$channel = Channel::model()->findByPk($prevChannel);
+						
+					$channel->in_use = 0;
+					$channel->save();
+					
+					/* set the channel status as in_use */
+					$channel = Channel::model()->findByPk($model->channel_id);
+						
+					$channel->in_use = 1;
+					$channel->save();
+				}
+				$this->redirect(array('viewassignment','id'=>$model->id));
+			}
+		}
+		
+		$this->render('edittestassignment',array(
+			'model'=>$model,
+		));
+	}
+	
+	/**
+	 * View the test Assignment
+	 */
+	public function actionViewAssignment($id)
+	{
+		$model=TestAssignment::model()->findByPk($id);
+		$model->operator_search = User::getFullNameProper($model->operator_id);
+		
+		$this->render('viewassignment',array(
+			'model'=>$model,
+		));
 	}
 	
 	/**
