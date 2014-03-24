@@ -76,7 +76,10 @@
 							array('label'=>'View Cells on CAT', 'url'=>array('testlab/catindex'), 'active'=>0),
 							array('label'=>'Condition for Assembly', 'url'=>array('testlab/cellconditioning'), 'active'=>0),
 							array('label'=>'View Cells Conditioning', 'url'=>array('testlab/conditioningindex'), 'active'=>0),
+							array('label'=>'Miscellaneous Testing', 'url'=>array('testlab/misctesting'), 'active'=>0),
+							array('label'=>'View Miscellaneous Tests', 'url'=>array('testlab/miscindex'), 'active'=>0),
 							array('label'=>'Test Reassignment', 'url'=>array('testlab/testreassignment'), 'active'=>0),
+							array('label'=>'View All Tests (Historic)', 'url'=>array('testlab/testindex'), 'active'=>0),
 						)),	
 						array('label'=>'Storage/Delivery', 'items'=>array(
 							array('label'=>'Put Cells in Storage', 'url'=>array('testlab/storage'), 'active'=>0),
