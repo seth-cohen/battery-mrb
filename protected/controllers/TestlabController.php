@@ -615,6 +615,14 @@ class TestlabController extends Controller
 					$channel->in_use = 1;
 					$channel->save();
 				}
+				
+				if(!$model->is_active)
+				{ // clear the channel status
+					$channel = $model->channel;
+						
+					$channel->in_use = 0;
+					$channel->save();
+				}
 				$this->redirect(array('viewassignment','id'=>$model->id));
 			}
 		}

@@ -31,7 +31,6 @@ Yii::app()->clientScript->registerCssFile(
         '/jui/css/base/jquery-ui.css'
 );
 
-var_dump($model->channel_id);
 ?>
 
 <div class="form">
