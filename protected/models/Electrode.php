@@ -85,7 +85,6 @@ class Electrode extends CActiveRecord
     	$alias = $this->getTableAlias( false, false );
         return array(
             'order'=>$alias.'.lot_num DESC',
-        	'condition'=>$alias.'.id NOT IN (29,30)'
         );
     }
     

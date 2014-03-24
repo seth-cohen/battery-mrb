@@ -1750,18 +1750,18 @@ class Cell extends CActiveRecord
 					if($cellModel->save())
 					{
 						//create a formation test assignment - assign generically to Formation Channel 1
-						$testAssignmentModel = new TestAssignment();
-						$testAssignmentModel->cell_id = $cellModel->id;
-						$testAssignmentModel->channel_id = 481;
-						$testAssignmentModel->chamber_id = 16;
-						$testAssignmentModel->operator_id = 73;
-						$testAssignmentModel->test_start = $date;
-						$testAssignmentModel->is_formation = 1;
-						$testAssignmentModel->is_active = $date > date("Y-m-d",mktime(0,0,0, date('m'), date('d')-3, date('Y')))?1:0;
-						$testAssignmentModel->is_conditioning = 0;
-						$testAssignmentModel->test_start_time = strtotime($date);
-						
-						$testAssignmentModel->save();
+//						$testAssignmentModel = new TestAssignment();
+//						$testAssignmentModel->cell_id = $cellModel->id;
+//						$testAssignmentModel->channel_id = 481;
+//						$testAssignmentModel->chamber_id = 16;
+//						$testAssignmentModel->operator_id = 73;
+//						$testAssignmentModel->test_start = $date;
+//						$testAssignmentModel->is_formation = 1;
+//						$testAssignmentModel->is_active = $date > date("Y-m-d",mktime(0,0,0, date('m'), date('d')-3, date('Y')))?1:0;
+//						$testAssignmentModel->is_conditioning = 0;
+//						$testAssignmentModel->test_start_time = strtotime($date);
+//						
+//						$testAssignmentModel->save();
 						
 						$result['success'][] = array(
 							'serial'=>$kitModel->getFormattedSerial(), 

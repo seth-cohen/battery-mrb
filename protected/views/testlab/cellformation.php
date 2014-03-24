@@ -25,7 +25,8 @@ $this->menu=array(
 *Only cells filled yesterday or today will be listed.
 If you are just looking to change the test channel then please use the 
 <?php echo CHtml::link('Test Reassignment', array('testreassignment')); ?> action.  Only channels that are not in use and are currently marked as in commission will be available.  
-Chambers that are marked out of commission will be listed in red in the drop down.
+Chambers that are marked out of commission will be listed in red in the drop down.<br/><br/>
+<b>NOTE: Time must be 24 hour format (ex. 13:21).  Seconds are ignored.</b>
 </p>
 
 <?php
@@ -36,9 +37,9 @@ Yii::app()->clientScript->registerCssFile(
         '/jui/css/base/jquery-ui.css'
 );
 
-$baseUrl = Yii::app()->baseUrl;
-Yii::app()->clientScript->registerScriptFile($baseUrl.'/js/jquery.ui.timepicker.js');
-Yii::app()->clientScript->registerCssFile($baseUrl.'/css/jquery.ui.timepicker.css');
+//$baseUrl = Yii::app()->baseUrl;
+//Yii::app()->clientScript->registerScriptFile($baseUrl.'/js/jquery.ui.timepicker.js');
+//Yii::app()->clientScript->registerCssFile($baseUrl.'/css/jquery.ui.timepicker.css');
 ?>
 
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -223,9 +224,9 @@ jQuery(function($) {
 		}
 	});
 
-	jQuery('body').on('focus', '.hasTimePicker', function(event) {
-		$(this).timepicker();
-	});
+	//jQuery('body').on('focus', '.hasTimePicker', function(event) {
+	//	$(this).timepicker();
+	//});
 	
 	jQuery('body').on('focus', '.hasDatePicker', function(event) {
 		$(this).datepicker({'showAnim':'slideDown','changeMonth':true,'changeYear':true,'dateFormat':'yy-mm-dd'});
