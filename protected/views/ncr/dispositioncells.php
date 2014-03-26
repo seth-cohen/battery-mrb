@@ -33,7 +33,10 @@ $this->menu=array(
 	'columns'=>array(
 		array(
 			'name'=>'ncr_search',
-			'value'=>'"NCR-".$data->ncr->number',
+			'type'=>'raw',
+			'value'=>function($data, $row){
+				return CHtml::link('NCR-'.$data->ncr->number, Yii::app()->createUrl('ncr/view', array('id'=>$data->ncr->id)), array(	));
+			},	
 		),
         array(
 			'name'=>'serial_search',

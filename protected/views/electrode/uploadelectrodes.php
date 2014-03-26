@@ -9,6 +9,9 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
     array('label'=>'Create Electrode Lot', 'url'=>array('create')),
+    array('label'=>'Calendar Electrode Lot', 'url'=>array('calendarlot')),
+    array('label'=>'Blank Electrode Lot', 'url'=>array('blanklot')),
+    array('label'=>'Bag Cathode Lot', 'url'=>array('baglot')),
     array('label'=>'Electrode Index', 'url'=>array('index')),
     array('label'=>'Electrode Admin', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 );

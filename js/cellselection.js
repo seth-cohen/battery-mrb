@@ -271,6 +271,11 @@ function cellSelected(sel, urlCellLocation, urlCellNotes)
 	var selectedValue = $('option:selected', el).val();
 	if(selectedValue!=''){
 		$('.cell-dropdown').not(el).each(function(index){
+			if($('option:selected', this).val() == selectedValue){
+				// then the prevValue must be reset.
+				$(this).data('prevValue', '');
+				$(this).data('prevText', '');
+			}
 			$('option[value="'+selectedValue+'"]', this).remove();
 		});	
 	} 
@@ -285,8 +290,41 @@ function cellSelected(sel, urlCellLocation, urlCellNotes)
 	el.data('prevText', sel.options[sel.selectedIndex].text);
 }
 
-function spareSelected(sel)
+function spareSelected(sel, urlCellLocation, urlCellNotes)
 {
+	
+	// get the location of the cell and display on the selection details 
+	var id = $('option:selected', sel).val();
+	var locationElement_id = sel.id.toString().replace("Battery_Spares","Spare_Locations");
+	var notesElement_id = sel.id.toString().replace("Battery_Spares","Spare_Notes");
+	
+	locationElement_id = locationElement_id.replace("_id","");
+	notesElement_id = notesElement_id.replace("_id","");
+	
+	$.ajax({
+		type:'get',
+		url: urlCellLocation,
+		data:
+		{
+			id: id.toString(),
+		},
+		success: function(data){
+			$('#'+locationElement_id).html(data);
+		},
+	});
+
+	$.ajax({
+		type:'get',
+		url: urlCellNotes,
+		data:
+		{
+			id: id.toString(),
+		},
+		success: function(data){
+			$('#'+notesElement_id).html(data);
+		},
+	});
+	
 	/* remove the selected value from the other dropdowns */
 	var el = $(sel);
 	var selectedValue = $('option:selected', el).val();

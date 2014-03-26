@@ -1,5 +1,5 @@
 <?php
-/* @var $this ManufacturingController */
+/* @var $this ElectrodeController */
 /* @var $model Electrode */
 
 $this->breadcrumbs=array(
@@ -10,6 +10,9 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
     array('label'=>'Create Electrode Lot', 'url'=>array('create')),
+    array('label'=>'Calendar Electrode Lot', 'url'=>array('calendarlot')),
+    array('label'=>'Blank Electrode Lot', 'url'=>array('blanklot')),
+    array('label'=>'Bag Cathode Lot', 'url'=>array('baglot')),
     array('label'=>'Electrode Admin', 'url'=>array('admin'), 'visible'=>Yii::app()->user->checkAccess('admin')),
 );
 
@@ -45,7 +48,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 <div class="shadow border">
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'electrode-grid',
-	'dataProvider'=>$model->search(),
+	'dataProvider'=>$model->notGeneric()->search(),
 	'filter'=>$model,
 	'columns'=>array(
 		'lot_num',
@@ -82,7 +85,19 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 )); ?>
 </div>
 
-<div id="cells-list" class="shadow border" style="display:none"></div>
+ <div id="details-wrapper"  style="display:none">
+	<div>
+<?php if(Yii::app()->user->checkAccess('manufacturing supervisor') || Yii::app()->user->checkAccess('manufacturing engineer')): ?>
+		<?php echo CHtml::button('Show Cell Details', array("id"=>"cell-details-button", "style"=>"float:left;", 'onClick'=>'showCellDetails();')); ?>
+		<?php echo CHtml::button('Show Blanking Details', array("id"=>"blanking-button", "style"=>"float:left;", 'onClick'=>'showBlankingDetails();')); ?>
+		<?php echo CHtml::button('Show Bagging Details', array("id"=>"bagging-button", "style"=>"float:left;", 'onClick'=>'showBaggingDetails();')); ?>
+<?php endif; ?>
+	</div>
+	<div class="clear" style="margin-bottom:10px;"></div>
+	<div id="cell-list" class="shadow border" style="display:none"></div>
+	<div id="blanking-stats" class="shadow border" style="display:none"></div>
+	<div id="bagging-stats" class="shadow border" style="display:none"></div>
+</div>
 
 <script type="text/javascript">
 	function electrodeSelected(target_id){
@@ -99,17 +114,60 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
     		success: function(data){
         		if(data == 'hide')
         		{
-        			$('#cells-list').hide();
+        			$('#cell-list').hide();
+        			$('#details-wrapper').hide();
         		}
         		else
         		{
-        			$('#cells-list').show();
-            		$('#cells-list').html(data);
+        			$('#cell-list').show();
+            		$('#cell-list').html(data);
+            		$('#details-wrapper').show();
         		}
     		},
     	});
+<?php if(Yii::app()->user->checkAccess('manufacturing supervisor') || Yii::app()->user->checkAccess('manufacturing engineer')): ?>
+		$.ajax({
+			type:'get',
+    		url: '<?php echo $this->createUrl('electrode/ajaxgetblankingstats'); ?>',
+    		data:
+    		{
+    			id: electrode_id.toString(),
+    		},
+    		success: function(data){
+        		if(data == 'hide')
+        		{
+        			$('#blanking-list').hide();
+        		}
+        		else
+        		{
+            		$('#blanking-stats').html(data);
+        		}
+    		},
+    	});
+
+		$.ajax({
+			type:'get',
+    		url: '<?php echo $this->createUrl('electrode/ajaxgetbaggingstats'); ?>',
+    		data:
+    		{
+    			id: electrode_id.toString(),
+    		},
+    		success: function(data){
+        		if(data == 'hide')
+        		{
+        			$('#bagging-stats').hide();
+        		}
+        		else
+        		{
+            		$('#bagging-stats').html(data);
+        		}
+    		},
+    	});
+<?php endif;?>
+
 	}
 </script>
+
 <script type="text/javascript">
 $(document).ready(function(){
 
@@ -118,4 +176,38 @@ $(document).ready(function(){
 		
 	});
 });
+
+function showCellDetails(){
+	//unhide the spares selection wrapper
+	$('#cell-list').show();
+	$('#blanking-stats').hide();
+	$('#bagging-stats').hide();
+}
+
+<?php if(Yii::app()->user->checkAccess('manufacturing supervisor') || Yii::app()->user->checkAccess('manufacturing engineer')): ?>
+function showBlankingDetails(){
+	//unhide the spares selection wrapper
+	$('#cell-list').hide();
+	$('#blanking-stats').show();
+	$('#bagging-stats').hide();
+}
+
+function showBaggingDetails(){
+	//unhide the spares selection wrapper
+	$('#cell-list').hide();
+	$('#blanking-stats').hide();
+	$('#bagging-stats').show();
+}
+<?php endif; ?>
 </script>
+
+
+<?php 
+/*
+ 
+
+
+
+
+ */
+?>

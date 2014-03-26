@@ -72,7 +72,7 @@ $this->menu=array(
 		'enableAjaxValidation'=>true,
 	)); ?>
 
-	<div class="shadow border" id="cellspares-wrapper" style="margin:auto;;"> 
+	<div class="shadow border" id="cellspares-wrapper" style="margin:auto;"> 
 	<div style="text-align:center; width: 100%; font-size:1.2em;">ADD SPARES</div>
 		<?php $this->widget('zii.widgets.grid.CGridView', array(
 			'id'=>"cellspares-grid",

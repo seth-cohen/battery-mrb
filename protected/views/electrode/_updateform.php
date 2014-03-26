@@ -50,7 +50,7 @@
 							CHtml::listData(RefNum::model()->findAll(array('condition'=>'id <> 70')), 'id','number'), 
 							array(
 								'prompt'=>' -Select Reference No.- ',
-								'onchange'=>'refSelected(this)',
+								'onChange'=>'refSelected(this)',
 								'style'=>'width:152px'
 							)); ?>
 			<?php echo $form->error($model,'ref_num_id'); ?>

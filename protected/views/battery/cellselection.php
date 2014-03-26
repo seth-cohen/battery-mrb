@@ -23,6 +23,8 @@ Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/styles.
 Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/jquery.easing.1.3.js');
 Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/jquery.easing.compatibility.js');
 Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/cellselection.js');
+
+$controller = $this
 ?>
 
 <h1>Battery Cell Selections</h1>
@@ -132,7 +134,7 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/cells
 <div id="selection-container" style="overflow-x:hidden; position:relative;margin-top: 12px; display:none;"></div>
 
 
-<div class="shadow border" id="cellspares-wrapper" style="display:none; margin:auto; width:30%;"> 
+<div class="shadow border" id="cellspares-wrapper" style="display:none; margin:auto; width:60%;"> 
 <div style="text-align:center; width: 100%; font-size:1.2em;">SPARES</div>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>"cellspares-grid",
@@ -146,14 +148,32 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.'/js/cells
 		array(
 			'header'=>'Cell Serial',
 			'type'=>'raw',
-			'value'=>function($data, $row) {
-				return	CHtml::dropDownList('Battery[Spares]['.$data['id'].'][id]', '', array(),array(
+			'value'=>function($data, $row) use ($controller){
+				return	 CHtml::dropDownList('Battery[Spares]['.$data['id'].'][id]', '', array(),array(
 						'prompt'=>'-N/A-',
 						'class'=>'cell-dropdown spares',
-						'onchange'=>'spareSelected(this)',
+						'onchange'=>'spareSelected(this,"'
+							.$controller->createUrl('cell/ajaxgetlocation')
+							.'","'
+							.$controller->createUrl('cell/ajaxgetnotes')
+						.'")',
 						'style'=>'width:150px',
 				));
 			},
+		),
+		array(
+			'header'=>'Spare Location',
+			'type'=>'html',
+			'value'=>function($data, $row) {
+				echo '<span id="Spare_Locations_' .$data['id'].  '"> Select Cell First </span>';
+			}
+		),
+		array(
+			'header'=>'Spare Notes',
+			'type'=>'html',
+			'value'=>function($data, $row) {
+				echo '<span id="Spare_Notes_' .$data['id'].  '"> Select Cell First </span>';
+			}
 		),
 /*		array(
 			'header'=>'For Module',

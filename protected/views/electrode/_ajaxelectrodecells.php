@@ -7,9 +7,14 @@
 <?php Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.'/css/styles.css'); ?>
 
 <?php 
-Yii::app()->clientScript->scriptMap=array(
+
+if ($this->action->id != 'view')
+{
+	Yii::app()->clientScript->scriptMap=array(
                     'jquery.yiigridview.js'=>false
                 ); 
+}
+
 ?>
 
 <h2 style="width:100%; text-align:center">Cells using <?php echo $model->is_anode?'Anode':'Cathode'; ?> Lot <?= $model->lot_num; ?> </h2>

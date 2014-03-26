@@ -40,9 +40,9 @@
 					'items'=>array(
 						array('label'=>'Electrodes', 'items'=>array(
 							array('label'=>'Create Electrode Lot', 'url'=>array('electrode/create'), 'active'=>0),
-							array('label'=>'Calender Electrode Lot', 'url'=>array('electrode/calender'), 'active'=>0),
-							array('label'=>'Bag Cathode Lot', 'url'=>array('electrode/bag'), 'active'=>0),
-							array('label'=>'Blank Electrode Lot', 'url'=>array('electrode/blank'), 'active'=>0),
+							array('label'=>'Calender Electrode Lot', 'url'=>array('electrode/calendarlot'), 'active'=>0),
+							array('label'=>'Blank Electrode Lot', 'url'=>array('electrode/blanklot'), 'active'=>0),
+							array('label'=>'Bag Cathode Lot', 'url'=>array('electrode/baglot'), 'active'=>0),
 							array('label'=>'View All Electrode Lots', 'url'=>array('electrode/index'), 'active'=>0),
 						)),
 						array('label'=>'Kits', 'items'=>array(

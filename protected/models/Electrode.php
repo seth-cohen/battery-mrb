@@ -18,12 +18,16 @@
  * The followings are the available model relations:
  * @property RefNum $refNum
  * @property User $coater
+ * @property User $calendar
  * @property Kit[] $kits
+ * @property BaggingStats[] $baggingStats
+ * @property BlankingStats[] $blankingStats
  */
 class Electrode extends CActiveRecord
 {
 	public $kitIds = array();
 	public $coater_search;
+	public $cal_search;
 	public $refnum_search;
 	
 	/**
@@ -43,6 +47,7 @@ class Electrode extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('lot_num, coat_date, is_anode, coater_id', 'required'),
+			array('cal_date, thickness, cal_id', 'required', 'on'=>'cal'),
 			array('is_anode, thickness, moisture', 'numerical', 'integerOnly'=>true),
 			array('lot_num, eap_num', 'length', 'max'=>50),
 			array('cal_date','safe'),  // variables with no rules won't save
@@ -52,7 +57,8 @@ class Electrode extends CActiveRecord
 			array('coater_id, ref_num_id', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, lot_num, eap_num, coater_id, ref_num_id, coat_date, is_anode, coater_search, refnum_search, cal_date, thickness, moisture', 'safe', 'on'=>'search'),
+			array('id, lot_num, eap_num, coater_id, ref_num_id, coat_date, is_anode, coater_search, 
+						cal_search, refnum_search, cal_date, thickness, moisture', 'safe', 'on'=>'search'),
 		);
 	}
 	
@@ -74,8 +80,15 @@ class Electrode extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'baggingStats' => array(self::HAS_MANY, 'BaggingStats', 'electrode_id'),
+			'blankingStats' => array(self::HAS_MANY, 'BlankingStats', 'electrode_id'),
+			'rejectBagCount'=>array(self::STAT, 'BaggingStats', 'electrode_id', 'select'=>'SUM(reject_count)'),
+			'rejectBlankCount'=>array(self::STAT, 'BlankingStats', 'electrode_id', 'select'=>'SUM(reject_count)'),
+			'goodBagCount'=>array(self::STAT, 'BaggingStats', 'electrode_id', 'select'=>'SUM(good_count)'),
+			'goodBlankCount'=>array(self::STAT, 'BlankingStats', 'electrode_id', 'select'=>'SUM(good_count)'),
 			'refNum' => array(self::BELONGS_TO, 'RefNum', 'ref_num_id'),
 			'coater' => array(self::BELONGS_TO, 'User', 'coater_id'),
+			'calendar' => array(self::BELONGS_TO, 'User', 'cal_id'),
 			'kits' => array(self::MANY_MANY, 'Kit', 'tbl_electrode_kit(electrode_id, kit_id)'),
 		);
 	}
@@ -122,8 +135,10 @@ class Electrode extends CActiveRecord
 			'moisture' => 'Moisture (PPM)',
 			'thickness'=> 'Thickness (um)',
 			'cal_date' => 'Cal Date',
+			'cal_id' =>  'Cal Operator',
 		
 			'coater_search' => 'Coater',
+			'cal_search' => 'Cal Operator',
 			'refnum_search' => 'Reference No.',
 		);
 	}
@@ -147,9 +162,12 @@ class Electrode extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->with = array(
-						'coater'=>array('alias'=>'user'), 
+						'coater'=>array('alias'=>'coat'), 
+						'calendar'=>array('alias'=>'cal'), 
 						'refNum'=>array('alias'=>'ref'),
 		); // needed for alias of search parameter tables
+		
+		$criteria->together = true;
 		
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('lot_num',$this->lot_num,true);
@@ -163,7 +181,8 @@ class Electrode extends CActiveRecord
 		$criteria->compare('is_anode',$this->is_anode);
 
 		/* for concatenated user name search */
-		$criteria->addSearchCondition('concat(user.first_name, " ", user.last_name)', $this->coater_search);
+		$criteria->addSearchCondition('concat(coat.first_name, " ", coat.last_name)', $this->coater_search);
+		$criteria->addSearchCondition('concat(cal.first_name, " ", cal.last_name)', $this->cal_search);
 		
 		if($this->refnum_search)
 		{
@@ -186,8 +205,12 @@ class Electrode extends CActiveRecord
 			'sort'=>array(
 				'attributes'=>array(
 					'coater_search'=>array(
-						'asc'=>"CONCAT(first_name, ' ', last_name)",
-						'desc'=>"CONCAT(first_name, ' ', last_name) DESC",
+						'asc'=>"CONCAT(coat.first_name, ' ', coat.last_name)",
+						'desc'=>"CONCAT(coat.first_name, ' ', coat.last_name) DESC",
+					),
+					'cal_search'=>array(
+						'asc'=>"CONCAT(cal.first_name, ' ', cal.last_name)",
+						'desc'=>"CONCAT(cal.first_name, ' ', cal.last_name) DESC",
 					),
 					'refnum_search'=>array(
 						'asc'=>'ref.number',

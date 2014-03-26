@@ -2,9 +2,9 @@
 	<b>ELECTRODES</b>
 	<ul>
 		<li style="margin-left:40px"><?php echo CHtml::link('Create New Electrode Lot', array('electrode/create'));?></li>
-		<li><?php echo CHtml::link('Calender Electrode Lot',  array(), array('style'=>'text-decoration:line-through'));?></li>
-		<li><?php echo CHtml::link('Bag Electrode Lot', array(), array('style'=>'text-decoration:line-through'));?></li>
-		<li><?php echo CHtml::link('Blank Electrode Lot', array(),array('style'=>'text-decoration:line-through'));?></li>
+		<li><?php echo CHtml::link('Calender Electrode Lot',  array('electrode/calendarlot'));?></li>
+		<li><?php echo CHtml::link('Blank Electrode Lot', array('electrode/blanklot'));?></li>
+		<li><?php echo CHtml::link('Bag Electrode Lot', array('electrode/baglot'));?></li>
 		<li><?php echo CHtml::link('View All Electrode Lots', array('electrode/index'));?></li>
 	</ul>
 	<b>KITS</b>

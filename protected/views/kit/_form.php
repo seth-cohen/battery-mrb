@@ -46,7 +46,7 @@
 		<div class="row multidrop5">
 			<?php echo CHtml::label('Anode Lots', 'Kit_anodeIds'); ?>
 			<?php echo CHtml::DropDownList('Kit[anodeIds][]', $model->anodeIds, 
-							CHtml::listData(Electrode::model()->anodes()->findAll(), 'id','lot_num'), 
+							CHtml::listData(Electrode::model()->anodes()->notGeneric()->findAll(), 'id','lot_num'), 
 							array(
 								'multiple'=>'multiple',
 								'prompt'=>' -Select Anode Lots- ',
@@ -101,7 +101,7 @@
 		<div class="row multidrop5">
 			<?php echo CHtml::label('Cathode Lots', 'Kit_cathodeIds'); ?>
 			<?php echo CHtml::DropDownList('Kit[cathodeIds][]', $model->cathodeIds, 
-							CHtml::listData(Electrode::model()->cathodes()->findAll(), 'id','lot_num'), 
+							CHtml::listData(Electrode::model()->cathodes()->notGeneric()->findAll(), 'id','lot_num'), 
 							array(
 								'multiple'=>'multiple',
 								'prompt'=>' -Select Cathode Lots- ',
