@@ -15,6 +15,7 @@
  * @property integer $is_conditioning
  * @property integer $is_misc
  * @property string $test_start_time
+ * @property string $desc
  *
  * The followings are the available model relations:
  * @property Cell $cell
@@ -55,8 +56,9 @@ class TestAssignment extends CActiveRecord
 			array('cell_id, channel_id, chamber_id, operator_id, test_start, test_start_time', 'required'),
 			array('cell_id, channel_id, chamber_id, operator_id', 'length', 'max'=>10),
 			array('test_start_time', 'length', 'max'=>10),
+			array('desc','length', 'max'=>50),
 			array('is_formation, is_active, is_conditioning, is_misc', 'numerical', 'integerOnly'=>true),
-			array('test_start', 'safe'),
+			array('test_start, desc', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, cell_id, channel_id, chamber_id, operator_id, test_start, is_active, is_formation, is_misc, 
@@ -92,6 +94,7 @@ class TestAssignment extends CActiveRecord
 			'operator_id' => 'Operator',
 			'test_start' => 'Test Date',
 			'test_start_time' => 'Start Time',
+			'desc' => 'Description',
 		
 			'serial_search' => 'Cell Serial',
 			'chamber_search' => 'Chamber',

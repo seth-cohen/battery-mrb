@@ -149,6 +149,12 @@ Yii::app()->clientScript->registerCssFile(
 	</div>
 	<div class="clear"></div>
 	
+	<div class="row">
+			<?php echo $form->labelEx($model, 'desc'); ?>
+			<?php echo $form->textField($model,'desc', array('size'=>50)); ?>
+			<?php echo $form->error($model,'desc'); ?>
+		</div>
+	
 	<div class="left-form">
 		<div class="row">
 			<?php echo $form->labelEx($model,'operator_id'); ?>

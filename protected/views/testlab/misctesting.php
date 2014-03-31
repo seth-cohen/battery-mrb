@@ -103,9 +103,14 @@ Yii::app()->clientScript->registerCssFile(
 //			))',
 		),
 		array(
-			'header' => 'Condition Date',
+			'header' => 'Test Date',
 			'type' => 'raw',
-			'value'=>'CHtml::textField("dates[$data->id]",date("Y-m-d",time()),array("style"=>"width:100px;", "class"=>"hasDatePicker"))',	
+			'value'=>'CHtml::textField("dates[$data->id]",date("Y-m-d",time()),array("style"=>"width:75px;", "class"=>"hasDatePicker"))',	
+		),
+		array(
+			'header' => 'Description',
+			'type' => 'raw',
+			'value'=>'CHtml::textField("desc[$data->id]","",array("style"=>"width:100px;", "size"=>"50"))',	
 		),
 	),
 	'htmlOptions'=>array('width'=>'100%'),

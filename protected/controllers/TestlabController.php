@@ -45,6 +45,11 @@ class TestlabController extends Controller
 				//'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('ajaxchangeactivestate'),
+				'roles' => array('testlab supervisor'),
+				//'users'=>array('admin'),
+			),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin'),
 				'roles' => array('admin'),
 				//'users'=>array('admin'),
@@ -489,6 +494,7 @@ class TestlabController extends Controller
 		$dates = $_POST['dates'];
 		$chambers = $_POST['chambers'];
 		$tempChannels = $_POST['channels'];
+		$descriptions = $_POST['desc'];
 		
 		/* make sure there are no duplicate channel selections */
 		$channels = array();
@@ -517,6 +523,7 @@ class TestlabController extends Controller
 				$tempTest->channel_id = $channels[$cell_id];
 				$tempTest->chamber_id = $chambers[$cell_id];
 				$tempTest->operator_id = $userIds[$cell_id];
+				$tempTest->desc = $descriptions[$cell_id];
 				$tempTest->test_start = date("Y-m-d",time());
 				$tempTest->test_start_time = time();
 				$tempTest->is_misc = 1;
@@ -547,6 +554,8 @@ class TestlabController extends Controller
 		$model->operator_search = User::getFullNameProper($model->operator_id);
 		
 		$prevChannel = null;
+		$prevStatus = $model->is_active;
+		$location;
 		
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -580,27 +589,31 @@ class TestlabController extends Controller
 				$model->is_formation = 1;
 				$model->is_conditioning = 0;
 				$model->is_misc = 0;
+				$location = '[FORM]';
 			}
 			elseif ($testType == 1)
 			{
 				$model->is_formation = 0;
 				$model->is_conditioning = 0;
 				$model->is_misc = 0;
+				$location = '[CAT]';
 			}
 			elseif ($testType == 2)
 			{
 				$model->is_formation = 0;
 				$model->is_conditioning = 1;
 				$model->is_misc = 0;
+				$location = '[COND]';
 			}
 			else
 			{
 				$model->is_formation = 0;
 				$model->is_conditioning = 0;
 				$model->is_misc = 1;
+				$location = '[MISC]';
 			}
 			
-			if($model->save())
+			if($prevStatus)
 			{
 				if($model->channel_id != $prevChannel)
 				{	//this is a new channel so we should clear the previous channel
@@ -617,12 +630,48 @@ class TestlabController extends Controller
 				}
 				
 				if(!$model->is_active)
-				{ // clear the channel status
+				{ // we are no longer active clear the channel status
 					$channel = $model->channel;
 						
 					$channel->in_use = 0;
 					$channel->save();
 				}
+					
+				//we are active so we should update the location
+				$model->cell->location = $location.
+							' '.$model->channel->cycler->name.
+							'{'.$model->channel->number.'} '.
+							'('.$model->chamber->name.')';
+				
+				$model->cell->save();
+			}
+			else
+			{
+				// we weren't active
+				if($model->is_active)
+				{ 	// but now we are so we need to delete any other active test assignments
+					$badModel = TestAssignment::model()->findByAttributes(array('cell_id'=>$model->cell_id),'is_active=1');
+					if($badModel){
+						$badModel->is_active = 0;
+						$badModel->save();
+						
+						// set the channel as in use.
+						$channel = $badModel->channel;
+							
+						$channel->in_use = 0;
+						$channel->save();
+					}
+					
+					// set the channel as in use.
+					$channel = $model->channel;
+						
+					$channel->in_use = 1;
+					$channel->save();
+				}
+			}
+			
+			if($model->save())
+			{	
 				$this->redirect(array('viewassignment','id'=>$model->id));
 			}
 		}
@@ -630,6 +679,111 @@ class TestlabController extends Controller
 		$this->render('edittestassignment',array(
 			'model'=>$model,
 		));
+	}
+	
+	/**
+	 * Sets the active status of the test assignment
+	 */
+	public function actionAjaxChangeActiveState()
+	{
+		$location;
+		
+		if(!isset($_POST['id']) || !isset($_POST['cell_id']) ||  !isset($_POST['new_state']) ||  !isset($_POST['original_state']))
+		{
+			echo '0';
+			Yii::app()->end();
+		}
+	
+		$testModel = TestAssignment::model()->findByPK($_POST['id']);
+		
+		if ($testModel->is_formation == 1)
+		{
+			$location = '[FORM]';
+		}
+		elseif ($testModel->is_conditioning == 1)
+		{
+			$location = '[COND]';
+		}
+		elseif ($testModel->is_misc == 1)
+		{
+			$location = '[MISC]';
+		}
+		else
+		{
+			$location = '[CAT]';
+		}
+			
+		if($testModel == null)
+		{
+			echo '0';
+			Yii::app()->end();
+		}
+			
+		if($testModel->is_active)
+		{	// we are active
+			if($_POST['new_state'] =='1')
+			{	//do nothing
+				echo '0';
+				Yii::app()->end();
+			}
+			else
+			{
+				// we are no longer active clear the channel status
+				$channel = $testModel->channel;
+					
+				$channel->in_use = 0;
+				$channel->save();
+				
+				$testModel->is_active = 0;
+				$testModel->save();
+				echo '1';
+				Yii::app()->end();
+			}
+		}
+		else 
+		{	// we are not active
+			if($_POST['new_state'] =='0')
+			{	//do nothing
+				echo '0';
+				Yii::app()->end();
+			}
+			else
+			{	// we were not active
+				// but now we are so we need to delete any other active test assignments
+				$badModel = TestAssignment::model()->findByAttributes(array('cell_id'=>$testModel->cell_id),'is_active=1');
+				if($badModel){
+					$badModel->is_active = 0;
+					$badModel->save();
+					
+					// set the channel as in use.
+					$channel = $badModel->channel;
+						
+					$channel->in_use = 0;
+					$channel->save();
+				}
+				// we are no longer active clear the channel status
+				$channel = $testModel->channel;
+					
+				$channel->in_use = 1;
+				$channel->save();
+				
+				//we are active so we should update the location
+				$testModel->cell->location = $location.
+							' '.$testModel->channel->cycler->name.
+							'{'.$testModel->channel->number.'} '.
+							'('.$testModel->chamber->name.')';
+				
+				$testModel->cell->save();
+				
+				$testModel->is_active = 1;
+				$testModel->save();
+				
+				echo '1';
+				Yii::app()->end();
+			}
+			
+		}
+		echo '0';
 	}
 	
 	/**

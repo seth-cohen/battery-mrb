@@ -63,6 +63,7 @@ $this->widget('zii.widgets.CDetailView', array(
 			'label' => 'Test Type',
 			'value'=>$testType,
 		),
+		'desc',
 		array(
 			'label' => 'Operator',
 			'value'=>User::getFullNameProper($model->operator_id),

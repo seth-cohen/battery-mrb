@@ -58,12 +58,36 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'columns'=>array(
 		array(
 			'name'=>'serial_search',
-			'value'=>'$data->cell->kit->getFormattedSerial()',
+			'type'=>'html',
+			'value'=>'$data->cell->getLink()',
 		),
 		array(
 			'name'=>'is_active',
 			'type'=>'boolean',
 			'filter'=>array(0=>'No', 1=>'Yes'),
+			'visible'=>!Yii::app()->user->checkAccess('testlab supervisor'),
+		),
+		array(
+			'name'=>'is_active',
+			'type'=>'raw',
+			'filter'=>array(0=>'No', 1=>'Yes'),
+			'value'=>function($data, $row){
+				return 
+				CHtml::activeDropDownList($data,"is_active",
+					array(
+						"0"=>"No",
+						"1"=>"Yes",
+					), 
+					array(
+						"onChange"=>"activeSelected(this)",
+						"style"=>"width:100px",
+						'data-cell-id'=>$data->cell->id,
+						'data-test-id'=>$data->id,
+						'data-original-state'=>$data->is_active,
+					)
+				);
+			},
+			'visible'=>Yii::app()->user->checkAccess('testlab supervisor'),
 		),
 		array(
 			'name'=>'type_search',
@@ -145,5 +169,48 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
         		}
     		},
     	});
+	}
+
+	function activeSelected(sel)
+	{
+		
+		var test_id = $(sel).data("test-id");
+		var cell_id =$(sel).data("cell-id");
+		var original_state = $(sel).data("original-state");
+		var is_active = $('option:selected', $(sel)).attr("value");
+	
+		$.ajax({
+			url: '<?php echo $this->createUrl('/testlab/ajaxchangeactivestate'); ?>',
+			type: 'POST',
+			data: 
+			{
+				id: test_id,
+				cell_id: cell_id,
+				new_state: is_active,
+				original_state: original_state,
+			},
+			success: function(data) {
+				var message;
+				if(data == '1'){
+					$.fn.yiiGridView.update('cell-grid');
+					message = $("<br/><span style='color:green'>Change Successful</span>");
+					$(sel).css('border', '2px solid green');
+					$(sel).parent().append(message);
+					setTimeout(function() {
+						$(sel).css('border', '1px solid');
+						message.remove();
+					}, 2000);
+				}else{
+					$.fn.yiiGridView.update('cell-grid');
+					message = $("<br/><span style='color:red'>Change Failed</span>");
+					$(sel).css('border', '2px solid red');
+					$(sel).parent().append(message);
+					setTimeout(function() {
+						$(sel).css('border', '1px solid');
+						message.remove();
+					}, 2000);
+				}
+			},
+		});	
 	}
 </script>

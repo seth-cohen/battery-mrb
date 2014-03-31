@@ -57,7 +57,8 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'columns'=>array(
 		array(
 			'name'=>'serial_search',
-			'value'=>'$data->cell->kit->getFormattedSerial()',
+			'type'=>'html',
+			'value'=>'$data->cell->getLink()',
 		),
 		array(
 			'name'=>'chamber_search',
@@ -78,6 +79,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 			'value' => 'date("H:i", $data->test_start_time)',
 			'filter'=>false,
 		),
+		'desc',
 		array(
 			'class'=>'CButtonColumn',
 			'template'=>'{view} {update}',
