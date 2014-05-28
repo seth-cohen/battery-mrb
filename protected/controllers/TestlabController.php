@@ -878,6 +878,7 @@ class TestlabController extends Controller
 				$tempTest->operator_id = $userIds[$test_id];
 				$tempTest->test_start = date("Y-m-d",time());
 				$tempTest->is_formation = $is_formation[$test_id];
+				
 					
 				$testsChanged[$test_id] = $tempTest;
 			}

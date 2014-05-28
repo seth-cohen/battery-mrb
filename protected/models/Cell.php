@@ -625,6 +625,7 @@ class Cell extends CActiveRecord
 				//'testAssignments'=>array('alias'=>'test'),
 			),
 			'sort'=>array(
+				'defaultOrder'=>'CONCAT(celltype.name, serial_num)',
 				'attributes'=>array(
 					'refnum_search'=>array(
 						'asc'=>'ref.number',
@@ -700,6 +701,13 @@ public function searchForCAT()
 											WHERE t.id = test.cell_id
 											AND test.is_active = 1
 											GROUP BY t.id)');
+		
+		/* and have not been scrapped on an NCR */
+		$criteria->addCondition('NOT EXISTS (SELECT ncr.cell_id, ncr.disposition
+												FROM tbl_ncr_cell ncr
+												WHERE ncr.cell_id = t.id
+												AND ncr.disposition = 1
+												GROUP BY t.id)');
 	
 		$criteria->addSearchCondition('concat(celltype.name,"-",kit.serial_num)',$this->serial_search, true);
 		
@@ -709,6 +717,7 @@ public function searchForCAT()
 			'withKeenLoading' => array(
 				'kit'=>array('select'=>array('celltype','serial_num')),
 				'testAssignments'=>array('alias'=>'test'),
+				//'ncrCell'=>array('alias'=>'ncr'),
 			),
 			'sort'=>array(
 				'defaultOrder'=>'CONCAT(celltype.name, serial_num)',
@@ -985,6 +994,7 @@ public function searchForCAT()
 				'testAssignments'=>array('alias'=>'test'),
 			),
 			'sort'=>array(
+				'defaultOrder'=>'CONCAT(celltype.name, serial_num)',
 				'attributes'=>array(
 					'refnum_search'=>array(
 						'asc'=>'ref.number',
