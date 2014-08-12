@@ -183,7 +183,7 @@ class TestlabController extends Controller
 		
 		/* Uses cell->searchUnFormed to find all cells with no
 		 * test assignments and that were filled today or yesterday */
-		$model->fill_date = '>='.date("Y-m-d",mktime(0,0,0, date('m'), date('d')-1, date('Y')));
+		$model->fill_date = '>='.date("Y-m-d",mktime(0,0,0, date('m'), date('d')-15, date('Y')));
 		
 		if(isset($_GET['Cell']))
 		{

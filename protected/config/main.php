@@ -24,7 +24,7 @@ return array(
 		
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
-			'password'=>'rhiannonisa*',
+			'password'=>'ytpDB*30',
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
 		),
@@ -82,7 +82,7 @@ return array(
 			// use 'site/error' action to display errors
 			'errorAction'=>'site/error',
 		),
-	
+	/*
 		'log'=>array(
 			'class'=>'CLogRouter',
 			'routes'=>array(
@@ -99,7 +99,7 @@ return array(
 				
 			),
 		),
-	
+	*/
 		'mail' => array(
 			'class' => 'ext.yii-mail.YiiMail',
 			'transportType'=>'smtp',
