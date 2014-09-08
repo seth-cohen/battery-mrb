@@ -72,7 +72,7 @@
 		<div class="row">
 			<?php echo $form->labelEx($model,'lot_num'); ?>
 			<?php echo $form->textField($model,'lot_num'); ?> 
-			<span style="padding-left:10px"; ><em><b>NOTE:</b></em> Today is day <b><?php echo date('z');?></b> of <?php echo date('Y'); ?></span>
+			<span style="padding-left:10px"; ><em><b>NOTE:</b></em> Today is day <b><?php echo date('z')+1;?></b> of <?php echo date('Y'); ?></span>
 			<?php echo $form->error($model,'lot_num'); ?>
 		</div>
 		<div class="row">
